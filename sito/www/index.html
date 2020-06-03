@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -196,7 +196,7 @@
           <div class="swiper-slide" style="background-image:url(https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1534850336045-c6c6d287f89e.jpg)"></div>
         </div>
       </div>
-      <div class="container py-6 py-md-7 text-white z-index-20">
+      <div class="container-xl py-6 py-md-7 text-white z-index-20">
         <div class="row">
           <div class="col-xl-10">
             <div class="text-center text-lg-left">
@@ -206,18 +206,21 @@
             <div class="search-bar mt-5 p-3 p-lg-1 pl-lg-4">
               <form action="#">
                 <div class="row">
-                  <div class="col-lg-4 d-flex align-items-center form-group">
-                    <!-- <label class="label-absolute" for="location"><i class="fa fa-crosshairs"></i><span class="sr-only">City</span></label>-->
-                    <input class="form-control border-0 shadow-0" type="text" name="search" placeholder="Dove vuoi andare?">
-                  </div>
                   <div class="col-lg-3 d-flex align-items-center form-group">
-                    <div class="input-label-absolute input-label-absolute-right w-100">
-                      
-                      <input class="form-control border-0 shadow-0" type="text" name="periodo" placeholder="Quando?" id="periodo">
-                    </div>
+                    <!-- <label class="label-absolute" for="location"><i class="fa fa-crosshairs"></i><span class="sr-only">City</span></label>-->
+                    <input id="prova" class="form-control border-0 shadow-0" type="text" name="search" placeholder="Dove vuoi andare?">
                   </div>
-                  <div class="col-lg-3 d-flex align-items-center form-group no-divider">
-                    <select class="selectpicker" title="Quanti ospit?" data-style="btn-form-control">
+                 <div class="col-lg d-flex align-items-center form-group">   
+                    <!--<input class="form-control border-0 shadow-0" type="text" onfocus="(this.type='date')" name="periodo" placeholder="Quando?" id="periodo">-->
+                      <input placeholder="Da" class="form-control border-0 shadow-0" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="periodo"id="periodo" />
+                  </div>
+
+                  <div class="col-lg d-flex align-items-center form-group">
+                    <input placeholder="A" class="form-control border-0 shadow-0" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="periodo"id="periodo" />
+                  </div>
+                  
+                  <div class="col-lg d-flex align-items-center form-group no-divider">
+                    <select class="selectpicker" title="Quanti ospiti?" data-style="btn-form-control">
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -228,9 +231,10 @@
                       <option value="8">8</option>
                     </select>
                   </div>
-                  <div class="col-lg-2">
-                    <button class="btn btn-primary btn-block rounded-xl h-100" type="submit">Cerca </button>
+                  <div class="col-lg">
+                    <button class="btn btn-primary btn-block rounded-xl h-100" type="submit" formaction="Ricerca.html">Cerca</button>
                   </div>
+                  
                 </div>
               </form>
             </div>
