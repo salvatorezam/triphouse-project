@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+
+<html lang="it">
+<head>
+    <meta charset="utf-8" />
+    <title>TriphHouse/Checkout</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/css/style.default.e1630ae4.css" id="theme-stylesheet">
+    <link rel="shortcut icon" href="images/icon.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="scriptPagamento.js"></script>
+</head>
+<body style="padding-top: 72px;">
+    <header class="header">
+        <!--Navbar-->
+        <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center">
+                    <a class="navbar-brand py-1" href="index.html">
+                        <img width="138" height="35" viewBox="0 0 138 31" fill="none" src="images/logo.png" alt="TripHouse logo">
+                    </a>
+                </div>
+            </div>
+
+            <!--bottone che viene visualizzato quando la navbar viene collassata nella visualizzazione da mobile -->
+            <!-- <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+                -->
+            <!--Inizio NavBar collassata-->
+            <!--Fine NavBar collassata-->
+        </nav>
+    </header>
+        <div class="container-fluid px-3">
+            <div class="row min-vh-100">
+                <div class="col-md-8 col-lg-6 col-xl-6 d-flex align-items-center">
+                    <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
+                        <div class="mb-4">
+                            <h2>Modulo pagamento</h2>
+                            <p class="text-muted">Un altro passo verso la tua vacanza da sogno</p>
+                            <p>totale importo da pagare: 400€ </p>
+                        </div>
+                        <form class="form-validate" name="formPagamento">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label for="cc-name">Nome titolare</label>
+                                    <input type="text" class="form-control" id="cc-name" name ="titolareCarta" placeholder="Nome Cognome" required>
+                             
+                                    <div class="invalid-feedback">
+                                        Nome titolare richiesto
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label for="cc-number">Numero carta</label>
+                                    <input type="text" class="form-control" id="cc-number" name="numeroCarta" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                        Numero carta richiesto
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="cc-expiration">Scadenza</label>
+                                    <input type="text" class="form-control" id="cc-expiration" name="dataScadenza" placeholder="mm/aaaa" required>
+                                    <div class="invalid-feedback">
+                                        Data scadenza richiesta
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="cc-cvv">CVV</label>
+                                    <input type="text" class="form-control" id="cc-cvv" name="cvv" placeholder="000" required>
+                                    <div class="invalid-feedback">
+                                        Codice di sicurezza richiesto
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-3 mt-3 ">
+                                    <button class="btn btn-md  btn-primary" type="submit" onclick="FormPaga()">Conferma</button>
+                                </div>
+                            </div>
+                        </form>                   
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-6 col-xl-6 d-none d-md-block">
+                    <!-- Image-->
+                    <div class="bg-cover h-100 mr-n3" style="background-image: url(images/newjork.jpg);"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- jQuery-->
+        <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/jquery/jquery.min.js"></script>
+        <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
+        <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Magnific Popup - Lightbox for the gallery-->
+        <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+        <!-- Smooth scroll-->
+        <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
+        <!-- Bootstrap Select-->
+        <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+        <!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
+        <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/object-fit-images/ofi.min.js"></script>
+        <!-- Swiper Carousel                       -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
+        <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/jquery.cookie/jquery.cookie.js"></script>
+    
+        <script>var basePath = ''</script>
+
+
+</body>
+</html>
