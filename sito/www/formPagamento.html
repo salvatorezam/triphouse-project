@@ -42,44 +42,46 @@
                             <p class="text-muted">Un altro passo verso la tua vacanza da sogno</p>
                             <p>totale importo da pagare: 400€ </p>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-4">
-                                <label for="cc-name">Nome titolare</label>
-                                <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                        <form class="form-validate" name="formPagamento">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label for="cc-name">Nome titolare</label>
+                                    <input type="text" class="form-control" id="cc-name" name ="titolareCarta" placeholder="" required>
                              
-                                <div class="invalid-feedback">
-                                    Nome titolare richiesto
+                                    <div class="invalid-feedback">
+                                        Nome titolare richiesto
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label for="cc-number">Numero carta</label>
+                                    <input type="text" class="form-control" id="cc-number" name="numeroCarta" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                        Numero carta richiesto
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-4">
-                                <label for="cc-number">Numero carta</label>
-                                <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Numero carta richiesto
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="cc-expiration">Scadenza</label>
+                                    <input type="text" class="form-control" id="cc-expiration" name="dataScadenza" placeholder="mm/aaaa" required>
+                                    <div class="invalid-feedback">
+                                        Data scadenza richiesta
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="cc-cvv">CVV</label>
+                                    <input type="text" class="form-control" id="cc-cvv" name="cvv" placeholder="000" required>
+                                    <div class="invalid-feedback">
+                                        Codice di sicurezza richiesto
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label for="cc-expiration">Scadenza</label>
-                                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Data scadenza richiesta
+                            <div class="row">
+                                <div class="col-md-4 mb-3 mt-3 ">
+                                    <button class="btn btn-md  btn-primary" type="submit">Conferma</button>
                                 </div>
                             </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="cc-cvv">CVV</label>
-                                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Codice di sicurezza richiesto
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4 mb-3 mt-3 ">
-                                 <button class="btn btn-md  btn-primary" type="submit">Conferma</button>
-                            </div>
-                        </div>               
+                        </form>                   
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-6 col-xl-6 d-none d-md-block">
