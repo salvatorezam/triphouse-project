@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/css/style.default.e1630ae4.css" id="theme-stylesheet">
     <link rel="shortcut icon" href="images/icon.png">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
+    <script src="scriptPagamento.js"></script>
 </head>
 <body style="padding-top: 72px;">
     <header class="header">
@@ -46,7 +46,7 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <label for="cc-name">Nome titolare</label>
-                                    <input type="text" class="form-control" id="cc-name" name ="titolareCarta" placeholder="" required>
+                                    <input type="text" class="form-control" id="cc-name" name ="titolareCarta" placeholder="Nome Cognome" required>
                              
                                     <div class="invalid-feedback">
                                         Nome titolare richiesto
@@ -78,7 +78,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4 mb-3 mt-3 ">
-                                    <button class="btn btn-md  btn-primary" type="submit">Conferma</button>
+                                    <button class="btn btn-md  btn-primary" type="submit" onclick="FormPaga()">Conferma</button>
                                 </div>
                             </div>
                         </form>                   
