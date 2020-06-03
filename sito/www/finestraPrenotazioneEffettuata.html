@@ -247,7 +247,43 @@
               </li>
               <li class="mb-2"> 
                 <div class="media align-items-center mb-3">
-                  <div class="media-body"><button type="button" class="btn btn-outline-success">Pagamento</button></div>
+                  <div class="py-0">
+                    <button class="btn btn-outline-success" type="button" data-toggle="collapse" data-target="#pagamento" aria-expanded="false" aria-controls="pagamento">Pagamento</button>
+                    <div class="collapse mt-4" id="pagamento">
+                      <h4 class="mb-2">totale importo da pagare: </h4>
+                      <form class="form" id="contact-form" method="get" action="#">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label class="form-label" for="name">Nome titolare</label>
+                              <input class="form-control" type="text" name="name" id="name" required="required">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label class="form-label" for="rating">Numero Carta</label>
+                              <input class="form-control" type="text" name="name" id="name" required="required">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label class="form-label" for="name">Scadenza</label>
+                              <input class="form-control" type="text" name="name" id="name" placeholder="MM/AAAA" required="required">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label class="form-label" for="rating">CVV</label>
+                              <input class="form-control" type="text" name="name" id="name" required="required">
+                            </div>
+                          </div>
+                        </div>
+                        <button class="btn btn-success" type="submit">Paga</button>
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </li>
             </ul>
