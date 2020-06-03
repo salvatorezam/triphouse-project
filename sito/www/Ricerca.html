@@ -101,23 +101,23 @@
           <form action="#" autocomplete="off">
             <div class="row">
               <div class="col-xl-4 col-md-6 mb-4">
-                <label class="form-label">Price range</label>
+                <label class="form-label">Fascia prezzo</label>
                 <div class="text-primary" id="slider-snap"></div>
                 <div class="nouislider-values">
-                  <div class="min">From $<span id="slider-snap-value-from"></span></div>
-                  <div class="max">To $<span id="slider-snap-value-to"></span></div>
+                  <div class="min">Da €<span id="slider-snap-value-from"></span></div>
+                  <div class="max">A €<span id="slider-snap-value-to"></span></div>
                 </div>
                 <input type="hidden" name="pricefrom" id="slider-snap-input-from" value="40">
                 <input type="hidden" name="priceto" id="slider-snap-input-to" value="110">
               </div>
               <div class="col-md-6 col-lg-12 col-xl-8 mb-4 d-xl-flex justify-content-center">
                 <div>
-                  <label class="form-label">Host and booking</label>
+                  <label class="form-label">Host e prenotazione</label>
                   <ul class="list-inline mb-0 mt-1">
                     <li class="list-inline-item">
                       <div class="custom-control custom-switch">
                         <input class="custom-control-input" id="instantBook" type="checkbox">
-                        <label class="custom-control-label" for="instantBook"> <span class="text-sm">Instant book</span></label>
+                        <label class="custom-control-label" for="instantBook"> <span class="text-sm">Prenotazione istantanea</span></label>
                       </div>
                     </li>
                     <li class="list-inline-item">
@@ -132,10 +132,10 @@
               <div class="col-12 pb-4">
                 <div class="collapse" id="moreFilters">
                   <div class="filter-block">
-                    <h6 class="mb-3">Location</h6>
+                    <h6 class="mb-3">Località</h6>
                     <div class="row">
                       <div class="col-xl-4 col-md-6 mb-4 mb-xl-0">
-                        <label class="form-label" for="form_neighbourhood">Neighbourhood</label>
+                        <label class="form-label" for="form_neighbourhood">Vicinato</label>
                         <select class="selectpicker form-control" name="neighbourhood" id="form_neighbourhood" multiple data-style="btn-selectpicker" data-live-search="true" data-selected-text-format="count &gt; 1" title="">
                           <option value="neighbourhood_0">Battery Park City    </option>
                           <option value="neighbourhood_1">Bowery    </option>
@@ -182,7 +182,7 @@
                         </select>
                       </div>
                       <div class="col-xl-8">
-                        <label class="form-label">Neighbourhood Tag</label>
+                        <label class="form-label">Tag vicinato</label>
                         <ul class="list-inline mt-xl-1 mb-0">
                           <li class="list-inline-item">
                             <div class="custom-control custom-checkbox">
@@ -193,13 +193,13 @@
                           <li class="list-inline-item">
                             <div class="custom-control custom-checkbox">
                               <input class="custom-control-input" type="checkbox" id="type_1" name="type[]">
-                              <label class="custom-control-label" for="type_1">Business                                            </label>
+                              <label class="custom-control-label" for="type_1">Affari                                            </label>
                             </div>
                           </li>
                           <li class="list-inline-item">
                             <div class="custom-control custom-checkbox">
                               <input class="custom-control-input" type="checkbox" id="type_2" name="type[]">
-                              <label class="custom-control-label" for="type_2">Family                                            </label>
+                              <label class="custom-control-label" for="type_2">Famiglia                                            </label>
                             </div>
                           </li>
                           <li class="list-inline-item">
@@ -213,10 +213,10 @@
                     </div>
                   </div>
                   <div class="filter-block">
-                    <h6 class="mb-3">Rooms and beds</h6>
+                    <h6 class="mb-3">Stanze e letti</h6>
                     <div class="row">
                       <div class="col-lg-4">
-                        <label class="form-label">Beds</label>
+                        <label class="form-label">Letti</label>
                         <div class="d-flex align-items-center">
                           <div class="btn btn-items btn-items-decrease">-</div>
                           <input class="form-control input-items input-items-greaterthan" type="text" value="1+" disabled>
@@ -224,7 +224,7 @@
                         </div>
                       </div>
                       <div class="col-lg-4">
-                        <label class="form-label">Bedrooms</label>
+                        <label class="form-label">Stanze da letto</label>
                         <div class="d-flex align-items-center">
                           <div class="btn btn-items btn-items-decrease">-</div>
                           <input class="form-control input-items input-items-greaterthan" type="text" value="1+" disabled>
@@ -232,7 +232,7 @@
                         </div>
                       </div>
                       <div class="col-lg-4">
-                        <label class="form-label">Bathrooms</label>
+                        <label class="form-label">Bagni</label>
                         <div class="d-flex align-items-center">
                           <div class="btn btn-items btn-items-decrease">-</div>
                           <input class="form-control input-items input-items-greaterthan" type="text" value="1+" disabled>
@@ -242,29 +242,29 @@
                     </div>
                   </div>
                   <div class="filter-block"> 
-                    <h6 class="mb-3">Trip type</h6>
+                    <h6 class="mb-3">Tipo di viaggio</h6>
                     <div class="row pt-1">
                       <div class="col-sm-6">
                         <div class="custom-control custom-switch mb-3">
                           <input class="custom-control-input" id="forfamilies" type="checkbox" name="forfamilies" aria-describedby="forfamiliesHelp">
-                          <label class="custom-control-label" for="forfamilies"> <span class="text-sm">For Families</span></label>
-                        </div><small class="text-muted form-text" id="forfamiliesHelp">Explore entire homes with 5-star reviews from families and essentials like a kitchen and TV</small>
+                          <label class="custom-control-label" for="forfamilies"> <span class="text-sm">Per famiglie</span></label>
+                        </div><small class="text-muted form-text" id="forfamiliesHelp">Esplora intere case con valutazione 5-stelle da famiglie e con essenziali come cucina e TV</small>
                       </div>
                       <div class="col-sm-6">
                         <div class="custom-control custom-switch mb-3">
                           <input class="custom-control-input" id="forwork" type="checkbox" name="forwork" aria-describedby="forworkHelp">
-                          <label class="custom-control-label" for="forwork"> <span class="text-sm">For work</span></label>
-                        </div><small class="text-muted form-text" id="forworkHelp">Explore top-rated homes with essentials like a workspace, wifi, and self check-in</small>
+                          <label class="custom-control-label" for="forwork"> <span class="text-sm">Per lavoro</span></label>
+                        </div><small class="text-muted form-text" id="forworkHelp">Esplora gli alloggi con le valutazioni più alte e con essenziali come una sala studio, wifi e self check-in</small>
                       </div>
                     </div>
                   </div>
                   <div class="filter-block"> 
-                    <h6 class="mb-3">Amenities</h6>
+                    <h6 class="mb-3">Servizi</h6>
                     <ul class="list-inline mb-0">
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="amenities_0" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_0">Kitchen                               </label>
+                          <label class="custom-control-label" for="amenities_0">Cucina                               </label>
                         </div>
                       </li>
                       <li class="list-inline-item">
@@ -276,25 +276,25 @@
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="amenities_2" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_2">Heating                               </label>
+                          <label class="custom-control-label" for="amenities_2">Riscaldamento                               </label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="amenities_3" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_3">Air conditioning                               </label>
+                          <label class="custom-control-label" for="amenities_3">Aria condizionata                               </label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="amenities_4" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_4">Washer                               </label>
+                          <label class="custom-control-label" for="amenities_4">Lavatrice                               </label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="amenities_5" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_5">Dryer                               </label>
+                          <label class="custom-control-label" for="amenities_5">Asciugatrice                               </label>
                         </div>
                       </li>
                       <li class="list-inline-item">
@@ -306,78 +306,78 @@
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="amenities_7" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_7">Breakfast                               </label>
+                          <label class="custom-control-label" for="amenities_7">Colazione                               </label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="amenities_8" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_8">Indoor fireplace                               </label>
+                          <label class="custom-control-label" for="amenities_8">Camino                               </label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="amenities_9" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_9">Buzzer/wireless intercom                               </label>
+                          <label class="custom-control-label" for="amenities_9">Citofono                               </label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="amenities_10" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_10">Doorman                               </label>
+                          <label class="custom-control-label" for="amenities_10">Portiere                               </label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="amenities_11" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_11">Hangers                               </label>
+                          <label class="custom-control-label" for="amenities_11">Attaccapanni                               </label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="amenities_12" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_12">Iron                               </label>
+                          <label class="custom-control-label" for="amenities_12">Ferro da stiro                               </label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="amenities_13" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_13">Hair dryer                               </label>
+                          <label class="custom-control-label" for="amenities_13">Asciugacapelli                               </label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="amenities_14" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_14">Laptop friendly workspace                               </label>
+                          <label class="custom-control-label" for="amenities_14">Sala studio                               </label>
                         </div>
                       </li>
                     </ul>
                   </div>
                   <div class="filter-block"> 
-                    <h6 class="mb-3">Facilities</h6>
+                    <h6 class="mb-3">Spazi e strutture</h6>
                     <ul class="list-inline mb-0">
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="facilities_0" name="facilities[]">
-                          <label class="custom-control-label" for="facilities_0">Free parking on premises                               </label>
+                          <label class="custom-control-label" for="facilities_0">Parcheggio gratuito                               </label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="facilities_1" name="facilities[]">
-                          <label class="custom-control-label" for="facilities_1">Gym                               </label>
+                          <label class="custom-control-label" for="facilities_1">Palestra                               </label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="facilities_2" name="facilities[]">
-                          <label class="custom-control-label" for="facilities_2">Hot tub                               </label>
+                          <label class="custom-control-label" for="facilities_2">Vasca da bagno                               </label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="facilities_3" name="facilities[]">
-                          <label class="custom-control-label" for="facilities_3">Pool                               </label>
+                          <label class="custom-control-label" for="facilities_3">Piscina                               </label>
                         </div>
                       </li>
                     </ul>
@@ -387,26 +387,26 @@
             </div>
             <div class="row">
               <div class="col-sm-6 mb-4 order-2 order-sm-1">
-                <button class="btn btn-primary" type="submit"> <i class="fas fa-search mr-1"></i>Search                </button>
+                <button class="btn btn-primary" type="submit"> <i class="fas fa-search mr-1"></i>Cerca                </button>
               </div>
               <div class="col-sm-6 mb-4 text-sm-right order-1 order-sm-2">
-                <button class="btn btn-link btn-collapse pl-0 text-secondary" type="button" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters" data-expanded-text="Less filters" data-collapsed-text="More filters">More filters</button>
+                <button class="btn btn-link btn-collapse pl-0 text-secondary" type="button" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters" data-expanded-text="Less filters" data-collapsed-text="More filters">Più filtri</button>
               </div>
             </div>
           </form>
           <hr class="my-4">
           <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4">
             <div class="mr-3">
-              <p class="mb-3 mb-md-0"><strong>12</strong> results found</p>
+              <p class="mb-3 mb-md-0"><strong>12</strong> risultati trovati</p>
             </div>
             <div>
-              <label class="form-label mr-2" for="form_sort">Sort by</label>
+              <label class="form-label mr-2" for="form_sort">Ordina per</label>
               <select class="selectpicker" name="sort" id="form_sort" data-style="btn-selectpicker" title="">
-                <option value="sortBy_0">Most popular   </option>
-                <option value="sortBy_1">Recommended   </option>
-                <option value="sortBy_2">Newest   </option>
-                <option value="sortBy_3">Oldest   </option>
-                <option value="sortBy_4">Closest   </option>
+                <option value="sortBy_0">Più popolare   </option>
+                <option value="sortBy_1">Raccomandato   </option>
+                <option value="sortBy_2">Più recente   </option>
+                <option value="sortBy_3">Più vecchio   </option>
+                <option value="sortBy_4">Più vicino   </option>
               </select>
             </div>
           </div>
