@@ -103,19 +103,20 @@
               <div class="col-md-6 col-lg-12 col-xl-8 mb-4">
                 <div>
                   <label class="form-label"><b>Tipo Alloggio</b></label>
-                  <ul class="list-inline mb-0 mt-1">
-                    <li class="list-inline-item">
-                      <div class="custom-control custom-switch">
-                        <input class="custom-control-input" id="BnB" type="checkbox">
-                        <label class="custom-control-label" for="BnB"> <span class="text-sm">B&B</span></label>
-                      </div>
-                    </li>
-                    <li class="list-inline-item">
-                      <div class="custom-control custom-switch">
-                        <input class="custom-control-input" id="casaVacanza" type="checkbox">
-                        <label class="custom-control-label" for="casaVacanza"> <span class="text-sm">Casa Vacanza</span></label>
-                      </div>
-                    </li>
+                    <ul class="list-inline mb-0">
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-radio">
+                          <input class="custom-control-input" type="radio" id="bnb" name="tipoAlloggio">
+                          <label class="custom-control-label" for="bnb"> B&B</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-radio">
+                          <input class="custom-control-input" type="radio" id="casaVacanza" name="tipoAlloggio">
+                          <label class="custom-control-label" for="casaVacanza">Casa Vacanza</label>
+                        </div>
+                      </li>
+                    </ul>
                   </ul>
                 </div>
               </div>
@@ -221,31 +222,31 @@
                     <h6 class="my-4">Distanza dal centro</h6>
                     <ul class="list-inline mb-0">
                       <li class="list-inline-item">
-                        <div class="custom-control custom-checkbox">
+                        <div class="custom-control custom-radio">
                           <input class="custom-control-input" type="radio" id="metri_0" name="metri[]">
                           <label class="custom-control-label" for="metri_0"> &le; 50m</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
-                        <div class="custom-control custom-checkbox">
+                        <div class="custom-control custom-radio">
                           <input class="custom-control-input" type="radio" id="metri_1" name="metri[]">
                           <label class="custom-control-label" for="metri_1">&le; 100m</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
-                        <div class="custom-control custom-checkbox">
+                        <div class="custom-control custom-radio">
                           <input class="custom-control-input" type="radio" id="metri_2" name="metri[]">
                           <label class="custom-control-label" for="metri_2">&le; 200m</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
-                        <div class="custom-control custom-checkbox">
+                        <div class="custom-control custom-radio">
                           <input class="custom-control-input" type="radio" id="metri_3" name="metri[]">
                           <label class="custom-control-label" for="metri_3">&le; 500m</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
-                        <div class="custom-control custom-checkbox">
+                        <div class="custom-control custom-radio">
                           <input class="custom-control-input" type="radio" id="metri_4" name="metri[]">
                           <label class="custom-control-label" for="metri_4">&le; 1000m</label>
                         </div>
