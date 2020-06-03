@@ -257,7 +257,20 @@
               </li>
               <li class="mb-2"> 
                 <div class="media align-items-center mb-3">
-                  <div class="media-body"><button type="button" class="btn btn-outline-success">Conferma prenotazione</button></div>
+                  <div class="py-0">
+                    <button class="btn btn-outline-warning" type="button" data-toggle="collapse" data-target="#gestisciPrenotazione" aria-expanded="false" aria-controls="gestisciPrenotazione">Gestisci prenotazione</button>
+                    <div class="collapse mt-4" id="gestisciPrenotazione">
+                      <h5 class="mb-4">Accetta o declina la prenotazione </h5>
+                      <div class="row">
+                        <div class="col-sm-6 mb-2">
+                          <button class="col btn btn-success" type="submit">Accetta</button>
+                        </div>
+                        <div class="col-sm-6 mb-2">
+                          <button class="col btn btn-danger" type="submit">Declina</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </li>
             </ul>
