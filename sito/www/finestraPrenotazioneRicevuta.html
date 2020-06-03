@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/css/custom.0a822280.css">
   
     <!-- Icon-->
-    <link rel="shortcut icon" href="icon.png">
+    <link rel="shortcut icon" href="images/icon.png">
 
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -37,7 +37,7 @@
       <!-- Navbar-->
       <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
         <div class="container-fluid">
-          <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="index.html"><img width="175" height="50" viewBox="0 0 175 50" fill="none" src="logo.png" alt="Directory logo"></a>
+          <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="index.html"><img width="175" height="50" viewBox="0 0 175 50" fill="none" src="images/logo.png" alt="Directory logo"></a>
           </div>
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
           <!-- Navbar Collapse -->
@@ -72,7 +72,7 @@
                           <div class="col-lg-10 offset-lg-1">
                             <div class="card text-center" style="width: 18rem;">
                               <div class="card-body">
-                                <div class="testimonial-avatar"><img class="img-fluid" src="Nino.jpg" alt="..."></div>
+                                <div class="avatar-xxl"><img class="img-fluid" src="images/Nino.jpg" alt="..."></div>
                                 <h5 class="card-title">Nome Utente</h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                               </div>
@@ -187,12 +187,57 @@
             <ul class="list-unstyled">
               <li class="mb-2"> 
                 <div class="media align-items-center mb-3">
-                  <div class="media-body"><button type="button" class="btn btn-outline-primary">Recensisci cliente</button></div>
+                  <div class="py-0">
+                    <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#recensisciCliente" aria-expanded="false" aria-controls="recensisciCliente">Recensisci Cliente</button>
+                    <div class="collapse mt-4" id="recensisciCliente">
+                      <h5 class="mb-4">Recensione</h5>
+                      <form class="form" id="contact-form" method="get" action="#">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label class="form-label" for="name">Il tuo nome</label>
+                              <input class="form-control" type="text" name="name" id="name" required="required">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label class="form-label" for="rating">La tua valutazione</label>
+                              <select class="custom-select focus-shadow-0" name="rating" id="rating">
+                                <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; 5</option>
+                                <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; 4</option>
+                                <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; 3</option>
+                                <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; 2</option>
+                                <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; 1</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label" for="review">Testo </label>
+                          <textarea class="form-control" rows="4" name="review" id="review" placeholder="Scrivi qualcosa sul cliente" required="required"></textarea>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Invia</button>
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </li>
               <li class="mb-2"> 
                 <div class="media align-items-center mb-3">
-                  <div class="media-body"><button type="button" class="btn btn-outline-danger">Annulla prenotazione</button></div>
+                  <div class="py-0">
+                    <button class="btn btn-outline-danger" type="button" data-toggle="collapse" data-target="#annullaPrenotazione" aria-expanded="false" aria-controls="annullaPrenotazione">Annulla prenotazione</button>
+                    <div class="collapse mt-4" id="annullaPrenotazione">
+                      <h5 class="mb-4">Sei sicuro di voler annullare la prenotazione? </h5>
+                      <div class="row">
+                        <div class="col-sm-6 mb-2">
+                          <button class="col btn btn-success" type="submit">SI</button>
+                        </div>
+                        <div class="col-sm-6 mb-2">
+                          <button class="col btn btn-danger" type="button" data-toggle="collapse" data-target="#annullaPrenotazione" aria-expanded="false" aria-controls="annullaPrenotazione">NO</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </li>
               <li class="mb-2"> 
