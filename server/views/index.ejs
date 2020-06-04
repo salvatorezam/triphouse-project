@@ -1,11 +1,384 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>TripHouse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="referrer" content="no-referrer">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="keywords" content="...">
+    <meta name="description" content="...">
+    
+    <!-- Price Slider Stylesheets -->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/nouislider/nouislider.css">
+    <!-- Google fonts - Playfair Display-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700">
+    <!-- Google fonts - Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700">
+    <!-- swiper-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
+    <!-- Magnigic Popup-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/magnific-popup/magnific-popup.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/css/style.default.e1630ae4.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/css/custom.0a822280.css">
+  
+    <!-- Icon-->
+    <link rel="shortcut icon" href="images/icon.png">
+
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+
+  <body style="padding-top: 72px;">
+    <header class="header">
+      <!-- Navbar-->
+      <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
+        <div class="container-fluid">
+          <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="index.html"><img width="175" height="50" viewBox="0 0 175 50" fill="none" src="images/logo.png" alt="TripHouse Logo"></a>
+          </div>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+          <!-- Navbar Collapse -->
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-auto">
+              <!-- Megamenu-->
+              <li class="nav-item dropdown position-static"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Profilo Utente</a>
+                <div class="dropdown-menu megamenu py-lg-0">
+                  <div class="row">
+                    <div class="col-lg-9">
+                      <div class="row p-3 pr-lg-0 pl-lg-5 pt-lg-5">
+                        <div class="col-lg-3">
+                          <!-- Megamenu list -->
+                          <h6 class="text-uppercase">Utente</h6>
+                          <ul class="megamenu-list list-unstyled">
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="/views/finestraListaPrenotazioniEffettuate.ejs">Visualizza prenotazione effettuata   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="modificaDatiPersonali.html">Modifica dati personali   </a></li>
+                          </ul> 
+                        </div>
+                        <div class="col-lg-3">
+                          <!-- Megamenu list -->
+                          <h6 class="text-uppercase">Host</h6>
+                          <ul class="megamenu-list list-unstyled">
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="finestraListaPrenotazioniRicevute.html">Visualizza prenotazione ricevuta   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="aggiungiAlloggio\aggiungiAlloggio.html">Aggiungi alloggio   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="visualizzaAlloggio.html">Visualizza alloggio   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="index.html">Supporto economico e legale   </a></li>
+                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="finestraListaPrenotazioniRicevute.html">Comunicazione dati ospiti    </a></li>
+                          </ul>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="col-lg-10 offset-lg-1">
+                            <div class="card text-center" style="width: 18rem;">
+                              <div class="card-body">
+                                <div class="testimonial-avatar"><img class="img-fluid" src="images/Nino.jpg" alt="..."></div>
+                                <h5 class="card-title">Nome Utente</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 d-none d-lg-block"><img class="bg-image" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1521170665346-3f21e2291d8b.jpg" alt=""></div>
+                  </div>
+                </div>
+              </li>
+              <!-- /Megamenu end-->
+              <li class="nav-item"><a class="nav-link" href="Registrazione.html">Registrati</a></li>
+              <li class="nav-item"><a class="nav-link" href="Autenticazione.html">Accedi</a></li>
+              <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block"><a class="btn btn-primary" href="user-add-0.html">Diventa Host</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- /Navbar -->
+    </header>
+    <section class="hero-home">
+      <div class="swiper-container hero-slider">
+        <div class="swiper-wrapper dark-overlay">
+          <div class="swiper-slide" style="background-image:url(images/home_slideshow/s_8.jpg)"></div>
+          <div class="swiper-slide" style="background-image:url(images/home_slideshow/s_9.jpg)"></div>
+          <div class="swiper-slide" style="background-image:url(images/home_slideshow/s_13.jpg)"></div>
+          <div class="swiper-slide" style="background-image:url(images/home_slideshow/u_1.jpg)"></div>
+          <div class="swiper-slide" style="background-image:url(images/home_slideshow/u_2.jpg)"></div>
+          <div class="swiper-slide" style="background-image:url(images/home_slideshow/photo-1501621965065-c6e1cf6b53e2.jpg)"></div>
+          <div class="swiper-slide" style="background-image:url(images/home_slideshow/photo-1519974719765-e6559eac2575.jpg)"></div>
+          <div class="swiper-slide" style="background-image:url(images/home_slideshow/photo-1490578474895-699cd4e2cf59.jpg)"></div>
+          <div class="swiper-slide" style="background-image:url(images/home_slideshow/photo-1534850336045-c6c6d287f89e.jpg)"></div>
+        </div>
+      </div>
+      <div class="container-xl py-6 py-md-7 text-white z-index-20">
+        <div class="row">
+          <div class="col-xl-10">
+            <div class="text-center text-lg-left">
+              <p class="subtitle letter-spacing-4 mb-2 text-secondary text-shadow">A sostegno del tuo viaggio</p>
+              <h1 class="display-3 font-weight-bold text-shadow">La meta è partire.</h1>
+            </div>
+            <div class="search-bar mt-5 p-3 p-lg-1 pl-lg-4">
+              <form action="#">
+                <div class="row">
+                  <div class="col-lg-3 d-flex align-items-center form-group">
+                    <!-- <label class="label-absolute" for="location"><i class="fa fa-crosshairs"></i><span class="sr-only">City</span></label>-->
+                    <input id="prova" class="form-control border-0 shadow-0" type="text" name="search" placeholder="Dove vuoi andare?">
+                  </div>
+                 <div class="col-lg d-flex align-items-center form-group">
+                      <input placeholder="Da" class="form-control border-0 shadow-0" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="periodo"id="periodo" />
+                  </div>
+
+                  <div class="col-lg d-flex align-items-center form-group">
+                    <input placeholder="A" class="form-control border-0 shadow-0" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="periodo"id="periodo" />
+                  </div>
+
+                  <div class="col-lg d-flex align-items-center form-group no-divider">
+                    <select class="selectpicker" title="Quanti ospiti?" data-style="btn-form-control">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                    </select>
+                  </div>
+                  <div class="col-lg">
+                    <button class="btn btn-primary btn-block rounded-xl h-100" type="submit" formaction="Ricerca.html">Cerca</button>
+                  </div>
+                  
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="py-6 bg-gray-100">
+      <div class="container">
+        <div class="text-center pb-lg-4">
+          <p class="subtitle text-secondary">Un'esperienza unica</p>
+          <h2 class="mb-5">Prenotare con noi è facile</h2>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 mb-3 mb-lg-0 text-center">
+            <div class="px-0 px-lg-3">
+              <div class="icon-rounded bg-primary-light mb-3">
+                <svg class="svg-icon text-primary w-2rem h-2rem">
+                  <use xlink:href="#destination-map-1"> </use>
+                </svg>
+              </div>
+              <h3 class="h5">Trova l'alloggio perfetto</h3>
+              <p class="text-muted">Il nostro sistema di ricerca e di filtraggio ti permette di individuare velocemente gli alloggi che soddisfano i tuoi interessi.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-3 mb-lg-0 text-center">
+            <div class="px-0 px-lg-3">
+              <div class="icon-rounded bg-primary-light mb-3">
+                <svg class="svg-icon text-primary w-2rem h-2rem">
+                  <use xlink:href="#pay-by-card-1"> </use>
+                </svg>
+              </div>
+              <h3 class="h5">Prenota con facilità</h3>
+              <p class="text-muted">Gestisci le prenotazioni con pochi click, che tu sia un ospite o un host.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-3 mb-lg-0 text-center">
+            <div class="px-0 px-lg-3">
+              <div class="icon-rounded bg-primary-light mb-3">
+                <svg class="svg-icon text-primary w-2rem h-2rem">
+                  <use xlink:href="#heart-1"> </use>
+                </svg>
+              </div>
+              <h3 class="h5">Goditi la vacanza</h3>
+              <p class="text-muted">Prenota un alloggio e inizia a fare le valigie, al resto ci pensiamo noi.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Divider Section-->
+    <section class="py-7 position-relative dark-overlay"><img class="bg-image" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1497436072909-60f360e1d4b1.jpg" alt="">
+      <div class="container">
+        <div class="overlay-content text-white py-lg-5">
+          <h3 class="display-3 font-weight-bold text-serif text-shadow mb-5">Pronto per la tua vacanza?</h3> <!-- <a class="btn btn-light" href="category-rooms.html">Get started</a> -->
+        </div>
+      </div>
+    </section>
+    <section class="py-7">
+      <div class="container">
+        <div class="text-center">
+          <p class="subtitle text-primary">Testimonianze</p>
+          <h2 class="mb-5">I nostri clienti dicono di noi</h2>
+        </div>
+        <!-- Slider main container-->
+        <div class="swiper-container testimonials-slider testimonials">
+          <!-- Additional required wrapper-->
+          <div class="swiper-wrapper pt-2 pb-5">
+            <!-- Slides-->
+            <div class="swiper-slide px-3">
+              <div class="testimonial card rounded-lg shadow border-0">
+                <div class="testimonial-avatar"><img class="img-fluid" src="images/Nino.jpg" alt="..."></div>
+                <div class="text">
+                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                  <p class="testimonial-text">Formaggio o limone?</p><strong>Nino u' ballerino</strong>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide px-3">
+              <div class="testimonial card rounded-lg shadow border-0">
+                <div class="testimonial-avatar"><img class="img-fluid" src="images/fratelli.jpg" alt="..."></div>
+                <div class="text">
+                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                  <p class="testimonial-text">Ho preso er muro, fratellì.</p><strong>1727wrldstar</strong>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide px-3">
+              <div class="testimonial card rounded-lg shadow border-0">
+                <div class="testimonial-avatar"><img class="img-fluid" src="images/tommaso.jpg" alt="..."></div>
+                <div class="text">
+                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                  <p class="testimonial-text">Che accendo? Sta zorba accendo? Che minchia accendo? Sta minchia accendo? Tutte cose atturtaru.</p><strong>Tommaso</strong>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide px-3">
+              <div class="testimonial card rounded-lg shadow border-0">
+                <div class="testimonial-avatar"><img class="img-fluid" src="images/rosario.jpg" alt="..."></div>
+                <div class="text">
+                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                  <p class="testimonial-text">Basi di Dati. Materia di corso. 9 CFU.</p><strong>Rosario Sorbello</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination">     </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer-->
+    <footer class="position-relative z-index-10 d-print-none">
+      <!-- Main block - menus, subscribe form-->
+      <div class="py-6 bg-gray-200 text-muted"> 
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4 mb-5 mb-lg-0">
+              <div class="font-weight-bold text-uppercase text-dark mb-3">Chi siamo</div>
+              <p>Edoardo Dovico<br/>Michele Nasser<br/>Mauro Russo<br/>Salvatore Zammuto</p>
+              <ul class="list-inline">
+                <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#" target="_blank" title="twitter"><i class="fab fa-twitter"></i></a></li>
+                <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#" target="_blank" title="facebook"><i class="fab fa-facebook"></i></a></li>
+                <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#" target="_blank" title="instagram"><i class="fab fa-instagram"></i></a></li>
+                <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#" target="_blank" title="pinterest"><i class="fab fa-pinterest"></i></a></li>
+                <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#" target="_blank" title="vimeo"><i class="fab fa-vimeo"></i></a></li>
+              </ul>
+            </div>
+            <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
+              <h6 class="text-uppercase text-dark mb-3">Rentals</h6>
+              <ul class="list-unstyled">
+                <li><a class="text-muted" href="index.html">Rooms     </a></li>
+                <li><a class="text-muted" href="category-rooms.html">Map on top     </a></li>
+                <li><a class="text-muted" href="category-2-rooms.html">Side map     </a></li>
+                <li><a class="text-muted" href="category-3-rooms.html">No map     </a></li>
+                <li><a class="text-muted" href="detail-rooms.html">Room detail     </a></li>
+              </ul>
+            </div>
+            <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
+              <h6 class="text-uppercase text-dark mb-3">Pages</h6>
+              <ul class="list-unstyled">
+                <li><a class="text-muted" href="compare.html">Comparison  <span class="badge badge-info-light ml-1">New</span>                                   </a></li>
+                <li><a class="text-muted" href="team.html">Team  <span class="badge badge-info-light ml-1">New</span>                                   </a></li>
+                <li><a class="text-muted" href="contact.html">Contact                                   </a></li>
+                <li><a class="text-muted" href="pricing.html">Pricing                                   </a></li>
+                <li><a class="text-muted" href="text.html">Text page                                   </a></li>
+                <li><a class="text-muted" href="faq.html">F.A.Q.s                                   </a></li>
+                <li><a class="text-muted" href="coming-soon.html">Coming soon                                   </a></li>
+                <li><a class="text-muted" href="404.html">404 page  <span class="badge badge-info-light ml-1">New</span>                                   </a></li>
+              </ul>
+            </div>
+            <div class="col-lg-4">
+              <h6 class="text-uppercase text-dark mb-3">Newsletter</h6>
+              <p class="mb-3"> Iscriviti alla nostra newsletter per rimanere aggiornato sugli sconti e offerte che offriamo.</p>
+              <form action="#" id="newsletter-form">
+                <div class="input-group mb-3">
+                  <input class="form-control bg-transparent border-dark border-right-0" type="email" placeholder="Il tuo indirizzo email" aria-label="Your Email Address">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-dark border-left-0" type="submit"> <i class="fa fa-paper-plane text-lg"></i></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Copyright section of the footer-->
+      <div class="py-4 font-weight-light bg-gray-800 text-gray-300">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-6 text-center text-md-left">
+              <p class="text-sm mb-md-0">&copy; 2020, Team Zammuto.  All rights reserved.</p>
+            </div>
+            <div class="col-md-6">
+              <ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-right">
+                <li class="list-inline-item"><img class="w-2rem" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/visa.svg" alt="..."></li>
+                <li class="list-inline-item"><img class="w-2rem" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/mastercard.svg" alt="..."></li>
+                <li class="list-inline-item"><img class="w-2rem" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/paypal.svg" alt="..."></li>
+                <li class="list-inline-item"><img class="w-2rem" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/western-union.svg" alt="..."></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    <script>
+      // ------------------------------------------------------- //
+      //   Normalmente dovremmo includere lo sprite in testa al documento, ma questo significherebbe avere una replica degli svg in ogni pagina,
+      //   inoltre il parser HTML dovrebbe prima ispezionare questi file nella loro interezza prima di poter proseguire.
+      //   La questione si risolve tramite una apposita richiesta ajax, che permette conseguentemente di sfruttare la cache del browser
+      //   per reperire i suddetti svg. Bisogna quindi assicurarsi che l'svg è nel namespace corretto prima che venga fatto l'append alla pagina:
+      //   questo lo si fa prima appendendo l'svg ad un div, e poi appendendo il risultato alla pagina, pertanto: 
+      function injectSvgSprite(path) {
+      
+          var ajax = new XMLHttpRequest();
+          ajax.open("GET", path, true);
+          ajax.send();
+          ajax.onload = function(e) {
+          var div = document.createElement("div");
+          div.className = 'd-none';
+          div.innerHTML = ajax.responseText;
+          document.body.insertBefore(div, document.body.childNodes[0]);
+          }
+      }    
+      injectSvgSprite('https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg'); 
+    </script> 
+
+    <!-- jQuery-->
+    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/jquery/jquery.min.js"></script>
+    <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
+    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Magnific Popup - Lightbox for the gallery-->
+    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <!-- Smooth scroll-->
+    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
+    <!-- Bootstrap Select-->
+    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
+    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/object-fit-images/ofi.min.js"></script>
+    <!-- Swiper Carousel                       -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
+    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="https://demo.bootstrapious.com/directory/1-5/js/demo.36f8799a.js"></script>
+    <script>var basePath = ''</script>
+    <!-- Main Theme JS file    -->
+    <script src="https://demo.bootstrapious.com/directory/1-5/js/theme.55f8348b.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-date-range-picker/0.19.0/jquery.daterangepicker.min.js"> </script>
+
+    <script src="js/datepicker-detail.111bc2ff.js">   </script>
   </body>
+
 </html>
