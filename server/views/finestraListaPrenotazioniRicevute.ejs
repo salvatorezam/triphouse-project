@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <% include partials/head.ejs %>
+  </head>
+  <body style="padding-top: 72px;">
+    <% include partials/header.ejs %>
+    <section class="py-5">
+      <div class="container">
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb pl-0  justify-content-start">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Vista Host    </li>
+        </ol>
+        <div class="d-flex justify-content-between align-items-end mb-5">
+          <h1 class="hero-heading mb-0">Prenotazioni ricevute </h1><!-- a class="btn btn-link text-muted" href="#">Prenotazioni passate</a-->
+        </div>
+        <div class="d-flex justify-content-between align-items-center flex-column flex-lg-row mb-5">
+          <div class="mr-3">
+            <p class="mb-3 mb-lg-0">Hai <strong>12 prenotazioni</strong> tra le tue proprietà</p>
+          </div>
+          <div class="text-center">
+            <label class="form-label mr-2" for="form_sort">Ordina per</label>
+            <select class="selectpicker mr-3 mb-3 mb-lg-0" name="sort" id="form_sort" data-style="btn-selectpicker" title="">
+              <option value="sortBy_0">più recenti   </option>
+              <option value="sortBy_1">meno recenti   </option>
+            </select><a class="btn btn-outline-secondary" href="#"><i class="fa fa-download mr-2"></i>Download CSV</a>
+          </div>
+        </div>
+        <div class="list-group shadow mb-5"><a class="list-group-item list-group-item-action p-4" href="finestraPrenotazioneRicevuta.html">
+            <div class="row">
+              <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
+                <div class="d-flex align-items-center mb-3">
+                  <h2 class="h5 mb-0">Meredith Goodwin</h2><img class="avatar avatar-sm avatar-border-white ml-3" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/avatar/avatar-0.jpg" alt="Jack London">
+                </div>
+                <p class="text-sm text-muted">Double Room</p><span class="badge badge-pill p-2 badge-secondary-light">February 16, 2019 - February 19, 2019</span>
+              </div>
+              <div class="col-lg-8">
+                <div class="row">
+                  <div class="col-6 col-md-4 col-lg-3 py-3 mb-3 mb-lg-0">
+                    <h6 class="label-heading">Tipo alloggio</h6>
+                    <p class="text-sm font-weight-bold">Bed & Breakfast</p>
+                    <h6 class="label-heading">Notti </h6>
+                    <p class="text-sm font-weight-bold mb-0">3</p>
+                  </div>
+                  <div class="col-6 col-md-4 col-lg-3 py-3">
+                    <h6 class="label-heading">Ospiti</h6>
+                    <p class="text-sm font-weight-bold">1 pax</p>
+                    <h6 class="label-heading">Prezzo</h6>
+                    <p class="text-sm font-weight-bold mb-0">€244.42</p>
+                  </div>
+                  <div class="col-6 col-md-4 col-lg-3 py-3">
+                    <h6 class="label-heading">Data prenotazione</h6>
+                    <p class="text-sm font-weight-bold">February 16, 2019                                        </p>
+                    <h6 class="label-heading">Ora di arrivo</h6>
+                    <p class="text-sm font-weight-bold mb-0">Around 4 PM</p>
+                  </div>
+                  <div class="col-12 col-lg-3 align-self-center"><span class="text-primary text-sm text-uppercase mr-4 mr-lg-0"><i class="fa fa-check fa-fw mr-2"> </i>Booking paid</span><br class="d-none d-lg-block"><span class="text-primary text-sm text-uppercase"><i class="fa fa-check fa-fw mr-2"> </i>Confirmed</span>
+                  </div>
+                </div>
+              </div>
+            </div></a>
+            <a class="list-group-item list-group-item-action p-4" href="finestraPrenotazioneRicevuta.html">
+              <div class="row">
+                <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
+                  <div class="d-flex align-items-center mb-3">
+                    <h2 class="h5 mb-0">Meredith Goodwin</h2><img class="avatar avatar-sm avatar-border-white ml-3" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/avatar/avatar-0.jpg" alt="Jack London">
+                  </div>
+                  <p class="text-sm text-muted">Double Room</p><span class="badge badge-pill p-2 badge-secondary-light">February 16, 2019 - February 19, 2019</span>
+                </div>
+                <div class="col-lg-8">
+                  <div class="row">
+                    <div class="col-6 col-md-4 col-lg-3 py-3 mb-3 mb-lg-0">
+                      <h6 class="label-heading">Tipo alloggio</h6>
+                      <p class="text-sm font-weight-bold">Bed & Breakfast</p>
+                      <h6 class="label-heading">Notti </h6>
+                      <p class="text-sm font-weight-bold mb-0">3</p>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3 py-3">
+                      <h6 class="label-heading">Ospiti</h6>
+                      <p class="text-sm font-weight-bold">1 pax</p>
+                      <h6 class="label-heading">Prezzo</h6>
+                      <p class="text-sm font-weight-bold mb-0">€244.42</p>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3 py-3">
+                      <h6 class="label-heading">Data prenotazione</h6>
+                      <p class="text-sm font-weight-bold">February 16, 2019                                        </p>
+                      <h6 class="label-heading">Ora di arrivo</h6>
+                      <p class="text-sm font-weight-bold mb-0">Around 4 PM</p>
+                    </div>
+                    <div class="col-12 col-lg-3 align-self-center"><span class="text-primary text-sm text-uppercase mr-4 mr-lg-0"><i class="fa fa-check fa-fw mr-2"> </i>Booking paid</span><br class="d-none d-lg-block"><span class="text-primary text-sm text-uppercase"><i class="fa fa-check fa-fw mr-2"> </i>Confirmed</span>
+                    </div>
+                  </div>
+                </div>
+              </div></a>
+            <a class="list-group-item list-group-item-action p-4" href="finestraPrenotazioneRicevuta.html">
+            <div class="row">
+              <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
+                <div class="d-flex align-items-center mb-3">
+                  <h2 class="h5 mb-0">Fisher Bauer</h2><img class="avatar avatar-sm avatar-border-white ml-3" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/avatar/avatar-2.jpg" alt="Jack London">
+                </div>
+                <p class="text-sm text-muted">Double Room</p><span class="badge badge-pill p-2 badge-danger-light">March 10, 2019 - March 13, 2019</span>
+              </div>
+              <div class="col-lg-8">
+                <div class="row">
+                  <div class="col-6 col-md-4 col-lg-3 py-3 mb-3 mb-lg-0">
+                    <h6 class="label-heading">Rate type</h6>
+                    <p class="text-sm font-weight-bold">Bed & Breakfast</p>
+                    <h6 class="label-heading">Nights </h6>
+                    <p class="text-sm font-weight-bold mb-0">3</p>
+                  </div>
+                  <div class="col-6 col-md-4 col-lg-3 py-3">
+                    <h6 class="label-heading">Occupancy</h6>
+                    <p class="text-sm font-weight-bold">2 pax</p>
+                    <h6 class="label-heading">Charge</h6>
+                    <p class="text-sm font-weight-bold mb-0">$938.48</p>
+                  </div>
+                  <div class="col-6 col-md-4 col-lg-3 py-3">
+                    <h6 class="label-heading">Booked Date</h6>
+                    <p class="text-sm font-weight-bold">March 10, 2019                                        </p>
+                    <h6 class="label-heading">Arrival Time</h6>
+                    <p class="text-sm font-weight-bold mb-0">Around 4 PM</p>
+                  </div>
+                  <div class="col-12 col-lg-3 align-self-center"><span class="text-primary text-sm text-uppercase mr-4 mr-lg-0"><i class="fa fa-check fa-fw mr-2"> </i>Booking paid</span><br class="d-none d-lg-block"><span class="text-primary text-sm text-uppercase"><i class="fa fa-check fa-fw mr-2"> </i>Confirmed</span>
+                  </div>
+                </div>
+              </div>
+            </div></a>
+            <a class="list-group-item list-group-item-action p-4" href="finestraPrenotazioneRicevuta.html">
+            <div class="row">
+              <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
+                <div class="d-flex align-items-center mb-3">
+                  <h2 class="h5 mb-0">Aguilar Webb</h2><img class="avatar avatar-sm avatar-border-white ml-3" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/avatar/avatar-3.jpg" alt="Jack London">
+                </div>
+                <p class="text-sm text-muted">Double Room</p><span class="badge badge-pill p-2 badge-success-light">April 09, 2019 - April 13, 2019</span>
+              </div>
+              <div class="col-lg-8">
+                <div class="row">
+                  <div class="col-6 col-md-4 col-lg-3 py-3 mb-3 mb-lg-0">
+                    <h6 class="label-heading">Rate type</h6>
+                    <p class="text-sm font-weight-bold">Bed & Breakfast</p>
+                    <h6 class="label-heading">Nights </h6>
+                    <p class="text-sm font-weight-bold mb-0">4</p>
+                  </div>
+                  <div class="col-6 col-md-4 col-lg-3 py-3">
+                    <h6 class="label-heading">Occupancy</h6>
+                    <p class="text-sm font-weight-bold">3 pax</p>
+                    <h6 class="label-heading">Charge</h6>
+                    <p class="text-sm font-weight-bold mb-0">$955.07</p>
+                  </div>
+                  <div class="col-6 col-md-4 col-lg-3 py-3">
+                    <h6 class="label-heading">Booked Date</h6>
+                    <p class="text-sm font-weight-bold">April 09, 2019                                        </p>
+                    <h6 class="label-heading">Arrival Time</h6>
+                    <p class="text-sm font-weight-bold mb-0">Around 4 PM</p>
+                  </div>
+                  <div class="col-12 col-lg-3 align-self-center"><span class="text-primary text-sm text-uppercase mr-4 mr-lg-0"><i class="fa fa-check fa-fw mr-2"> </i>Booking paid</span><br class="d-none d-lg-block"><span class="text-muted text-sm text-uppercase"><i class="fa fa-times fa-fw mr-2"> </i>Confirmed</span>
+                  </div>
+                </div>
+              </div>
+            </div></a>
+        </div>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination pagination-template d-flex justify-content-center">
+            <li class="page-item"><a class="page-link" href="#"> <i class="fa fa-angle-left"></i></a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#"> <i class="fa fa-angle-right"></i></a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+    <!-- Footer-->
+    <% include partials/footer.ejs %>
+
+    <!-- scriptFooter -->
+    <% include partials/scriptFooter.ejs %>
+  </body>
+</html>
