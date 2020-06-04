@@ -6,4 +6,9 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+/* GET prova. */
+router.get('/FLPE', function(req, res, next) {
+  res.render('finestraListaPrenotazioniEffettuate.ejs', { title: 'Express' });
+});
+
 module.exports = router;
