@@ -38,7 +38,7 @@
       <!-- Navbar-->
       <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
         <div class="container-fluid">
-          <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="../index.html"><img width="175" height="50" viewBox="0 0 175 50" fill="none" src="../images/logo.png" alt="Directory logo"></a>
+          <div class="d-flex align-items-center"><a class="navbar-brand py-0" href="../index.html"><img width="175" height="50" viewBox="0 0 175 50" fill="none" src="../images/logo.png" alt="Directory logo"></a>
           </div>
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
           <!-- Navbar Collapse -->
@@ -101,275 +101,73 @@
     </div>
     <section class="py-5">
       <div class="container">
-        <p class="subtitle text-primary">Add new listing</p>
-        <h1 class="h2 mb-5"> Basic information <span class="text-muted float-right">Step 1</span>      </h1>
+        <p class="subtitle text-primary">aggiungi alloggio</p>
+        <h1 class="h2 mb-5"> Informazioni di base <span class="text-muted float-right">Step 1</span>      </h1>
         <form>
           <div class="row form-block">
             <div class="col-lg-4">
-              <h4>Basic</h4>
-              <p class="text-muted text-sm">His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table.</p>
-            </div>
+              <h4>Base</h4>
+              </div>
             <div class="col-lg-7 ml-auto">
               <div class="form-group"></div>
               <div class="form-group">
-                <label class="form-label" for="form_name">Property name</label>
-                <input class="form-control" name="name" id="form_name">
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="form_type">Home type</label>
+                <label class="form-label" for="form_type">Tipo Alloggio</label>
                 <select class="selectpicker form-control" name="type" id="form_type" data-style="btn-selectpicker" title="" aria-describedby="propertyTypeHelp">
-                  <option value="type_0">Entire place                         </option>
-                  <option value="type_1">Private room                         </option>
-                  <option value="type_2">Shared room                         </option>
-                </select><small class="form-text text-muted" id="propertyTypeHelp">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections</small>
+                  <option disabled selected>Seleziona Tipo Alloggio</option>
+                  <option value="type_0">B&B</option>
+                  <option value="type_1">Casa Vacana</option>
+                </select>
               </div>
               <div class="form-group">
-                <label class="form-label">Is your property set as a dedicated guest space?</label>
-                <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="guests_0" name="guests">
-                  <label class="custom-control-label" for="guests_0">Yes, it's primarily set up for guests</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="guests_1" name="guests">
-                  <label class="custom-control-label" for="guests_1">No, I keep my personal belongings there</label>
-                </div>
+                <label class="form-label" for="form_name">Nome Proprietario</label>
+                <input class="form-control" name="name" id="form_name">
               </div>
             </div>
           </div>
           <div class="row form-block">
             <div class="col-lg-4">
-              <h4>Location</h4>
-              <p class="text-muted text-sm">Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.</p>
-            </div>
-            <div class="col-lg-7 ml-auto">
-              <!-- Country-->
-              <div class="form-group">
-                <label class="form-label" for="form_country">Country / Region</label>
-                <select class="selectpicker form-control" name="country" id="form_country" data-style="btn-selectpicker" title=" " data-live-search="true">
-                  <option value="country_#{index}">Afghanistan             </option>
-                  <option value="country_#{index}">Albania             </option>
-                  <option value="country_#{index}">Algeria             </option>
-                  <option value="country_#{index}">Andorra             </option>
-                  <option value="country_#{index}">Angola             </option>
-                  <option value="country_#{index}">Anguilla             </option>
-                  <option value="country_#{index}">Antigua &amp; Barbuda             </option>
-                  <option value="country_#{index}">Argentina             </option>
-                  <option value="country_#{index}">Armenia             </option>
-                  <option value="country_#{index}">Aruba             </option>
-                  <option value="country_#{index}">Australia             </option>
-                  <option value="country_#{index}">Austria             </option>
-                  <option value="country_#{index}">Azerbaijan             </option>
-                  <option value="country_#{index}">Bahamas             </option>
-                  <option value="country_#{index}">Bahrain             </option>
-                  <option value="country_#{index}">Bangladesh             </option>
-                  <option value="country_#{index}">Barbados             </option>
-                  <option value="country_#{index}">Belarus             </option>
-                  <option value="country_#{index}">Belgium             </option>
-                  <option value="country_#{index}">Belize             </option>
-                  <option value="country_#{index}">Benin             </option>
-                  <option value="country_#{index}">Bermuda             </option>
-                  <option value="country_#{index}">Bhutan             </option>
-                  <option value="country_#{index}">Bolivia             </option>
-                  <option value="country_#{index}">Bosnia &amp; Herzegovina             </option>
-                  <option value="country_#{index}">Botswana             </option>
-                  <option value="country_#{index}">Brazil             </option>
-                  <option value="country_#{index}">British Virgin Islands             </option>
-                  <option value="country_#{index}">Brunei             </option>
-                  <option value="country_#{index}">Bulgaria             </option>
-                  <option value="country_#{index}">Burkina Faso             </option>
-                  <option value="country_#{index}">Burundi             </option>
-                  <option value="country_#{index}">Cambodia             </option>
-                  <option value="country_#{index}">Cameroon             </option>
-                  <option value="country_#{index}">Cape Verde             </option>
-                  <option value="country_#{index}">Cayman Islands             </option>
-                  <option value="country_#{index}">Chad             </option>
-                  <option value="country_#{index}">Chile             </option>
-                  <option value="country_#{index}">China             </option>
-                  <option value="country_#{index}">Colombia             </option>
-                  <option value="country_#{index}">Congo             </option>
-                  <option value="country_#{index}">Cook Islands             </option>
-                  <option value="country_#{index}">Costa Rica             </option>
-                  <option value="country_#{index}">Cote D Ivoire             </option>
-                  <option value="country_#{index}">Croatia             </option>
-                  <option value="country_#{index}">Cruise Ship             </option>
-                  <option value="country_#{index}">Cuba             </option>
-                  <option value="country_#{index}">Cyprus             </option>
-                  <option value="country_#{index}">Czech Republic             </option>
-                  <option value="country_#{index}">Denmark             </option>
-                  <option value="country_#{index}">Djibouti             </option>
-                  <option value="country_#{index}">Dominica             </option>
-                  <option value="country_#{index}">Dominican Republic             </option>
-                  <option value="country_#{index}">Ecuador             </option>
-                  <option value="country_#{index}">Egypt             </option>
-                  <option value="country_#{index}">El Salvador             </option>
-                  <option value="country_#{index}">Equatorial Guinea             </option>
-                  <option value="country_#{index}">Estonia             </option>
-                  <option value="country_#{index}">Ethiopia             </option>
-                  <option value="country_#{index}">Falkland Islands             </option>
-                  <option value="country_#{index}">Faroe Islands             </option>
-                  <option value="country_#{index}">Fiji             </option>
-                  <option value="country_#{index}">Finland             </option>
-                  <option value="country_#{index}">France             </option>
-                  <option value="country_#{index}">French Polynesia             </option>
-                  <option value="country_#{index}">French West Indies             </option>
-                  <option value="country_#{index}">Gabon             </option>
-                  <option value="country_#{index}">Gambia             </option>
-                  <option value="country_#{index}">Georgia             </option>
-                  <option value="country_#{index}">Germany             </option>
-                  <option value="country_#{index}">Ghana             </option>
-                  <option value="country_#{index}">Gibraltar             </option>
-                  <option value="country_#{index}">Greece             </option>
-                  <option value="country_#{index}">Greenland             </option>
-                  <option value="country_#{index}">Grenada             </option>
-                  <option value="country_#{index}">Guam             </option>
-                  <option value="country_#{index}">Guatemala             </option>
-                  <option value="country_#{index}">Guernsey             </option>
-                  <option value="country_#{index}">Guinea             </option>
-                  <option value="country_#{index}">Guinea Bissau             </option>
-                  <option value="country_#{index}">Guyana             </option>
-                  <option value="country_#{index}">Haiti             </option>
-                  <option value="country_#{index}">Honduras             </option>
-                  <option value="country_#{index}">Hong Kong             </option>
-                  <option value="country_#{index}">Hungary             </option>
-                  <option value="country_#{index}">Iceland             </option>
-                  <option value="country_#{index}">India             </option>
-                  <option value="country_#{index}">Indonesia             </option>
-                  <option value="country_#{index}">Iran             </option>
-                  <option value="country_#{index}">Iraq             </option>
-                  <option value="country_#{index}">Ireland             </option>
-                  <option value="country_#{index}">Isle of Man             </option>
-                  <option value="country_#{index}">Israel             </option>
-                  <option value="country_#{index}">Italy             </option>
-                  <option value="country_#{index}">Jamaica             </option>
-                  <option value="country_#{index}">Japan             </option>
-                  <option value="country_#{index}">Jersey             </option>
-                  <option value="country_#{index}">Jordan             </option>
-                  <option value="country_#{index}">Kazakhstan             </option>
-                  <option value="country_#{index}">Kenya             </option>
-                  <option value="country_#{index}">Kuwait             </option>
-                  <option value="country_#{index}">Kyrgyz Republic             </option>
-                  <option value="country_#{index}">Laos             </option>
-                  <option value="country_#{index}">Latvia             </option>
-                  <option value="country_#{index}">Lebanon             </option>
-                  <option value="country_#{index}">Lesotho             </option>
-                  <option value="country_#{index}">Liberia             </option>
-                  <option value="country_#{index}">Libya             </option>
-                  <option value="country_#{index}">Liechtenstein             </option>
-                  <option value="country_#{index}">Lithuania             </option>
-                  <option value="country_#{index}">Luxembourg             </option>
-                  <option value="country_#{index}">Macau             </option>
-                  <option value="country_#{index}">Macedonia             </option>
-                  <option value="country_#{index}">Madagascar             </option>
-                  <option value="country_#{index}">Malawi             </option>
-                  <option value="country_#{index}">Malaysia             </option>
-                  <option value="country_#{index}">Maldives             </option>
-                  <option value="country_#{index}">Mali             </option>
-                  <option value="country_#{index}">Malta             </option>
-                  <option value="country_#{index}">Mauritania             </option>
-                  <option value="country_#{index}">Mauritius             </option>
-                  <option value="country_#{index}">Mexico             </option>
-                  <option value="country_#{index}">Moldova             </option>
-                  <option value="country_#{index}">Monaco             </option>
-                  <option value="country_#{index}">Mongolia             </option>
-                  <option value="country_#{index}">Montenegro             </option>
-                  <option value="country_#{index}">Montserrat             </option>
-                  <option value="country_#{index}">Morocco             </option>
-                  <option value="country_#{index}">Mozambique             </option>
-                  <option value="country_#{index}">Namibia             </option>
-                  <option value="country_#{index}">Nepal             </option>
-                  <option value="country_#{index}">Netherlands             </option>
-                  <option value="country_#{index}">Netherlands Antilles             </option>
-                  <option value="country_#{index}">New Caledonia             </option>
-                  <option value="country_#{index}">New Zealand             </option>
-                  <option value="country_#{index}">Nicaragua             </option>
-                  <option value="country_#{index}">Niger             </option>
-                  <option value="country_#{index}">Nigeria             </option>
-                  <option value="country_#{index}">Norway             </option>
-                  <option value="country_#{index}">Oman             </option>
-                  <option value="country_#{index}">Pakistan             </option>
-                  <option value="country_#{index}">Palestine             </option>
-                  <option value="country_#{index}">Panama             </option>
-                  <option value="country_#{index}">Papua New Guinea             </option>
-                  <option value="country_#{index}">Paraguay             </option>
-                  <option value="country_#{index}">Peru             </option>
-                  <option value="country_#{index}">Philippines             </option>
-                  <option value="country_#{index}">Poland             </option>
-                  <option value="country_#{index}">Portugal             </option>
-                  <option value="country_#{index}">Puerto Rico             </option>
-                  <option value="country_#{index}">Qatar             </option>
-                  <option value="country_#{index}">Reunion             </option>
-                  <option value="country_#{index}">Romania             </option>
-                  <option value="country_#{index}">Russia             </option>
-                  <option value="country_#{index}">Rwanda             </option>
-                  <option value="country_#{index}">Saint Pierre &amp; Miquelon             </option>
-                  <option value="country_#{index}">Samoa             </option>
-                  <option value="country_#{index}">San Marino             </option>
-                  <option value="country_#{index}">Satellite             </option>
-                  <option value="country_#{index}">Saudi Arabia             </option>
-                  <option value="country_#{index}">Senegal             </option>
-                  <option value="country_#{index}">Serbia             </option>
-                  <option value="country_#{index}">Seychelles             </option>
-                  <option value="country_#{index}">Sierra Leone             </option>
-                  <option value="country_#{index}">Singapore             </option>
-                  <option value="country_#{index}">Slovakia             </option>
-                  <option value="country_#{index}">Slovenia             </option>
-                  <option value="country_#{index}">South Africa             </option>
-                  <option value="country_#{index}">South Korea             </option>
-                  <option value="country_#{index}">Spain             </option>
-                  <option value="country_#{index}">Sri Lanka             </option>
-                  <option value="country_#{index}">St Kitts &amp; Nevis             </option>
-                  <option value="country_#{index}">St Lucia             </option>
-                  <option value="country_#{index}">St Vincent             </option>
-                  <option value="country_#{index}">St. Lucia             </option>
-                  <option value="country_#{index}">Sudan             </option>
-                  <option value="country_#{index}">Suriname             </option>
-                  <option value="country_#{index}">Swaziland             </option>
-                  <option value="country_#{index}">Sweden             </option>
-                  <option value="country_#{index}">Switzerland             </option>
-                  <option value="country_#{index}">Syria             </option>
-                  <option value="country_#{index}">Taiwan             </option>
-                  <option value="country_#{index}">Tajikistan             </option>
-                  <option value="country_#{index}">Tanzania             </option>
-                  <option value="country_#{index}">Thailand             </option>
-                  <option value="country_#{index}">Timor L'Este             </option>
-                  <option value="country_#{index}">Togo             </option>
-                  <option value="country_#{index}">Tonga             </option>
-                  <option value="country_#{index}">Trinidad &amp; Tobago             </option>
-                  <option value="country_#{index}">Tunisia             </option>
-                  <option value="country_#{index}">Turkey             </option>
-                  <option value="country_#{index}">Turkmenistan             </option>
-                  <option value="country_#{index}">Turks &amp; Caicos             </option>
-                  <option value="country_#{index}">Uganda             </option>
-                  <option value="country_#{index}">Ukraine             </option>
-                  <option value="country_#{index}">United Arab Emirates             </option>
-                  <option value="country_#{index}">United Kingdom             </option>
-                  <option value="country_#{index}">Uruguay             </option>
-                  <option value="country_#{index}">Uzbekistan             </option>
-                  <option value="country_#{index}">Venezuela             </option>
-                  <option value="country_#{index}">Vietnam             </option>
-                  <option value="country_#{index}">Virgin Islands (US)             </option>
-                  <option value="country_#{index}">Yemen             </option>
-                  <option value="country_#{index}">Zambia             </option>
-                  <option value="country_#{index}">Zimbabwe             </option>
-                </select>
+              <h4>Indirizzo Alloggio</h4>
               </div>
+            <div class="col-lg-7 ml-auto">
               <!-- Street-->
               <div class="form-group">
-                <label class="form-label" for="form_street">Street Address</label>
-                <input class="form-control" name="name" id="form_street">
+                <label class="form-label" for="form_via">Via e numero civico (Es. Via Roma, 1)</label>
+                <input class="form-control" name="name" id="form_via">
               </div>
               <!-- City + State-->
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="form-label" for="form_city">City</label>
-                    <input class="form-control" name="name" id="form_city">
+                    <label class="form-label" for="form_citta">Città</label>
+                    <input class="form-control" name="name" id="form_citta">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="form-label" for="form_state">State</label>
-                    <input class="form-control" name="name" id="form_state">
+                    <label class="form-label" for="form_regione">Regione</label>
+                    <select class="selectpicker form-control" name="type" id="form_regione" data-style="btn-selectpicker" title="" aria-describedby="propertyTypeHelp">
+                      <option disabled selected>Seleziona Regione</option>
+                      <option value="type_0">Abruzzo</option>
+                      <option value="type_1">Basilicata</option>
+                      <option value="type_2">Calabria</option>
+                      <option value="type_3">Campania</option>
+                      <option value="type_4">Emilia-Romagna</option>
+                      <option value="type_5">Friuli-Venezia Giulia</option>
+                      <option value="type_6">Lazio</option>
+                      <option value="type_7">Liguria</option>
+                      <option value="type_8">Lombardia</option>
+                      <option value="type_9">Marche</option>
+                      <option value="type_10">Molise</option>
+                      <option value="type_11">Piemonte</option>
+                      <option value="type_12">Puglia</option>
+                      <option value="type_13">Sardegna</option>
+                      <option value="type_14">Sicilia</option>
+                      <option value="type_15">Toscana</option>
+                      <option value="type_16">Trentino-Alto Adige</option>
+                      <option value="type_17">Umbria</option>
+                      <option value="type_18">Valle d'Aosta</option>
+                      <option value="type_19">Veneto</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -377,8 +175,14 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="form-label" for="form_zip">ZIP Code</label>
-                    <input class="form-control" name="name" id="form_zip">
+                    <label class="form-label" for="form_prov">Provincia</label>
+                    <input class="form-control" name="name" id="form_prv">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label" for="form_cap">CAP</label>
+                    <input class="form-control" name="name" id="form_cap">
                   </div>
                 </div>
               </div>
@@ -387,107 +191,11 @@
           <div class="row form-block flex-column flex-sm-row">
             <div class="col text-center text-sm-left">
             </div>
-            <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="agg-all-2.html"> Next step<i class="fa-chevron-right fa ml-2"></i></a></div>
+            <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="agg-all-2.html"> Prossimo step<i class="fa-chevron-right fa ml-2"></i></a></div>
           </div>
         </form>
       </div>
     </section>
-    <!-- Footer-->
-    <footer class="position-relative z-index-10 d-print-none">
-      <!-- Main block - menus, subscribe form-->
-      <div class="py-6 bg-gray-200 text-muted"> 
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-4 mb-5 mb-lg-0">
-              <div class="font-weight-bold text-uppercase text-dark mb-3">Directory</div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-              <ul class="list-inline">
-                <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#" target="_blank" title="twitter"><i class="fab fa-twitter"></i></a></li>
-                <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#" target="_blank" title="facebook"><i class="fab fa-facebook"></i></a></li>
-                <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#" target="_blank" title="instagram"><i class="fab fa-instagram"></i></a></li>
-                <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#" target="_blank" title="pinterest"><i class="fab fa-pinterest"></i></a></li>
-                <li class="list-inline-item"><a class="text-muted text-hover-primary" href="#" target="_blank" title="vimeo"><i class="fab fa-vimeo"></i></a></li>
-              </ul>
-            </div>
-            <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
-              <h6 class="text-uppercase text-dark mb-3">Rentals</h6>
-              <ul class="list-unstyled">
-                <li><a class="text-muted" href="../index.html">Rooms     </a></li>
-                <li><a class="text-muted" href="category-rooms.html">Map on top     </a></li>
-                <li><a class="text-muted" href="category-2-rooms.html">Side map     </a></li>
-                <li><a class="text-muted" href="category-3-rooms.html">No map     </a></li>
-                <li><a class="text-muted" href="detail-rooms.html">Room detail     </a></li>
-              </ul>
-            </div>
-            <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
-              <h6 class="text-uppercase text-dark mb-3">Pages</h6>
-              <ul class="list-unstyled">
-                <li><a class="text-muted" href="compare.html">Comparison  <span class="badge badge-info-light ml-1">New</span>                                   </a></li>
-                <li><a class="text-muted" href="team.html">Team  <span class="badge badge-info-light ml-1">New</span>                                   </a></li>
-                <li><a class="text-muted" href="contact.html">Contact                                   </a></li>
-                <li><a class="text-muted" href="pricing.html">Pricing                                   </a></li>
-                <li><a class="text-muted" href="text.html">Text page                                   </a></li>
-                <li><a class="text-muted" href="faq.html">F.A.Q.s                                   </a></li>
-                <li><a class="text-muted" href="coming-soon.html">Coming soon                                   </a></li>
-                <li><a class="text-muted" href="404.html">404 page  <span class="badge badge-info-light ml-1">New</span>                                   </a></li>
-              </ul>
-            </div>
-            <div class="col-lg-4">
-              <h6 class="text-uppercase text-dark mb-3">Daily Offers & Discounts</h6>
-              <p class="mb-3"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque temporibus.</p>
-              <form action="#" id="newsletter-form">
-                <div class="input-group mb-3">
-                  <input class="form-control bg-transparent border-dark border-right-0" type="email" placeholder="Your Email Address" aria-label="Your Email Address">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-dark border-left-0" type="submit"> <i class="fa fa-paper-plane text-lg"></i></button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Copyright section of the footer-->
-      <div class="py-4 font-weight-light bg-gray-800 text-gray-300">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-6 text-center text-md-left">
-              <p class="text-sm mb-md-0">&copy; 2020, Your company.  All rights reserved.</p>
-            </div>
-            <div class="col-md-6">
-              <ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-right">
-                <li class="list-inline-item"><img class="w-2rem" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/visa.svg" alt="..."></li>
-                <li class="list-inline-item"><img class="w-2rem" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/mastercard.svg" alt="..."></li>
-                <li class="list-inline-item"><img class="w-2rem" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/paypal.svg" alt="..."></li>
-                <li class="list-inline-item"><img class="w-2rem" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/western-union.svg" alt="..."></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <button class="btn btn-primary btn-sm d-none d-lg-block" type="button" data-toggle="collapse" data-target="#style-switch" id="style-switch-button">
-      <svg class="svg-icon svg-icon-md">
-        <use xlink:href="#configuration-1"> </use>
-      </svg>
-    </button>
-    <div class="collapse" id="style-switch">
-      <div class="p-4">
-        <h6 class="text-uppercase mb-4">Select theme colour</h6>
-        <form class="mb-3">
-          <select class="form-control style-switch-select" name="colour" id="colour">
-            <option value="">select colour variant</option>
-            <option value="css/style.default.e1630ae4.css">blue</option>
-            <option value="css/style.pink.ad40e50b.css">pink</option>
-            <option value="css/style.green.215fda4d.css">green</option>
-            <option value="css/style.red.1b81f296.css">red</option>
-            <option value="css/style.violet.2acee140.css">violet</option>
-            <option value="css/style.sea.f33d3e98.css">sea</option>
-          </select>
-        </form>
-        <p class="text-muted text-xs mb-0">Stylesheet switching in this demo is done with JavaScript and can cause a blink while page loads. This will not happen in your production code.</p>
-      </div>
-    </div>
     <!-- JavaScript files-->
     <script>
       // ------------------------------------------------------- //
