@@ -1,38 +1,8 @@
 <!DOCTYPE html>
 <html lang="it">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>TripHouse</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta name="referrer" content="no-referrer">
-
-    <meta name="robots" content="noindex,nofollow">
-    <meta name="keywords" content="...">
-    <meta name="description" content="...">
+    <% include partials/head.ejs %>
     
-    <!-- Price Slider Stylesheets -->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/nouislider/nouislider.css">
-    <!-- Google fonts - Playfair Display-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700">
-    <!-- Google fonts - Poppins-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700">
-    <!-- swiper-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
-    <!-- Magnigic Popup-->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/magnific-popup/magnific-popup.css">
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/css/style.default.e1630ae4.css" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/css/custom.0a822280.css">
-  
-    <!-- Icon-->
-    <link rel="shortcut icon" href="images/icon.png">
-
-    <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
     <!-- Stile per il background della passwrod in base alla sua forza-->
     <style>
       .weak {
@@ -45,8 +15,8 @@
         background-color: rgba(60, 179, 113, 0.3);
       }
     </style>
-
   </head>
+
   <body>
     <div class="container-fluid px-3">
       <div class="row min-vh-100">
@@ -438,22 +408,6 @@
       injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
     </script>
 
-    <!-- jQuery-->
-    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/jquery/jquery.min.js"></script>
-    <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
-    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Magnific Popup - Lightbox for the gallery-->
-    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-    <!-- Smooth scroll-->
-    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
-    <!-- Bootstrap Select-->
-    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
-    <!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
-    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/object-fit-images/ofi.min.js"></script>
-    <!-- Swiper Carousel                       -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
-    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/jquery.cookie/jquery.cookie.js"> </script>
-    <script src="js/demo.36f8799a.js"></script>
-    <script>var basePath = ''</script>
+    <% include partials/scriptFooter.ejs %>
   </body>
 </html>
