@@ -1,0 +1,45 @@
+<script>
+    // ------------------------------------------------------- //
+    //   Normalmente dovremmo includere lo sprite in testa al documento, ma questo significherebbe avere una replica degli svg in ogni pagina,
+    //   inoltre il parser HTML dovrebbe prima ispezionare questi file nella loro interezza prima di poter proseguire.
+    //   La questione si risolve tramite una apposita richiesta ajax, che permette conseguentemente di sfruttare la cache del browser
+    //   per reperire i suddetti svg. Bisogna quindi assicurarsi che l'svg è nel namespace corretto prima che venga fatto l'append alla pagina:
+    //   questo lo si fa prima appendendo l'svg ad un div, e poi appendendo il risultato alla pagina, pertanto: 
+    function injectSvgSprite(path) {
+    
+        var ajax = new XMLHttpRequest();
+        ajax.open("GET", path, true);
+        ajax.send();
+        ajax.onload = function(e) {
+        var div = document.createElement("div");
+        div.className = 'd-none';
+        div.innerHTML = ajax.responseText;
+        document.body.insertBefore(div, document.body.childNodes[0]);
+        }
+    }    
+    injectSvgSprite('https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg'); 
+  </script> 
+
+  <!-- jQuery-->
+  <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/jquery/jquery.min.js"></script>
+  <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
+  <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Magnific Popup - Lightbox for the gallery-->
+  <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+  <!-- Smooth scroll-->
+  <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
+  <!-- Bootstrap Select-->
+  <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+  <!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
+  <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/object-fit-images/ofi.min.js"></script>
+  <!-- Swiper Carousel                       -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
+  <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/jquery.cookie/jquery.cookie.js"> </script>
+  <script src="https://demo.bootstrapious.com/directory/1-5/js/demo.36f8799a.js"></script>
+  <script>var basePath = ''</script>
+  <!-- Main Theme JS file    -->
+  <script src="https://demo.bootstrapious.com/directory/1-5/js/theme.55f8348b.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-date-range-picker/0.19.0/jquery.daterangepicker.min.js"> </script>
+
+  <script src="js/datepicker-detail.111bc2ff.js">   </script>
