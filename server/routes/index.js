@@ -9,7 +9,8 @@ router.get('/', function(req, res, next) {
 /* GET home page. */
 router.get('/Ricerca', function(req, res, next) {
   res.render('Ricerca', { title: 'Express' });
-  
+});
+
 /* GET prova. */
 router.get('/FLPE', function(req, res, next) {
   res.render('finestraListaPrenotazioniEffettuate.ejs', { title: 'Express' });
