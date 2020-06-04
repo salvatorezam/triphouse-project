@@ -28,13 +28,13 @@
             </div>
 
             <form class="form-validate" onsubmit="return sendMail()"> <!-- da completare-->
-             <fieldset> 
-              <div class="form-group" style="display: inline-block; vertical-align: top; margin-right: 20%;">
+             <fieldset class="row"> 
+              <div class="form-group col-8">
                 <label class="form-label" for="loginNomeCognome"> Nome e cognome *</label>
                 <input class="form-control" name="loginNomeCognome" id="loginNomeCognome" type="text" placeholder="Nome e cognome" autocomplete="off" data-msg="Inserisci il tuo nome e il tuo cognome" required>
               </div>
 
-              <div class="form-group" id="gender_wrapper" style="display: inline-block; vertical-align: top; margin-top: 4%; margin-bottom: 0%;">
+              <div class="form-group col-4">
                 <input type="radio" id="uomo" name="sesso" value="uomo" required>
                 <label for="uomo">Uomo</label><br>
                 <input type="radio" id="donna" name="sesso" value="donna" required>
@@ -47,8 +47,10 @@
                 <label class="form-label" for="loginUDataDiNascita"> Data di nascita</label>
                 <input class="form-control" name="loginUDataDiNascita" id="loginUDataDiNascita" type="date" placeholder="" autocomplete="off" data-msg="Inserisci la tua data di nascita">
               </div>
+            </fieldset>
 
-              <div class="form-group" style="display: inline-block; vertical-align: top; max-width: 200px; margin-right:5%">
+            <fieldset class="row">
+              <div class="form-group col-6">
                 <label class="form-label" for="loginNazione"> Nazione *</label>
                 <select id="nazione" name="nazione" class="form-control" required>
                   <option value="Afghanistan">Afghanistan</option>
@@ -298,7 +300,7 @@
                 </select>
               </div>  
 
-              <div class="form-group" style="display: inline-block; vertical-align: top; max-width: 200px; margin-left:5%;">
+              <div class="form-group col-6">
                 <label class="form-label" for="loginCittaDiNascita"> Città di nascita *</label>
                 <input class="form-control" name="loginCittaDiNascita" id="loginCittaDiNascita" type="text" placeholder="Città di Nascita" autocomplete="off" required data-msg="Inserisci la tua città di nascita" required>
               </div>
@@ -327,7 +329,7 @@
                 <input class="form-control" name="loginPassword2" id="loginPassword2" placeholder="Password" type="password" onchange="checkPassword(this)" required data-msg="Inserisci di nuovo la password" required>
               </div>
             </fieldset>
-            <!-- inserire checkPassword-->
+            
             <button class="btn btn-lg btn-block btn-primary" type="submit">Registrati</button>
 
             <hr class="my-4">

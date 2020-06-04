@@ -8,7 +8,12 @@ router.get('/', function(req, res, next) {
 
 /* GET ricerca. */
 router.get('/Ricerca', function(req, res, next) {
-  res.render('Ricerca', { title: 'Express' });
+  res.render('Ricerca');
+});
+
+/* GET registrazione. */
+router.get('/registrazione', function(req, res, next) {
+  res.render('registrazione');
 });
 
 /* GET finestraListaPrenotazioniEffettuate */
