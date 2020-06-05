@@ -1,5 +1,5 @@
 CREATE DATABASE IF NOT EXISTS Prova_TripHouse_DB;
-USE TripHouse_DB;
+USE Prova_TripHouse_DB;
 
 CREATE TABLE IF NOT EXISTS UtenteRegistrato (
 	ID_UR CHAR(8) PRIMARY KEY,
@@ -7,13 +7,11 @@ CREATE TABLE IF NOT EXISTS UtenteRegistrato (
     cognome VARCHAR(40),
     sesso CHAR(1) CHECK(sesso = 'M' OR sesso = 'F' OR sesso = 'N'),
     data_nascita DATE,
+	nazione_nascita VARCHAR(30),
     citta_nascita VARCHAR(20),
     prov_nascita VARCHAR(20),
     email VARCHAR(50),
     telefono VARCHAR(12),
-    citta_res VARCHAR(20),
-    prov_res VARCHAR(20),
-    ind_res VARCHAR(30),
     stato_host BOOLEAN
 );
 
