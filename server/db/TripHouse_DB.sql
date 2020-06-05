@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS RecensisciAlloggio (
 	data_rec DATE,
 	scrittore CHAR(8) REFERENCES UtenteRegistrato(ID_UR),
 	alloggio CHAR(8) REFERENCES Alloggio(ID_ALL),
-	valutazione INT(1) CHECK(valutazione >=1 AND valutazione <=5)
+	valutazione INT CHECK(valutazione >=1 AND valutazione <=5)
 );
 
 CREATE TABLE IF NOT EXISTS Alloggio (
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS Alloggio (
 	num_letti_matrimoniali INT,
 	num_camere INT,
 	num_bagni INT,
-	--spazi, accessori e altro
+	-- spazi, accessori e altro
 	cucina BOOLEAN,
 	lavanderia BOOLEAN,
 	aria_condizionata BOOLEAN,
@@ -66,21 +66,21 @@ CREATE TABLE IF NOT EXISTS Alloggio (
 	colazione BOOLEAN,
 	asciugacapelli BOOLEAN,
 	tv BOOLEAN,
-	--servizi essenziali
+	-- servizi essenziali
 	carta_igienica BOOLEAN,
 	sapone_mani_corpo BOOLEAN,
 	asciugamano BOOLEAN,
 	accappatoio BOOLEAN,
 	cuscino BOOLEAN,
 	lenzuola BOOLEAN,
-	--TESTO
+	-- TESTO
 	titolo VARCHAR(40),
 	descrizione_alloggio TEXT,
 	descrizione_regole TEXT,
 	note TEXT,
 	tasse DECIMAL,
 	prezzo DECIMAL
---	FOTO,
+    -- FOTO
 );
 
 CREATE TABLE IF NOT EXISTS DateDisponibili (
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS DatiOspiti (
 	num_doc VARCHAR(10),
 --	Foto_doc, 
 	nazionalita CHAR(2),
-	eta INT(3),
+	eta INT,
 	prenotazione CHAR(8) REFERENCES Prenotazione(ID_PREN)
 );
 
