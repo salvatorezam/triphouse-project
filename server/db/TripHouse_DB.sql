@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS RecensisciCliente (
 	data_rec DATE,
 	scrittore CHAR(8) REFERENCES UtenteRegistrato(ID_UR),
 	ricevente CHAR(8) REFERENCES UtenteRegistrato(ID_UR),
-	valutazione INT(1) CHECK(valutazione >=1 AND valutazione <=5)
+	valutazione INT CHECK(valutazione >=1 AND valutazione <=5)
 );
 
 CREATE TABLE IF NOT EXISTS RecensisciAlloggio (
