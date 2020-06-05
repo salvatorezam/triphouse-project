@@ -340,7 +340,7 @@
             </form>
 
             <!-- Ritorno alla schermata principale-->
-            <a class="close-absolute mr-md-5 mr-xl-6 pt-5" href="index.html"> 
+            <a class="close-absolute mr-md-5 mr-xl-6 pt-5" href="/"> 
               <svg class="svg-icon w-3rem h-3rem">
                 <use xlink:href="#close-1"> </use>
               </svg>
@@ -392,22 +392,6 @@
 
       // registra il gestore nell'elemento password
       document.querySelector("[type='password']").addEventListener('input', strengthVal);
-    
-    
-    // Inclusione sprite svg ----------------------------------------------
-      function injectSvgSprite(path) {
-      
-          var ajax = new XMLHttpRequest();
-          ajax.open("GET", path, true);
-          ajax.send();
-          ajax.onload = function(e) {
-          var div = document.createElement("div");
-          div.className = 'd-none';
-          div.innerHTML = ajax.responseText;
-          document.body.insertBefore(div, document.body.childNodes[0]);
-          }
-      }    
-      injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
     </script>
 
     <% include partials/scriptFooter.ejs %>

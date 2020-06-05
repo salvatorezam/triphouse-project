@@ -17,30 +17,39 @@
         <p class="subtitle text-primary">Aggiungi alloggio</p>
         <h1 class="h2 mb-5"> Servizi <span class="text-muted float-right">Step 2</span>      </h1>
         <form>
+          <!--Camere e bagni-->
           <div class="row form-block">
             <div class="col-lg-4">
               <h4>Camere e Bagni</h4>
               </div>
-            <div class="col-lg-7 ml-auto">
-              <div class="row">
-                <div class="col-lg-4">
-                  <label class="form-label">Letti</label>
-                  <div class="d-flex align-items-center">
-                    <div class="btn btn-items btn-items-decrease">-</div>
-                    <input class="form-control input-items" type="text" value="1" dis>
-                    <div class="btn btn-items btn-items-increase">+</div>
-                  </div>
-                </div>
-                <div class="col-lg-4">
-                  <label class="form-label">Bedrooms</label>
+            <div class="col-lg ml-auto">
+              <div class="row align-items-center">
+                <div class="col-lg-3">
+                  <label class="form-label col-sm-6">Letti Singoli</label>
                   <div class="d-flex align-items-center">
                     <div class="btn btn-items btn-items-decrease">-</div>
                     <input class="form-control input-items" type="text" value="1" disabled>
                     <div class="btn btn-items btn-items-increase">+</div>
                   </div>
                 </div>
-                <div class="col-lg-4">
-                  <label class="form-label">Bathrooms</label>
+                <div class="col-lg-3">
+                  <label class="form-label col-sm-6">Letti Matrimoniali</label>
+                  <div class="d-flex align-items-center">
+                    <div class="btn btn-items btn-items-decrease">-</div>
+                    <input class="form-control input-items" type="text" value="1" disabled>
+                    <div class="btn btn-items btn-items-increase">+</div>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <label class="form-label col-sm-6">Camere</label>
+                  <div class="d-flex align-items-center">
+                    <div class="btn btn-items btn-items-decrease">-</div>
+                    <input class="form-control input-items" type="text" value="1" disabled>
+                    <div class="btn btn-items btn-items-increase">+</div>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <label class="form-label col-sm-6">Bagni</label>
                   <div class="d-flex align-items-center">
                     <div class="btn btn-items btn-items-decrease">-</div>
                     <input class="form-control input-items" type="text" value="1" disabled>
@@ -50,113 +59,106 @@
               </div>
             </div>
           </div>
+          <!--Camere e bagni fine-->
+          <!--Spazi, accessori e altro-->
           <div class="row form-block">
             <div class="col-lg-4">
-              <h4>Amenities</h4>
-              <p class="text-muted text-sm">His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table.</p>
+              <h4>Spazi, accessori e altro</h4>
             </div>
             <div class="col-lg-7 ml-auto">
               <div class="form-group">
-                <label class="form-label">Available Amenities</label>
-                <ul class="list-inline mb-0">
-                  <li class="list-inline-item">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" id="amenities_0" name="amenities[]">
-                      <label class="custom-control-label text-muted" for="amenities_0">Kitchen    </label>
-                    </div>
-                  </li>
-                  <li class="list-inline-item">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" id="amenities_1" name="amenities[]">
-                      <label class="custom-control-label text-muted" for="amenities_1">Shampoo    </label>
-                    </div>
-                  </li>
-                  <li class="list-inline-item">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" id="amenities_2" name="amenities[]">
-                      <label class="custom-control-label text-muted" for="amenities_2">Heating    </label>
-                    </div>
-                  </li>
-                  <li class="list-inline-item">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" id="amenities_3" name="amenities[]">
-                      <label class="custom-control-label text-muted" for="amenities_3">Air conditioning    </label>
-                    </div>
-                  </li>
-                  <li class="list-inline-item">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" id="amenities_4" name="amenities[]">
-                      <label class="custom-control-label text-muted" for="amenities_4">Washer    </label>
-                    </div>
-                  </li>
-                  <li class="list-inline-item">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" id="amenities_5" name="amenities[]">
-                      <label class="custom-control-label text-muted" for="amenities_5">Dryer    </label>
-                    </div>
-                  </li>
-                  <li class="list-inline-item">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" id="amenities_6" name="amenities[]">
-                      <label class="custom-control-label text-muted" for="amenities_6">Wifi    </label>
-                    </div>
-                  </li>
-                  <li class="list-inline-item">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" id="amenities_7" name="amenities[]">
-                      <label class="custom-control-label text-muted" for="amenities_7">Breakfast    </label>
-                    </div>
-                  </li>
-                  <li class="list-inline-item">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" id="amenities_8" name="amenities[]">
-                      <label class="custom-control-label text-muted" for="amenities_8">Indoor fireplace    </label>
-                    </div>
-                  </li>
-                  <li class="list-inline-item">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" id="amenities_9" name="amenities[]">
-                      <label class="custom-control-label text-muted" for="amenities_9">Buzzer/wireless intercom    </label>
-                    </div>
-                  </li>
-                  <li class="list-inline-item">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" id="amenities_10" name="amenities[]">
-                      <label class="custom-control-label text-muted" for="amenities_10">Doorman    </label>
-                    </div>
-                  </li>
-                  <li class="list-inline-item">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" id="amenities_11" name="amenities[]">
-                      <label class="custom-control-label text-muted" for="amenities_11">Hangers    </label>
-                    </div>
-                  </li>
-                  <li class="list-inline-item">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" id="amenities_12" name="amenities[]">
-                      <label class="custom-control-label text-muted" for="amenities_12">Iron    </label>
-                    </div>
-                  </li>
-                  <li class="list-inline-item">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" id="amenities_13" name="amenities[]">
-                      <label class="custom-control-label text-muted" for="amenities_13">Hair dryer    </label>
-                    </div>
-                  </li>
-                  <li class="list-inline-item">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" id="amenities_14" name="amenities[]">
-                      <label class="custom-control-label text-muted" for="amenities_14">Laptop friendly workspace    </label>
-                    </div>
-                  </li>
-                </ul>
+                <label class="form-label">Servizi</label>
+                    <ul class="list-inline mb-0">
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities_0" name="amenities[]">
+                          <label class="custom-control-label" for="amenities_0">Cucina</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities_1" name="amenities[]">
+                          <label class="custom-control-label" for="amenities_1">Lavanderia</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities_2" name="amenities[]">
+                          <label class="custom-control-label" for="amenities_2">Aria Condizionata</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities_3" name="amenities[]">
+                          <label class="custom-control-label" for="amenities_3">Wifi</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities_4" name="amenities[]">
+                          <label class="custom-control-label" for="amenities_4">Colazione</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities_5" name="amenities[]">
+                          <label class="custom-control-label" for="amenities_5">Asciugacapelli</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities_6" name="amenities[]">
+                          <label class="custom-control-label" for="amenities_6">Tv</label>
+                        </div>
+                      </li>   
+                    </ul>
+                    <label class="form-label" style="margin-top: .7rem;">Servizi Essenziali</label>
+                    <ul class="list-inline mb-0">
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities2_0" name="amenities2[]">
+                          <label class="custom-control-label" for="amenities2_0">Carta igienica</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities2_1" name="amenities2[]">
+                          <label class="custom-control-label" for="amenities2_1">Sapone mani e corpo</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities2_2" name="amenities2[]">
+                          <label class="custom-control-label" for="amenities2_2">Asciugamao</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities2_3" name="amenities2[]">
+                          <label class="custom-control-label" for="amenities2_3">Accappatoio</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities2_4" name="amenities2[]">
+                          <label class="custom-control-label" for="amenities2_4">Cuscino</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities2_5" name="amenities2[]">
+                          <label class="custom-control-label" for="amenities2_5">lenzuola</label>
+                        </div>
+                      </li>   
+                    </ul>
               </div>
             </div>
           </div>
+          <!--Spazi, accessori e altro fine-->
           <div class="row form-block flex-column flex-sm-row">
-            <div class="col text-center text-sm-left"><a class="btn btn-link text-muted" href="/agg-all-1"> <i class="fa-chevron-left fa mr-2"></i>Back</a>
+            <div class="col text-center text-sm-left"><a class="btn btn-link text-muted" href="/agg-all-1"> <i class="fa-chevron-left fa mr-2"></i>Indietro</a>
             </div>
-            <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/agg-all-3"> Next step<i class="fa-chevron-right fa ml-2"></i></a></div>
+            <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/agg-all-3">Prossimo Step<i class="fa-chevron-right fa ml-2"></i></a></div>
           </div>
         </form>
       </div>
