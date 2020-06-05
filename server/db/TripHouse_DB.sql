@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS RecensisciAlloggio (
 
 CREATE TABLE IF NOT EXISTS Alloggio (
 	ID_ALL CHAR(8) PRIMARY KEY,
+	proprietario CHAR(8) REFERENCES UtenteRegistrato(ID_UR),
 	-- INFORMAZIONI DI BASE
 	tipo_all VARCHAR(20),
 	nome_proprietario VARCHAR(20),
