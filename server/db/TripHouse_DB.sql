@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS UtenteRegistrato (
     citta_nascita VARCHAR(20),
     prov_nascita VARCHAR(20),
     email VARCHAR(50),
-    telefono VARCHAR(12),
+    telefono VARCHAR(20),
     stato_host BOOLEAN
 );
 
@@ -118,3 +118,4 @@ CREATE TABLE IF NOT EXISTS DatiOspiti (
 -- POPOLAMENTO
 -- ###########
 
+INSERT INTO UtenteRegistrato VALUES (UUID(),'Marco','Rossi','M','1992-6-25','Italia','Roma','RM','marco.rossi@gmail.com','+393324567898',false);
