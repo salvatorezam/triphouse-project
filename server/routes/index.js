@@ -11,6 +11,11 @@ router.get('/ricerca', function(req, res, next) {
   res.render('ricerca');
 });
 
+/* GET registrazione. */
+router.get('/registrazione', function(req, res, next) {
+  res.render('registrazione');
+});
+
 /* GET finestraListaPrenotazioniEffettuate */
 router.get('/finestraListaPrenotazioniEffettuate', function(req, res, next) {
   res.render('finestraListaPrenotazioniEffettuate');
