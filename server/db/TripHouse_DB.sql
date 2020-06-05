@@ -112,3 +112,9 @@ CREATE TABLE IF NOT EXISTS DatiOspiti (
 	eta INT(3),
 	prenotazione CHAR(8) REFERENCES Prenotazione(ID_PREN)
 );
+
+
+-- ###########
+-- POPOLAMENTO
+-- ###########
+
