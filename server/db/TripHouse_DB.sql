@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS TripHouse_DB;
 USE TripHouse_DB;
 
 CREATE TABLE IF NOT EXISTS UtenteRegistrato (
-	ID_UR CHAR(8) PRIMARY KEY,
+	ID_UR VARCHAR(36) PRIMARY KEY,
     nome VARCHAR(40),
     cognome VARCHAR(40),
     sesso CHAR(1) CHECK(sesso = 'M' OR sesso = 'F' OR sesso = 'N'),
@@ -16,13 +16,13 @@ CREATE TABLE IF NOT EXISTS UtenteRegistrato (
 );
 
 CREATE TABLE IF NOT EXISTS Credenziali (
-	ID_CR CHAR(8) PRIMARY KEY, 
+	ID_CR VARCHAR(36) PRIMARY KEY, 
 	password_hash VARCHAR(40), 
 	utente CHAR(8) REFERENCES UtenteRegistrato(ID_UR)
 );
 
 CREATE TABLE IF NOT EXISTS RecensisciCliente (
-	ID_RC CHAR(8) PRIMARY KEY,
+	ID_RC VARCHAR(36) PRIMARY KEY,
 	testo TEXT,
 	data_rec DATE,
 	scrittore CHAR(8) REFERENCES UtenteRegistrato(ID_UR),
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS RecensisciCliente (
 );
 
 CREATE TABLE IF NOT EXISTS RecensisciAlloggio (
-	ID_RA CHAR(8) PRIMARY KEY,
+	ID_RA VARCHAR(36) PRIMARY KEY,
 	testo TEXT,
 	data_rec DATE,
 	scrittore CHAR(8) REFERENCES UtenteRegistrato(ID_UR),
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS RecensisciAlloggio (
 );
 
 CREATE TABLE IF NOT EXISTS Alloggio (
-	ID_ALL CHAR(8) PRIMARY KEY,
+	ID_ALL VARCHAR(36) PRIMARY KEY,
 	proprietario CHAR(8) REFERENCES UtenteRegistrato(ID_UR),
 	-- INFORMAZIONI DI BASE
 	tipo_all VARCHAR(20),
@@ -84,14 +84,14 @@ CREATE TABLE IF NOT EXISTS Alloggio (
 );
 
 CREATE TABLE IF NOT EXISTS DateDisponibili (
-	ID_DAT CHAR(8) PRIMARY KEY,
+	ID_DAT VARCHAR(36) PRIMARY KEY,
 	data_inizio DATE,
 	data_fine DATE,
 	alloggio CHAR(8) REFERENCES Alloggio(ID_ALL)
 );
 
 CREATE TABLE IF NOT EXISTS Prenotazione (
-	ID_PREN CHAR(8) PRIMARY KEY,
+	ID_PREN VARCHAR(36) PRIMARY KEY,
 	utente CHAR(8) REFERENCES UtenteRegistrato(ID_UR),
 	alloggio CHAR(8) REFERENCES Alloggio(ID_ALL),
 	data_inizio DATE,
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS Prenotazione (
 );
 
 CREATE TABLE IF NOT EXISTS DatiOspiti (
-	ID_DO CHAR(8) PRIMARY KEY,
+	ID_DO VARCHAR(36) PRIMARY KEY,
 	nome VARCHAR(40),
 	cognome VARCHAR(40),
 	tipo_doc CHAR(2),
