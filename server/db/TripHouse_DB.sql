@@ -11,37 +11,37 @@ CREATE TABLE IF NOT EXISTS UtenteRegistrato (
     citta_nascita VARCHAR(20),
     prov_nascita VARCHAR(20),
     email VARCHAR(50),
-    telefono VARCHAR(12),
+    telefono VARCHAR(20),
     stato_host BOOLEAN
 );
 
 CREATE TABLE IF NOT EXISTS Credenziali (
 	ID_CR VARCHAR(36) PRIMARY KEY, 
 	password_hash VARCHAR(40), 
-	utente CHAR(8) REFERENCES UtenteRegistrato(ID_UR)
+	utente VARCHAR(36) REFERENCES UtenteRegistrato(ID_UR)
 );
 
 CREATE TABLE IF NOT EXISTS RecensisciCliente (
 	ID_RC VARCHAR(36) PRIMARY KEY,
 	testo TEXT,
 	data_rec DATE,
-	scrittore CHAR(8) REFERENCES UtenteRegistrato(ID_UR),
-	ricevente CHAR(8) REFERENCES UtenteRegistrato(ID_UR),
-	valutazione INT(1) CHECK(valutazione >=1 AND valutazione <=5)
+	scrittore VARCHAR(36) REFERENCES UtenteRegistrato(ID_UR),
+	ricevente VARCHAR(36) REFERENCES UtenteRegistrato(ID_UR),
+	valutazione INT CHECK(valutazione >=1 AND valutazione <=5)
 );
 
 CREATE TABLE IF NOT EXISTS RecensisciAlloggio (
 	ID_RA VARCHAR(36) PRIMARY KEY,
 	testo TEXT,
 	data_rec DATE,
-	scrittore CHAR(8) REFERENCES UtenteRegistrato(ID_UR),
-	alloggio CHAR(8) REFERENCES Alloggio(ID_ALL),
+	scrittore VARCHAR(36) REFERENCES UtenteRegistrato(ID_UR),
+	alloggio VARCHAR(36) REFERENCES Alloggio(ID_ALL),
 	valutazione INT CHECK(valutazione >=1 AND valutazione <=5)
 );
 
 CREATE TABLE IF NOT EXISTS Alloggio (
 	ID_ALL VARCHAR(36) PRIMARY KEY,
-	proprietario CHAR(8) REFERENCES UtenteRegistrato(ID_UR),
+	proprietario VARCHAR(36) REFERENCES UtenteRegistrato(ID_UR),
 	-- INFORMAZIONI DI BASE
 	tipo_all VARCHAR(20),
 	nome_proprietario VARCHAR(20),
@@ -87,13 +87,13 @@ CREATE TABLE IF NOT EXISTS DateDisponibili (
 	ID_DAT VARCHAR(36) PRIMARY KEY,
 	data_inizio DATE,
 	data_fine DATE,
-	alloggio CHAR(8) REFERENCES Alloggio(ID_ALL)
+	alloggio VARCHAR(36) REFERENCES Alloggio(ID_ALL)
 );
 
 CREATE TABLE IF NOT EXISTS Prenotazione (
 	ID_PREN VARCHAR(36) PRIMARY KEY,
-	utente CHAR(8) REFERENCES UtenteRegistrato(ID_UR),
-	alloggio CHAR(8) REFERENCES Alloggio(ID_ALL),
+	utente VARCHAR(36) REFERENCES UtenteRegistrato(ID_UR),
+	alloggio VARCHAR(36) REFERENCES Alloggio(ID_ALL),
 	data_inizio DATE,
 	data_fine DATE,
 	data_pren DATE,
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS DatiOspiti (
 --	Foto_doc, 
 	nazionalita CHAR(2),
 	eta INT,
-	prenotazione CHAR(8) REFERENCES Prenotazione(ID_PREN)
+	prenotazione VARCHAR(36) REFERENCES Prenotazione(ID_PREN)
 );
 
 
@@ -118,3 +118,5 @@ CREATE TABLE IF NOT EXISTS DatiOspiti (
 -- POPOLAMENTO
 -- ###########
 
+INSERT INTO UtenteRegistrato VALUES (UUID(),'Marco','Rossi','M','1992-6-25','Italia','Roma','RM','marco.rossi@gmail.com','+393324567898',false);
+INSERT INTO Credenziali VALUES (UUID(),'marcorossipass','a6b914f4-a752-11ea-b30a-a066100a22be'); 
