@@ -7,8 +7,8 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET ricerca. */
-router.get('/Ricerca', function(req, res, next) {
-  res.render('Ricerca', { title: 'Express' });
+router.get('/ricerca', function(req, res, next) {
+  res.render('ricerca');
 });
 
 /* GET finestraListaPrenotazioniEffettuate */
@@ -44,6 +44,11 @@ router.get('/aggiungiAlloggio', function(req, res, next) {
 /* GET visualizzaAlloggio */
 router.get('/visualizzaAlloggio', function(req, res, next) {
   res.render('visualizzaAlloggio');
+});
+
+/* GET alloggio page. */
+router.get('/alloggio', function(req, res, next) {
+  res.render('alloggio');
 });
 
 module.exports = router;

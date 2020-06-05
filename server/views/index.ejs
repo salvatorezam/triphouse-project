@@ -32,20 +32,19 @@
               <h1 class="display-3 font-weight-bold text-shadow">La meta è partire.</h1>
             </div>
             <div class="search-bar mt-5 p-3 p-lg-1 pl-lg-4">
-              <form action="#">
+              <form action="#" autocomplete="off">
                 <div class="row">
                   <div class="col-lg-3 d-flex align-items-center form-group">
                     <!-- <label class="label-absolute" for="location"><i class="fa fa-crosshairs"></i><span class="sr-only">City</span></label>-->
                     <input id="prova" class="form-control border-0 shadow-0" type="text" name="search" placeholder="Dove vuoi andare?">
                   </div>
-                 <div class="col-lg d-flex align-items-center form-group">
-                      <input placeholder="Da" class="form-control border-0 shadow-0" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="periodo"id="periodo" />
+                  <!--Data-->
+                  <div class="col-lg-4 d-flex align-items-center form-group">
+                    <label class="form-label" for="form_dates"></label>
+                    <div class="datepicker-container datepicker-container-left">
+                      <input class="form-control" type="tetx" name="bookingDate" id="form_dates" placeholder="Scegli le tue date" required="required" style="border: none;">
+                    </div>
                   </div>
-
-                  <div class="col-lg d-flex align-items-center form-group">
-                    <input placeholder="A" class="form-control border-0 shadow-0" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="periodo"id="periodo" />
-                  </div>
-
                   <div class="col-lg d-flex align-items-center form-group no-divider">
                     <select class="selectpicker" title="Quanti ospiti?" data-style="btn-form-control">
                       <option value="1">1</option>
@@ -59,7 +58,7 @@
                     </select>
                   </div>
                   <div class="col-lg">
-                    <button class="btn btn-primary btn-block rounded-xl h-100" type="submit" formaction="Ricerca">Cerca</button>
+                    <button class="btn btn-primary btn-block rounded-xl h-100" type="submit" formaction="ricerca">Cerca</button>
                   </div>
                   
                 </div>

@@ -2,100 +2,14 @@
 <!DOCTYPE html>
 <html lang="it">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>TripHouse</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta name="referrer" content="no-referrer">
-    <meta name="robots" content="noindex,nofollow">
-    <meta name="keywords" content="...">
-    <meta name="description" content="...">
-    
-    <!-- Price Slider Stylesheets -->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/nouislider/nouislider.css">
-    <!-- Google fonts - Playfair Display-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700">
-    <!-- Google fonts - Poppins-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700">
-    <!-- swiper-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
-    <!-- Magnigic Popup-->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/magnific-popup/magnific-popup.css">
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/css/style.default.e1630ae4.css" id="theme-stylesheet">
-    <link id="new-stylesheet" rel="stylesheet" href="css/style.default.e1630ae4.css">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/css/custom.0a822280.css">
-  
-    <!-- Icon-->
-    <link rel="shortcut icon" href="images/icon.png">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    
+    <!-- head -->
+    <% include partials/head.ejs %>
+    <!-- head -->
   </head>
   <body style="padding-top: 72px;">
-    <header class="header">
-      <!-- Navbar-->
-      <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
-        <div class="container-fluid">
-          <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="index.html"><img width="175" height="50" viewBox="0 0 175 50" fill="none" src="images/logo.png" alt="Directory logo"></a>
-          </div>
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
-          <!-- Navbar Collapse -->
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav ml-auto">
-              <!-- Megamenu-->
-              <li class="nav-item dropdown position-static"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Profilo Utente</a>
-                <div class="dropdown-menu megamenu py-lg-0">
-                  <div class="row">
-                    <div class="col-lg-9">
-                      <div class="row p-3 pr-lg-0 pl-lg-5 pt-lg-5">
-                        <div class="col-lg-3">
-                          <!-- Megamenu list -->
-                          <h6 class="text-uppercase">Utente</h6>
-                          <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="finestraListaPrenotazioniEffettuate.html">Visualizza prenotazione effettuata   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="index.html">Modifica dati personali   </a></li>
-                          </ul> 
-                        </div>
-                        <div class="col-lg-3">
-                          <!-- Megamenu list -->
-                          <h6 class="text-uppercase">Host</h6>
-                          <ul class="megamenu-list list-unstyled">
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="finestraListaPrenotazioniRicevute.html">Visualizza prenotazione ricevuta   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="index.html">Aggiungi alloggio   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="index.html">Visualizza alloggio   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="index.html">Supporto economico e legale   </a></li>
-                            <li class="megamenu-list-item"><a class="megamenu-list-link" href="index.html">Comunicazione dati ospiti    </a></li>
-                          </ul>
-                        </div>
-                        <div class="col-lg-6">
-                          <div class="col-lg-10 offset-lg-1">
-                            <div class="card text-center" style="width: 18rem;">
-                              <div class="card-body">
-                                <div class="testimonial-avatar"><img class="img-fluid" src="images/Nino.jpg" alt="..."></div>
-                                <h5 class="card-title">Nome Utente</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-3 d-none d-lg-block"><img class="bg-image" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1521170665346-3f21e2291d8b.jpg" alt=""></div>
-                  </div>
-                </div>
-              </li>
-              <!-- /Megamenu end-->
-              <li class="nav-item"><a class="nav-link" href="Autenticazione.html">Accedi</a></li>
-              <li class="nav-item"><a class="nav-link" href="registrazione.html">Registrati</a></li>
-              <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block"><a class="btn btn-primary" href="user-add-0.html">Diventa Host</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <!-- /Navbar -->
-    </header>
+    <!-- header -->
+    <% include partials/header.ejs %>
+    <!-- header -->
     <section>
       <!-- Slider main container-->
       <div class="swiper-container detail-slider slider-gallery swiper-container-horizontal">
@@ -191,7 +105,9 @@
           <div class="text-block">
             <h5 class="mb-4">Listing location</h5>
             <div class="map-wrapper-300 mb-3">
+
               <div class="h-100" id="detailMap"></div>
+
             </div>
           </div>
           <div class="text-block">
@@ -477,73 +393,8 @@
           <div class="swiper-pagination"></div>
         </div>
       </div>
-    <!-- JavaScript files-->
-    <script>
-      // ------------------------------------------------------- //
-      //   Inject SVG Sprite - 
-      //   see more here 
-      //   https://css-tricks.com/ajaxing-svg-sprite/
-      // ------------------------------------------------------ //
-      function injectSvgSprite(path) {
-      
-          var ajax = new XMLHttpRequest();
-          ajax.open("GET", path, true);
-          ajax.send();
-          ajax.onload = function(e) {
-          var div = document.createElement("div");
-          div.className = 'd-none';
-          div.innerHTML = ajax.responseText;
-          document.body.insertBefore(div, document.body.childNodes[0]);
-          }
-      }    
-      // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
-      // use your own URL in production, please :)
-      // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
-      //- injectSvgSprite('${path}icons/orion-svg-sprite.69651a96.svg'); 
-      injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
-      
-    </script>
-    <!-- jQuery-->
-    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/jquery/jquery.min.js"></script>
-    <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
-    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Magnific Popup - Lightbox for the gallery-->
-    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-    <!-- Smooth scroll-->
-    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
-    <!-- Bootstrap Select-->
-    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
-    <!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
-    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/object-fit-images/ofi.min.js"></script>
-    <!-- Swiper Carousel                       -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
-    <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/jquery.cookie/jquery.cookie.js"> </script>
-    <script src="js/demo.36f8799a.js"></script>
-    <script>var basePath = ''</script>
-    <!-- Main Theme JS file    -->
-    <script src="https://demo.bootstrapious.com/directory/1-5/js/theme.55f8348b.js"></script>
-    <!-- Map-->
-    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
-    <!-- Available tile layers-->
-    <script src="js/map-layers.f6cf9b57.js"> </script>
-    <script src="js/map-detail.ecc97be1.js"></script>
-    <script>
-      createDetailMap({
-          mapId: 'detailMap',
-          mapZoom: 14,
-          mapCenter: [40.732346, -74.0014247],
-          circleShow: true,
-          circlePosition: [40.732346, -74.0014247]
-      })
-      
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"> </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-date-range-picker/0.19.0/jquery.daterangepicker.min.js"> </script>
-    <script src="js/datepicker-detail.111bc2ff.js">   </script>
-
-
-    <script>
-      
-    </script>
+    <!-- Script Footer -->
+    <% include partials/scriptFooter.ejs %>
+    <!-- Script Footer -->
   </body>
 </html>
