@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <!-- head -->
+    <% include ../partials/head.ejs %>
+    <!-- head -->
+  </head>
+  <body style="padding-top: 72px;">
+    <header class="header">
+      <div class="progress rounded-0 sticky-top" style="height: 8px; top: 71px;">
+        <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </header>
+    <section class="py-5">
+      <div class="container">
+        <p class="subtitle text-primary">Aggiungi alloggio</p>
+        <h1 class="h2 mb-5"> Servizi <span class="text-muted float-right">Step 2</span>      </h1>
+        <form>
+          <div class="row form-block">
+            <div class="col-lg-4">
+              <h4>Camere e Bagni</h4>
+              </div>
+            <div class="col-lg-7 ml-auto">
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="form-label">Letti</label>
+                  <div class="d-flex align-items-center">
+                    <div class="btn btn-items btn-items-decrease">-</div>
+                    <input class="form-control input-items" type="text" value="1" dis>
+                    <div class="btn btn-items btn-items-increase">+</div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <label class="form-label">Bedrooms</label>
+                  <div class="d-flex align-items-center">
+                    <div class="btn btn-items btn-items-decrease">-</div>
+                    <input class="form-control input-items" type="text" value="1" disabled>
+                    <div class="btn btn-items btn-items-increase">+</div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <label class="form-label">Bathrooms</label>
+                  <div class="d-flex align-items-center">
+                    <div class="btn btn-items btn-items-decrease">-</div>
+                    <input class="form-control input-items" type="text" value="1" disabled>
+                    <div class="btn btn-items btn-items-increase">+</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row form-block">
+            <div class="col-lg-4">
+              <h4>Amenities</h4>
+              <p class="text-muted text-sm">His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table.</p>
+            </div>
+            <div class="col-lg-7 ml-auto">
+              <div class="form-group">
+                <label class="form-label">Available Amenities</label>
+                <ul class="list-inline mb-0">
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" id="amenities_0" name="amenities[]">
+                      <label class="custom-control-label text-muted" for="amenities_0">Kitchen    </label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" id="amenities_1" name="amenities[]">
+                      <label class="custom-control-label text-muted" for="amenities_1">Shampoo    </label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" id="amenities_2" name="amenities[]">
+                      <label class="custom-control-label text-muted" for="amenities_2">Heating    </label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" id="amenities_3" name="amenities[]">
+                      <label class="custom-control-label text-muted" for="amenities_3">Air conditioning    </label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" id="amenities_4" name="amenities[]">
+                      <label class="custom-control-label text-muted" for="amenities_4">Washer    </label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" id="amenities_5" name="amenities[]">
+                      <label class="custom-control-label text-muted" for="amenities_5">Dryer    </label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" id="amenities_6" name="amenities[]">
+                      <label class="custom-control-label text-muted" for="amenities_6">Wifi    </label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" id="amenities_7" name="amenities[]">
+                      <label class="custom-control-label text-muted" for="amenities_7">Breakfast    </label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" id="amenities_8" name="amenities[]">
+                      <label class="custom-control-label text-muted" for="amenities_8">Indoor fireplace    </label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" id="amenities_9" name="amenities[]">
+                      <label class="custom-control-label text-muted" for="amenities_9">Buzzer/wireless intercom    </label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" id="amenities_10" name="amenities[]">
+                      <label class="custom-control-label text-muted" for="amenities_10">Doorman    </label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" id="amenities_11" name="amenities[]">
+                      <label class="custom-control-label text-muted" for="amenities_11">Hangers    </label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" id="amenities_12" name="amenities[]">
+                      <label class="custom-control-label text-muted" for="amenities_12">Iron    </label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" id="amenities_13" name="amenities[]">
+                      <label class="custom-control-label text-muted" for="amenities_13">Hair dryer    </label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" id="amenities_14" name="amenities[]">
+                      <label class="custom-control-label text-muted" for="amenities_14">Laptop friendly workspace    </label>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row form-block flex-column flex-sm-row">
+            <div class="col text-center text-sm-left"><a class="btn btn-link text-muted" href="/agg-all-1"> <i class="fa-chevron-left fa mr-2"></i>Back</a>
+            </div>
+            <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/agg-all-3"> Next step<i class="fa-chevron-right fa ml-2"></i></a></div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <!-- Script Footer -->
+    <% include ../partials/scriptFooter.ejs %>
+    <!-- Script Footer -->
+  </body>
+</html>

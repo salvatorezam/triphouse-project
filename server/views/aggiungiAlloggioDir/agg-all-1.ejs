@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <!-- head -->
+    <% include ../partials/head.ejs %>
+    <!-- head -->
+  </head>
+  <body style="padding-top: 72px;">
+    <header class="header">
+      <div class="progress rounded-0 sticky-top" style="height: 8px; top: 71px;">
+        <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </header>
+    <section class="py-5">
+      <div class="container"> 
+        <p class="subtitle text-primary">aggiungi alloggio</p>
+        <h1 class="h2 mb-5"> Informazioni di base <span class="text-muted float-right">Step 1</span>      </h1>
+        <form>
+          <div class="row form-block">
+            <div class="col-lg-4">
+              <h4>Base</h4>
+              </div>
+            <div class="col-lg-7 ml-auto">
+              <div class="form-group"></div>
+              <div class="form-group">
+                <label class="form-label" for="form_type">Tipo Alloggio</label>
+                <select class="selectpicker form-control" name="type" id="form_type" data-style="btn-selectpicker" title="" aria-describedby="propertyTypeHelp">
+                  <option disabled selected>Seleziona Tipo Alloggio</option>
+                  <option value="type_0">B&B</option>
+                  <option value="type_1">Casa Vacana</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="form_name">Nome Proprietario</label>
+                <input class="form-control" name="name" id="form_name">
+              </div>
+            </div>
+          </div>
+          <div class="row form-block">
+            <div class="col-lg-4">
+              <h4>Indirizzo Alloggio</h4>
+              </div>
+            <div class="col-lg-7 ml-auto">
+              <!-- Street-->
+              <div class="form-group">
+                <label class="form-label" for="form_via">Via e numero civico (Es. Via Roma, 1)</label>
+                <input class="form-control" name="name" id="form_via">
+              </div>
+              <!-- City + State-->
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label" for="form_citta">Città</label>
+                    <input class="form-control" name="name" id="form_citta">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label" for="form_regione">Regione</label>
+                    <select class="selectpicker form-control" name="type" id="form_regione" data-style="btn-selectpicker" title="" aria-describedby="propertyTypeHelp">
+                      <option disabled selected>Seleziona Regione</option>
+                      <option value="type_0">Abruzzo</option>
+                      <option value="type_1">Basilicata</option>
+                      <option value="type_2">Calabria</option>
+                      <option value="type_3">Campania</option>
+                      <option value="type_4">Emilia-Romagna</option>
+                      <option value="type_5">Friuli-Venezia Giulia</option>
+                      <option value="type_6">Lazio</option>
+                      <option value="type_7">Liguria</option>
+                      <option value="type_8">Lombardia</option>
+                      <option value="type_9">Marche</option>
+                      <option value="type_10">Molise</option>
+                      <option value="type_11">Piemonte</option>
+                      <option value="type_12">Puglia</option>
+                      <option value="type_13">Sardegna</option>
+                      <option value="type_14">Sicilia</option>
+                      <option value="type_15">Toscana</option>
+                      <option value="type_16">Trentino-Alto Adige</option>
+                      <option value="type_17">Umbria</option>
+                      <option value="type_18">Valle d'Aosta</option>
+                      <option value="type_19">Veneto</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <!-- ZIP Code-->
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label" for="form_prv">Provincia</label>
+                    <input class="form-control" name="name" id="form_prv">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label" for="form_cap">CAP</label>
+                    <input class="form-control" name="name" id="form_cap">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row form-block flex-column flex-sm-row">
+            <div class="col text-center text-sm-left">
+            </div>
+            <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/agg-all-2"> Prossimo step<i class="fa-chevron-right fa ml-2"></i></a></div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <!-- Script Footer -->
+    <% include ../partials/scriptFooter.ejs %>
+    <!-- Script Footer -->
+  </body>
+</html>
