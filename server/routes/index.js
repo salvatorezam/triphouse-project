@@ -16,31 +16,6 @@ router.get('/registrazione', function(req, res, next) {
   res.render('registrazione');
 });
 
-/* GET finestraListaPrenotazioniEffettuate */
-router.get('/finestraListaPrenotazioniEffettuate', function(req, res, next) {
-  res.render('finestraListaPrenotazioniEffettuate');
-});
-
-/* GET finestraPrenotazioneEffettuata */
-router.get('/finestraPrenotazioneEffettuata', function(req, res, next) {
-  res.render('finestraPrenotazioneEffettuata');
-});
-
-/* GET modificaDatiPersonali */
-router.get('/modificaDatiPersonali', function(req, res, next) {
-  res.render('modificaDatiPersonali');
-});
-
-/* GET finestraListaPrenotazioniRicevute */
-router.get('/finestraListaPrenotazioniRicevute', function(req, res, next) {
-  res.render('finestraListaPrenotazioniRicevute');
-});
-
-/* GET finestraPrenotazioneRicevuta */
-router.get('/finestraPrenotazioneRicevuta', function(req, res, next) {
-  res.render('finestraPrenotazioneRicevuta');
-});
-
 /* GET aggiungiAlloggio */
 router.get('/aggiungiAlloggio', function(req, res, next) {
   res.render('aggiungiAlloggioDir/aggiungiAlloggio');
