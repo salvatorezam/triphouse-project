@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS Alloggio (
 	descrizione_regole TEXT,
 	note TEXT,
 	tasse DECIMAL,
-	prezzo DECIMAL,
+	prezzo DECIMAL
 --	FOTO,
 );
 
