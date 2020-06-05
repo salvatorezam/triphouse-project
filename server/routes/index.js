@@ -16,6 +16,11 @@ router.get('/registrazione', function(req, res, next) {
   res.render('registrazione');
 });
 
+/* GET autenticazione. */
+router.get('/autenticazione', function(req, res, next) {
+  res.render('autenticazione');
+});
+
 /* GET aggiungiAlloggio */
 router.get('/aggiungiAlloggio', function(req, res, next) {
   res.render('aggiungiAlloggioDir/aggiungiAlloggio');
