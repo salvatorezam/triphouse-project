@@ -31,14 +31,15 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
           
           console.log('prenCONCLUSE');
           console.log(prenConcluse.length);
-          console.log(prenConcluse);
+          console.log({dataC: prenConcluse});
           console.log('prenNON');
           console.log(prenNonConcluse.length);
-          console.log(prenNonConcluse);
+          console.log('ecco');
+          console.log({dataNC: prenNonConcluse});
           
                   
           //let id_utente = prenConcluse[0].nome_cognome;
-          res.render('finestraListaPrenotazioniEffettuate', {dataC: prenConcluse, dataNC: prenNonConcluse});
+          res.render('finestraListaPrenotazioniEffettuate', {data : {dataC: prenConcluse, dataNC: prenNonConcluse}});
       });
   } catch (err) {
       console.log(err);
