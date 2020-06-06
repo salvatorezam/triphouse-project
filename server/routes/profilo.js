@@ -12,23 +12,33 @@ router.get('/finestraListaPrenotazioniEffettuate', getListaPrenotazioniEffettuat
 async function getListaPrenotazioniEffettuate(req, res, next) {
 
   const db = await makeDb(config);
-  let results = {};
+  let prenConcluse = {};
+  let prenNonConcluse = {};
   try {
       await withTransaction(db, async() => {
           
-          let sql = "SELECT * FROM Prenotazione;";
-          results = await db.query(sql)
+          let sql1 = "SELECT * FROM Prenotazione WHERE stato_prenotazione = 'conclusa';";
+          prenConcluse = await db.query(sql1)
               .catch(err => {
                   throw err;
               });
-      
-          //let pwd = req.body.my_pass; 
-          console.log(results);
+
+          let sql2 = "SELECT * FROM Prenotazione WHERE stato_prenotazione <> 'conclusa';";
+          prenNonConcluse = await db.query(sql2)
+              .catch(err => {
+                  throw err;
+              });
+          
+          console.log('prenCONCLUSE');
+          console.log(prenConcluse.length);
+          console.log(prenConcluse);
+          console.log('prenNON');
+          console.log(prenNonConcluse.length);
+          console.log(prenNonConcluse);
+          
                   
-          //let id_utente = results[0].nome_cognome;
-          console.log('Dati utente:');
-          console.log(results[0]);
-          res.render('finestraListaPrenotazioniEffettuate', {data: results[0]});
+          //let id_utente = prenConcluse[0].nome_cognome;
+          res.render('finestraListaPrenotazioniEffettuate', {dataC: prenConcluse, dataNC: prenNonConcluse});
       });
   } catch (err) {
       console.log(err);
