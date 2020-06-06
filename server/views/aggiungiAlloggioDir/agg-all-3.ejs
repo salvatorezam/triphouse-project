@@ -16,38 +16,67 @@
       <div class="container">
         <p class="subtitle text-primary">Aggiugni alloggio</p>
         <h1 class="h2 mb-5"> Testo <span class="text-muted float-right">Step 3</span>      </h1>
-        <form>
+        <form autocomplete="off">
           <div class="row form-block">
             <div class="col-lg-4">
-              <h4>Description</h4>
-              <p class="text-muted text-sm"> Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.</p>
+              <h4>Titolo</h4>
+              <p class="text-muted text-sm"> Inserisci il titolo dell'annuncio del tuo alloggio.</p>
             </div>
             <div class="col-lg-7 ml-auto"> <!--incolonnare-->
-              <div class="form-group mb-5">
-                <label class="form-label" for="form_description">Describe your place to guests</label>
-                <textarea class="form-control" name="name" id="form_description" rows="5" aria-describedby="descriptionHelp"></textarea><small class="form-text text-muted mt-2" id="descriptionHelp">The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. &quot;What's happened to me?&quot; he thought. It wasn't a dream.    </small>
+              <div class="form-group">
+                <label class="form-label" for="form_titolo_annuncio">titolo annuncio</label>
+                <input class="form-control" name="name" id="form_titolo_annuncio">
               </div>
             </div>
           </div>
-
           <div class="row form-block">
             <div class="col-lg-4">
-              <h4>descrizione 2</h4>
-              <p class="text-muted text-sm"> Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.</p>
+              <h4>Descrizione</h4>
+              <p class="text-muted text-sm"></p> 
+            </div>
+            <div class="col-lg-7 ml-auto"> <!--incolonnare-->
+              <div class="form-group mb-5">
+                <label class="form-label" for="form_descrizione">Descrizione Alloggio</label>
+                <textarea class="form-control" name="name" id="form_descrizione" rows="5" aria-describedby="descriptionHelp"></textarea>
+              </div>
             </div>
             <div class="col-lg-7 ml-auto">
-              <label class="form-label" for="form_availability">Your availability</label>
-              <textarea class="form-control" name="name" id="form_availability" rows="3" aria-describedby="availabilityHelp"></textarea><small class="form-text text-muted mt-2" id="availabilityHelp">His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table.    </small>
+              <div class="form-group mb-5">
+                <label class="form-label" for="form_descrizione_regole">Descrizione Regole Alloggio</label>
+                <textarea class="form-control" name="name" id="form_descrizione_regole" rows="3" aria-describedby="availabilityHelp"></textarea>
+              </div>
             </div>
             <div class="col-lg-7 ml-auto">
-              <label class="form-label" for="form_neighbourhood">Your neighbourhood</label>
-              <textarea class="form-control" name="name" id="form_neighbourhood" rows="3" aria-describedby="hoodHelp"></textarea><small class="form-text text-muted mt-2" id="hoodHelp">Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.    </small>
+              <div class="form-group mb-5">
+                <label class="form-label" for="form_descrizione_note">note</label>
+                <textarea class="form-control" name="name" id="form_descrizione_note" rows="3" aria-describedby="availabilityHelp"></textarea>
+                <small class="form-text text-muted mt-2" id="commento_note">(Facoltativo)</small>
+                <small class="form-text text-muted mt-2" id="commento_note_2">Aggiungi delle note per precisare alcuni aspetti dell'alloggio. (Es. Camera con bagno, salone con divano letto, etc..)</small>
+              </div>
+             </div>
+          </div>
+          <div class="row form-block">
+            <div class="col-lg-4">
+              <h4>Retribuzione</h4>
+              <p class="text-muted text-sm"></p> <!--commento retribuzione-->
+            </div>
+            <div class="col-lg-7 ml-auto"> <!--incolonnare-->
+              <div class="form-group">
+                <label class="form-label" for="form_prezzo">Prezzo</label>
+                <input class="form-control" id="form_prezzo">
+              </div>
+            </div>
+            <div class="col-lg-7 ml-auto"> <!--incolonnare-->
+              <div class="form-group">
+                <label class="form-label" for="form_tassa">Tassa di soggiorno</label>
+                <input class="form-control" id="form_tassa">
+              </div>
             </div>
           </div>
           <div class="row form-block flex-column flex-sm-row">
-            <div class="col text-center text-sm-left"><a class="btn btn-link text-muted" href="/agg-all-2"> <i class="fa-chevron-left fa mr-2"></i>indietro</a>
+            <div class="col text-center text-sm-left"><a class="btn btn-link text-muted" href="/aggiungiAlloggio/agg-all-2"> <i class="fa-chevron-left fa mr-2"></i>indietro</a>
             </div>
-            <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/agg-all-4"> Prossimo<i class="fa-chevron-right fa ml-2"></i></a></div>
+            <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/aggiungiAlloggio/agg-all-4"> Prossimo step<i class="fa-chevron-right fa ml-2"></i></a></div>
           </div>
         </form>
       </div>
