@@ -20,6 +20,10 @@ router.get('/prenotazionePg3', function(req, res, next) {
 router.get('/prenotazionePg4', function(req, res, next) {
     res.render('prenotazioneDir/prenotazionePg4');
 });
+/* GET prenotazionePg5 */
+router.get('/prenotazionePg5', function(req, res, next) {
+    res.render('prenotazioneDir/prenotazionePg5');
+});
 
 /* GET recapPrenotazione */
 router.get('/recapPrenotazione', function(req, res, next) {

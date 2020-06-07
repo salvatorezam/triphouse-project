@@ -1,137 +1,131 @@
-﻿<!DOCTYPE html>
-
+<!DOCTYPE html>
 <html lang="it">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>TripHouse</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="all,follow">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!-- Price Slider Stylesheets -->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/nouislider/nouislider.css">
-    <!-- Google fonts - Playfair Display-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700">
-    <!-- Google fonts - Poppins-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700">
-    <!-- swiper-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
-    <!-- Magnigic Popup-->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/magnific-popup/magnific-popup.css">
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/css/style.default.e1630ae4.css" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/css/custom.0a822280.css">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/favicon.png">
-    <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-</head>
-<body>
-    <header>
+  <!-- head -->
+  <% include ../partials/head.ejs %>
+  <!-- head -->
 
-    </header>
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7">
-                    <p class="subtitle text-primary">Prenota la tua casa vacanza</p>
-                    <h1 class="h2 mb-5">Burocrazia<span class="text-muted float-right">Step 3</span>      </h1>
+  <body style="padding-top: 72px;">
+    
+      <!-- header utente loggato -->
+      <% include ../partials/headerUtenteLogin.ejs %>
+      <!-- header utente loggato -->
 
-                    <h6 class="subtitle text-muted" style="margin-bottom:2em;">La parte noisa della prenotazione della tua vacanza</h6>
-                    <div class="text-block">
-                        <!--inizio form documenti utenti registrati-->
-                        <label class="h5">Inserisci i tuoi documenti</label>
-                        <p class="text-muted">seleziona il tipo di documento</p>
-                        <!-- in action bisogna specificare dove devono essere caricati i campi del form con il file-->
-                        <form action="" method="post" enctype="multipart/form-data">
-                            <fieldset class=" col-lg-4">
-                                <div class="form-group style="text-align: center; margin-top: 1em; ">
-                                    <input type="radio" class="tipoDoc" id="caDoc" name="documento" value="cartaIdentita" autocomplete="off" required>
-                                    <label for="caDoc">Carta d'identità</label><br />
-                                    <input type="radio" class="tipoDoc" id="pasDoc" name="documento" value="passaporto" autocomplete="off" required>
-                                    <label for="pasDoc">Passaporto</label><br />
-                                </div>
-                            </fieldset>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <label class="form-label" for="numDoc">Numero Documento</label>
-                                    <input class="form-control" name="numeroDoc" id="numDoc" type="text">
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="form-label" for="dataDoc">Data scadenza</label>
-                                    <input class="form-control" name="scadenzaDoc" id="dataDoc" type="text">
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="form-label" for="dataDoc">Rilasciato da:</label>
-                                    <input class="form-control" name="autoritaDocumento" id="autoritaDoc" type="text">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <label class="form-label" for="fileDoc1">Inserisci la scanzione del documento</label>
-                                    <input class="form-control" type="file" name="fileDoc" id="fileDoc1" autocomplete="off">
-                                </div>
-                                <div class="col-lg-2" style="margin-top:2em">
-                                    <input class="btn btn-primary" type="submit" value="Carica">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!--fine form documenti utente Registrato-->
+    <div class="progress rounded-0 sticky-top" style="height: 8px; top: 71px;">
+      <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <section class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7">
+              <p class="subtitle text-primary">Prenota la tua casa vacanza</p>
+              <h1 class="h2 mb-5">Burocrazia<span class="text-muted float-right">Step 3</span>      </h1>
 
-                   <!--inizio form documenti ospiti-->
-                    <div class="text-block">
-                        <label class="h5">Inserisci i documenti degli opsiti</label>
-                        <p class="text-muted">seleziona il tipo di documento</p>
-                        <!-- in action bisogna specificare dove devono essere caricati i campi del form con il file-->
-                        <form action="" method="post" enctype="multipart/form-data">
-                            <fieldset class=" col-lg-4">
-                                <div class="form-group style="text-align: center; margin-top: 1em; ">
-                                    <input type="radio" class="tipoDoc" id="caDoc" name="documento" value="cartaIdentita" autocomplete="off" required>
-                                    <label for="caDoc">Carta d'identità</label><br />
-                                    <input type="radio" class="tipoDoc" id="pasDoc" name="documento" value="passaporto" autocomplete="off" required>
-                                    <label for="pasDoc">Passaporto</label><br />
-                                </div>
-                            </fieldset>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <label class="form-label" for="numDoc">Numero Documento</label>
-                                    <input class="form-control" name="numeroDoc" id="numDoc" type="text">
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="form-label" for="dataDoc">Data scadenza</label>
-                                    <input class="form-control" name="scadenzaDoc" id="dataDoc" type="text">
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="form-label" for="dataDoc">Rilasciato da:</label>
-                                    <input class="form-control" name="autoritaDocumento" id="autoritaDoc" type="text">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <label class="form-label" for="fileDoc1">Inserisci la scanzione del documento</label>
-                                    <input class="form-control" type="file" name="fileDoc" id="fileDoc1" autocomplete="off">
-                                </div>
-                                <div class="col-lg-2" style="margin-top:2em">
-                                    <input class="btn btn-primary" type="submit" value="Carica">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!--fine form ospiti da replicare-->
-                    <div class="row form-block flex-column flex-sm-row">
-                        <div class="col text-center text-sm-left">
-                            <a class="btn btn-link text-muted" href="user-booking-1.html"> <i class="fa-chevron-left fa mr-2"></i>Back</a>
-                        </div>
-                        <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="user-booking-3.html"> Next step<i class="fa-chevron-right fa ml-2"></i></a></div>
-                    </div>
+              <h6 class="subtitle text-muted" style="margin-bottom:2em;">La parte noisa della prenotazione della tua vacanza</h6>
+              <div class="text-block">
+                  <!--inizio form documenti utenti registrati-->
+                  <label class="h5">Inserisci i tuoi documenti</label>
+                  <p class="text-muted">seleziona il tipo di documento</p>
+                  <!-- in action bisogna specificare dove devono essere caricati i campi del form con il file-->
+                  <form action="" method="post" enctype="multipart/form-data">
+                      <fieldset class=" col-lg-4">
+                          <div class="form-group style="text-align: center; margin-top: 1em; ">
+                              <input type="radio" class="tipoDoc" id="caDoc" name="documento" value="cartaIdentita" autocomplete="off" required>
+                              <label for="caDoc">Carta d'identità</label><br />
+                              <input type="radio" class="tipoDoc" id="pasDoc" name="documento" value="passaporto" autocomplete="off" required>
+                              <label for="pasDoc">Passaporto</label><br />
+                          </div>
+                      </fieldset>
+                      <div class="row">
+                          <div class="col-lg-4">
+                              <label class="form-label" for="numDoc">Numero Documento</label>
+                              <input class="form-control" name="numeroDoc" id="numDoc" type="text">
+                          </div>
+                          <div class="col-lg-4">
+                              <label class="form-label" for="dataDoc">Data scadenza</label>
+                              <input class="form-control" name="scadenzaDoc" id="dataDoc" type="text">
+                          </div>
+                          <div class="col-lg-4">
+                              <label class="form-label" for="dataDoc">Rilasciato da:</label>
+                              <input class="form-control" name="autoritaDocumento" id="autoritaDoc" type="text">
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-lg-8">
+                              <label class="form-label" for="fileDoc1">Inserisci la scanzione del documento</label>
+                              <input class="form-control" type="file" name="fileDoc" id="fileDoc1" autocomplete="off">
+                          </div>
+                          <div class="col-lg-2" style="margin-top:2em">
+                              <input class="btn btn-primary" type="submit" value="Carica">
+                          </div>
+                      </div>
+                  </form>
+              </div>
+              <!--fine form documenti utente Registrato-->
+
+             <!--inizio form documenti ospiti-->
+             <button class="btn btn-link btn-collapse pl-0 text-muted" type="button" data-toggle="collapse" data-target="#formDocOspiti" aria-expanded="false" aria-controls="formDocOspiti" data-expanded-text="Chiudi" data-collapsed-text="Inserisci documenti ospiti">Inserisci documenti Ospiti</button>
+             <div class=" text-block row collapse" id="formDocOspiti"> 
+               <form action="" method="post" enctype="multipart/form-data">  
+                  <label class="h5">Inserisci i documenti degli opsiti</label>
+                  <p class="text-muted">seleziona il tipo di documento</p>
+                  <!-- in action bisogna specificare dove devono essere caricati i campi del form con il file-->
+                 
+                      <fieldset class=" col-lg-4">
+                          <div class="form-group style="text-align: center; margin-top: 1em; ">
+                              <input type="radio" class="tipoDoc" id="caDoc" name="documento" value="cartaIdentita" autocomplete="off" required>
+                              <label for="caDoc">Carta d'identità</label><br />
+                              <input type="radio" class="tipoDoc" id="pasDoc" name="documento" value="passaporto" autocomplete="off" required>
+                              <label for="pasDoc">Passaporto</label><br />
+                          </div>
+                      </fieldset>
+                      <div class="row">
+                          <div class="col-lg-4">
+                              <label class="form-label" for="numDoc">Numero Documento</label>
+                              <input class="form-control" name="numeroDoc" id="numDoc" type="text">
+                          </div>
+                          <div class="col-lg-4">
+                              <label class="form-label" for="dataDoc">Data scadenza</label>
+                              <input class="form-control" name="scadenzaDoc" id="dataDoc" type="text">
+                          </div>
+                          <div class="col-lg-4">
+                              <label class="form-label" for="dataDoc">Rilasciato da:</label>
+                              <input class="form-control" name="autoritaDocumento" id="autoritaDoc" type="text">
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-lg-8">
+                              <label class="form-label" for="fileDoc1">Inserisci la scanzione del documento</label>
+                              <input class="form-control" type="file" name="fileDoc" id="fileDoc1" autocomplete="off">
+                          </div>
+                          <div class="col-lg-2" style="margin-top:2em">
+                              <input class="btn btn-primary" type="submit" value="Carica">
+                          </div>
+                      </div>
+                  </form>
                 </div>
-                <!-- mini vista alloggi-->
-            </div>
+             
+              <!--fine form ospiti da replicare-->
+              <div class="row form-block flex-column flex-sm-row">
+                  <div class="col text-center text-sm-left">
+                      <a class="btn btn-link text-muted" href="/prenotazione/prenotazionePg2"> <i class="fa-chevron-left fa mr-2"></i>Indietro</a>
+                  </div>
+                  <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/prenotazione/prenotazionePg4">Avanti<i class="fa-chevron-right fa ml-2"></i></a></div>
+              </div>
+          </div>
+          <!-- mini vista alloggio -->
+          <% include ../partials/miniViewAlloggio.ejs %>
+          <!-- mini vista alloggio -->
         </div>
+      </div>
     </section>
-</body>
+
+    <!-- Footer-->
+    <% include ../partials/footer.ejs %>
+    <!-- Footer-->
+
+    <!-- Script Footer-->
+    <% include ../partials/scriptFooter.ejs %>
+    <!-- Script Footer -->
+  </body>
 </html>
