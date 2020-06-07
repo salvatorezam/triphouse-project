@@ -66,4 +66,10 @@ router.get('/finestraListaPrenotazioniRicevute', function(req, res, next) {
 router.get('/finestraPrenotazioneRicevuta', function(req, res, next) {
   res.render('finestraPrenotazioneRicevuta');
 });
+
+/* GET finestraComDatiOspiti */
+router.get('/finestraComDatiOspiti', function(req, res, next) {
+  res.render('finestraComDatiOspiti');
+});
+
 module.exports = router;
