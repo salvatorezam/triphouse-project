@@ -17,12 +17,12 @@
     <section class="py-5">
       <div class="container">
         <div class="row">
-          <div class="col-lg-7">
-              <p class="subtitle text-primary">Prenota la tua casa vacanza</p>
-              <h1 class="h2 mb-5">Burocrazia<span class="text-muted float-right">Step 3</span>      </h1>
+            <div class="col-lg-7">
+                <p class="subtitle text-primary">Prenota la tua casa vacanza</p>
+                <h1 class="h2 mb-5">Burocrazia<span class="text-muted float-right">Step 3</span>      </h1>
 
-              <h6 class="subtitle text-muted" style="margin-bottom:2em;">La parte noisa della prenotazione della tua vacanza</h6>
-              <div class="text-block">
+                <h6 class="subtitle text-muted" style="margin-bottom:2em;">La parte noisa della prenotazione della tua vacanza</h6>
+                <div class="text-block">
                   <!--inizio form documenti utenti registrati-->
                   <label class="h5">Inserisci i tuoi documenti</label>
                   <p class="text-muted">seleziona il tipo di documento</p>
@@ -60,13 +60,13 @@
                           </div>
                       </div>
                   </form>
-              </div>
-              <!--fine form documenti utente Registrato-->
+                </div>
+                <!--fine form documenti utente Registrato-->
 
-             <!--inizio form documenti ospiti-->
-             <button class="btn btn-link btn-collapse pl-0 text-muted" type="button" data-toggle="collapse" data-target="#formDocOspiti" aria-expanded="false" aria-controls="formDocOspiti" data-expanded-text="Chiudi" data-collapsed-text="Inserisci documenti ospiti">Inserisci documenti Ospiti</button>
-             <div class=" text-block row collapse" id="formDocOspiti"> 
-               <form action="" method="post" enctype="multipart/form-data">  
+                <!--inizio form documenti ospiti-->
+                <button class="btn btn-link btn-collapse pl-0 text-muted" type="button" data-toggle="collapse" data-target="#formDocOspiti" aria-expanded="false" aria-controls="formDocOspiti" data-expanded-text="Chiudi" data-collapsed-text="Inserisci documenti ospiti">Inserisci documenti Ospiti</button>
+                <div class=" text-block row collapse" id="formDocOspiti"> 
+                  <form action="" method="post" enctype="multipart/form-data">  
                   <label class="h5">Inserisci i documenti degli opsiti</label>
                   <p class="text-muted">seleziona il tipo di documento</p>
                   <!-- in action bisogna specificare dove devono essere caricati i campi del form con il file-->
@@ -110,9 +110,11 @@
                   <div class="col text-center text-sm-left">
                       <a class="btn btn-link text-muted" href="/prenotazione/prenotazionePg2"> <i class="fa-chevron-left fa mr-2"></i>Indietro</a>
                   </div>
-                  <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/prenotazione/prenotazionePg4">Avanti<i class="fa-chevron-right fa ml-2"></i></a></div>
+                  <div class="col text-center text-sm-right">
+                      <a class="btn btn-primary px-3" href="/prenotazione/prenotazionePg4">Avanti<i class="fa-chevron-right fa ml-2"></i></a>
+                  </div>
               </div>
-          </div>
+            </div>
           <!-- mini vista alloggio -->
           <% include ../partials/miniViewAlloggio.ejs %>
           <!-- mini vista alloggio -->
