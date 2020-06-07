@@ -1,29 +1,70 @@
 <!DOCTYPE html>
 <html lang="it">
+
   <!-- head -->
   <% include ../partials/head.ejs %>
   <!-- head -->
+
   <body style="padding-top: 72px;">
+    
       <!-- header utente loggato -->
       <% include ../partials/headerUtenteLogin.ejs %>
       <!-- header utente loggato -->
+
     <div class="progress rounded-0 sticky-top" style="height: 8px; top: 71px;">
-      <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+      <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
     <section class="py-5">
       <div class="container">
         <div class="row">
           <div class="col-lg-7">
             <p class="subtitle text-primary">Prenota la tua casa vacanza</p>
-            <h1 class="h2 mb-5"> Prenotazione effettuata <span class="text-muted float-right">Step 4</span>      </h1>
+            <h1 class="h2 mb-5"> Conferma <span class="text-muted float-right">Step 4</span>      </h1>
+
             <div class="text-block">
-              <p class="text-muted">Grazie per la prenotazione, Ondrej. </p>
-              <p class="text-muted mb-5">Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.</p>
-              <div class="row form-block flex-column flex-sm-row">
-                <p class="text-center mb-5"><a class="btn btn-primary mx-2 mb-2" href="/prenotazione/recapPrenotazione"> <i class="far fa-file mr-2"></i>Vedi la tua prenotazione</a></p>
-                <p class="text-center mb-5"><a class="btn btn-link mx-2 mb-2" href="#"> <i class="far fa-file mr-2"></i>Torna alla home</a></p>
+              <form action="#">
+                <div class="d-flex justify-content-between align-items-end mb-4">
+                  <h5 class="mb-0">Pay with your card</h5>
+                  <div class="text-muted"><i class="fab fa-cc-amex fa-2x mr-2"> </i><i class="fab fa-cc-visa fa-2x mr-2"> </i><i class="fab fa-cc-mastercard fa-2x"></i></div>
+                </div>
+                <select class="selectpicker form-control mb-3" name="payment" id="form_payment" data-style="btn-selectpicker">
+                  <option value="">Visa •••• 5687</option>
+                  <option value="">Mastercard •••• 4569</option>
+                </select>
+                <button class="btn btn-link btn-collapse pl-0 text-muted" type="button" data-toggle="collapse" data-target="#addNewCard" aria-expanded="false" aria-controls="addNewCard" data-expanded-text="Close" data-collapsed-text="Add a new card">Add a new card</button>
+                <div class="row collapse" id="addNewCard">
+                  <div class="form-group col-md-6">
+                    <label class="form-label" for="card-name">Name on Card</label>
+                    <input class="form-control" type="text" name="card-name" placeholder="Name on card" id="card-name">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="form-label" for="card-number">Card Number</label>
+                    <input class="form-control" type="text" name="card-number" placeholder="Card number" id="card-number">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="form-label" for="expiry-date">Expiry Date</label>
+                    <input class="form-control" type="text" name="expiry-date" placeholder="MM/YY" id="expiry-date">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="form-label" for="cvv">CVC/CVV</label>
+                    <input class="form-control" type="text" name="cvv" placeholder="123" id="cvv">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="form-label" for="zip">ZIP</label>
+                    <input class="form-control" type="text" name="zip" placeholder="123" id="zip">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="text-block">
+              <h6>Cancellation policy</h6>
+              <p class="text-sm text-muted">Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of .</p>
+              <p class="text-sm text-muted">He must have tried it a hundred times, shut his eyes so that he wouldn't have to look at the flounde.</p>
+            </div>
+            <div class="row form-block flex-column flex-sm-row">
+              <div class="col text-center text-sm-left"><a class="btn btn-link text-muted" href="/prenotazione/prenotazionePg3"> <i class="fa-chevron-left fa mr-2"></i>Indietro</a>
               </div>
-              <p class="mb-5 text-center"><img class="img-fluid" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/illustration/undraw_celebration_0jvk.svg" alt="" style="width: 400px;"></p>
+              <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/prenotazione/prenotazionePg5">Avanti<i class="fa-chevron-right fa ml-2"></i></a></div>
             </div>
           </div>
 
@@ -34,7 +75,7 @@
         </div>
       </div>
     </section>
-      
+
     <!-- Footer-->
     <% include ../partials/footer.ejs %>
     <!-- Footer-->
@@ -42,6 +83,5 @@
     <!-- Script Footer-->
     <% include ../partials/scriptFooter.ejs %>
     <!-- Script Footer -->
-    
   </body>
 </html>
