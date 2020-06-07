@@ -315,25 +315,18 @@
                   </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="margin-bottom: 0.2em">
                   <label class="form-label" for="loginPassword"> Password *</label>
                   <input class="form-control" name="loginPassword" id="loginPassword" placeholder="Password" type="password"
                     title="Almeno 8 caratteri di cui di una lettera maiuscola un numero."
                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$" size="32" maxlength="40" data-msg="Inserisci la tua password" required>
-                  <div class="invalid-feedback">
-                    Almeno 8 caratteri di cui una lettera maiuscola e un numero.
-                  </div>
-                  <div class="valid-feedback text-warning">
-                      Password media
-                  </div>
+                  <div id="password-strength-status">&nbsp</div>
                 </div>
 
                 <div class="form-group mb-4">
                   <label class="form-label" for="loginPassword2"> Conferma la tua password *</label>
                   <input class="form-control" name="loginPassword2" id="loginPassword2" placeholder="Password" type="password" data-msg="Inserisci di nuovo la password" required>
-                  <div class="valid-feedback">
-                    Le password coincidono!
-                </div>
+                  <div>&nbsp</div>
                 </div>
               </fieldset>
               
@@ -368,6 +361,7 @@
       // Eseguiamo il codice jQuery solo dopo che il documento è stato caricato completamente
       $(document).ready(function() {
 
+         // Gestione del titolo della sezione 'Nato/a a:'
           $('.gender').on('input', function(ev) {
             if ('donna'.localeCompare($(this).val()) == 0)
               $("#p-nato").text("Nata a:");
@@ -375,24 +369,27 @@
               $("#p-nato").text("Nato a:");
           });
 
-          const strongPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}");
-
-          $('#loginPassword').on('input', function(ev) {
-            $('#loginPassword2').val('').siblings('.valid-feedback').hide();
-            if (strongPass.test($(this).val()))
-                $(this).siblings('.valid-feedback').removeClass('text-warning').text('Password forte').show();
-            else
-                $(this).siblings('.valid-feedback').addClass('text-warning').text('Password media').show();
-          });  
+          // Gestione dell'inserimento della password ------------------------------------------------------
+          let numeri = /([0-9])/;
+          let alfabeto = /([a-zA-Z])/;
+          let caratteriSpeciali = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
 
           $('#loginPassword2').change(function(ev) {
               if ($(this).val() != $('#loginPassword').val()) {
-                  $(this).siblings('.valid-feedback').hide();
+                  $(this).siblings('div').removeClass().addClass('text-danger').text('');
                   $(this).val('').attr('placeholder', 'Password non coincidenti!').focus();
               }
               else 
-                  $(this).siblings('.valid-feedback').show()
-              
+                  $(this).siblings('div').removeClass().addClass('text-success').text('Le password coincidono!');     
+          });
+
+          $('#loginPassword').on('input', function(ev) {
+            if($('#loginPassword').val().length<8) 
+              $('#password-strength-status').removeClass().addClass('weak-password text-danger').text('Password debole.');
+            else if($('#loginPassword').val().match(numeri) && $('#loginPassword').val().match(alfabeto) && $('#loginPassword').val().match(caratteriSpeciali))         
+                $('#password-strength-status').removeClass().addClass('strong-password text-success').text('Password forte.');
+            else 
+              $('#password-strength-status').removeClass().addClass('medium-password text-warning').text('Password media.');
           });
       });
     </script>
