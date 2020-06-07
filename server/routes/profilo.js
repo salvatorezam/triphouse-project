@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var createError = require('http-errors');
 
+//creo degli array per salvare gli id delle prenotazioni
+var listaIdPrenConcluse = [];
+var listaIdPrenNonConcluse = [];
+
 //const crypto = require('crypto');
 const { config } = require('../db/config');
 const { makeDb, withTransaction } = require('../db/dbmiddleware');
@@ -17,22 +21,37 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
   try {
       await withTransaction(db, async() => {
           
-          let sql1 = "SELECT * FROM Prenotazione WHERE stato_prenotazione = 'conclusa';";
+          let sql1 = "SELECT p.ID_PREN AS ID_PREN, p.data_inizio AS data_inizio, a.titolo AS titolo, a.citta AS citta, p.stato_prenotazione AS stato_pren \
+                      FROM Prenotazione p, Alloggio a \
+                      WHERE p.alloggio = a.ID_ALL AND p.stato_prenotazione = 'conclusa';";
           prenConcluse = await db.query(sql1)
               .catch(err => {
                   throw err;
               });
+          
+          for (el of prenConcluse) {
+            listaIdPrenConcluse.push(el.ID_PREN);
+          }
 
-          let sql2 = "SELECT * FROM Prenotazione WHERE stato_prenotazione <> 'conclusa';";
+          let sql2 = "SELECT p.ID_PREN AS ID_PREN, p.data_inizio AS data_inizio, a.titolo AS titolo, a.citta AS citta, p.stato_prenotazione AS stato_pren \
+                      FROM Prenotazione p, Alloggio a \
+                      WHERE p.alloggio = a.ID_ALL AND p.stato_prenotazione <> 'conclusa';";
           prenNonConcluse = await db.query(sql2)
               .catch(err => {
                   throw err;
               });
           
+          for (el of prenNonConcluse) {
+            listaIdPrenNonConcluse.push(el.ID_PREN);
+          }
+          
+          //DA CANCELLARE
           console.log('prenCONCLUSE');
+          console.log(listaIdPrenConcluse);
           console.log(prenConcluse.length);
-          console.log({dataC: prenConcluse});
+          console.log(prenConcluse);
           console.log('prenNON');
+          console.log(listaIdPrenNonConcluse);
           console.log(prenNonConcluse.length);
           console.log('ecco');
           console.log({dataNC: prenNonConcluse});
@@ -49,6 +68,7 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
   
 /* GET finestraPrenotazioneEffettuata */
 router.get('/finestraPrenotazioneEffettuata', function(req, res, next) {
+  console.log('Prenotazioni' + listaIdPrenConcluse);
   res.render('finestraPrenotazioneEffettuata');
 });
 
