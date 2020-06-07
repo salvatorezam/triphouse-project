@@ -67,10 +67,39 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
 }
   
 /* GET finestraPrenotazioneEffettuata */
-router.get('/finestraPrenotazioneEffettuata', function(req, res, next) {
-  console.log('Prenotazioni' + listaIdPrenConcluse);
-  res.render('finestraPrenotazioneEffettuata');
-});
+router.get('/finestraPrenotazioneEffettuata', getPrenotazioneEffettuata);
+
+async function getPrenotazioneEffettuata(req, res, next) {
+
+  const db = await makeDb(config);
+  let prenData = {};
+  try {
+      await withTransaction(db, async() => {
+          
+          let sql = "SELECT p.data_inizio AS data_inizio, p.data_fine AS data_fine, \
+                      a.titolo AS titolo, a.indirizzo AS indirizzo, a.n_civico AS n_civico, \
+                      a.citta AS citta, ur.telefono AS telefono_prp, a.tipo_all AS tipo_all, \
+                      a.nome_proprietario AS nome_proprietario, p.prezzo_totale AS prezzo_totale, ur.email AS email_prp \
+                      FROM Prenotazione p, Alloggio a, UtenteRegistrato ur \
+                      WHERE p.alloggio = a.ID_ALL AND a.proprietario = ur.ID_UR AND a.titolo = 'Casa Roma';";
+          prenData = await db.query(sql)
+              .catch(err => {
+                  throw err;
+              });
+          
+          //DA CANCELLARE
+          console.log('DATI PRENOTAZIONE: ');
+          console.log({data : prenData});
+          
+          res.render('finestraPrenotazioneEffettuata', {data : prenData});
+      });
+  } catch (err) {
+      console.log(err);
+      next(createError(500));
+  }
+}
+  
+
 
 /* GET modificaDatiPersonali */
 router.get('/modificaDatiPersonali', function(req, res, next) {
@@ -91,5 +120,43 @@ router.get('/finestraPrenotazioneRicevuta', function(req, res, next) {
 router.get('/finestraComDatiOspiti', function(req, res, next) {
   res.render('finestraComDatiOspiti');
 });
+
+/* Recensisci Alloggio */
+router.post('/recensisciAlloggio', recensisciAlloggio);
+
+async function recensisciAlloggio(req, res, next) {
+
+  const db = await makeDb(config);
+  let recensione = {};
+  var today = new Date();
+
+  try {
+      await withTransaction(db, async() => {
+          
+          let sql = "INSERT INTO RecensisciAlloggio VALUES (UUID(),?,?,?,?,?);";
+          let values = [
+            req.body.testoRec,
+            today,
+            'scrittore_rec',
+            'alloggio_rec',
+            req.body.valutazione
+          ];
+          recensione = await db.query(sql, values)
+              .catch(err => {
+                  throw err;
+              }); 
+          
+          console.log(req.body);
+          //DA CANCELLARE
+          console.log('DATI RECENSIONE: ');
+          //console.log(values);
+          
+          res.status(204).send();
+      });
+  } catch (err) {
+      console.log(err);
+      next(createError(500));
+  }
+}
 
 module.exports = router;

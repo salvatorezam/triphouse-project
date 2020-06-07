@@ -2,6 +2,23 @@
 <html lang="it">
   <head>
     <% include partials/head.ejs %>
+    <script>
+      function submitForm() {
+        var valutazione = document.getElementById("valutazione");
+        var testoRec = document.getElementById("testoRec");
+        var dataRec = 'ciao';
+        $.ajax({
+          type: "POST",
+          data: dataRec,
+          reset: function() {
+            valutazione.val("");
+            testoRec.val("");
+            alert('Operazione andata a buon fine');
+          }
+        });
+        return;
+      }
+    </script>
   </head>
   <body style="padding-top: 72px;">
     <% include partials/header.ejs %>
@@ -33,23 +50,23 @@
             <li class="breadcrumb-item active">Prenotazione effettuata   </li>
           </ol>
           <div class="text-block">
-            <p class="subtitle">Data arrivo - Data partenza</p>
-            <h1 class="hero-heading mb-3">Titolo - Prenotazione</h1>
+            <p class="subtitle"><%= data[0].data_inizio.toString().slice(0,15) %> - <%= data[0].data_fine.toString().slice(0,15) %></p>
+            <h1 class="hero-heading mb-3"><%= data[0].titolo %></h1>
           </div>
           <div class="text-block">
-            <h6 class="mb-4">Numero Notti</h6>
+            <!-- h6 class="mb-4">Numero Notti</h6   DA ELIMINARE?    -->
             <div class="row mb-3">
               <div class="col-md-6 d-flex align-items-center mb-3 mb-md-0">
                 <div class="date-tile mr-3">
-                  <div class="text-uppercase"> <span class="text-sm">Apr</span><br><strong class="text-lg">17</strong></div>
+                  <div class="text-uppercase"> <span class="text-sm"><%= data[0].data_inizio.toString().slice(4,7) %></span><br><strong class="text-lg"><%= data[0].data_inizio.toString().slice(8,10) %></strong></div>
                 </div>
-                <p class="text-sm mb-0">Wednesday check-in<br>3PM - 7PM</p>
+                <p class="text-sm mb-0"><%= data[0].data_inizio.toString().slice(0,3) %><br/>check-in</p>
               </div>
               <div class="col-md-6 d-flex align-items-center">
                 <div class="date-tile mr-3">
-                  <div class="text-uppercase"> <span class="text-sm">Apr</span><br><strong class="text-lg">18</strong></div>
+                  <div class="text-uppercase"> <span class="text-sm"><%= data[0].data_fine.toString().slice(4,7) %></span><br><strong class="text-lg"><%= data[0].data_fine.toString().slice(8,10) %></strong></div>
                 </div>
-                <p class="text-sm mb-0">Thursday check-out<br>11AM</p>
+                <p class="text-sm mb-0"><%= data[0].data_fine.toString().slice(0,3) %><br/>check-out</p>
               </div>
             </div>
           </div>
@@ -57,25 +74,25 @@
             <div class="row">
               <div class="col-sm">
                 <h6>Indirizzo</h6>
-                <p class="text-muted">Ap #867, 859 Sit Rd., London</p>
+                <p class="text-muted"><%= data[0].indirizzo %> <%= data[0].n_civico %>, <%= data[0].citta %></p>
               </div>
               <div class="col-sm">
                 <h6>Telefono</h6>
-                <p class="text-muted">+421 454 897 545</p>
+                <p class="text-muted"><%= data[0].telefono_prp %></p>
               </div>
             </div>
           </div>
           <div class="text-block">
             <div class="media align-items-center mb-3">
               <div class="media-body">
-                <h6>Tipologia alloggio</h6>
-                <p class="text-muted mb-0">Ospitato da <a href="user-profile.html" class="text-reset">Jack London</a></p>
+                <h6><%= data[0].tip0_all %></h6>
+                <p class="text-muted mb-0">Ospitato da <a href="user-profile.html" class="text-reset"><%= data[0].nome_proprietario %></a></p>
               </div><a href="user-profile.html"><img class="avatar avatar-lg avatar-border-white ml-4" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/avatar/avatar-10.jpg" alt="Jack London"></a>
             </div>
           </div>
           <div class="text-block">
             <h6 class="mb-3">Chi viene con te</h6>
-            <div class="row mb-3">
+            <div class="row mb-3"> <!-- DA FARE PER GLI OSPITI -->
               <div class="col-auto text-center text-sm"><img class="avatar avatar-border-white mb-1" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/avatar/avatar-0.jpg" alt="Ondrej"><br>Ondrej</div>
               <div class="col-auto text-center text-sm"><img class="avatar avatar-border-white mb-1" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/avatar/avatar-1.jpg" alt="Julie"><br>Julie</div>
               <div class="col-auto text-center text-sm"><img class="avatar avatar-border-white mb-1" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/avatar/avatar-2.jpg" alt="Barbora"><br>Barbora</div>
@@ -85,9 +102,9 @@
             <div class="row">
               <div class="col">
                 <h6>Costo totale</h6>
-                <p class="text-muted">€499.50</p>
+                <p class="text-muted">€<%= data[0].prezzo_totale %></p>
               </div>
-              <div class="col align-self-center">
+              <div class="col align-self-center"> <!-- PENSARE PER LA RICEVUTA -->
                 <p class="text-right d-print-none"><a class="btn btn-link text-muted" href="#"><i class="far fa-file mr-2"></i>Ricevuta</a></p>
               </div>
             </div>
@@ -101,18 +118,18 @@
                     <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#recensisciAlloggio" aria-expanded="false" aria-controls="recensisciAlloggio">Recensisci Alloggio</button>
                     <div class="collapse mt-4" id="recensisciAlloggio">
                       <h5 class="mb-4">Recensione</h5>
-                      <form class="form" id="contact-form" method="get" action="#">
+                      <form class="form" id="form_recensione" method="POST" action="/profilo/recensisciAlloggio">
                         <div class="row">
                           <div class="col-sm-6">
-                            <div class="form-group">
-                              <label class="form-label" for="name">Il tuo nome</label>
-                              <input class="form-control" type="text" name="name" id="name" required="required">
+                            <div class="form-group"> <!-- RISOLVERE LA COSA DEL NOME (AUTOCARICARLO)-->
+                              <label class="form-label" for="nome">Il tuo nome</label>
+                              <input class="form-control-plaintext" type="text" placeholder="nome scrittore" readonly>
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label class="form-label" for="rating">La tua valutazione</label>
-                              <select class="custom-select focus-shadow-0" name="rating" id="rating">
+                              <label class="form-label" for="valutazione">La tua valutazione</label>
+                              <select class="custom-select focus-shadow-0 form-control-lg" name="valutazione" id="valutazione">
                                 <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; 5</option>
                                 <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; 4</option>
                                 <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; 3</option>
@@ -123,10 +140,10 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="form-label" for="review">Testo </label>
-                          <textarea class="form-control" rows="4" name="review" id="review" placeholder="Scrivi qualcosa su alloggio e cliente" required="required"></textarea>
+                          <label class="form-label" for="testoRec">Testo </label>
+                          <textarea class="form-control" rows="4" name="testoRec" id="testoRec" placeholder="Scrivi qualcosa su alloggio e cliente" required="required"></textarea>
                         </div>
-                        <button class="btn btn-primary" type="submit">Invia</button>
+                        <button class="btn btn-primary" id="inviaRecensione" onclick="submitForm()">Invia</button> <!-- type="submit" -->
                       </form>
                     </div>
                   </div>
@@ -152,7 +169,7 @@
               </li>
               <li class="mb-2"> 
                 <div class="media align-items-center mb-3">
-                  <div class="media-body"><a role="button" class="btn btn-outline-info" href="mailto:pippo@topolinia.disney.com ">Contatta host</a></div>
+                  <div class="media-body"><a role="button" class="btn btn-outline-info" href="mailto:<%= data[0].email_prp %>">Contatta host</a></div>
                 </div>
               </li>
               <li class="mb-2"> 
@@ -199,7 +216,7 @@
             </ul>
           </div>
           <div class="text-block">
-            <h6 class="mb-4">Cose da tenere a mente </h6>
+            <h6 class="mb-4">Cose da tenere a mente </h6> <!-- CARICARE LE REGOLE -->
             <ul class="list-unstyled">
               <li class="mb-2"> 
                 <div class="media align-items-center mb-3">
@@ -265,6 +282,27 @@
         </div>
       </div>
     </div>
+    <!--script>
+      function resetForm(form) {
+        console.log('son dentro');
+        $(':input', form).each(function() {
+          var type = this.type;
+          var tag = this.tagName.toLowerCase();
+          if (type == 'text' || type == 'password' || tag == 'textarea')
+            this.value = "";
+          else if (type == 'checkbox' || type == 'radio')
+            this.checked = false;
+          else if (tag == 'select')
+            this.selectedIndex = -1;
+        });
+      };
+
+      $(document).ready(function() {
+
+        $('#inviaRecensione').onclick(resetForm('#form_recensione'));
+      });
+    </script-->
+
     <!-- Footer-->
     <% include partials/footer.ejs %>
     
