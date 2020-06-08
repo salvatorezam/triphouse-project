@@ -14,23 +14,23 @@
               <p class="text-muted">Pronto a trovare la tua destinazione da sogno?</p>
             </div>
 
-            <form class="form-validate" onsubmit="return sendMail()"> <!-- da completare-->
+            <form id="regform" class="form-validate" method="POST" action="/RegAutControl/utenteregistrato"> <!-- onsubmit="return sendMail()"> da completare-->
 
               <p class="lead text-uppercase">Dati anagrafici</p>
               <fieldset class="form-row"> 
-                <div class="form-group col-4">
-                  <label class="form-label" for="loginNome"> Nome *</label>
-                  <input class="form-control" name="loginNome" id="loginNome" type="text" placeholder="Nome" autocomplete="off" data-msg="Inserisci il tuo nome" required>
+                <div class="form-group col-sm-4">
+                  <label class="form-label" for="nome"> Nome *</label>
+                  <input class="form-control" name="nome" id="nome" type="text" placeholder="Nome" autocomplete="off" data-msg="Inserisci il tuo nome" required>
                 </div>
-                <div class="form-group col-4">
-                  <label class="form-label" for="loginCognome"> Cognome *</label>
-                  <input class="form-control" name="loginCognome" id="loginCognome" type="text" placeholder="Cognome" autocomplete="off" data-msg="Inserisci il tuo cognome" required>
+                <div class="form-group col-sm-4">
+                  <label class="form-label" for="cognome"> Cognome *</label>
+                  <input class="form-control" name="cognome" id="cognome" type="text" placeholder="Cognome" autocomplete="off" data-msg="Inserisci il tuo cognome" required>
                 </div>
 
-                <div class="form-group col-4" style="text-align: center; margin-top: 1em; ">
-                  <input type="radio" class="gender" id="uomo" name="sesso" value="uomo" autocomplete="off" required>
+                <div class="form-group col-sm-4" style="text-align: center; margin-top: 1em;">
+                  <input type="radio" class="gender" id="uomo" name="sesso" value="M" autocomplete="off" required>
                   <label for="uomo">Uomo </label><br>
-                  <input type="radio" class="gender" id="donna" name="sesso" value="donna" autocomplete="off" required>
+                  <input type="radio" class="gender" id="donna" name="sesso" value="F" autocomplete="off" required>
                   <label for="donna">Donna</label>                
                 </div>
               </fieldset>
@@ -38,9 +38,9 @@
               <p class="lead text-uppercase mt-4" id="p-nato">Nato a:</p>
               <fieldset>
                 <div class="form-row">
-                  <div class="form-group col-6">
-                    <label class="form-label" for="loginNazione"> Nazione *</label>
-                    <select id="nazione" name="nazione" class="form-control" required>
+                  <div class="form-group col-sm-6">
+                    <label class="form-label" for="nazione"> Nazione *</label>
+                    <select id="nazione_nascita" name="nazione_nascita" class="form-control" required>
                       <option value="Afghanistan">Afghanistan</option>
                       <option value="Åland Islands">Åland Islands</option>
                       <option value="Albania">Albania</option>
@@ -288,15 +288,15 @@
                     </select>
                   </div> 
 
-                  <div class="form-group col-6">
-                    <label class="form-label" for="loginCittaDiNascita"> Città di nascita *</label>
-                    <input class="form-control" name="loginCittaDiNascita" id="loginCittaDiNascita" type="text" placeholder="Città di nascita" autocomplete="off" required data-msg="Inserisci la tua città di nascita" required>
+                  <div class="form-group col-sm-6">
+                    <label class="form-label" for="citta_nascita"> Città di nascita *</label>
+                    <input class="form-control" name="citta_nascita" id="citta_nascita" type="text" placeholder="Città di nascita" autocomplete="off" required data-msg="Inserisci la tua città di nascita" required>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-6">
-                    <label class="form-label" for="loginUDataDiNascita"> Data di nascita</label>
-                    <input class="form-control" name="loginUDataDiNascita" id="loginUDataDiNascita" type="date" placeholder="" autocomplete="off" data-msg="Inserisci la tua data di nascita">
+                    <label class="form-label" for="data_nascita"> Data di nascita *</label>
+                    <input class="form-control" name="data_nascita" id="data_nascita" type="date" placeholder="" autocomplete="off" data-msg="Inserisci la tua data di nascita" required>
                   </div>
                 </div>
               </fieldset>
@@ -304,36 +304,29 @@
               <p class="lead text-uppercase mt-4">Credenziali di accesso</p>
               <fieldset>  
                 <div class="form-row">
-                  <div class="form-group col-6">
-                    <label class="form-label" for="loginMail"> Indirizzo Email *</label>
-                    <input class="form-control" name="loginMail" id="loginMail" type="email" placeholder="esempio@indirizzo.it" autocomplete="off" data-msg="Inserisci la tua email"  required>
+                  <div class="form-group col-sm-6">
+                    <label class="form-label" for="email"> Indirizzo Email *</label>
+                    <input class="form-control" name="email" id="email" type="email" placeholder="esempio@indirizzo.it" autocomplete="off" data-msg="Inserisci la tua email"  required>
                   </div>
 
-                  <div class="form-group col-6">
-                    <label class="form-label" for="loginTelefono"> Telefono</label>
-                    <input class="form-control" name="loginTelefono" id="loginTelefono" type="tel" placeholder="(+/00)PPLLLNNNNNNN" pattern="((((\+|00)[1-9]{2})|0)?([1-9]{2,3}))([0-9]{6,10})" autocomplete="off" data-msg="Inserisci il tuo numero di telefono">
+                  <div class="form-group col-sm-6">
+                    <label class="form-label" for="telefono"> Telefono</label>
+                    <input class="form-control" name="telefono" id="telefono" type="tel" placeholder="(+/00)PPLLLNNNNNNN" pattern="((((\+|00)[1-9]{2})|0)?([1-9]{2,3}))([0-9]{6,10})" autocomplete="off" data-msg="Inserisci il tuo numero di telefono">
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <label class="form-label" for="loginPassword"> Password *</label>
-                  <input class="form-control" name="loginPassword" id="loginPassword" placeholder="Password" type="password"
+                <div class="form-group" style="margin-bottom: 0.2em">
+                  <label class="form-label" for="password"> Password *</label>
+                  <input class="form-control" name="password" id="password" placeholder="Password" type="password"
                     title="Almeno 8 caratteri di cui di una lettera maiuscola un numero."
                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$" size="32" maxlength="40" data-msg="Inserisci la tua password" required>
-                  <div class="invalid-feedback">
-                    Almeno 8 caratteri di cui una lettera maiuscola e un numero.
-                  </div>
-                  <div class="valid-feedback text-warning">
-                      Password media
-                  </div>
+                  <div id="password-strength-status">&nbsp</div>
                 </div>
 
                 <div class="form-group mb-4">
-                  <label class="form-label" for="loginPassword2"> Conferma la tua password *</label>
-                  <input class="form-control" name="loginPassword2" id="loginPassword2" placeholder="Password" type="password" data-msg="Inserisci di nuovo la password" required>
-                  <div class="valid-feedback">
-                    Le password coincidono!
-                </div>
+                  <label class="form-label" for="password2"> Conferma la tua password *</label>
+                  <input class="form-control" name="password2" id="password2" placeholder="Password" type="password" data-msg="Inserisci di nuovo la password" required>
+                  <div>&nbsp</div>
                 </div>
               </fieldset>
               
@@ -362,39 +355,8 @@
       </div>
     </div>
 
+    <!-- Script-->
     <% include partials/scriptFooter.ejs %>
-    
-    <script>
-      // Eseguiamo il codice jQuery solo dopo che il documento è stato caricato completamente
-      $(document).ready(function() {
-
-          $('.gender').on('input', function(ev) {
-            if ('donna'.localeCompare($(this).val()) == 0)
-              $("#p-nato").text("Nata a:");
-           else
-              $("#p-nato").text("Nato a:");
-          });
-
-          const strongPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}");
-
-          $('#loginPassword').on('input', function(ev) {
-            $('#loginPassword2').val('').siblings('.valid-feedback').hide();
-            if (strongPass.test($(this).val()))
-                $(this).siblings('.valid-feedback').removeClass('text-warning').text('Password forte').show();
-            else
-                $(this).siblings('.valid-feedback').addClass('text-warning').text('Password media').show();
-          });  
-
-          $('#loginPassword2').change(function(ev) {
-              if ($(this).val() != $('#loginPassword').val()) {
-                  $(this).siblings('.valid-feedback').hide();
-                  $(this).val('').attr('placeholder', 'Password non coincidenti!').focus();
-              }
-              else 
-                  $(this).siblings('.valid-feedback').show()
-              
-          });
-      });
-    </script>
+    <script src="/javascripts/registration-scripts.js"></script>
   </body>
 </html>
