@@ -24,3 +24,5 @@ router.get('/finestraListaPrenotazioniRicevute', function(req, res, next) {
   router.get('/finestraComDatiOspiti', function(req, res, next) {
     res.render('finestraComDatiOspiti');
   });
+
+  module.exports = router;
