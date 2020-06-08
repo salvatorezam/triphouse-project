@@ -23,7 +23,7 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
           
           let sql1 = "SELECT p.ID_PREN AS ID_PREN, p.data_inizio AS data_inizio, a.titolo AS titolo, a.citta AS citta, p.stato_prenotazione AS stato_pren \
                       FROM Prenotazione p, Alloggio a \
-                      WHERE p.alloggio = a.ID_ALL AND p.stato_prenotazione = 'conclusa';";
+                      WHERE p.alloggio = a.ID_ALL AND p.stato_prenotazione <> 'conclusa';";
           prenConcluse = await db.query(sql1)
               .catch(err => {
                   throw err;
@@ -35,7 +35,7 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
 
           let sql2 = "SELECT p.ID_PREN AS ID_PREN, p.data_inizio AS data_inizio, a.titolo AS titolo, a.citta AS citta, p.stato_prenotazione AS stato_pren \
                       FROM Prenotazione p, Alloggio a \
-                      WHERE p.alloggio = a.ID_ALL AND p.stato_prenotazione <> 'conclusa';";
+                      WHERE p.alloggio = a.ID_ALL AND p.stato_prenotazione = 'conclusa';";
           prenNonConcluse = await db.query(sql2)
               .catch(err => {
                   throw err;
@@ -80,6 +80,7 @@ async function getPrenotazioneEffettuata(req, res, next) {
   try {
       await withTransaction(db, async() => {
           
+          //dati prenotazione che mi servono
           let sql = "SELECT p.data_inizio AS data_inizio, p.data_fine AS data_fine, \
                       a.titolo AS titolo, a.indirizzo AS indirizzo, a.n_civico AS n_civico, \
                       a.citta AS citta, ur.telefono AS telefono_prp, a.tipo_all AS tipo_all, \
@@ -109,15 +110,17 @@ async function getPrenotazioneEffettuata(req, res, next) {
             stato_pag = "disabled";
           }
           
+          //dati recensione
           let sql_rec = "SELECT p.ID_PREN \
                           FROM Prenotazione p, Alloggio a, RecensisciAlloggio ra \
-                          WHERE p.alloggio = a.ID_ALL AND ra.alloggio = a.ID_ALL;";
+                          WHERE p.alloggio = a.ID_ALL AND ra.alloggio = a.ID_ALL AND a.titolo = 'Casa Roma';";
           recData = await db.query(sql_rec)
               .catch(err => {
                   throw err;
               });
           
-          if (recData.length != 0) {
+          //check per verificare la possibilità di recensire (in base a recensioni già fatte o conclusione vacanza)
+          if (recData.length != 0 || stato_prenotazione != 'conclusa') {
 
             stato_rec = "disabled";
           }
@@ -144,20 +147,6 @@ router.get('/modificaDatiPersonali', function(req, res, next) {
   res.render('modificaDatiPersonali');
 });
 
-/* GET finestraListaPrenotazioniRicevute */
-router.get('/finestraListaPrenotazioniRicevute', function(req, res, next) {
-  res.render('finestraListaPrenotazioniRicevute');
-});
-
-/* GET finestraPrenotazioneRicevuta */
-router.get('/finestraPrenotazioneRicevuta', function(req, res, next) {
-  res.render('finestraPrenotazioneRicevuta');
-});
-
-/* GET finestraComDatiOspiti */
-router.get('/finestraComDatiOspiti', function(req, res, next) {
-  res.render('finestraComDatiOspiti');
-});
 
 /* Recensisci Alloggio */
 router.post('/recensisciAlloggio', recensisciAlloggio);
@@ -176,7 +165,7 @@ async function recensisciAlloggio(req, res, next) {
             req.body.testoRec,
             today,
             'scrittore_rec',
-            'alloggio_rec',
+            '2d8cdeb2-a755-11ea-b30a-a066100a22be',
             req.body.valutazione
           ];
           recensione = await db.query(sql, values)
@@ -187,10 +176,37 @@ async function recensisciAlloggio(req, res, next) {
           console.log(req.body);
           //DA CANCELLARE
           console.log('DATI RECENSIONE: ');
-          //console.log(values);
+          console.log(values);
           
-          res.status(204).send();
+          res.redirect('/profiloUtenteControl/finestraPrenotazioneEffettuata');
       });
+  } catch (err) {
+      console.log(err);
+      next(createError(500));
+  }
+}
+
+router.get('/annullaPrenotazione', annullaPrenotazione);
+
+async function annullaPrenotazione(req, res, next) {
+
+  const db = await makeDb(config);
+
+  try {
+    await withTransaction(db, async() => {
+
+      //MODIFICARE SQL ASSOLUTAMENTE
+      let sql = "UPDATE Prenotazione \
+                  SET stato_prenotazione = 'conclusa' \
+                  WHERE ID_PREN = '485ae14d-a756-11ea-b30a-a066100a22be';";
+      annullamento = await db.query(sql)
+          .catch(err => {
+              throw err;
+          });
+
+      console.log('Prenotazione annullata');
+      res.redirect('/profiloUtenteControl/finestraPrenotazioneEffettuata');
+    });
   } catch (err) {
       console.log(err);
       next(createError(500));
