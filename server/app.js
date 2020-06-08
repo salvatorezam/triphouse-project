@@ -11,6 +11,7 @@ var profiloHostRouter = require('./routes/profiloHostControl');
 var prenotazioneRouter = require('./routes/prenotazione');
 var aggiungiAlloggio = require('./routes/aggiungiAlloggio');
 var RegAutControl = require('./routes/RegAutControl');
+var visualizzaAlloggio = require('./routes/visualizzaAlloggio');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use('/profiloHostControl', profiloHostRouter);
 app.use('/prenotazione', prenotazioneRouter);
 app.use('/aggiungiAlloggio', aggiungiAlloggio);
 app.use('/RegAutControl', RegAutControl);
+app.use('/visualizzaAlloggio', visualizzaAlloggio);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
