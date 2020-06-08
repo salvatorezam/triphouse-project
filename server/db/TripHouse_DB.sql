@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS UtenteRegistrato (
 	nazione_nascita VARCHAR(30) NOT NULL,
     citta_nascita VARCHAR(20) NOT NULL,
 	data_nascita DATE,
-    email VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
     telefono VARCHAR(20),
     stato_host BOOLEAN
 );
@@ -117,10 +117,11 @@ CREATE TABLE IF NOT EXISTS DatiOspiti (
 -- POPOLAMENTO
 -- ###########
 
-INSERT INTO UtenteRegistrato VALUES (UUID(),'Marco','Rossi','M','1992-6-25','Italia','Roma','RM','marco.rossi@gmail.com','+393324567898',false);
-INSERT INTO UtenteRegistrato VALUES (UUID(),'Giuseppe','Rosato','M','1995-7-2','Italia','Roma','RM','g.rosato@gmail.com','+3933245456898',true);
-INSERT INTO UtenteRegistrato VALUES (UUID(),'Luca','Pini','M','1992-6-25','Italia','Roma','RM','luca.pini@gmail.com','+393324567898',false);
-INSERT INTO UtenteRegistrato VALUES (UUID(),'Santo','Robino','M','1995-7-2','Italia','Roma','RM','robino@gmail.com','+3933245456898',false);
+INSERT INTO UtenteRegistrato VALUES (UUID(),'Marco','Rossi','M','Italia','Roma','1992-6-25','marco.rossi@gmail.com','+393324567898',false);
+INSERT INTO UtenteRegistrato VALUES (UUID(),'Giuseppe','Rosati','M','Italia','Roma','1991-8-25','g.rosati@gmail.com','+393324567898',true);
+INSERT INTO UtenteRegistrato VALUES (UUID(),'Nicola','Carovana','M','Italia','Roma','1996-2-20','nic.caro@gmail.com','+393324567898',false);
+INSERT INTO UtenteRegistrato VALUES (UUID(),'Piero','Alex','M','Italia','Roma','1990-11-11','piero.alex@gmail.com','+393324567898',false);
+
 
 INSERT INTO Credenziali VALUES (UUID(),'marcorossipass','a6b914f4-a752-11ea-b30a-a066100a22be'); 
 
