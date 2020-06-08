@@ -5,7 +5,7 @@ var router = express.Router();
 // istanziamo il modulo crypto e il config e il middleware per il db
 const crypto = require('../db/config');
 const { config } = require('../db/config');
-const { makeDB, withTransaction } = require('../db/dbmiddleware')
+const { makeDb, withTransaction } = require('../db/dbmiddleware')
 
 /* La rotta /users è vietata */
 router.get('/', function(req, res, next) {
@@ -25,28 +25,28 @@ async function registrazione(req, res, next) {
         await withTransaction(db, async() => {
 
              // inserimento utente
-            let sql = 'INSERT INTO UtenteRegistrato(nome, cognome, sesso, data_nascita, nazione_nascita,\
-                                                        citta_nascita, email, telefono, stato_host) VALUES (?,?,?,?,?,?,?,?,?,?)';
-            let values = [
-                req.body.nome,
-                req.body.cognome,
-                req.body.sesso,
-                req.body.data_nascita,
-                req.body.nazione_nascita,
-                req.body.citta_nascita,
-                req.body.email,
-                req.body.telefono,
-                req.body.stato_host
-            ];
-
-            result = await db.query(sql, values).catch(err => {throw err});
+            results = await db.query('INSERT INTO UtenteRegistrato(nome, cognome, sesso, data_nascita, nazione_nascita,\
+                citta_nascita, email, telefono, stato_host) VALUES (?,?,?,?,?,?,?,?,?)', [
+                    req.body.nome,
+                    req.body.cognome,
+                    req.body.sesso,
+                    req.body.data_nascita,
+                    req.body.nazione_nascita,
+                    req.body.citta_nascita,
+                    req.body.email,
+                    req.body.telefono,
+                    req.body.stato_host
+                ])
+                .catch(err => {
+                    throw err
+                });
 
             console.log('Inserimento dati nuovo utente.');
-            console.log(result);
+            console.log(result.insertID);
             // render?
-
+            /*
             // inserimento credenziali utente
-            sql = 'INSERT INTO Credenziali VALUES (?,?,?)';
+            sql = 'INSERT INTO Credenziali VALUES (?,?)';
             values = [
                 result.insertID, // sfrutto l'oggetto result che viene restituito dal metodo query per reperire l'indice dell'utente appena inserito
                 req.body.password
@@ -54,7 +54,7 @@ async function registrazione(req, res, next) {
             results = await db.query(sql, values).catch(err => {throw err});
 
             console.log(result);
-            console.log(`Utente ${req.body.email} inserito!`);
+            console.log(`Utente ${req.body.email} inserito!`);*/
 
             
             /*

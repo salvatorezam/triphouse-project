@@ -27,10 +27,10 @@
                   <input class="form-control" name="cognome" id="cognome" type="text" placeholder="Cognome" autocomplete="off" data-msg="Inserisci il tuo cognome" required>
                 </div>
 
-                <div class="form-group col-sm-4" style="text-align: center; margin-top: 1em; ">
-                  <input type="radio" class="gender" id="uomo" name="sesso" value="uomo" autocomplete="off" required>
+                <div class="form-group col-sm-4" style="text-align: center; margin-top: 1em;">
+                  <input type="radio" class="gender" id="uomo" name="sesso" value="M" autocomplete="off" required>
                   <label for="uomo">Uomo </label><br>
-                  <input type="radio" class="gender" id="donna" name="sesso" value="donna" autocomplete="off" required>
+                  <input type="radio" class="gender" id="donna" name="sesso" value="F" autocomplete="off" required>
                   <label for="donna">Donna</label>                
                 </div>
               </fieldset>
@@ -40,7 +40,7 @@
                 <div class="form-row">
                   <div class="form-group col-sm-6">
                     <label class="form-label" for="nazione"> Nazione *</label>
-                    <select id="nazione" name="nazione" class="form-control" required>
+                    <select id="nazione_nascita" name="nazione_nascita" class="form-control" required>
                       <option value="Afghanistan">Afghanistan</option>
                       <option value="Åland Islands">Åland Islands</option>
                       <option value="Albania">Albania</option>
@@ -295,8 +295,8 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col-6">
-                    <label class="form-label" for="data_nascita"> Data di nascita</label>
-                    <input class="form-control" name="data_nascita" id="data_nascita" type="date" placeholder="" autocomplete="off" data-msg="Inserisci la tua data di nascita">
+                    <label class="form-label" for="data_nascita"> Data di nascita *</label>
+                    <input class="form-control" name="data_nascita" id="data_nascita" type="date" placeholder="" autocomplete="off" data-msg="Inserisci la tua data di nascita" required>
                   </div>
                 </div>
               </fieldset>
