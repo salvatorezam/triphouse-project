@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS TripHouse_DB;
 USE TripHouse_DB;
 
 CREATE TABLE IF NOT EXISTS UtenteRegistrato (
-	ID_UR INT AUTO_INCREMENT,
+	ID_UR VARCHAR(36) PRIMARY KEY,
     nome VARCHAR(40) NOT NULL,
     cognome VARCHAR(40) NOT NULL,
     sesso CHAR(1) CHECK(sesso = 'M' OR sesso = 'F'),
@@ -11,14 +11,13 @@ CREATE TABLE IF NOT EXISTS UtenteRegistrato (
 	data_nascita DATE,
     email VARCHAR(50) NOT NULL,
     telefono VARCHAR(20),
-    stato_host BOOLEAN,
-	PRIMARY KEY (ID_UR)
+    stato_host BOOLEAN
 );
 
 CREATE TABLE IF NOT EXISTS Credenziali (
-	utente INT NOT NULL PRIMARY KEY,
+	email VARCHAR(36) PRIMARY KEY,
 	password_hash CHAR(128) NOT NULL, 
-	FOREIGN KEY (utente) REFERENCES UtenteRegistrato(ID_UR)
+	FOREIGN KEY (email) REFERENCES UtenteRegistrato(ID_UR)
 );
 
 CREATE TABLE IF NOT EXISTS RecensisciCliente (

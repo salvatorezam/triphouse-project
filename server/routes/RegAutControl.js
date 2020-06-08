@@ -23,37 +23,57 @@ async function registrazione(req, res, next) {
     try {
 
         await withTransaction(db, async() => {
+            let sql = "INSERT INTO UtenteRegistrato VALUES (UUID(),?,?,?,?,?,?,?,?,?);\
+                        INSERT INTO Credenziali(utente, password_hash)\
+                        SELECT (SELECT ID_UR FROM UtenteRegistrato WHERE email = ?, ?);";
+            let values = [ 
+                //problema duplicate entry
+                req.body.nome,
+                req.body.cognome,
+                req.body.sesso,
+                req.body.nazione_nascita,
+                req.body.citta_nascita,
+                req.body.data_nascita,
+                req.body.email,
+                req.body.telefono,
+                false,
+                req.body.email,
+                req.body.password
+            ];
 
+            console.log(values);
+
+            results = await db.query(sql, values).catch(err => { throw err; });
+
+            res.redirect('/');
+
+            /*
              // inserimento utente
-            results = await db.query('INSERT INTO UtenteRegistrato(nome, cognome, sesso, data_nascita, nazione_nascita,\
-                citta_nascita, email, telefono, stato_host) VALUES (?,?,?,?,?,?,?,?,?)', [
+            results = await db.query('INSERT INTO UtenteRegistrato VALUES (UUID(),?,?,?,?,?,?,?,?);\
+                                      INSERT INTO Credenziali(utente, password_hash)\
+                                      SELECT (SELECT ID_UR FROM UtenteRegistrato WHERE email = ?), ?\
+                                      FROM UtenteRegistrato;', [ 
+                    //problema duplicate entry
                     req.body.nome,
                     req.body.cognome,
                     req.body.sesso,
-                    req.body.data_nascita,
                     req.body.nazione_nascita,
                     req.body.citta_nascita,
+                    req.body.data_nascita,
                     req.body.email,
                     req.body.telefono,
-                    req.body.stato_host
+                    req.body.email,
+                    req.body.password
                 ])
                 .catch(err => {
-                    throw err
-                });
+                    throw err;
+                });*/
 
             console.log('Inserimento dati nuovo utente.');
-            console.log(result.insertID);
+            console.log(results);
             // render?
             /*
-            // inserimento credenziali utente
-            sql = 'INSERT INTO Credenziali VALUES (?,?)';
-            values = [
-                result.insertID, // sfrutto l'oggetto result che viene restituito dal metodo query per reperire l'indice dell'utente appena inserito
-                req.body.password
-            ];
-            results = await db.query(sql, values).catch(err => {throw err});
-
-            console.log(result);
+           
             console.log(`Utente ${req.body.email} inserito!`);*/
 
             
