@@ -192,7 +192,7 @@ async function recensisciAlloggio(req, res, next) {
           console.log('DATI RECENSIONE: ');
           console.log(values);
           
-          res.redirect('/profilo/finestraPrenotazioneEffettuata');
+          res.redirect('/profiloUtenteControl/finestraPrenotazioneEffettuata');
       });
   } catch (err) {
       console.log(err);
@@ -219,7 +219,7 @@ async function annullaPrenotazione(req, res, next) {
           });
 
       console.log('Prenotazione annullata');
-      res.redirect('/profilo/finestraPrenotazioneEffettuata');
+      res.redirect('/profiloUtenteControl/finestraPrenotazioneEffettuata');
     });
   } catch (err) {
       console.log(err);

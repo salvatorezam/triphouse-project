@@ -29,7 +29,7 @@
           <!-- Breadcrumbs -->
           <ol class="breadcrumb pl-0  justify-content-start">
             <li class="breadcrumb-item"><a href="/index">Home</a></li>
-            <li class="breadcrumb-item"><a href="/profilo/finestraListaPrenotazioniEffettuate">I tuoi viaggi</a></li>
+            <li class="breadcrumb-item"><a href="/profiloUtenteControl/finestraListaPrenotazioniEffettuate">I tuoi viaggi</a></li>
             <li class="breadcrumb-item active">Prenotazione effettuata   </li>
           </ol>
           <div class="text-block">
@@ -101,7 +101,7 @@
                     <button class="btn btn-outline-primary" id="recButton" type="button" data-toggle="collapse" data-target="#recensisciAlloggio" aria-expanded="false" aria-controls="recensisciAlloggio" <%= data.data_rec %>>Recensisci Alloggio</button>                   
                     <div class="collapse mt-4" id="recensisciAlloggio">
                       <h5 class="mb-4">Recensione</h5>
-                      <form class="form" id="form_recensione" method="POST" action="/profilo/recensisciAlloggio">
+                      <form class="form" id="form_recensione" method="POST" action="/profiloUtenteControl/recensisciAlloggio">
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group"> <!-- RISOLVERE LA COSA DEL NOME (AUTOCARICARLO) -->
@@ -140,7 +140,7 @@
                       <h5 class="mb-4">Sei sicuro di voler annullare la prenotazione? </h5>
                       <div class="row">
                         <div class="col-sm-6 mb-2">
-                          <a href="/profilo/annullaPrenotazione" id="confermaAnnullamento"><button class="col btn btn-success" id="confermaAnnullamento">SI</button></a>
+                          <a href="/profiloUtenteControl/annullaPrenotazione" id="confermaAnnullamento"><button class="col btn btn-success" id="confermaAnnullamento">SI</button></a>
                         </div>
                         <div class="col-sm-6 mb-2">
                           <button class="col btn btn-danger" type="button" data-toggle="collapse" data-target="#annullaPrenotazione" aria-expanded="false" aria-controls="annullaPrenotazione">NO</button>
