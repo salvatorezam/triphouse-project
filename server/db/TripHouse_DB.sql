@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS UtenteRegistrato (
 CREATE TABLE IF NOT EXISTS Credenziali (
 	email VARCHAR(36) PRIMARY KEY,
 	password_hash CHAR(128) NOT NULL, 
-	FOREIGN KEY (email) REFERENCES UtenteRegistrato(ID_UR)
+	FOREIGN KEY (email) REFERENCES UtenteRegistrato(email)
 );
 
 CREATE TABLE IF NOT EXISTS RecensisciCliente (
