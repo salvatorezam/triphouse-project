@@ -16,23 +16,23 @@
       <div class="container"> 
         <p class="subtitle text-primary">aggiungi alloggio</p>
         <h1 class="h2 mb-5"> Informazioni di base <span class="text-muted float-right">Step 1</span>      </h1>
-        <form autocomplete="off"> 
+        <form method="POST" action="/aggiungiAlloggio/alloggioInserito"> 
           <div class="row form-block">
             <div class="col-lg-4">
               <h4>Base</h4>
               </div>
             <div class="col-lg-7 ml-auto">
               <div class="form-group">
-                <label class="form-label" for="form_type">Tipo Alloggio</label>
-                <select class="selectpicker form-control" name="type" id="form_type" data-style="btn-selectpicker" title="" aria-describedby="propertyTypeHelp">
+                <label class="form-label" for="tipo_all">Tipo Alloggio</label>
+                <select class="selectpicker form-control" name="tipo_all" id="tipo_all" data-style="btn-selectpicker" title="" aria-describedby="propertyTypeHelp">
                   <option disabled selected>Seleziona Tipo Alloggio</option>
-                  <option value="type_0">B&B</option>
-                  <option value="type_1">Casa Vacana</option>
+                  <option value="B&B">B&B</option>
+                  <option value="Casa Vacanza">Casa Vacanza</option>
                 </select>
               </div>
               <div class="form-group">
-                <label class="form-label" for="form_name">Nome Proprietario</label>
-                <input class="form-control" id="form_name">
+                <label class="form-label" for="proprietario">Nome Proprietario</label>
+                <input class="form-control" name="nome_proprietario" id="nome_proprietario">
               </div>
             </div>
           </div>
@@ -43,42 +43,42 @@
             <div class="col-lg-7 ml-auto">
               <!-- Street-->
               <div class="form-group">
-                <label class="form-label" for="form_via">Via e numero civico (Es. Via Roma, 1)</label>
-                <input class="form-control" id="form_via">
+                <label class="form-label" for="indirizzo">Via e numero civico (Es. Via Roma, 1)</label>
+                <input class="form-control" name="indirizzo" id="indirizzo">
               </div>
               <!-- City + State-->
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="form-label" for="form_citta">Città</label>
-                    <input class="form-control" id="form_citta">
+                    <label class="form-label" for="citta">Città</label>
+                    <input class="form-control" name="citta" id="citta">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="form-label" for="form_regione">Regione</label>
-                    <select class="selectpicker form-control" name="type" id="form_regione" data-style="btn-selectpicker" title="" aria-describedby="propertyTypeHelp">
+                    <label class="form-label" for="regione">Regione</label>
+                    <select class="selectpicker form-control" name="regione" id="regione" data-style="btn-selectpicker" title="" aria-describedby="propertyTypeHelp">
                       <option disabled selected>Seleziona Regione</option>
-                      <option value="type_0">Abruzzo</option>
-                      <option value="type_1">Basilicata</option>
-                      <option value="type_2">Calabria</option>
-                      <option value="type_3">Campania</option>
-                      <option value="type_4">Emilia-Romagna</option>
-                      <option value="type_5">Friuli-Venezia Giulia</option>
-                      <option value="type_6">Lazio</option>
-                      <option value="type_7">Liguria</option>
-                      <option value="type_8">Lombardia</option>
-                      <option value="type_9">Marche</option>
-                      <option value="type_10">Molise</option>
-                      <option value="type_11">Piemonte</option>
-                      <option value="type_12">Puglia</option>
-                      <option value="type_13">Sardegna</option>
-                      <option value="type_14">Sicilia</option>
-                      <option value="type_15">Toscana</option>
-                      <option value="type_16">Trentino-Alto Adige</option>
-                      <option value="type_17">Umbria</option>
-                      <option value="type_18">Valle d'Aosta</option>
-                      <option value="type_19">Veneto</option>
+                      <option value="Abruzzo">Abruzzo</option>
+                      <option value="Basilicata">Basilicata</option>
+                      <option value="Calabria">Calabria</option>
+                      <option value="Campania">Campania</option>
+                      <option value="Emilia-Romagna">Emilia-Romagna</option>
+                      <option value="Friuli-Venezia Giulia">Friuli-Venezia Giulia</option>
+                      <option value="Lazio">Lazio</option>
+                      <option value="Liguria">Liguria</option>
+                      <option value="Lombardia">Lombardia</option>
+                      <option value="Marche">Marche</option>
+                      <option value="Molise">Molise</option>
+                      <option value="Piemonte">Piemonte</option>
+                      <option value="Puglia">Puglia</option>
+                      <option value="Sardegna">Sardegna</option>
+                      <option value="Sicilia">Sicilia</option>
+                      <option value="Toscana">Toscana</option>
+                      <option value="Trentino-Alto Adige">Trentino-Alto Adige</option>
+                      <option value="Umbria">Umbria</option>
+                      <option value="Valle d'Aosta">Valle d'Aosta</option>
+                      <option value="Veneto">Veneto</option>
                     </select>
                   </div>
                 </div>
@@ -86,14 +86,14 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="form-label" for="form_prv">Provincia</label>
-                    <input class="form-control" id="form_prv">
+                    <label class="form-label" for="provincia">Provincia</label>
+                    <input class="form-control" name="provincia" id="provincia">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label class="form-label" for="form_cap">CAP</label>
-                    <input class="form-control" id="form_cap">
+                    <label class="form-label" for="cap">CAP</label>
+                    <input class="form-control" name="cap" id="cap">
                   </div>
                 </div>
               </div>
@@ -102,7 +102,8 @@
           <div class="row form-block flex-column flex-sm-row">
             <div class="col text-center text-sm-left">
             </div>
-            <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/aggiungiAlloggio/agg-all-2"> Prossimo step<i class="fa-chevron-right fa ml-2"></i></a></div>
+            <!--<div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/aggiungiAlloggio/agg-all-2"> Prossimo step<i class="fa-chevron-right fa ml-2"></i></a></div>-->
+            <button type="submit" class="col text-center text-sm-right">Invia</button>
           </div>
         </form>
       </div>
