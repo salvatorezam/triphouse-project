@@ -147,20 +147,6 @@ router.get('/modificaDatiPersonali', function(req, res, next) {
   res.render('modificaDatiPersonali');
 });
 
-/* GET finestraListaPrenotazioniRicevute */
-router.get('/finestraListaPrenotazioniRicevute', function(req, res, next) {
-  res.render('finestraListaPrenotazioniRicevute');
-});
-
-/* GET finestraPrenotazioneRicevuta */
-router.get('/finestraPrenotazioneRicevuta', function(req, res, next) {
-  res.render('finestraPrenotazioneRicevuta');
-});
-
-/* GET finestraComDatiOspiti */
-router.get('/finestraComDatiOspiti', function(req, res, next) {
-  res.render('finestraComDatiOspiti');
-});
 
 /* Recensisci Alloggio */
 router.post('/recensisciAlloggio', recensisciAlloggio);

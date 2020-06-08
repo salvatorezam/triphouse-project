@@ -6,7 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var profiloRouter = require('./routes/profilo');
+var profiloUtenteRouter = require('./routes/profiloUtenteControl');
+var profiloHostRouter = require('./routes/profiloHostControl');
 var prenotazioneRouter = require('./routes/prenotazione');
 var aggiungiAlloggio = require('./routes/aggiungiAlloggio');
 var RegAutControl = require('./routes/RegAutControl');
@@ -25,7 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/profilo', profiloRouter);
+app.use('/profiloUtenteControl', profiloUtenteRouter);
+app.use('/profiloHostControl', profiloHostRouter);
 app.use('/prenotazione', prenotazioneRouter);
 app.use('/aggiungiAlloggio', aggiungiAlloggio);
 app.use('/RegAutControl', RegAutControl);
