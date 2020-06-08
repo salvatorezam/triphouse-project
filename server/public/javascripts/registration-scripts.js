@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     // Gestione del titolo della sezione 'Nato/a a:' --------------------------------------------------
     $('.gender').on('input', function(ev) {
-        if ('donna'.localeCompare($(this).val()) == 0)
+        if ('F'.localeCompare($(this).val()) == 0)
             $("#p-nato").text("Nata a:");
         else
             $("#p-nato").text("Nato a:");
