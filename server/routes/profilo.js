@@ -23,7 +23,7 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
           
           let sql1 = "SELECT p.ID_PREN AS ID_PREN, p.data_inizio AS data_inizio, a.titolo AS titolo, a.citta AS citta, p.stato_prenotazione AS stato_pren \
                       FROM Prenotazione p, Alloggio a \
-                      WHERE p.alloggio = a.ID_ALL AND p.stato_prenotazione = 'conclusa';";
+                      WHERE p.alloggio = a.ID_ALL AND p.stato_prenotazione <> 'conclusa';";
           prenConcluse = await db.query(sql1)
               .catch(err => {
                   throw err;
@@ -35,7 +35,7 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
 
           let sql2 = "SELECT p.ID_PREN AS ID_PREN, p.data_inizio AS data_inizio, a.titolo AS titolo, a.citta AS citta, p.stato_prenotazione AS stato_pren \
                       FROM Prenotazione p, Alloggio a \
-                      WHERE p.alloggio = a.ID_ALL AND p.stato_prenotazione <> 'conclusa';";
+                      WHERE p.alloggio = a.ID_ALL AND p.stato_prenotazione = 'conclusa';";
           prenNonConcluse = await db.query(sql2)
               .catch(err => {
                   throw err;
@@ -67,7 +67,7 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
 }
   
 /* GET finestraPrenotazioneEffettuata */
-router.get('/finestraPrenotazioneEffettuata', getPrenotazioneEffettuata);
+var takePage = router.get('/finestraPrenotazioneEffettuata', getPrenotazioneEffettuata);
 
 async function getPrenotazioneEffettuata(req, res, next) {
 
@@ -191,6 +191,36 @@ async function recensisciAlloggio(req, res, next) {
           
           res.status(204).send();
       });
+  } catch (err) {
+      console.log(err);
+      next(createError(500));
+  }
+}
+
+router.get('/annullaPrenotazione', annullaPrenotazione);
+
+async function annullaPrenotazione(req, res, next) {
+
+  const db = await makeDb(config);
+
+  try {
+    await withTransaction(db, async() => {
+
+      //MODIFICARE SQL ASSOLUTAMENTE
+      let sql = "UPDATE Prenotazione \
+                  SET stato_prenotazione = 'conclusa' \
+                  WHERE ID_PREN = '485ae14d-a756-11ea-b30a-a066100a22be';";
+      annullamento = await db.query(sql)
+          .catch(err => {
+              throw err;
+          });
+
+      console.log('Prenotazione annullata');
+
+      //takePage;
+      res.status(204).send();
+      console.log('che famo');
+    });
   } catch (err) {
       console.log(err);
       next(createError(500));
