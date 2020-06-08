@@ -67,7 +67,7 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
 }
   
 /* GET finestraPrenotazioneEffettuata */
-var takePage = router.get('/finestraPrenotazioneEffettuata', getPrenotazioneEffettuata);
+router.get('/finestraPrenotazioneEffettuata', getPrenotazioneEffettuata);
 
 async function getPrenotazioneEffettuata(req, res, next) {
 
@@ -80,6 +80,7 @@ async function getPrenotazioneEffettuata(req, res, next) {
   try {
       await withTransaction(db, async() => {
           
+          //dati prenotazione che mi servono
           let sql = "SELECT p.data_inizio AS data_inizio, p.data_fine AS data_fine, \
                       a.titolo AS titolo, a.indirizzo AS indirizzo, a.n_civico AS n_civico, \
                       a.citta AS citta, ur.telefono AS telefono_prp, a.tipo_all AS tipo_all, \
@@ -109,15 +110,17 @@ async function getPrenotazioneEffettuata(req, res, next) {
             stato_pag = "disabled";
           }
           
+          //dati recensione
           let sql_rec = "SELECT p.ID_PREN \
                           FROM Prenotazione p, Alloggio a, RecensisciAlloggio ra \
-                          WHERE p.alloggio = a.ID_ALL AND ra.alloggio = a.ID_ALL;";
+                          WHERE p.alloggio = a.ID_ALL AND ra.alloggio = a.ID_ALL AND a.titolo = 'Casa Roma';";
           recData = await db.query(sql_rec)
               .catch(err => {
                   throw err;
               });
           
-          if (recData.length != 0) {
+          //check per verificare la possibilità di recensire (in base a recensioni già fatte o conclusione vacanza)
+          if (recData.length != 0 || stato_prenotazione != 'conclusa') {
 
             stato_rec = "disabled";
           }
@@ -176,7 +179,7 @@ async function recensisciAlloggio(req, res, next) {
             req.body.testoRec,
             today,
             'scrittore_rec',
-            'alloggio_rec',
+            '2d8cdeb2-a755-11ea-b30a-a066100a22be',
             req.body.valutazione
           ];
           recensione = await db.query(sql, values)
@@ -187,9 +190,9 @@ async function recensisciAlloggio(req, res, next) {
           console.log(req.body);
           //DA CANCELLARE
           console.log('DATI RECENSIONE: ');
-          //console.log(values);
+          console.log(values);
           
-          res.status(204).send();
+          res.redirect('/profilo/finestraPrenotazioneEffettuata');
       });
   } catch (err) {
       console.log(err);
@@ -216,10 +219,7 @@ async function annullaPrenotazione(req, res, next) {
           });
 
       console.log('Prenotazione annullata');
-
-      //takePage;
-      res.status(204).send();
-      console.log('che famo');
+      res.redirect('/profilo/finestraPrenotazioneEffettuata');
     });
   } catch (err) {
       console.log(err);
