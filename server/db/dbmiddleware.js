@@ -13,7 +13,7 @@ const util = require('util');
 
 
 // Creiamo una funzione "factory"
-// questo design pattern è pensayto per
+// questo design pattern è pensato per
 // creare oggetti già istanziati con tutte le loro proprietà
 // makeDb creerà un database che svolge tutte le transazioni
 // in modo asincrono
