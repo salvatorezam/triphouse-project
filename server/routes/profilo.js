@@ -73,13 +73,18 @@ async function getPrenotazioneEffettuata(req, res, next) {
 
   const db = await makeDb(config);
   let prenData = {};
+  let recData = {};
+  let stato_pren = "";
+  let stato_rec = "";
+  let stato_pag = "";
   try {
       await withTransaction(db, async() => {
           
           let sql = "SELECT p.data_inizio AS data_inizio, p.data_fine AS data_fine, \
                       a.titolo AS titolo, a.indirizzo AS indirizzo, a.n_civico AS n_civico, \
                       a.citta AS citta, ur.telefono AS telefono_prp, a.tipo_all AS tipo_all, \
-                      a.nome_proprietario AS nome_proprietario, p.prezzo_totale AS prezzo_totale, ur.email AS email_prp \
+                      a.nome_proprietario AS nome_proprietario, p.prezzo_totale AS prezzo_totale, ur.email AS email_prp, \
+                      p.stato_prenotazione AS stato_prenotazione \
                       FROM Prenotazione p, Alloggio a, UtenteRegistrato ur \
                       WHERE p.alloggio = a.ID_ALL AND a.proprietario = ur.ID_UR AND a.titolo = 'Casa Roma';";
           prenData = await db.query(sql)
@@ -87,11 +92,44 @@ async function getPrenotazioneEffettuata(req, res, next) {
                   throw err;
               });
           
+          //check per verificare la possibilità di annullare la prenotazione o pagare
+          if (prenData[0].stato_prenotazione == 'conclusa') {
+
+            // METTERCI ANCHE LA DATA DI SCADENZA 
+            //disabilita tasto annullamento
+            stato_pren = "disabled";
+
+            //disabilita tasto pagamento
+            stato_pag = "disabled";
+          }
+
+          //check per verificare la possibilità di pagamento
+          if (prenData[0].stato_prenotazione == 'richiesta' || prenData[0].stato_prenotazione == 'pagata') {
+
+            stato_pag = "disabled";
+          }
+          
+          let sql_rec = "SELECT p.ID_PREN \
+                          FROM Prenotazione p, Alloggio a, RecensisciAlloggio ra \
+                          WHERE p.alloggio = a.ID_ALL AND ra.alloggio = a.ID_ALL;";
+          recData = await db.query(sql_rec)
+              .catch(err => {
+                  throw err;
+              });
+          
+          if (recData.length != 0) {
+
+            stato_rec = "disabled";
+          }
+          
           //DA CANCELLARE
           console.log('DATI PRENOTAZIONE: ');
-          console.log({data : prenData});
+          console.log(prenData);
+
+          console.log('DATI RECENSIONE: ');
+          console.log(stato_rec);
           
-          res.render('finestraPrenotazioneEffettuata', {data : prenData});
+          res.render('finestraPrenotazioneEffettuata', {data : {data_pren : prenData, data_rec : stato_rec, data_ann : stato_pren, data_pag : stato_pag}});
       });
   } catch (err) {
       console.log(err);
