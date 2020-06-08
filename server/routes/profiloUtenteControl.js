@@ -56,8 +56,6 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
           console.log('ecco');
           console.log({dataNC: prenNonConcluse});
           
-                  
-          //let id_utente = prenConcluse[0].nome_cognome;
           res.render('finestraListaPrenotazioniEffettuate', {data : {dataC: prenConcluse, dataNC: prenNonConcluse}});
       });
   } catch (err) {
@@ -77,6 +75,7 @@ async function getPrenotazioneEffettuata(req, res, next) {
   let stato_pren = "";
   let stato_rec = "";
   let stato_pag = "";
+
   try {
       await withTransaction(db, async() => {
           
@@ -186,6 +185,7 @@ async function recensisciAlloggio(req, res, next) {
   }
 }
 
+/* Annulla Prenotazione */
 router.get('/annullaPrenotazione', annullaPrenotazione);
 
 async function annullaPrenotazione(req, res, next) {
