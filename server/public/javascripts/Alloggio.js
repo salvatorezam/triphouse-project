@@ -10,31 +10,33 @@ class Alloggio{
         this.regione = null;
         this.citta = null; 
         this.provincia = null; 
-        this.num_ospiti_max = null;
+        this.num_ospiti = null;
         this.distanza_centro = null;
         this.num_letti_singoli= null;
         this.num_letti_matrimoniali = null;
         this.num_camere = null;
         this.num_bagni = null;
-        this.cucina = null;
-        this.lavanderia = null;
-        this.aria_condizionata = null;
-        this.wifi = null;
-        this.colazione = null;
-        this.asciugacapelli = null;
-        this.tv = null;
-        this.carta_igienica = null;
-        this.sapone_mani_corpo = null;
-        this.asciugamano = null;
-        this.accappatoio = null;
-        this.cuscino = null;
-        this.lenzuola = null;
+        this.cucina = false;
+        this.lavanderia = false;
+        this.aria_condizionata = false;
+        this.wifi = false;
+        this.colazione = false;
+        this.asciugacapelli = false;
+        this.tv = false;
+        this.carta_igienica = false;
+        this.sapone_mani_corpo = false;
+        this.asciugamano = false;
+        this.accappatoio = false;
+        this.cuscino = false;
+        this.lenzuola = false;
         this.titolo = null;
         this.descrizione_alloggio = null;
         this.descrizione_regole = null;
         this.note = null;
         this.tasse = null;
         this.prezzo = null;
+
+        this.foto = [];
         
         console.log('alloggio istanziato');
     }

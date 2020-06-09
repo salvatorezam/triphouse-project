@@ -2,6 +2,22 @@ var createError = require('http-errors');
 var express = require('express');
 var router = express.Router();
 
+let fileName;
+
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb){
+    cb(null, './uploads/')
+  },
+  filename: function(req, file, cb){
+    console.log('uploaded' + file.originalname)
+    cb(null, file.originalname)
+    this.fileName = file.originalname
+    console.log("il nome è: "+ file.originalname)
+  }
+});
+
 /*carichiamo il middleware*/
 
 const { config } = require('../db/config');
@@ -57,7 +73,7 @@ async function compilaStep1(req, res, next){
     this.alloggio.provincia = req.body.provincia;
     this.alloggio.cap = req.body.cap;
 
-    this.alloggio.num_ospiti_max = req.body.ciao;
+    this.alloggio.num_ospiti = req.body.num_ospiti;
     this.alloggio.distanza_centro = req.body.distanza_centro;
 
     console.log('Inserimento valori step 1');
@@ -83,6 +99,7 @@ async function compilaStep2(req, res, next){
     this.alloggio.num_camere = req.body.num_camere;
     this.alloggio.num_bagni = req.body.num_bagni;
 
+
     this.alloggio.cucina = req.body.servizi_0;
     this.alloggio.lavanderia = req.body.servizi_1;
     this.alloggio.aria_condizionata = req.body.servizi_2;
@@ -101,6 +118,51 @@ async function compilaStep2(req, res, next){
     console.log('Inserimento valori step 2');
     console.log(this.alloggio);
     res.render('aggiungiAlloggioDir/agg-all-3');
+    
+  } catch (error) {
+    console.log(err);
+    next(createError(500));
+  }
+}
+
+/* POST agg-all-3*/
+
+router.post('/agg-all-4', compilaStep3);
+
+async function compilaStep3(req, res, next){
+
+  try {
+
+    this.alloggio.titolo = req.body.titolo_annuncio;
+    this.alloggio.descrizione_alloggio = req.body.descrizione;
+    this.alloggio.descrizione_regole = req.body.descrizione_regole;
+    this.alloggio.note = req.body.descrizione_note;
+    this.alloggio.tasse = req.body.tassa;
+    this.alloggio.prezzo = req.body.prezzo;
+
+    console.log('Inserimento valori step 3');
+    console.log(this.alloggio);
+    res.render('aggiungiAlloggioDir/agg-all-4');
+    
+  } catch (error) {
+    console.log(err);
+    next(createError(500));
+  }
+}
+
+/* POST agg-all-4*/
+
+router.post('/agg-all-5', compilaStep3);
+
+async function compilaStep4(req, res, next){
+
+  try {
+
+    
+
+    console.log('Inserimento valori step 4');
+    console.log(this.alloggio);
+    res.render('aggiungiAlloggioDir/agg-all-5');
     
   } catch (error) {
     console.log(err);
@@ -150,5 +212,19 @@ async function inserisciAlloggio(req,res,next){
   }*/
 }
 
+
+const upload = multer({
+  storage: storage
+}).single('fileToUpload');
+
+
+
+router.post('/upload', (req, res) =>{
+  upload(req, res, err => {
+    if(err) return console.error(err)
+    console.log(req.file)
+    res.render('aggiungiAlloggioDir/agg-all-4')
+  })
+});
 
 module.exports = router;
