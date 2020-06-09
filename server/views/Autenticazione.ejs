@@ -12,14 +12,16 @@
               <h2>Autenticati</h2>
               <p class="text-muted">Bentornato, pronto per iniziare nuove avventure?</p>
             </div>
-            <form class="form-validate">
+            <form id="autform" class="form-validate" method="POST" action="/regAutControl/accesso">
               <div class="form-group">
                 <label class="form-label" for="loginUsername">Indirizzo Email</label>
-                <input class="form-control" name="loginUsername" id="loginUsername" type="email" placeholder="nome@indizzo.it" autocomplete="off" required data-msg="inserisci l'indirizzo email">
+                <input class="form-control" name="loginUsername" id="loginUsername" type="email" maxlength="40"
+                       placeholder="nome@indizzo.it" autocomplete="off" required data-msg="inserisci l'indirizzo email">
               </div>
               <div class="form-group">
                 <label class="form-label" for="loginPassword"> Password</label>
-                <input class="form-control" name="loginPassword" id="loginPassword" placeholder="Password" type="password" required data-msg="Inserisci la tua password">
+                <input class="form-control" name="loginPassword" id="loginPassword" placeholder="Password" 
+                       type="password" required data-msg="Inserisci la tua password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$" size="32">
               </div>
          
               <button class="btn btn-lg btn-block btn-primary" type="submit">Accedi</button>

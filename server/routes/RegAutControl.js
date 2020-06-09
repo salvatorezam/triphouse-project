@@ -113,4 +113,85 @@ async function registrazione(req, res, next) {
     }
 }
 
+
+router.post('/accesso', autenticazione);
+
+
+async function autenticazione(req, res, next) {
+    // istanziamo il middleware
+    const db = await makeDb(config);
+    let results = {};
+    try {
+        await withTransaction(db, async() => {  
+            // ricerca utente
+            results = await db.query("SELECT email, password_hash FROM Credenziali WHERE email=?;", 
+                        req.body.loginUsername)
+                        .catch(err => {
+                        throw err;
+                        });
+
+            console.log('Dati login');
+            console.log(results);
+
+            if (results.affectedRows == 0) {
+                console.log('Utente non trovato!');
+                next(createError(404, 'Utente non trovato'));
+            } else {
+                let pwd = req.body.loginPassword; // istanziamo l'algoritmo di hashing
+                //pwdhash.update(req.body.pass); // cifriamo la password
+                //let encpwd = pwdhash.digest('hex'); // otteniamo la stringa esadecimale
+
+                if (pwd != results[0].password_hash) {
+                    // password non coincidenti
+                    console.log('Password errata!');
+                    next(createError(403, 'Password errata'));
+                } else {
+                    console.log('Utente autenticato');
+                    console.log(results);
+                }
+                    // recupero dello user id
+                   // let id_utente = results[0].nome_cognome;
+
+            }
+                    
+            // render?
+            res.redirect('/');
+           
+           
+        
+            /*
+            // generazione della password cifrata con SHA512
+            result = await db.query('SELECT sha2(?,512) AS encpwd', [req.body.loginPassword])
+                .catch(err => {
+                    throw err;
+                });
+
+            let encpwd = results[0].encpwd;
+            console.log('Password cifrata');
+            console.log(results);
+
+            results = await db.query('INSERT INTO `autenticazione` \
+            (id_utente, email, password) VALUES ?', [
+                    [
+                        [
+                            id_utente,
+                            req.body.email,
+                            encpwd
+                        ]
+                    ]
+                ])
+                .catch(err => {
+                    throw err;
+                });
+
+            
+            res.render('landing', { title: 'Registrazione effettuata' }); */
+
+        });
+    } catch (err) {
+        console.log(err);
+        next(createError(500));
+    }
+}
+
 module.exports = router;
