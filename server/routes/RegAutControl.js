@@ -101,7 +101,10 @@ async function autenticazione(req, res, next) { // sistemare il messaggio di err
     try {
         await withTransaction(db, async() => {  
             // ricerca utente
-            results = await db.query("SELECT email, salt, password_hash FROM Credenziali WHERE email=?;", 
+            results = await db.query("SELECT ur.ID_UR AS ID_UR, c.email AS email, \
+                                    c.salt AS salt, c.password_hash AS password_hash \
+                                    FROM Credenziali c, UtenteRegistrato ur \
+                                    WHERE ur.email = c.email AND c.email=?;", 
                         req.body.loginUsername)
                         .catch(err => {
                             throw err;
@@ -117,6 +120,13 @@ async function autenticazione(req, res, next) { // sistemare il messaggio di err
 
                 if (hashedPasswordDataLogin.passwordHash == results[0].password_hash) {
                     console.log('Autenticazione riuscita.');
+                    //console.log(results);
+                    req.session.user = {
+                        loggedin : true,
+                        id_utente : results[0].ID_UR,
+                    };
+                    req.session.save();
+
                     res.redirect('/');
                 }
                 else {

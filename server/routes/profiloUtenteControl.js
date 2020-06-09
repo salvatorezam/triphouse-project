@@ -16,15 +16,32 @@ router.get('/finestraListaPrenotazioniEffettuate', getListaPrenotazioniEffettuat
 async function getListaPrenotazioniEffettuate(req, res, next) {
 
   const db = await makeDb(config);
+  let results = {};
   let prenConcluse = {};
   let prenNonConcluse = {};
   try {
       await withTransaction(db, async() => {
+
+          let sql0 = "SELECT * FROM USERS_SESSIONS WHERE session_id = ?;";
+          results = await db.query(sql0, [req.session.id])
+              .catch(err => {
+                  throw err;
+              });
+
+          if (results.affectedRows == 0) {
+              console.log('Sessione Utente non trovata!');
+              next(createError(404, 'Sessione Utente non trovata'));
+          } else {
+              console.log(results[0]);
+              var idUtente = JSON.parse(results[0].data);
+              idUtente = idUtente.user.id_utente;
+              console.log(idUtente);
+          }
           
           let sql1 = "SELECT p.ID_PREN AS ID_PREN, p.data_inizio AS data_inizio, a.titolo AS titolo, a.citta AS citta, p.stato_prenotazione AS stato_pren \
                       FROM Prenotazione p, Alloggio a \
-                      WHERE p.alloggio = a.ID_ALL AND p.stato_prenotazione <> 'conclusa';";
-          prenConcluse = await db.query(sql1)
+                      WHERE p.alloggio = a.ID_ALL AND p.stato_prenotazione <> 'conclusa' AND p.utente = ?;";
+          prenConcluse = await db.query(sql1, idUtente)
               .catch(err => {
                   throw err;
               });
@@ -35,8 +52,8 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
 
           let sql2 = "SELECT p.ID_PREN AS ID_PREN, p.data_inizio AS data_inizio, a.titolo AS titolo, a.citta AS citta, p.stato_prenotazione AS stato_pren \
                       FROM Prenotazione p, Alloggio a \
-                      WHERE p.alloggio = a.ID_ALL AND p.stato_prenotazione = 'conclusa';";
-          prenNonConcluse = await db.query(sql2)
+                      WHERE p.alloggio = a.ID_ALL AND p.stato_prenotazione = 'conclusa' AND p.utente = ?;";
+          prenNonConcluse = await db.query(sql2, idUtente)
               .catch(err => {
                   throw err;
               });

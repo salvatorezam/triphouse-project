@@ -3,6 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
+var session = require('express-session');
+var MySQLStore = require('express-mysql-session')(session);
+const { options } = require('./db/options');
+
+var sessionStore = new MySQLStore(options);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -15,7 +21,15 @@ var visualizzaAlloggio = require('./routes/visualizzaAlloggio');
 
 var app = express();
 
-//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+app.use(session({
+  secret: 'token segreto',
+  resave: false,
+  saveUninitialized: true,
+  unset: 'destroy',
+  store: sessionStore,
+  name: 'nome cookie sessione'
+}));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -34,6 +48,8 @@ app.use('/prenotazione', prenotazioneRouter);
 app.use('/aggiungiAlloggio', aggiungiAlloggio);
 app.use('/regAutControl', RegAutControl);
 app.use('/visualizzaAlloggio', visualizzaAlloggio);
+
+app.use(bodyParser.json());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
