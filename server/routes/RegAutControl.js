@@ -76,7 +76,7 @@ async function registrazione(req, res, next) {
             res.redirect('/');
            
             // gestione dell'invio della mail di conferma
-            results = await sendRegistrationEmail(transporter, req.body.email).catch(err => {throw err;});
+            results = sendRegistrationEmail(transporter, req.body.email).catch(err => {throw err;});
         
             /*
             // generazione della password cifrata con SHA512

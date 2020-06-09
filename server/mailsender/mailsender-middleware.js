@@ -12,6 +12,7 @@ exports.sendRegistrationEmail = async function (transporter, mailReceiver) {
             if (error) 
                 return reject(error);
             console.log('Email sent: ' + info.response);
+            resolve('Email sent');
             });
         }); 
 };
