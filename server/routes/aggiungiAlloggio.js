@@ -2,7 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var router = express.Router();
 
-let fileName;
+//let fileName;
 
 const multer = require('multer');
 
@@ -13,10 +13,14 @@ const storage = multer.diskStorage({
   filename: function(req, file, cb){
     console.log('uploaded' + file.originalname)
     cb(null, file.originalname)
-    this.fileName = file.originalname
-    console.log("il nome è: "+ file.originalname)
+    /*fileName = file.originalname
+    console.log("il nome è: "+ fileName)*/
   }
 });
+
+const upload = multer({
+  storage: storage
+}).single('fileToUpload');
 
 /*carichiamo il middleware*/
 
@@ -29,6 +33,14 @@ var moduloAlloggio = require('../public/javascripts/Alloggio.js');
 router.get('/agg-all-1', function(req, res, next) {
 
     this.alloggio = new moduloAlloggio();
+   /* for(var x=0; x<6; x++){
+      this.alloggio.foto[x] = null;
+      if(this.alloggio.foto[x]==null){
+        console.log("funziona");
+      };
+    }*/
+    
+
     res.render('aggiungiAlloggioDir/agg-all-1');
   });
   
@@ -152,13 +164,11 @@ async function compilaStep3(req, res, next){
 
 /* POST agg-all-4*/
 
-router.post('/agg-all-5', compilaStep3);
+router.post('/agg-all-5', compilaStep4);
 
 async function compilaStep4(req, res, next){
 
   try {
-
-    
 
     console.log('Inserimento valori step 4');
     console.log(this.alloggio);
@@ -169,6 +179,26 @@ async function compilaStep4(req, res, next){
     next(createError(500));
   }
 }
+
+
+router.post('/upload', (req, res) =>{
+ // for(var x=0; x<6; x++){
+ //   if(this.alloggio.foto[x] == null){
+      upload(req, res, err => {
+        if(err) return console.error(err)
+        console.log(req.file)
+        res.render('aggiungiAlloggioDir/agg-all-4')
+      });
+  //    this.alloggio.foto[x] = fileName;
+  //    console.log("nome file salvato: " + this.alloggio.foto[x]);
+  //    break;
+  // }
+  //  else{
+  //    alert("Non puoi caricare più di 6 foto");
+  //    break;
+  //  }
+ // }
+});
 
 /*Router Post*/
 
@@ -213,18 +243,9 @@ async function inserisciAlloggio(req,res,next){
 }
 
 
-const upload = multer({
-  storage: storage
-}).single('fileToUpload');
 
 
 
-router.post('/upload', (req, res) =>{
-  upload(req, res, err => {
-    if(err) return console.error(err)
-    console.log(req.file)
-    res.render('aggiungiAlloggioDir/agg-all-4')
-  })
-});
+
 
 module.exports = router;
