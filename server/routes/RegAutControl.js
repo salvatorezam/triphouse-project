@@ -3,9 +3,9 @@ var express = require('express');
 var router = express.Router();
 
 // istanziamo il modulo crypto e il config, il middleware per il db e per il mailsender
-const crypto = require('../db/config');
 const { config } = require('../db/config');
 const { makeDb, withTransaction } = require('../db/dbmiddleware');
+const { sha512 } = require('../hashing/hashingmiddleware');
 const { transporter } = require('../mailsender/mailsender-config');
 const { sendRegistrationEmail } = require('../mailsender/mailsender-middleware');
 
@@ -47,9 +47,14 @@ async function registrazione(req, res, next) {
     let results = {};
     try {
         await withTransaction(db, async() => {  
+
+            // generazione dell'hash della password con una stringa casuale come salt
+            let hashedPasswordData = sha512(req.body.password);
+            console.log('Hash calculated.');
+            
             // inserimento utente
             results = await db.query("INSERT INTO UtenteRegistrato VALUES (UUID(),?,?,?,?,?,?,?,?,?);\
-                                      INSERT INTO Credenziali(email, password_hash) VALUES (?,?);", 
+                                      INSERT INTO Credenziali(email, salt, password_hash) VALUES (?,?,?);", 
                         [ 
                             req.body.nome,
                             req.body.cognome,
@@ -61,7 +66,8 @@ async function registrazione(req, res, next) {
                             req.body.telefono,
                             false,
                             req.body.email,
-                            req.body.password
+                            hashedPasswordData.salt,
+                            hashedPasswordData.passwordHash
                         ])
                         .catch(err => {
                         throw err;
@@ -71,41 +77,12 @@ async function registrazione(req, res, next) {
             console.log(results);
 
             console.log(`Utente ${req.body.email} inserito!`);
+
+            // Invio della mail di conferma
+            results = sendRegistrationEmail(transporter, req.body.email).catch(err => {throw err;});
                     
             // render?
             res.redirect('/');
-           
-            // gestione dell'invio della mail di conferma
-            results = sendRegistrationEmail(transporter, req.body.email).catch(err => {throw err;});
-        
-            /*
-            // generazione della password cifrata con SHA512
-            result = await db.query('SELECT sha2(?,512) AS encpwd', [req.body.loginPassword])
-                .catch(err => {
-                    throw err;
-                });
-
-            let encpwd = results[0].encpwd;
-            console.log('Password cifrata');
-            console.log(results);
-
-            results = await db.query('INSERT INTO `autenticazione` \
-            (id_utente, email, password) VALUES ?', [
-                    [
-                        [
-                            id_utente,
-                            req.body.email,
-                            encpwd
-                        ]
-                    ]
-                ])
-                .catch(err => {
-                    throw err;
-                });
-
-            
-            res.render('landing', { title: 'Registrazione effettuata' }); */
-
         });
     } catch (err) {
         console.log(err);
