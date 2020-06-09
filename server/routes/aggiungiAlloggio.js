@@ -2,25 +2,30 @@ var createError = require('http-errors');
 var express = require('express');
 var router = express.Router();
 
-//let fileName;
 
-const multer = require('multer');
+
+var multer  = require('multer');
+
 
 const storage = multer.diskStorage({
-  destination: function(req, file, cb){
+  destination: function(req, file, cb){             //destination viene utilizzato per determinare in quale cartella devono essere archiviati i file caricati.
     cb(null, './uploads/')
   },
-  filename: function(req, file, cb){
+  filename: function(req, file, cb){                //filenameviene utilizzato per determinare il nome del file all'interno della cartella
     console.log('uploaded' + file.originalname)
-    cb(null, file.originalname)
-    /*fileName = file.originalname
-    console.log("il nome è: "+ fileName)*/
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, file.fieldname + '-' + uniqueSuffix + '-' + file.originalname)
+    //fileName = file.originalname
+    console.log("il nome è: "+ file.originalname)
   }
 });
 
-const upload = multer({
-  storage: storage
-}).single('fileToUpload');
+var upload = multer({ storage: storage }).array('fileToUpload',6);
+
+
+
+
+//const upload = multer({storage: storage}).single('fileToUpload'); //req.files is array og fileTuUpload files
 
 /*carichiamo il middleware*/
 
@@ -164,31 +169,42 @@ async function compilaStep3(req, res, next){
 
 /* POST agg-all-4*/
 
-router.post('/agg-all-5', compilaStep4);
-
-async function compilaStep4(req, res, next){
+router.post('/upload', upload, function (req, res, next) {
+  // req.files is array of `photos` files
+  // req.body will contain the text fields, if there were any
+  //if(err) return console.error(err)
 
   try {
-
-    console.log('Inserimento valori step 4');
+    this.alloggio.foto = req.files;
+    console.log(req.files);
     console.log(this.alloggio);
     res.render('aggiungiAlloggioDir/agg-all-5');
-    
-  } catch (error) {
+
+  } catch(error){
     console.log(err);
     next(createError(500));
   }
-}
+});
 
 
-router.post('/upload', (req, res) =>{
+
+
+
+
+
+
+
+
+
+
+//router.post('/upload', (req, res) =>{
  // for(var x=0; x<6; x++){
  //   if(this.alloggio.foto[x] == null){
-      upload(req, res, err => {
-        if(err) return console.error(err)
-        console.log(req.file)
-        res.render('aggiungiAlloggioDir/agg-all-4')
-      });
+ //     upload(req, res, err => {
+  //      if(err) return console.error(err)
+  //      console.log(req.file)
+  //      res.render('aggiungiAlloggioDir/agg-all-4')
+  //    });
   //    this.alloggio.foto[x] = fileName;
   //    console.log("nome file salvato: " + this.alloggio.foto[x]);
   //    break;
@@ -198,7 +214,7 @@ router.post('/upload', (req, res) =>{
   //    break;
   //  }
  // }
-});
+//});
 
 /*Router Post*/
 
