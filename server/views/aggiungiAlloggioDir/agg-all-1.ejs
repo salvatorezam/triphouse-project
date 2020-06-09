@@ -17,7 +17,7 @@
       input[type=number] {
         -moz-appearance: textfield;
       }
-  </style>
+    </style>
   </head>
   <body style="padding-top: 72px;">
     <header class="header">
@@ -119,37 +119,35 @@
               <h4>Altro</h4>
             </div>
             <div class="col-lg-7 ml-auto">
-              <div class="col-md-auto">
-                <div class="form-group">
-                  <label class="form-label">Numero Ospiti</label>
-                  <input class="form-control" name="ciao" id="ciao" type="number">
-                </div>
+              <div class="form-group">
+                <label class="form-label" for="ospiti">Numero Ospiti</label>
+                <input class="form-control" type="number" name="num_ospiti" id="num_ospiti" min="2" max="12" required>
               </div>
-              <div class="col-md-auto">
-                <div class="form-group" style="margin-top: 3em;">
-                  <label class="form-label">Distanza dal centro</label>
-                  <ul class="list-inline mb-0">
-                    <li class="list-inline-item">
-                      <div class="custom-control custom-radio">
-                        <input class="custom-control-input" type="radio" id="distanza_centro_0" value="D" name="distanza_centro">
-                        <label class="custom-control-label" for="distanza_centro_0">Distante</label>
-                      </div>
-                    </li>
-                    <li class="list-inline-item">
-                      <div class="custom-control custom-radio">
-                        <input class="custom-control-input" type="radio" id="distanza_centro_1" value="M" name="distanza_centro">
-                        <label class="custom-control-label" for="distanza_centro_1">Medio</label>
-                      </div>
-                    </li>
-                    <li class="list-inline-item">
-                      <div class="custom-control custom-radio">
-                        <input class="custom-control-input" type="radio" id="distanza_centro_2" value="V" name="distanza_centro">
-                        <label class="custom-control-label" for="distanza_centro_2">Vicino</label>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
+              
+              <div class="form-group" style="margin-top: 3em;">
+                <label class="form-label">Distanza dal centro</label>
+                <ul class="list-inline mb-0">
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="distanza_centro_0" value="D" name="distanza_centro">
+                      <label class="custom-control-label" for="distanza_centro_0">Distante</label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="distanza_centro_1" value="M" name="distanza_centro">
+                      <label class="custom-control-label" for="distanza_centro_1">Medio</label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="distanza_centro_2" value="V" name="distanza_centro">
+                      <label class="custom-control-label" for="distanza_centro_2">Vicino</label>
+                    </div>
+                  </li>
+                </ul>
               </div>
+              
             </div>
           </div>
           <div class="row form-block flex-column flex-sm-row">

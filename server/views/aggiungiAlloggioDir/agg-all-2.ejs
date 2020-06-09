@@ -80,12 +80,12 @@
               <h4>Spazi, accessori e altro</h4>
             </div>
             <div class="col-lg-7 ml-auto">
-              <div class="form-group">
+              <div class="form-group" id="checkbox-value">
                 <label class="form-label">Servizi</label>
                     <ul class="list-inline mb-0">
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="servizi_0" value="true" name="servizi_0">
+                          <input class="custom-control-input" type="checkbox" id="servizi_0" value="" name="servizi_0">
                           <label class="custom-control-label" for="servizi_0">Cucina</label>
                         </div>
                       </li>
@@ -182,10 +182,16 @@
     <!-- Script Footer -->
 
     <script>
-      $(document).ready(function(){
-        $('#nextstep').submit(function(ev) {
-          $(".form-control, .input-items").removeAttr('disabled');
-        });   
+      
+
+      $("#servizi_0").on('change', function() {
+        if ($(this).is(':checked')) {
+          $(this).attr('value', 'true');
+        } else {
+          $(this).attr('value', 'false');
+        }
+        
+       
       });
     </script>
 
