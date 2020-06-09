@@ -130,8 +130,7 @@ async function autenticazione(req, res, next) {
                         throw err;
                         });
 
-            console.log('Dati login');
-            console.log(results);
+
 
             if (results.affectedRows == 0) {
                 console.log('Utente non trovato!');
@@ -147,7 +146,7 @@ async function autenticazione(req, res, next) {
                     next(createError(403, 'Password errata'));
                 } else {
                     console.log('Utente autenticato');
-                    console.log(results);
+                    //console.log(results);
                 }
                     // recupero dello user id
                    // let id_utente = results[0].nome_cognome;
@@ -156,36 +155,6 @@ async function autenticazione(req, res, next) {
                     
             // render?
             res.redirect('/');
-           
-           
-        
-            /*
-            // generazione della password cifrata con SHA512
-            result = await db.query('SELECT sha2(?,512) AS encpwd', [req.body.loginPassword])
-                .catch(err => {
-                    throw err;
-                });
-
-            let encpwd = results[0].encpwd;
-            console.log('Password cifrata');
-            console.log(results);
-
-            results = await db.query('INSERT INTO `autenticazione` \
-            (id_utente, email, password) VALUES ?', [
-                    [
-                        [
-                            id_utente,
-                            req.body.email,
-                            encpwd
-                        ]
-                    ]
-                ])
-                .catch(err => {
-                    throw err;
-                });
-
-            
-            res.render('landing', { title: 'Registrazione effettuata' }); */
 
         });
     } catch (err) {
