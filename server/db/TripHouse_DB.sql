@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS UtenteRegistrato (
 
 CREATE TABLE IF NOT EXISTS Credenziali (
 	email VARCHAR(50) PRIMARY KEY,
+	salt CHAR(32) NOT NULL,
 	password_hash CHAR(128) NOT NULL, 
 	FOREIGN KEY (email) REFERENCES UtenteRegistrato(email)
 );
@@ -122,9 +123,9 @@ INSERT INTO UtenteRegistrato VALUES (UUID(),'Giuseppe','Rosati','M','Italia','Ro
 INSERT INTO UtenteRegistrato VALUES (UUID(),'Nicola','Carovana','M','Italia','Roma','1996-2-20','nic.caro@gmail.com','+393324567898',false);
 INSERT INTO UtenteRegistrato VALUES (UUID(),'Piero','Alex','M','Italia','Roma','1990-11-11','piero.alex@gmail.com','+393324567898',false);
 
-INSERT INTO Credenziali VALUES ('marco.rossi@gmail.com','marcorossipass'); 
-INSERT INTO Credenziali VALUES ('g.rosati@gmail.com','giurosatipass');
-INSERT INTO Credenziali VALUES ('piero.alex@gmail.com','piealepass');
+INSERT INTO Credenziali VALUES ('marco.rossi@gmail.com','aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','marcorossipass'); 
+INSERT INTO Credenziali VALUES ('g.rosati@gmail.com','aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','giurosatipass');
+INSERT INTO Credenziali VALUES ('piero.alex@gmail.com','aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','piealepass');
 
 INSERT INTO RecensisciCliente VALUES (UUID(),'ha lasciato tutto in ordine','2020-3-6','b9db1cb1-a99e-11ea-b30a-a066100a22be','b532de10-a99e-11ea-b30a-a066100a22be','4');
 
