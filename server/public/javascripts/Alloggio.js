@@ -35,6 +35,8 @@ class Alloggio{
         this.note = null;
         this.tasse = null;
         this.prezzo = null;
+
+        this.foto = [];
         
         console.log('alloggio istanziato');
     }

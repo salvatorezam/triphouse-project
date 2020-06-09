@@ -2,6 +2,8 @@ var createError = require('http-errors');
 var express = require('express');
 var router = express.Router();
 
+let fileName;
+
 const multer = require('multer');
 
 const storage = multer.diskStorage({
@@ -11,6 +13,8 @@ const storage = multer.diskStorage({
   filename: function(req, file, cb){
     console.log('uploaded' + file.originalname)
     cb(null, file.originalname)
+    this.fileName = file.originalname
+    console.log("il nome è: "+ file.originalname)
   }
 });
 
