@@ -5,6 +5,19 @@
     <!-- head -->
     <% include ../partials/head.ejs %>
     <!-- head -->
+    <style>
+      /* Chrome, Safari, Edge, Opera */
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox */
+      input[type=number] {
+        -moz-appearance: textfield;
+      }
+    </style>
   </head>
   <body style="padding-top: 72px;">
     <header class="header">
@@ -16,49 +29,51 @@
       <div class="container"> 
         <p class="subtitle text-primary">aggiungi alloggio</p>
         <h1 class="h2 mb-5"> Informazioni di base <span class="text-muted float-right">Step 1</span>      </h1>
-        <form method="POST" action="/aggiungiAlloggio/alloggioInserito"> 
+        <form method="POST" action="/aggiungiAlloggio/agg-all-2"> 
+          <!--BASE-->
           <div class="row form-block">
             <div class="col-lg-4">
               <h4>Base</h4>
-              </div>
+            </div>
             <div class="col-lg-7 ml-auto">
               <div class="form-group">
                 <label class="form-label" for="tipo_all">Tipo Alloggio</label>
-                <select class="selectpicker form-control" name="tipo_all" id="tipo_all" data-style="btn-selectpicker" title="" aria-describedby="propertyTypeHelp">
-                  <option disabled selected>Seleziona Tipo Alloggio</option>
+                <select class="selectpicker form-control" name="tipo_all" id="tipo_all" data-style="btn-selectpicker" title="" aria-describedby="propertyTypeHelp" required>
+                  <option value="" disabled selected>Seleziona Tipo Alloggio</option>
                   <option value="B&B">B&B</option>
                   <option value="Casa Vacanza">Casa Vacanza</option>
                 </select>
               </div>
               <div class="form-group">
                 <label class="form-label" for="proprietario">Nome Proprietario</label>
-                <input class="form-control" name="nome_proprietario" id="nome_proprietario">
+                <input class="form-control" type="text" name="nome_proprietario" id="nome_proprietario" maxlength="20" required>
               </div>
             </div>
           </div>
+          <!--INDIRIZZO-->
           <div class="row form-block">
             <div class="col-lg-4">
               <h4>Indirizzo Alloggio</h4>
             </div>
             <div class="col-lg-7 ml-auto">
-              <!-- Street-->
+              <!-- via e civico-->
               <div class="form-group">
                 <label class="form-label" for="indirizzo">Via e numero civico (Es. Via Roma, 1)</label>
-                <input class="form-control" name="indirizzo" id="indirizzo">
+                <input class="form-control" name="indirizzo" id="indirizzo" required >
               </div>
-              <!-- City + State-->
+              <!-- Città regione provincia cap-->
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="form-label" for="citta">Città</label>
-                    <input class="form-control" name="citta" id="citta">
+                    <input class="form-control" name="citta" required maxlength="20" id="citta" required>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="form-label" for="regione">Regione</label>
-                    <select class="selectpicker form-control" name="regione" id="regione" data-style="btn-selectpicker" title="" aria-describedby="propertyTypeHelp">
-                      <option disabled selected>Seleziona Regione</option>
+                    <select class="selectpicker form-control" name="regione" id="regione" data-style="btn-selectpicker" title="" aria-describedby="propertyTypeHelp" required>
+                      <option value="" disabled selected>Seleziona Regione</option>
                       <option value="Abruzzo">Abruzzo</option>
                       <option value="Basilicata">Basilicata</option>
                       <option value="Calabria">Calabria</option>
@@ -87,23 +102,58 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="form-label" for="provincia">Provincia</label>
-                    <input class="form-control" name="provincia" id="provincia">
+                    <input class="form-control" name="provincia" id="provincia" required>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="form-label" for="cap">CAP</label>
-                    <input class="form-control" name="cap" id="cap">
+                    <input class="form-control" type="number" name="cap" id="cap" required>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <div class="row form-block">
+            <div class="col-lg-4">
+              <h4>Altro</h4>
+            </div>
+            <div class="col-lg-7 ml-auto">
+              <div class="form-group">
+                <label class="form-label" for="ospiti">Numero Ospiti</label>
+                <input class="form-control" type="number" name="num_ospiti" id="num_ospiti" min="2" max="12" required>
+              </div>
+              
+              <div class="form-group" style="margin-top: 3em;">
+                <label class="form-label">Distanza dal centro</label>
+                <ul class="list-inline mb-0">
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="distanza_centro_0" value="D" name="distanza_centro">
+                      <label class="custom-control-label" for="distanza_centro_0">Distante</label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="distanza_centro_1" value="M" name="distanza_centro">
+                      <label class="custom-control-label" for="distanza_centro_1">Medio</label>
+                    </div>
+                  </li>
+                  <li class="list-inline-item">
+                    <div class="custom-control custom-radio">
+                      <input class="custom-control-input" type="radio" id="distanza_centro_2" value="V" name="distanza_centro">
+                      <label class="custom-control-label" for="distanza_centro_2">Vicino</label>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              
+            </div>
+          </div>
           <div class="row form-block flex-column flex-sm-row">
             <div class="col text-center text-sm-left">
             </div>
-            <!--<div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/aggiungiAlloggio/agg-all-2"> Prossimo step<i class="fa-chevron-right fa ml-2"></i></a></div>-->
-            <button type="submit" class="col text-center text-sm-right">Invia</button>
+            <button type="submit" class="btn btn-primary px-3">Invia<i class="fa-chevron-right fa ml-2"></i></button>
           </div>
         </form>
       </div>

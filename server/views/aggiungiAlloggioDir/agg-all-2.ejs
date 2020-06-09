@@ -5,6 +5,20 @@
     <!-- head -->
     <% include ../partials/head.ejs %>
     <!-- head -->
+
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+          -moz-appearance: textfield;
+        }
+    </style>
   </head>
   <body style="padding-top: 72px;">
     <header class="header">
@@ -16,7 +30,7 @@
       <div class="container">
         <p class="subtitle text-primary">Aggiungi alloggio</p>
         <h1 class="h2 mb-5"> Servizi <span class="text-muted float-right">Step 2</span>      </h1>
-        <form>
+        <form method="POST" action="/aggiungiAlloggio/agg-all-3">
           <!--Camere e bagni-->
           <div class="row form-block">
             <div class="col-lg-4">
@@ -28,7 +42,7 @@
                   <label class="form-label col-sm-6">Letti Singoli</label>
                   <div class="d-flex align-items-center">
                     <div class="btn btn-items btn-items-decrease">-</div>
-                    <input class="form-control input-items" type="text" value="1" disabled>
+                    <input class="form-control input-items" name="num_letti_singoli" type="number" value="1" required max="10" min="0">
                     <div class="btn btn-items btn-items-increase">+</div>
                   </div>
                 </div>
@@ -36,7 +50,7 @@
                   <label class="form-label col-sm-6">Letti Matrimoniali</label>
                   <div class="d-flex align-items-center">
                     <div class="btn btn-items btn-items-decrease">-</div>
-                    <input class="form-control input-items" type="text" value="1" disabled>
+                    <input class="form-control input-items" name="num_letti_matrimoniali" type="number" value="1" required max="10" min="0">
                     <div class="btn btn-items btn-items-increase">+</div>
                   </div>
                 </div>
@@ -44,7 +58,7 @@
                   <label class="form-label col-sm-6">Camere &nbsp &nbsp &nbsp </label>
                   <div class="d-flex align-items-center">
                     <div class="btn btn-items btn-items-decrease">-</div>
-                    <input class="form-control input-items" type="text" value="1" disabled>
+                    <input class="form-control input-items" name="num_camere" type="number" value="1" required max="10" min="0">
                     <div class="btn btn-items btn-items-increase">+</div>
                   </div>
                 </div>
@@ -52,7 +66,7 @@
                   <label class="form-label col-sm-6">Bagni &nbsp &nbsp &nbsp </label>
                   <div class="d-flex align-items-center">
                     <div class="btn btn-items btn-items-decrease">-</div>
-                    <input class="form-control input-items" type="text" value="1" disabled>
+                    <input class="form-control input-items" name="num_bagni" type="number" value="1" required max="10" min="0">
                     <div class="btn btn-items btn-items-increase">+</div>
                   </div>
                 </div>
@@ -66,49 +80,49 @@
               <h4>Spazi, accessori e altro</h4>
             </div>
             <div class="col-lg-7 ml-auto">
-              <div class="form-group">
+              <div class="form-group" id="checkbox-value">
                 <label class="form-label">Servizi</label>
                     <ul class="list-inline mb-0">
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities_0" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_0">Cucina</label>
+                          <input class="custom-control-input" type="checkbox" id="servizi_0" value="" name="servizi_0">
+                          <label class="custom-control-label" for="servizi_0">Cucina</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities_1" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_1">Lavanderia</label>
+                          <input class="custom-control-input" type="checkbox" id="servizi_1" value="true" name="servizi_1">
+                          <label class="custom-control-label" for="servizi_1">Lavanderia</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities_2" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_2">Aria Condizionata</label>
+                          <input class="custom-control-input" type="checkbox" id="servizi_2" value="true" name="servizi_2">
+                          <label class="custom-control-label" for="servizi_2">Aria Condizionata</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities_3" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_3">Wifi</label>
+                          <input class="custom-control-input" type="checkbox" id="servizi_3" value="true" name="servizi_3">
+                          <label class="custom-control-label" for="servizi_3">Wifi</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities_4" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_4">Colazione</label>
+                          <input class="custom-control-input" type="checkbox" id="servizi_4" value="true" name="servizi_4">
+                          <label class="custom-control-label" for="servizi_4">Colazione</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities_5" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_5">Asciugacapelli</label>
+                          <input class="custom-control-input" type="checkbox" id="servizi_5" value="true" name="servizi_5">
+                          <label class="custom-control-label" for="servizi_5">Asciugacapelli</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities_6" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_6">Tv</label>
+                          <input class="custom-control-input" type="checkbox" id="servizi_6" value="true" name="servizi_6">
+                          <label class="custom-control-label" for="servizi_6">Tv</label>
                         </div>
                       </li>   
                     </ul>
@@ -116,38 +130,38 @@
                     <ul class="list-inline mb-0">
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities2_0" name="amenities2[]">
-                          <label class="custom-control-label" for="amenities2_0">Carta igienica</label>
+                          <input class="custom-control-input" type="checkbox" id="servizi2_0" value="true" name="servizi2_0">
+                          <label class="custom-control-label" for="servizi2_0">Carta igienica</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities2_1" name="amenities2[]">
-                          <label class="custom-control-label" for="amenities2_1">Sapone mani e corpo</label>
+                          <input class="custom-control-input" type="checkbox" id="servizi2_1" value="true" name="servizi2_1">
+                          <label class="custom-control-label" for="servizi2_1">Sapone mani e corpo</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities2_2" name="amenities2[]">
-                          <label class="custom-control-label" for="amenities2_2">Asciugamao</label>
+                          <input class="custom-control-input" type="checkbox" id="servizi2_2" value="true" name="servizi2_2">
+                          <label class="custom-control-label" for="servizi2_2">Asciugamao</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities2_3" name="amenities2[]">
-                          <label class="custom-control-label" for="amenities2_3">Accappatoio</label>
+                          <input class="custom-control-input" type="checkbox" id="servizi2_3" value="true" name="servizi2_3">
+                          <label class="custom-control-label" for="servizi2_3">Accappatoio</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities2_4" name="amenities2[]">
-                          <label class="custom-control-label" for="amenities2_4">Cuscino</label>
+                          <input class="custom-control-input" type="checkbox" id="servizi2_4" value="true" name="servizi2_4">
+                          <label class="custom-control-label" for="servizi2_4">Cuscino</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities2_5" name="amenities2[]">
-                          <label class="custom-control-label" for="amenities2_5">lenzuola</label>
+                          <input class="custom-control-input" type="checkbox" id="servizi2_5" value="true" name="servizi2_5">
+                          <label class="custom-control-label" for="servizi2_5">lenzuola</label>
                         </div>
                       </li>   
                     </ul>
@@ -156,9 +170,9 @@
           </div>
           <!--Spazi, accessori e altro fine-->
           <div class="row form-block flex-column flex-sm-row">
-            <div class="col text-center text-sm-left"><a class="btn btn-link text-muted" href="/aggiungiAlloggio/agg-all-1"> <i class="fa-chevron-left fa mr-2"></i>Indietro</a>
+            <div class="col text-center text-sm-left"><a class="btn btn-link text-muted" href="javascript:history.back()"> <i class="fa-chevron-left fa mr-2"></i>Indietro</a>
             </div>
-            <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/aggiungiAlloggio/agg-all-3">Prossimo Step<i class="fa-chevron-right fa ml-2"></i></a></div>
+            <button type="submit" class="btn btn-primary px-3" id="nextstep">Prossimo Step<i class="fa-chevron-right fa ml-2"></i></button>
           </div>
         </form>
       </div>
@@ -166,5 +180,20 @@
     <!-- Script Footer -->
     <% include ../partials/scriptFooter.ejs %>
     <!-- Script Footer -->
+
+    <script>
+      
+
+      $("#servizi_0").on('change', function() {
+        if ($(this).is(':checked')) {
+          $(this).attr('value', 'true');
+        } else {
+          $(this).attr('value', 'false');
+        }
+        
+       
+      });
+    </script>
+
   </body>
 </html>

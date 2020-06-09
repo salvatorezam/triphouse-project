@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS Alloggio (
 	nome_proprietario VARCHAR(20),
 	indirizzo VARCHAR(30),
 	n_civico INT,
-	cap INT,	<!--nuovo-->
+	cap INT,	--nuovo -- I COMMENTI IN SQL GRAZIEEEEEEEE (e appena u canciate arriere scippate)
 	regione VARCHAR(20),
 	citta VARCHAR(20),
 	provincia VARCHAR(20),

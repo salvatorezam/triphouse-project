@@ -16,7 +16,7 @@
       <div class="container">
         <p class="subtitle text-primary">Aggiugni alloggio</p>
         <h1 class="h2 mb-5"> Testo <span class="text-muted float-right">Step 3</span>      </h1>
-        <form autocomplete="off">
+        <form autocomplete="off" method="POST" action="/aggiungiAlloggio/agg-all-4">
           <div class="row form-block">
             <div class="col-lg-4">
               <h4>Titolo</h4>
@@ -24,8 +24,8 @@
             </div>
             <div class="col-lg-7 ml-auto"> <!--incolonnare-->
               <div class="form-group">
-                <label class="form-label" for="form_titolo_annuncio">titolo annuncio</label>
-                <input class="form-control" name="name" id="form_titolo_annuncio">
+                <label class="form-label" for="titolo_annuncio">titolo annuncio</label>
+                <input class="form-control" type="text" name="titolo_annuncio" id="titolo_annuncio" required maxlength="40">
               </div>
             </div>
           </div>
@@ -36,20 +36,20 @@
             </div>
             <div class="col-lg-7 ml-auto"> <!--incolonnare-->
               <div class="form-group mb-5">
-                <label class="form-label" for="form_descrizione">Descrizione Alloggio</label>
-                <textarea class="form-control" name="name" id="form_descrizione" rows="5" aria-describedby="descriptionHelp"></textarea>
+                <label class="form-label" for="descrizione">Descrizione Alloggio</label>
+                <textarea class="form-control" name="descrizione" id="descrizione" rows="5" aria-describedby="descriptionHelp"required ></textarea>
               </div>
             </div>
             <div class="col-lg-7 ml-auto">
               <div class="form-group mb-5">
-                <label class="form-label" for="form_descrizione_regole">Descrizione Regole Alloggio</label>
-                <textarea class="form-control" name="name" id="form_descrizione_regole" rows="3" aria-describedby="availabilityHelp"></textarea>
+                <label class="form-label" for="descrizione_regole">Descrizione Regole Alloggio</label>
+                <textarea class="form-control" name="descrizione_regole" id="descrizione_regole" rows="3" aria-describedby="availabilityHelp" required ></textarea>
               </div>
             </div>
             <div class="col-lg-7 ml-auto">
               <div class="form-group mb-5">
-                <label class="form-label" for="form_descrizione_note">note</label>
-                <textarea class="form-control" name="name" id="form_descrizione_note" rows="3" aria-describedby="availabilityHelp"></textarea>
+                <label class="form-label" for="descrizione_note">note</label>
+                <textarea class="form-control" name="descrizione_note" id="descrizione_note" rows="3" aria-describedby="availabilityHelp"></textarea>
                 <small class="form-text text-muted mt-2" id="commento_note">(Facoltativo)</small>
                 <small class="form-text text-muted mt-2" id="commento_note_2">Aggiungi delle note per precisare alcuni aspetti dell'alloggio. (Es. Camera con bagno, salone con divano letto, etc..)</small>
               </div>
@@ -60,23 +60,25 @@
               <h4>Retribuzione</h4>
               <p class="text-muted text-sm"></p> <!--commento retribuzione-->
             </div>
-            <div class="col-lg-7 ml-auto"> <!--incolonnare-->
-              <div class="form-group">
-                <label class="form-label" for="form_prezzo">Prezzo</label>
-                <input class="form-control" id="form_prezzo">
+            <div class="row col-lg-7 ml-auto">
+              <div class="col-lg-6 ml-auto"> <!--incolonnare-->
+                <div class="form-group mb-5">
+                  <label class="form-label" for="prezzo">Prezzo €</label>
+                  <input class="form-control col-lg-3" name="prezzo" id="prezzo" type="number" required title="Inserisci il prezzo del tuo alloggio">
+                </div>
               </div>
-            </div>
-            <div class="col-lg-7 ml-auto"> <!--incolonnare-->
-              <div class="form-group">
-                <label class="form-label" for="form_tassa">Tassa di soggiorno</label>
-                <input class="form-control" id="form_tassa">
+              <div class="col-lg-6 ml-auto"> <!--incolonnare-->
+                <div class="form-group mb-5">
+                  <label class="form-label" for="tassa">Tassa di soggiorno €</label>
+                  <input class="form-control col-lg-3" name="tassa" id="tassa" type="number" required title="Inserisci la tassa di soggiorno">
+                </div>
               </div>
             </div>
           </div>
           <div class="row form-block flex-column flex-sm-row">
-            <div class="col text-center text-sm-left"><a class="btn btn-link text-muted" href="/aggiungiAlloggio/agg-all-2"> <i class="fa-chevron-left fa mr-2"></i>indietro</a>
+            <div class="col text-center text-sm-left"><a class="btn btn-link text-muted" href="javascript:history.back()"> <i class="fa-chevron-left fa mr-2"></i>indietro</a>
             </div>
-            <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/aggiungiAlloggio/agg-all-4"> Prossimo step<i class="fa-chevron-right fa ml-2"></i></a></div>
+            <button type="submit" class="btn btn-primary px-3" id="nextstep">Prossimo Step<i class="fa-chevron-right fa ml-2"></i></button>
           </div>
         </form>
       </div>
