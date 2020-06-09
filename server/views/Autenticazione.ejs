@@ -21,7 +21,7 @@
               <div class="form-group">
                 <label class="form-label" for="loginPassword"> Password</label>
                 <input class="form-control" name="loginPassword" id="loginPassword" placeholder="Password" 
-                       type="password" required data-msg="Inserisci la tua password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$" size="32">
+                       type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$" size="32" maxlength="40" required data-msg="Inserisci la tua password">
               </div>
          
               <button class="btn btn-lg btn-block btn-primary" type="submit">Accedi</button>
