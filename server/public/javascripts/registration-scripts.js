@@ -9,6 +9,24 @@ $(document).ready(function() {
             $("#p-nato").text("Nato a:");
     });
 
+    // Controllo validità email -----------------------------------------------------------------------
+    $('#email').change(function(ev) {
+        let email = $(this).val();
+        $.ajax({
+            context: this,
+            url: '/regAutControl/controllomail',
+            type: 'POST',
+            data: {email:email},
+            success: response => {
+                console.log('Response from server is ' + response);
+                if (response.localeCompare('EMAIL-NOT-OK') == 0) {
+                    alert('Esiste già un utente con questa email!');
+                    $(this).val('');
+                }
+            }
+        });
+    });
+
      // Gestione dell'inserimento della password ------------------------------------------------------
     let numeri = /([0-9])/;
     let alfabeto = /([a-zA-Z])/;
@@ -32,11 +50,5 @@ $(document).ready(function() {
         }
         else 
             $(this).siblings('div').removeClass().addClass('text-success').text('Le password coincidono!');     
-    });
-
-    $('#regform').submit(function(ev) {
-        
-        $('#password').val(require('crypto').createHash('sha512').update($('#password').val()).digest('hex'));
-        return true;
     });
  });

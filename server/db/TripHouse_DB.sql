@@ -2,20 +2,20 @@ CREATE DATABASE IF NOT EXISTS TripHouse_DB;
 USE TripHouse_DB;
 
 CREATE TABLE IF NOT EXISTS UtenteRegistrato (
-	ID_UR VARCHAR(36) PRIMARY KEY,
+	ID_UR CHAR(36) PRIMARY KEY,
     nome VARCHAR(40) NOT NULL,
     cognome VARCHAR(40) NOT NULL,
     sesso CHAR(1) CHECK(sesso = 'M' OR sesso = 'F'),
-	nazione_nascita VARCHAR(30) NOT NULL,
-    citta_nascita VARCHAR(20) NOT NULL,
-	data_nascita DATE,
-    email VARCHAR(50) NOT NULL,
+	nazione_nascita VARCHAR(50) NOT NULL,
+    citta_nascita VARCHAR(40) NOT NULL,
+	data_nascita DATE NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
     telefono VARCHAR(20),
     stato_host BOOLEAN
 );
 
 CREATE TABLE IF NOT EXISTS Credenziali (
-	email VARCHAR(36) PRIMARY KEY,
+	email VARCHAR(50) PRIMARY KEY,
 	password_hash CHAR(128) NOT NULL, 
 	FOREIGN KEY (email) REFERENCES UtenteRegistrato(email)
 );
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS RecensisciAlloggio (
 
 CREATE TABLE IF NOT EXISTS Alloggio (
 	ID_ALL VARCHAR(36) PRIMARY KEY,
-	proprietario VARCHAR(36) REFERENCES UtenteRegistrato(ID_UR),
+	proprietario CHAR(36) REFERENCES UtenteRegistrato(ID_UR),
 	-- INFORMAZIONI DI BASE
 	tipo_all VARCHAR(20),
 	nome_proprietario VARCHAR(20),

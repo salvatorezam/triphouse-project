@@ -14,17 +14,17 @@
               <p class="text-muted">Pronto a trovare la tua destinazione da sogno?</p>
             </div>
 
-            <form id="regform" class="form-validate" method="POST" action="/RegAutControl/utenteregistrato"> <!-- onsubmit="return sendMail()"> da completare-->
+            <form id="regform" class="form-validate" method="POST" action="/regAutControl/utenteregistrato"> <!-- onsubmit="return sendMail()"> da completare-->
 
               <p class="lead text-uppercase">Dati anagrafici</p>
               <fieldset class="form-row"> 
                 <div class="form-group col-sm-4">
-                  <label class="form-label" for="nome"> Nome *</label>
-                  <input class="form-control" name="nome" id="nome" type="text" placeholder="Nome" autocomplete="off" data-msg="Inserisci il tuo nome" required>
+                  <label class="form-label" for="nome"> Nome *</label>  
+                  <input class="form-control" name="nome" id="nome" type="text" placeholder="Nome" maxlength="40" autocomplete="off" required>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="form-label" for="cognome"> Cognome *</label>
-                  <input class="form-control" name="cognome" id="cognome" type="text" placeholder="Cognome" autocomplete="off" data-msg="Inserisci il tuo cognome" required>
+                  <input class="form-control" name="cognome" id="cognome" type="text" placeholder="Cognome" maxlength="40" autocomplete="off" required>
                 </div>
 
                 <div class="form-group col-sm-4" style="text-align: center; margin-top: 1em;">
@@ -290,13 +290,13 @@
 
                   <div class="form-group col-sm-6">
                     <label class="form-label" for="citta_nascita"> Città di nascita *</label>
-                    <input class="form-control" name="citta_nascita" id="citta_nascita" type="text" placeholder="Città di nascita" autocomplete="off" required data-msg="Inserisci la tua città di nascita" required>
+                    <input class="form-control" name="citta_nascita" id="citta_nascita" type="text" placeholder="Città di nascita" maxlength="40" autocomplete="off" required>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-6">
                     <label class="form-label" for="data_nascita"> Data di nascita *</label>
-                    <input class="form-control" name="data_nascita" id="data_nascita" type="date" placeholder="" autocomplete="off" data-msg="Inserisci la tua data di nascita" required>
+                    <input class="form-control" name="data_nascita" id="data_nascita" type="date" placeholder="" autocomplete="off" required>
                   </div>
                 </div>
               </fieldset>
@@ -306,12 +306,12 @@
                 <div class="form-row">
                   <div class="form-group col-sm-6">
                     <label class="form-label" for="email"> Indirizzo Email *</label>
-                    <input class="form-control" name="email" id="email" type="email" placeholder="esempio@indirizzo.it" autocomplete="off" data-msg="Inserisci la tua email"  required>
+                    <input class="form-control" name="email" id="email" type="email" placeholder="esempio@indirizzo.it" maxlength="50" autocomplete="off" required>
                   </div>
 
                   <div class="form-group col-sm-6">
                     <label class="form-label" for="telefono"> Telefono</label>
-                    <input class="form-control" name="telefono" id="telefono" type="tel" placeholder="(+/00)PPLLLNNNNNNN" pattern="((((\+|00)[1-9]{2})|0)?([1-9]{2,3}))([0-9]{6,10})" autocomplete="off" data-msg="Inserisci il tuo numero di telefono">
+                    <input class="form-control" name="telefono" id="telefono" type="tel" placeholder="(+/00)PPLLLNNNNNNN" pattern="((((\+|00)[1-9]{2})|0)?([1-9]{2,3}))([0-9]{6,10})" autocomplete="off">
                   </div>
                 </div>
 
