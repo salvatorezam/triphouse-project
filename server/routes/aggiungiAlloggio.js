@@ -2,6 +2,18 @@ var createError = require('http-errors');
 var express = require('express');
 var router = express.Router();
 
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb){
+    cb(null, './uploads/')
+  },
+  filename: function(req, file, cb){
+    console.log('uploaded' + file.originalname)
+    cb(null, file.originalname)
+  }
+});
+
 /*carichiamo il middleware*/
 
 const { config } = require('../db/config');
@@ -196,5 +208,19 @@ async function inserisciAlloggio(req,res,next){
   }*/
 }
 
+
+const upload = multer({
+  storage: storage
+}).single('fileToUpload');
+
+
+
+router.post('/upload', (req, res) =>{
+  upload(req, res, err => {
+    if(err) return console.error(err)
+    console.log(req.file)
+    res.render('aggiungiAlloggioDir/agg-all-4')
+  })
+});
 
 module.exports = router;
