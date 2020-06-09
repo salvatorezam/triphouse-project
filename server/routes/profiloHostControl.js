@@ -16,10 +16,18 @@ async function getListaPrenotazioniRicevute(req, res, next) {
     
     const db = await makeDb(config);
     let prenRicevute = {};
+
     try {
         await withTransaction(db, async() => {
 
-            let sql = "SELECT * FROM Prenotazione;"; //DA DEFINIRE
+            //DA DEFINIRE
+            let sql = "SELECT p.ID_PREN AS ID_PREN, p.data_inizio AS data_inizio, p.data_fine AS data_fine, \
+                        a.titolo AS titolo, a.tipo_all AS tipo_all, p.stato_prenotazione AS stato_prenotazione, \
+                        ur.nome AS nome_ut, ur.cognome AS cognome_ut, p.prezzo_totale AS prezzo_totale, p.data_pren AS data_prenotazione, \
+                        count(dos.ID_DO) AS num_ospiti \
+                        FROM Prenotazione p, Alloggio a, UtenteRegistrato ur, DatiOspiti dos \
+                        WHERE p.alloggio = a.ID_ALL AND p.utente = ur.ID_UR AND dos.prenotazione = p.ID_PREN \
+                        GROUP BY p.ID_PREN;";
             prenRicevute = await db.query(sql)
                 .catch(err => {
                     throw err;
@@ -55,7 +63,13 @@ async function getListaPrenotazioniRicevute(req, res, next) {
         await withTransaction(db, async() => {
 
             //dati prenotazione che mi servono
-            let sql = "SELECT * FROM Prenotazione;"; //DA DEFINIRE
+            let sql = "SELECT p.data_inizio AS data_inizio, p.data_fine AS data_fine, \
+                        a.titolo AS titolo, a.indirizzo AS indirizzo, a.n_civico AS n_civico, \
+                        a.citta AS citta, ur.telefono AS telefono_ut, a.tipo_all AS tipo_all, \
+                        ur.nome AS nome_ut, ur.cognome AS cognome_ut, p.prezzo_totale AS prezzo_totale, ur.email AS email_ut, \
+                        p.stato_prenotazione AS stato_prenotazione, dos.nome AS nome_osp \
+                        FROM Prenotazione p, Alloggio a, UtenteRegistrato ur, DatiOspiti dos \
+                        WHERE p.alloggio = a.ID_ALL AND p.utente = ur.ID_UR AND dos.prenotazione = p.ID_PREN;"; //DA DEFINIRE
 
             prenData = await db.query(sql)
                 .catch(err => {
@@ -64,14 +78,14 @@ async function getListaPrenotazioniRicevute(req, res, next) {
 
             //FARE CHECK PER DISABILITARE I BUTTON
 
-            //dati recensione
-            let sql_rec = "SELECT * FROM Recensione;"; //DA DEFINIRE
+            /*dati recensione
+            let sql_rec = "SELECT * FROM RecensioneCliente;"; //DA DEFINIRE
             
             recData = await db.query(sql_rec)
                 .catch(err => {
                     throw err;
                 });
-
+            */
             //FARE CHECK PER DISABILITARE I BUTTON
             
             //DA CANCELLARE

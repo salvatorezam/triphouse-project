@@ -10,7 +10,8 @@ var profiloUtenteRouter = require('./routes/profiloUtenteControl');
 var profiloHostRouter = require('./routes/profiloHostControl');
 var prenotazioneRouter = require('./routes/prenotazione');
 var aggiungiAlloggio = require('./routes/aggiungiAlloggio');
-var regAutControl = require('./routes/regAutControl');
+var RegAutControl = require('./routes/RegAutControl');
+var visualizzaAlloggio = require('./routes/visualizzaAlloggio');
 
 var app = express();
 
@@ -30,7 +31,8 @@ app.use('/profiloUtenteControl', profiloUtenteRouter);
 app.use('/profiloHostControl', profiloHostRouter);
 app.use('/prenotazione', prenotazioneRouter);
 app.use('/aggiungiAlloggio', aggiungiAlloggio);
-app.use('/regAutControl', regAutControl);
+app.use('/regAutControl', RegAutControl);
+app.use('/visualizzaAlloggio', visualizzaAlloggio);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

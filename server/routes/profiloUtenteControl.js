@@ -109,7 +109,7 @@ async function getPrenotazioneEffettuata(req, res, next) {
             stato_pag = "disabled";
           }
           
-          //dati recensione
+          //dati recensione                     METTERE TUTTE LE SQL ASSIEME
           let sql_rec = "SELECT p.ID_PREN \
                           FROM Prenotazione p, Alloggio a, RecensisciAlloggio ra \
                           WHERE p.alloggio = a.ID_ALL AND ra.alloggio = a.ID_ALL AND a.titolo = 'Casa Roma';";
@@ -119,7 +119,7 @@ async function getPrenotazioneEffettuata(req, res, next) {
               });
           
           //check per verificare la possibilità di recensire (in base a recensioni già fatte o conclusione vacanza)
-          if (recData.length != 0 || stato_prenotazione != 'conclusa') {
+          if (recData.length != 0 || prenData[0].stato_prenotazione != 'conclusa') {
 
             stato_rec = "disabled";
           }

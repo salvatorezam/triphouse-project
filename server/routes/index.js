@@ -27,8 +27,8 @@ router.get('/aggiungiAlloggio', function(req, res, next) {
 });
 
 /* GET visualizzaAlloggio */
-router.get('/visualizzaAlloggio', function(req, res, next) {
-  res.render('visualizzaAlloggio');
+router.get('/visualizzaListaAlloggiInseriti', function(req, res, next) {
+  res.render('visualizzaListaAlloggiInseriti');
 });
 
 /* GET alloggio page. */
