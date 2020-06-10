@@ -74,7 +74,7 @@ async function registrazione(req, res, next) {
                             hashedPasswordData.passwordHash
                         ])
                         .catch(err => {
-                        throw err;
+                            throw err;
                         });
 
             console.log('Inserimento dati nuovo utente.');
