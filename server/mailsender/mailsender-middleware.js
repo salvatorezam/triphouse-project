@@ -1,4 +1,4 @@
-var nodemailer = require('nodemailer'); 
+var nodemailer = require('nodemailer'); // è necessario?
 
 exports.sendRegistrationEmail = async function (transporter, mailReceiver) {
     let mailOptions = {
