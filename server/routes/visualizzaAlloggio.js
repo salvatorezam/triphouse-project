@@ -20,9 +20,9 @@ router.get('/visualizzaAlloggio', function(req, res, next) {
 
 
 /* GET visualizzaListaAlloggiInseriti */
-router.get('/visualizzaListaAlloggiInseriti', getListaPrenotazioniEffettuate);
+router.get('/visualizzaListaAlloggiInseriti', listaAlloggiInseriti);
 
-async function getListaPrenotazioniEffettuate(req, res, next) {
+async function listaAlloggiInseriti(req, res, next) {
 
   const db = await makeDb(config);
   let results = {};

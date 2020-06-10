@@ -2,6 +2,8 @@ var createError = require('http-errors');
 var express = require('express');
 var router = express.Router();
 
+var idUtente = "";
+
 /*carichiamo il middleware*/
 
 const { config } = require('../db/config');
@@ -32,10 +34,36 @@ var upload = multer({ storage: storage }).array('fileToUpload',6);
 var moduloAlloggio = require('../public/javascripts/Alloggio.js');
 
 /* GET agg-all-1 */
-router.get('/agg-all-1', function(req, res, next) {
+router.get('/agg-all-1', async function(req, res, next) {
 
-    this.alloggio = new moduloAlloggio();
-    res.render('aggiungiAlloggioDir/agg-all-1');
+  this.alloggio = new moduloAlloggio();
+  const db = await makeDb(config);
+
+  try {
+    await withTransaction(db, async() => {
+
+      let sql0 = "SELECT * FROM USERS_SESSIONS WHERE session_id = ?;";
+      results = await db.query(sql0, [req.session.id])
+          .catch(err => {
+              throw err;
+          });
+
+      if (results.affectedRows == 0) {
+          console.log('Sessione Utente non trovata!');
+          next(createError(404, 'Sessione Utente non trovata'));
+      } else {
+          let datiUtente = JSON.parse(results[0].data);
+          idUtente = datiUtente.user.id_utente;
+      }
+
+      res.render('aggiungiAlloggioDir/agg-all-1');
+
+  });
+
+  } catch (err) {
+      console.log(err);
+      next(createError(500));
+  }
   });
   
   /* POST agg-all-1*/
@@ -156,7 +184,7 @@ router.post('/upload', upload, async function (req, res, next) {
       // inserimento utente
       let sql = "INSERT INTO Alloggio VALUES (UUID(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
       let values = [
-        this.alloggio.proprietario = 'idrru è', //req.session.user.id_utente
+        this.alloggio.proprietario = req.session.user.id_utente,
         this.alloggio.tipo_all,
         this.alloggio.nome_proprietario,
         this.alloggio.indirizzo,
