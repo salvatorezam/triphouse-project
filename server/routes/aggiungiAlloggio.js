@@ -7,9 +7,9 @@ var router = express.Router();
 const { config } = require('../db/config');
 const { makeDb, withTransaction } = require('../db/dbmiddleware');
 
+//DICHIARO MULTER PER FOTO
 
 var multer  = require('multer');
-
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb){             //destination viene utilizzato per determinare in quale cartella devono essere archiviati i file caricati.
@@ -24,13 +24,7 @@ const storage = multer.diskStorage({
   }
 });
 
-var upload = multer({ storage: storage }).array('fileToUpload',6);
-
-
-
-
-//const upload = multer({storage: storage}).single('fileToUpload'); //req.files is array og fileTuUpload files
-
+var upload = multer({ storage: storage }).array('fileToUpload',6);  
 
 
 var moduloAlloggio = require('../public/javascripts/Alloggio.js');
@@ -118,20 +112,20 @@ async function compilaStep2(req, res, next){
     this.alloggio.num_bagni = req.body.num_bagni;
 
 
-    this.alloggio.cucina = req.body.servizi_0;
-    this.alloggio.lavanderia = req.body.servizi_1;
-    this.alloggio.aria_condizionata = req.body.servizi_2;
-    this.alloggio.wifi = req.body.servizi_3;
-    this.alloggio.colazione = req.body.servizi_4;
-    this.alloggio.asciugacapelli = req.body.servizi_5;
-    this.alloggio.tv = req.body.servizi_6;
+    this.alloggio.cucina = (req.body.servizi_0 == 'true' ? true : false);
+    this.alloggio.lavanderia = (req.body.servizi_1  == 'true' ? true : false);
+    this.alloggio.aria_condizionata = (req.body.servizi_2  == 'true' ? true : false);
+    this.alloggio.wifi =( req.body.servizi_3  == 'true' ? true : false);
+    this.alloggio.colazione = (req.body.servizi_4  == 'true' ? true : false);
+    this.alloggio.asciugacapelli = (req.body.servizi_5  == 'true' ? true : false);
+    this.alloggio.tv = (req.body.servizi_6  == 'true' ? true : false);
 
-    this.alloggio.carta_igienica = req.body.servizi2_0;
-    this.alloggio.sapone_mani_corpo = req.body.servizi2_1;
-    this.alloggio.asciugamano = req.body.servizi2_2;
-    this.alloggio.accappatoio = req.body.servizi2_3;
-    this.alloggio.cuscino = req.body.servizi2_4;
-    this.alloggio.lenzuola = req.body.servizi2_5;
+    this.alloggio.carta_igienica = (req.body.servizi2_0  == 'true' ? true : false);
+    this.alloggio.sapone_mani_corpo = (req.body.servizi2_1  == 'true' ? true : false);
+    this.alloggio.asciugamano = (req.body.servizi2_2  == 'true' ? true : false);
+    this.alloggio.accappatoio = (req.body.servizi2_3  == 'true' ? true : false);
+    this.alloggio.cuscino = (req.body.servizi2_4  == 'true' ? true : false);
+    this.alloggio.lenzuola = (req.body.servizi2_5  == 'true' ? true : false);
 
     console.log('Inserimento valori step 2');
     console.log(this.alloggio);
@@ -202,19 +196,19 @@ router.post('/upload', upload, async function (req, res, next) {
         this.alloggio.num_letti_matrimoniali,
         this.alloggio.num_camere,
         this.alloggio.num_bagni,
-        this.alloggio.cucina,
-        this.alloggio.lavanderia,
-        this.alloggio.aria_condizionata,
-        this.alloggio.wifi,
-        this.alloggio.colazione,
-        this.alloggio.asciugacapelli ,
-        this.alloggio.tv ,
-        this.alloggio.carta_igienica ,
-        this.alloggio.sapone_mani_corpo ,
-        this.alloggio.asciugamano ,
-        this.alloggio.accappatoio ,
-        this.alloggio.cuscino ,
-        this.alloggio.lenzuola ,
+        this.alloggio.cucina ,
+        this.alloggio.lavanderia ,
+        this.alloggio.aria_condizionata ,
+        this.alloggio.wifi ,
+        this.alloggio.colazione ,
+        this.alloggio.asciugacapelli  ,
+        this.alloggio.tv  ,
+        this.alloggio.carta_igienica  ,
+        this.alloggio.sapone_mani_corpo  ,
+        this.alloggio.asciugamano  ,
+        this.alloggio.accappatoio  ,
+        this.alloggio.cuscino  ,
+        this.alloggio.lenzuola  ,
         this.alloggio.titolo ,
         this.alloggio.descrizione_alloggio ,
         this.alloggio.descrizione_regole ,
