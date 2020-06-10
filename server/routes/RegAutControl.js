@@ -9,7 +9,7 @@ const { generateSalt, sha512 } = require('../hashing/hashingmiddleware');
 const { transporter } = require('../mailsender/mailsender-config');
 const { sendRegistrationEmail } = require('../mailsender/mailsender-middleware');
 
-/* La rotta /users è vietata */
+/* La rotta attuale è vietata */
 router.get('/', function(req, res, next) {
     next(createError(403));
 });
@@ -83,7 +83,7 @@ async function registrazione(req, res, next) {
             console.log(`Utente ${req.body.email} inserito!`);
 
             // Invio della mail di conferma
-            results = sendRegistrationEmail(transporter, req.body.email).catch(err => {throw err;});
+            // results = sendRegistrationEmail(transporter, req.body.email).catch(err => {throw err;});
                     
             // render?
             res.redirect('/');
