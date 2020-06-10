@@ -144,7 +144,8 @@ router.post('/upload', upload, async function (req, res, next) {
   //if(err) return console.error(err)
 
   try {
-    this.alloggio.foto = req.files;
+
+    this.alloggio.foto = req.files;   //assegno array di oggetti req.files a alloggio.foto
     //console.log(req.files.filename);
     //console.log(this.alloggio);
 
@@ -155,7 +156,7 @@ router.post('/upload', upload, async function (req, res, next) {
       // inserimento utente
       let sql = "INSERT INTO Alloggio VALUES (UUID(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
       let values = [
-        this.alloggio.proprietario = '12', //req.session.user.id_utente
+        this.alloggio.proprietario = 'idrru è', //req.session.user.id_utente
         this.alloggio.tipo_all,
         this.alloggio.nome_proprietario,
         this.alloggio.indirizzo,
@@ -190,12 +191,14 @@ router.post('/upload', upload, async function (req, res, next) {
         this.alloggio.tasse,
         this.alloggio.prezzo,
 
-        this.alloggio.foto[0].filename || null,
-        this.alloggio.foto[1].filename || null,
-        this.alloggio.foto[2].filename || null,
-        this.alloggio.foto[3].filename || null,
-        this.alloggio.foto[4].filename || null,
-        this.alloggio.foto[5].filename || null
+        // sostituisco gli oggetti foto con il filename della foto che è una stringa
+
+        this.alloggio.foto[0] = (this.alloggio.foto[0] != undefined ? this.alloggio.foto[0].filename : null),
+        this.alloggio.foto[1] = (this.alloggio.foto[1] != undefined ? this.alloggio.foto[1].filename : null),
+        this.alloggio.foto[2] = (this.alloggio.foto[2] != undefined ? this.alloggio.foto[2].filename : null),
+        this.alloggio.foto[3] = (this.alloggio.foto[3] != undefined ? this.alloggio.foto[3].filename : null),
+        this.alloggio.foto[4] = (this.alloggio.foto[4] != undefined ? this.alloggio.foto[4].filename : null),
+        this.alloggio.foto[5] = (this.alloggio.foto[5] != undefined ? this.alloggio.foto[5].filename : null)
       ];
 
       results = await db.query(sql, values)
