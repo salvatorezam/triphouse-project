@@ -2,6 +2,10 @@ var createError = require('http-errors');
 var express = require('express');
 var router = express.Router();
 
+/*carichiamo il middleware*/
+
+const { config } = require('../db/config');
+const { makeDb, withTransaction } = require('../db/dbmiddleware');
 
 
 var multer  = require('multer');
@@ -27,10 +31,7 @@ var upload = multer({ storage: storage }).array('fileToUpload',6);
 
 //const upload = multer({storage: storage}).single('fileToUpload'); //req.files is array og fileTuUpload files
 
-/*carichiamo il middleware*/
 
-const { config } = require('../db/config');
-const { makeDb, withTransaction } = require('../db/dbmiddleware');
 
 var moduloAlloggio = require('../public/javascripts/Alloggio.js');
 
@@ -39,7 +40,7 @@ router.get('/agg-all-1', function(req, res, next) {
 
     this.alloggio = new moduloAlloggio();
    /* for(var x=0; x<6; x++){
-      this.alloggio.foto[x] = null;
+      this.alloggio.foto[x] ,
       if(this.alloggio.foto[x]==null){
         console.log("funziona");
       };
@@ -169,19 +170,77 @@ async function compilaStep3(req, res, next){
 
 /* POST agg-all-4*/
 
-router.post('/upload', upload, function (req, res, next) {
+router.post('/upload', upload, async function (req, res, next) {
   // req.files is array of `photos` files
   // req.body will contain the text fields, if there were any
   //if(err) return console.error(err)
 
   try {
     this.alloggio.foto = req.files;
-    console.log(req.files);
-    console.log(this.alloggio);
+    //console.log(req.files.filename);
+    //console.log(this.alloggio);
+
+    const db = await makeDb(config); 
+    var results = {};
+
+    await withTransaction(db, async() => {
+      // inserimento utente
+      let sql = "INSERT INTO Alloggio VALUES (UUID(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+      let values = [
+        this.alloggio.proprietario = '12',
+        this.alloggio.tipo_all,
+        this.alloggio.nome_proprietario,
+        this.alloggio.indirizzo,
+        this.alloggio.n_civico,
+        this.alloggio.cap,
+        this.alloggio.regione,
+        this.alloggio.citta, 
+        this.alloggio.provincia, 
+        this.alloggio.num_ospiti,
+        this.alloggio.distanza_centro,
+        this.alloggio.num_letti_singoli,
+        this.alloggio.num_letti_matrimoniali,
+        this.alloggio.num_camere,
+        this.alloggio.num_bagni,
+        this.alloggio.cucina,
+        this.alloggio.lavanderia,
+        this.alloggio.aria_condizionata,
+        this.alloggio.wifi,
+        this.alloggio.colazione,
+        this.alloggio.asciugacapelli ,
+        this.alloggio.tv ,
+        this.alloggio.carta_igienica ,
+        this.alloggio.sapone_mani_corpo ,
+        this.alloggio.asciugamano ,
+        this.alloggio.accappatoio ,
+        this.alloggio.cuscino ,
+        this.alloggio.lenzuola ,
+        this.alloggio.titolo ,
+        this.alloggio.descrizione_alloggio ,
+        this.alloggio.descrizione_regole ,
+        this.alloggio.note,
+        this.alloggio.tasse,
+        this.alloggio.prezzo,
+
+        this.alloggio.foto[0].filename || null,
+        this.alloggio.foto[1].filename || null,
+        this.alloggio.foto[2].filename || null,
+        this.alloggio.foto[3].filename || null,
+        this.alloggio.foto[4].filename || null,
+        this.alloggio.foto[5].filename || null
+      ];
+
+      results = await db.query(sql, values)
+              .catch(err => {
+                  throw err;
+              });
+
+    });
+
     res.render('aggiungiAlloggioDir/agg-all-5');
 
   } catch(error){
-    console.log(err);
+    console.log(error);
     next(createError(500));
   }
 });
