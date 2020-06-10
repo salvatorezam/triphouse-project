@@ -33,23 +33,23 @@
             <li class="breadcrumb-item active">Prenotazione effettuata   </li>
           </ol>
           <div class="text-block">
-            <p class="subtitle"><%= data.data_pren[0].data_inizio.toString().slice(0,15) %> - <%= data.data_pren[0].data_fine.toString().slice(0,15) %></p>
-            <h1 class="hero-heading mb-3"><%= data.data_pren[0].titolo %></h1>
+            <p class="subtitle"><%= data.data_pren.data_inizio.toString().slice(0,15) %> - <%= data.data_pren.data_fine.toString().slice(0,15) %></p>
+            <h1 class="hero-heading mb-3"><%= data.data_pren.titolo %></h1>
           </div>
           <div class="text-block">
             <!-- h6 class="mb-4">Numero Notti</h6   DA ELIMINARE?    -->
             <div class="row mb-3">
               <div class="col-md-6 d-flex align-items-center mb-3 mb-md-0">
                 <div class="date-tile mr-3">
-                  <div class="text-uppercase"> <span class="text-sm"><%= data.data_pren[0].data_inizio.toString().slice(4,7) %></span><br><strong class="text-lg"><%= data.data_pren[0].data_inizio.toString().slice(8,10) %></strong></div>
+                  <div class="text-uppercase"> <span class="text-sm"><%= data.data_pren.data_inizio.toString().slice(4,7) %></span><br><strong class="text-lg"><%= data.data_pren.data_inizio.toString().slice(8,10) %></strong></div>
                 </div>
-                <p class="text-sm mb-0"><%= data.data_pren[0].data_inizio.toString().slice(0,3) %><br/>check-in</p>
+                <p class="text-sm mb-0"><%= data.data_pren.data_inizio.toString().slice(0,3) %><br/>check-in</p>
               </div>
               <div class="col-md-6 d-flex align-items-center">
                 <div class="date-tile mr-3">
-                  <div class="text-uppercase"> <span class="text-sm"><%= data.data_pren[0].data_fine.toString().slice(4,7) %></span><br><strong class="text-lg"><%= data.data_pren[0].data_fine.toString().slice(8,10) %></strong></div>
+                  <div class="text-uppercase"> <span class="text-sm"><%= data.data_pren.data_fine.toString().slice(4,7) %></span><br><strong class="text-lg"><%= data.data_pren.data_fine.toString().slice(8,10) %></strong></div>
                 </div>
-                <p class="text-sm mb-0"><%= data.data_pren[0].data_fine.toString().slice(0,3) %><br/>check-out</p>
+                <p class="text-sm mb-0"><%= data.data_pren.data_fine.toString().slice(0,3) %><br/>check-out</p>
               </div>
             </div>
           </div>
@@ -57,35 +57,37 @@
             <div class="row">
               <div class="col-sm">
                 <h6>Indirizzo</h6>
-                <p class="text-muted"><%= data.data_pren[0].indirizzo %> <%= data.data_pren[0].n_civico %>, <%= data.data_pren[0].citta %></p>
+                <p class="text-muted"><%= data.data_pren.indirizzo %> <%= data.data_pren.n_civico %>, <%= data.data_pren.citta %></p>
               </div>
               <div class="col-sm">
                 <h6>Telefono</h6>
-                <p class="text-muted"><%= data.data_pren[0].telefono_prp %></p>
+                <p class="text-muted"><%= data.data_pren.telefono_uh %></p>
               </div>
             </div>
           </div>
           <div class="text-block">
             <div class="media align-items-center mb-3">
               <div class="media-body">
-                <h6><%= data.data_pren[0].tipo_all %></h6>
-                <p class="text-muted mb-0">Ospitato da <a href="user-profile.html" class="text-reset"><%= data.data_pren[0].nome_proprietario %></a></p>
+                <h6><%= data.data_pren.tipo_all %></h6>
+                <p class="text-muted mb-0">Ospitato da <a href="user-profile.html" class="text-reset"><%= data.data_pren.nome_proprietario %></a></p>
               </div><a href="user-profile.html"><img class="avatar avatar-lg avatar-border-white ml-4" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/avatar/avatar-10.jpg" alt="Jack London"></a>
             </div>
           </div>
           <div class="text-block">
             <h6 class="mb-3">Chi viene con te</h6>
             <div class="row mb-3"> <!-- DA FARE PER GLI OSPITI -->
-              <div class="col-auto text-center text-sm"><img class="avatar avatar-border-white mb-1" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/avatar/avatar-0.jpg" alt="Ondrej"><br>Ondrej</div>
-              <div class="col-auto text-center text-sm"><img class="avatar avatar-border-white mb-1" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/avatar/avatar-1.jpg" alt="Julie"><br>Julie</div>
-              <div class="col-auto text-center text-sm"><img class="avatar avatar-border-white mb-1" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/avatar/avatar-2.jpg" alt="Barbora"><br>Barbora</div>
-            </div>
+              <% let ospiti = data.data_pren.nomi_ospiti; if (ospiti == "") { %>
+              <p> Nessun altro ospite verrà con te</p>
+              <% } else { ospiti = data.data_pren.nomi_ospiti.slice(0, (ospiti.length-1)); ospiti = ospiti.split('-'); for (osp of ospiti) { %>
+              <div class="col-auto text-center text-sm"><img class="avatar avatar-border-white mb-1" src="../images/ominoUtente.png" alt="Ondrej"><br><%= osp %></div>
+              <% }}; %>
+              </div>
           </div>
           <div class="text-block">
             <div class="row">
               <div class="col">
                 <h6>Costo totale</h6>
-                <p class="text-muted">€<%= data.data_pren[0].prezzo_totale %></p>
+                <p class="text-muted">€<%= data.data_pren.prezzo_totale %></p>
               </div>
               <div class="col align-self-center"> <!-- PENSARE PER LA RICEVUTA -->
                 <p class="text-right d-print-none"><a class="btn btn-link text-muted" href="#"><i class="far fa-file mr-2"></i>Ricevuta</a></p>
@@ -100,13 +102,12 @@
                   <div class="py-0">
                     <button class="btn btn-outline-primary" id="recButton" type="button" data-toggle="collapse" data-target="#recensisciAlloggio" aria-expanded="false" aria-controls="recensisciAlloggio" <%= data.data_rec %>>Recensisci Alloggio</button>                   
                     <div class="collapse mt-4" id="recensisciAlloggio">
-                      <h5 class="mb-4">Recensione</h5>
                       <form class="form" id="form_recensione" method="POST" action="/profiloUtenteControl/recensisciAlloggio">
                         <div class="row">
                           <div class="col-sm-6">
-                            <div class="form-group"> <!-- RISOLVERE LA COSA DEL NOME (AUTOCARICARLO) -->
-                              <label class="form-label" for="nome">Il tuo nome</label>
-                              <input class="form-control-plaintext" type="text" placeholder="nome scrittore" readonly>
+                            <div class="form-group">
+                              <label class="form-label" for="nome"></label>
+                              <input class="form-control-plaintext" type="text" placeholder="Fai la tua recensione" readonly>
                             </div>
                           </div>
                           <div class="col-sm-6">
@@ -152,7 +153,7 @@
               </li>
               <li class="mb-2"> 
                 <div class="media align-items-center mb-3">
-                  <div class="media-body"><a role="button" class="btn btn-outline-info" href="mailto:<%= data.data_pren[0].email_prp %>">Contatta host</a></div>
+                  <div class="media-body"><a role="button" class="btn btn-outline-info" href="mailto:<%= data.data_pren.email_uh %>">Contatta host</a></div>
                 </div>
               </li>
               <li class="mb-2"> 
