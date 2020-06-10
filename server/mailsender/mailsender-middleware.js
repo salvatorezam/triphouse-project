@@ -34,3 +34,20 @@ exports.inviaMailHost = async function (transporter, mailReceiver, testo) {
         }); 
 };
 
+exports.inviaMailCliente = async function (transporter, mailReceiver, testo) {
+    let mailOptions = {
+        from: 'triphousetz@gmail.com',
+        to: mailReceiver,
+        subject: 'Prenotazione annullata!',
+        text: testo
+    }
+    return new Promise((resolve, reject) => {
+        transporter.sendMail(mailOptions, function(error, info) {
+            if (error) 
+                return reject(error);
+            console.log('Email sent: ' + info.response);
+            resolve('Email sent');
+            });
+        }); 
+};
+

@@ -65,14 +65,14 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
             if (prenotazioni[1].length != 0) {
               for (elDatOsp of prenotazioni[1]) {
                 if (elPren.ID_PREN == elDatOsp.ID_PREN) {
-                  elPren.nomi_ospiti = elPren.nomi_ospiti + elDatOsp.nome_osp + "-" ;
+                  elPren.nomi_ospiti = elPren.nomi_ospiti + elDatOsp.nome_osp + "-";
                 }
               }
             }
 
             //recensioni
             if (prenotazioni[2].length != 0) {
-              for (let elRec of prenotazioni[2]) {
+              for (elRec of prenotazioni[2]) {
                 if (elPren.ID_PREN == elRec.ID_PREN) {
                   elPren.recBoolean = true;
                 } 
@@ -197,7 +197,6 @@ async function annullaPrenotazione(req, res, next) {
   try {
     await withTransaction(db, async() => {
 
-      //MODIFICARE SQL ASSOLUTAMENTE
       let sql = "UPDATE Prenotazione \
                   SET stato_prenotazione = 'conclusa' \
                   WHERE ID_PREN = ?; \
