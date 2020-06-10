@@ -43,18 +43,17 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                         a.citta AS citta, p.stato_prenotazione AS stato_prenotazione, \
                         ur.nome AS nome_ut, ur.cognome AS cognome_ut, ur.telefono AS telefono_ut, \
                         ur.email AS email_ut, \
-                        p.prezzo_totale AS prezzo_totale, p.data_pren AS data_prenotazione, \
-                        count(dos.ID_DO) AS num_ospiti \
-                        FROM Prenotazione p, Alloggio a, UtenteRegistrato ur, DatiOspiti dos \
-                        WHERE p.alloggio = a.ID_ALL AND p.utente = ur.ID_UR AND dos.prenotazione = p.ID_PREN \
+                        p.prezzo_totale AS prezzo_totale, p.data_pren AS data_prenotazione \
+                        FROM Prenotazione p, Alloggio a, UtenteRegistrato ur \
+                        WHERE p.alloggio = a.ID_ALL AND p.utente = ur.ID_UR AND a.proprietario = ? \
                         GROUP BY p.ID_PREN; \
                         SELECT p.ID_PREN AS ID_PREN, dos.nome AS nome_osp \
                         FROM Prenotazione p, DatiOspiti dos \
                         WHERE p.ID_PREN = dos.prenotazione; \
                         SELECT p.ID_PREN \
                         FROM RecensisciCliente rc, UtenteRegistrato ur, Prenotazione p \
-                        WHERE rc.ricevente = ur.ID_UR AND p.utente = ur.ID_UR AND ra.scrittore = ?;";
-            prenRicevute = await db.query(sql1)
+                        WHERE rc.ricevente = ur.ID_UR AND p.utente = ur.ID_UR AND rc.scrittore = ?;";
+            prenRicevute = await db.query(sql1, [idUtente, idUtente])
                 .catch(err => {
                     throw err;
                 });
@@ -64,10 +63,12 @@ async function getListaPrenotazioniRicevute(req, res, next) {
 
                 //ospiti
                 elPren.nomi_ospiti = "";
+                elPren.num_ospiti = 0;
                 if (prenRicevute[1].length != 0) {
                     for (elDatOsp of prenRicevute[1]) {
                         if (elPren.ID_PREN == elDatOsp.ID_PREN) {
                             elPren.nomi_ospiti = elPren.nomi_ospiti + elDatOsp.nome_osp + "-";
+                            elPren.num_ospiti++;
                         }
                     }
                 }
