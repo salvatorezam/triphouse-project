@@ -1,7 +1,10 @@
 var createError = require('http-errors');
 var express = require('express');
 var router = express.Router();
-var idUtente = '';
+
+//variabili che mi servono
+
+var idUtente = "";
 
 /*carichiamo il middleware*/
 
@@ -24,9 +27,9 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
   let prenConcluse = {};
   let prenNonConcluse = {};
 
-  //res.render('visualizzaListaAlloggiInseriti');
-    try {
-      await withTransaction(db, async() => {
+  
+    try { res.render('visualizzaListaAlloggiInseriti');
+      /*await withTransaction(db, async() => {
 
           let sql0 = "SELECT * FROM USERS_SESSIONS WHERE session_id = ?;";
           results = await db.query(sql0, [req.session.id])
@@ -95,11 +98,11 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
           }
 
           res.render('finestraListaPrenotazioniEffettuate', {data : {dataC: prenConcluse, dataNC: prenNonConcluse}});
-      });
-  } catch (err) {
-      console.log(err);
-      next(createError(500));
-  }
+      });*/
+    } catch (err) {
+        console.log(err);
+        next(createError(500));
+    }
 }
 
 module.exports = router;
