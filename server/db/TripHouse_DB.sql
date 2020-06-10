@@ -135,9 +135,9 @@
 
 	INSERT INTO RecensisciCliente VALUES (UUID(),'ha lasciato tutto in ordine','2020-3-6','b9db1cb1-a99e-11ea-b30a-a066100a22be','b532de10-a99e-11ea-b30a-a066100a22be','4');
 
-	INSERT INTO Alloggio VALUES (UUID(),'b9db1cb1-a99e-11ea-b30a-a066100a22be','casa vacanza','Giuseppe','via p. trino',120,90100,'Lazio','Roma','RM',7,'M',1,1,3,1,true,false,true,true,false,false,true,true,true,true,true,true,true,'Casa Roma','casa in città de roma','nun se po fa nulla','state attenti ar cane',3.5,36);
-	INSERT INTO Alloggio VALUES (UUID(),'b9db1cb1-a99e-11ea-b30a-a066100a22be','casa vacanza','Giuseppe','via catone',90,90100,'Lazio','Roma','RM',5,'M',1,1,3,1,true,false,true,true,false,false,true,true,true,true,true,true,true,'Casa Roma','casa in città de roma','nun se po fa nulla','state attenti ar cane',3.5,36);
-	INSERT INTO Alloggio VALUES (UUID(),'b9db1cb1-a99e-11ea-b30a-a066100a22be','casa vacanza','Giuseppe','via tirolo',60,90100,'Lazio','Roma','RM',7,'M',1,1,3,1,true,false,true,true,false,false,true,true,true,true,true,true,true,'Casa Roma','casa in città de roma','nun se po fa nulla','state attenti ar cane',3.5,36);
+	INSERT INTO Alloggio VALUES (UUID(),'b9db1cb1-a99e-11ea-b30a-a066100a22be','casa vacanza','Giuseppe','via p. trino',120,90100,'Lazio','Roma','RM',7,'M',1,1,3,1,true,false,true,true,false,false,true,true,true,true,true,true,true,'Casa Roma','casa in città de roma','nun se po fa nulla','state attenti ar cane',3.5,36,null,null,null,null,null,null);
+	INSERT INTO Alloggio VALUES (UUID(),'b9db1cb1-a99e-11ea-b30a-a066100a22be','casa vacanza','Giuseppe','via catone',90,90100,'Lazio','Roma','RM',5,'M',1,1,3,1,true,false,true,true,false,false,true,true,true,true,true,true,true,'Casa Roma','casa in città de roma','nun se po fa nulla','state attenti ar cane',3.5,36,null,null,null,null,null,null);
+	INSERT INTO Alloggio VALUES (UUID(),'b9db1cb1-a99e-11ea-b30a-a066100a22be','casa vacanza','Giuseppe','via tirolo',60,90100,'Lazio','Roma','RM',7,'M',1,1,3,1,true,false,true,true,false,false,true,true,true,true,true,true,true,'Casa Roma','casa in città de roma','nun se po fa nulla','state attenti ar cane',3.5,36,null,null,null,null,null,null);
 
 	INSERT INTO RecensisciAlloggio VALUES (UUID(),'mi sono trovato bene','2020-3-7','b532de10-a99e-11ea-b30a-a066100a22be','8b3d4384-a99f-11ea-b30a-a066100a22be',4);
 

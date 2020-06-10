@@ -9,7 +9,7 @@ const { generateSalt, sha512 } = require('../hashing/hashingmiddleware');
 const { transporter } = require('../mailsender/mailsender-config');
 const { sendRegistrationEmail } = require('../mailsender/mailsender-middleware');
 
-/* La rotta /users è vietata */
+/* La rotta attuale è vietata */
 router.get('/', function(req, res, next) {
     next(createError(403));
 });
