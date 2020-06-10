@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS RecensisciAlloggio (
 
 CREATE TABLE IF NOT EXISTS Alloggio (
 	ID_ALL VARCHAR(36) PRIMARY KEY,
-	proprietario CHAR(36) REFERENCES UtenteRegistrato(ID_UR),
+	proprietario VARCHAR(36) REFERENCES UtenteRegistrato(ID_UR),
 	-- INFORMAZIONI DI BASE
 	tipo_all VARCHAR(20),
 	nome_proprietario VARCHAR(20),
@@ -80,8 +80,14 @@ CREATE TABLE IF NOT EXISTS Alloggio (
 	descrizione_regole TEXT,
 	note TEXT,
 	tasse DECIMAL,
-	prezzo DECIMAL
+	prezzo DECIMAL,
     -- FOTO
+    foto_0 VARCHAR(60),
+    foto_1 VARCHAR(60),
+    foto_2 varchar(60),
+    foto_3 varchar(60),
+    foto_4 varchar(60),
+    foto_5 varchar(60)
 );
 
 CREATE TABLE IF NOT EXISTS DateDisponibili (

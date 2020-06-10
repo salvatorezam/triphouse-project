@@ -187,7 +187,7 @@ router.post('/upload', upload, async function (req, res, next) {
       // inserimento utente
       let sql = "INSERT INTO Alloggio VALUES (UUID(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
       let values = [
-        this.alloggio.proprietario = '12',
+        this.alloggio.proprietario = '12', //req.session.user.id_utente
         this.alloggio.tipo_all,
         this.alloggio.nome_proprietario,
         this.alloggio.indirizzo,
