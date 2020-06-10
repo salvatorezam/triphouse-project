@@ -26,6 +26,8 @@ const storage = multer.diskStorage({
 
 var upload = multer({ storage: storage }).array('fileToUpload',6);  
 
+//Carico il modulo alloggio per poter salvare i dati mano a mamo che si compila il form
+//in modo che i dati verranno inviati al db solo alla fine della compilazione del form
 
 var moduloAlloggio = require('../public/javascripts/Alloggio.js');
 
@@ -33,38 +35,10 @@ var moduloAlloggio = require('../public/javascripts/Alloggio.js');
 router.get('/agg-all-1', function(req, res, next) {
 
     this.alloggio = new moduloAlloggio();
-   /* for(var x=0; x<6; x++){
-      this.alloggio.foto[x] ,
-      if(this.alloggio.foto[x]==null){
-        console.log("funziona");
-      };
-    }*/
-    
-
     res.render('aggiungiAlloggioDir/agg-all-1');
   });
   
-/* GET agg-all-2 */
-router.get('/agg-all-2', function(req, res, next) {
-res.render('aggiungiAlloggioDir/agg-all-2');
-});
-
-/* GET agg-all-3 */
-router.get('/agg-all-3', function(req, res, next) {
-res.render('aggiungiAlloggioDir/agg-all-3');
-});
-
-/* GET agg-all-4 */
-router.get('/agg-all-4', function(req, res, next) {
-res.render('aggiungiAlloggioDir/agg-all-4');
-});
-
-/* GET agg-all-5 */
-router.get('/agg-all-5', function(req, res, next) {
-res.render('aggiungiAlloggioDir/agg-all-5');
-});
-
-/* POST agg-all-1*/
+  /* POST agg-all-1*/
 
 router.post('/agg-all-2', compilaStep1);
 
@@ -240,81 +214,9 @@ router.post('/upload', upload, async function (req, res, next) {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-//router.post('/upload', (req, res) =>{
- // for(var x=0; x<6; x++){
- //   if(this.alloggio.foto[x] == null){
- //     upload(req, res, err => {
-  //      if(err) return console.error(err)
-  //      console.log(req.file)
-  //      res.render('aggiungiAlloggioDir/agg-all-4')
-  //    });
-  //    this.alloggio.foto[x] = fileName;
-  //    console.log("nome file salvato: " + this.alloggio.foto[x]);
-  //    break;
-  // }
-  //  else{
-  //    alert("Non puoi caricare più di 6 foto");
-  //    break;
-  //  }
- // }
-//});
-
-/*Router Post*/
-
-router.post('/alloggioInserito', inserisciAlloggio);
-
-/*middleware di inserisci alloggio*/
-
-async function inserisciAlloggio(req,res,next){
-
-  /*istanziamo il middleware*/
-/*
-  const db = await makeDb(config);
-    let results = {};
-
-    try {
-
-      await withTransaction(db, async() => {
-          // inserimento utente
-          let sql = "INSERT INTO Alloggio VALUES (UUID(),?,?,?,?,?,?,?);";
-          let values = [
-              req.body.tipo_all,
-              req.body.nome_proprietario,
-              req.body.indirizzo,
-              req.body.cap,
-              req.body.regione,
-              req.body.citta,
-              req.body.provincia
-          ];
-              results = await db.query(sql, values)
-              .catch(err => {
-                  throw err;
-              });
-           
-          console.log('Inserimento tabella alloggio');
-          console.log(results);
-          res.render('aggiungiAlloggioDir/agg-all-2');
-      });
-  } catch (err) {
-      console.log(err);
-      next(createError(500));
-  }*/
-}
-
-
-
-
-
-
+/* GET agg-all-5 */
+router.get('/agg-all-5', function(req, res, next) {
+res.render('aggiungiAlloggioDir/agg-all-5');
+});
 
 module.exports = router;
