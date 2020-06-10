@@ -8,6 +8,7 @@ var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
 const { options } = require('./db/options');
 
+
 var sessionStore = new MySQLStore(options);
 
 var indexRouter = require('./routes/index');
