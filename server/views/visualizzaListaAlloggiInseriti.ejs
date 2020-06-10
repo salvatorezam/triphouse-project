@@ -16,23 +16,29 @@
 
 
         <div class="row">
+          <% if(data.length == 0) { %>
+            <div class="col-xl-3 col-md-4 col-sm-6 mb-5">
+              <h3 class="col-12 hero-heading mb-2">Nessun viaggio in programma</h3>
+              <img src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/illustration/undraw_celebration_0jvk.svg" alt="" style="width: 300px;">
+            </div>
+          <% } else { %>
           <!-- place item-->
+          <% data.forEach(element => { %>
           <div class="col-xl-3 col-md-4 col-sm-6 mb-5" data-marker-id="59c0c8e33b1527bfe2abaf92">
             <div class="card h-100 border-0 shadow">
-              <div class="card-img-top overflow-hidden"><a href="/visualizzaAlloggio/visualizzaAlloggio"><img class="img-fluid" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1484154218962-a197022b5858.jpg" alt="Modern, Well-Appointed Room"/></a></div>
+              <div class="card-img-top overflow-hidden" ><a href="/visualizzaAlloggio/visualizzaAlloggio"><img class="img-fluid" src="/images/uploads/<%=element.foto_0 %>" alt="<%= element.titolo %>"/></a></div>
               <div class="card-body d-flex align-items-center">
                 <div class="w-100">
-                  <p class="subtitle font-weight-normal text-sm mb-2">March 2019</p>
-                  <h6 class="card-title"><a class="text-decoration-none text-dark" href="/visualizzaAlloggio/visualizzaAlloggio">Modern, Well-Appointed Room</a></h6>
+                  <p class="subtitle font-weight-normal text-sm mb-2"><%= element.tipo_all %></p>
+                  <h6 class="card-title"><a class="text-decoration-none text-dark" href="/visualizzaAlloggio/visualizzaAlloggio"><%= element.titolo %></a></h6>
                   <div class="d-flex card-subtitle mb-3">
-                    <p class="flex-grow-1 mb-0 text-muted text-sm">Private room</p>
-                    <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i>
-                    </p>
+                    <p class="flex-grow-1 mb-0 text-muted text-sm"><%= element.citta %></p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <% });} %>
         </div>
       </div>
     </section>

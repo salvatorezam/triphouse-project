@@ -13,7 +13,7 @@ var multer  = require('multer');
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb){             //destination viene utilizzato per determinare in quale cartella devono essere archiviati i file caricati.
-    cb(null, './uploads/')
+    cb(null, './public/images/uploads/')
   },
   filename: function(req, file, cb){                //filenameviene utilizzato per determinare il nome del file all'interno della cartella
     console.log('uploaded' + file.originalname)
