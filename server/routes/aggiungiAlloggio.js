@@ -221,12 +221,12 @@ router.post('/upload', upload, async function (req, res, next) {
 
         // sostituisco gli oggetti foto con il filename della foto che è una stringa
 
-        this.alloggio.foto[0] = (this.alloggio.foto[0] != undefined ? this.alloggio.foto[0].filename : null),
-        this.alloggio.foto[1] = (this.alloggio.foto[1] != undefined ? this.alloggio.foto[1].filename : null),
-        this.alloggio.foto[2] = (this.alloggio.foto[2] != undefined ? this.alloggio.foto[2].filename : null),
-        this.alloggio.foto[3] = (this.alloggio.foto[3] != undefined ? this.alloggio.foto[3].filename : null),
-        this.alloggio.foto[4] = (this.alloggio.foto[4] != undefined ? this.alloggio.foto[4].filename : null),
-        this.alloggio.foto[5] = (this.alloggio.foto[5] != undefined ? this.alloggio.foto[5].filename : null)
+        this.alloggio.foto[0] = (this.alloggio.foto[0] != undefined ? this.alloggio.foto[0].filename.slice(0,15) : null),
+        this.alloggio.foto[1] = (this.alloggio.foto[1] != undefined ? this.alloggio.foto[1].filename.slice(0,15) : null),
+        this.alloggio.foto[2] = (this.alloggio.foto[2] != undefined ? this.alloggio.foto[2].filename.slice(0,15) : null),
+        this.alloggio.foto[3] = (this.alloggio.foto[3] != undefined ? this.alloggio.foto[3].filename.slice(0,15) : null),
+        this.alloggio.foto[4] = (this.alloggio.foto[4] != undefined ? this.alloggio.foto[4].filename.slice(0,15) : null),
+        this.alloggio.foto[5] = (this.alloggio.foto[5] != undefined ? this.alloggio.foto[5].filename.slice(0,15) : null)
       ];
 
       results = await db.query(sql, values)
