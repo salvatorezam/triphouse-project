@@ -195,7 +195,10 @@ async function diventahost(req, res, next) {
                .catch(err => {
                    throw err;
                });
-            req.app.locals.user.stato_host = req.session.user.stato_host = true;
+
+            req.session.user.stato_host = true;
+            req.app.locals.users.set(req.session.user.id_utente, req.session.user);
+            
             console.log('Stato host aggiornato.'); 
             res.redirect('/');        
        });
