@@ -36,7 +36,7 @@
               </div> -->
             </div>
           <button class="btn btn-link btn-collapse pl-0 text-muted" data-toggle="collapse" data-target="#scatola" aria-expanded="false" aria-controls="#scatola" data-expanded-text="Chiudi" data-collapsed-text="Inserisci informazioni ospiti">Inserisci informazioni ospiti</button>
-          <form name="myform" method="POST" action="/prenotazioneDir/prenotazionePg3">
+          <form name="myform" method="POST" action="/prenotazione/prenotazionePg3">
             <div class=" text-block row collapse" id="scatola">
               <div id="ospite1">
                 <h6>Ospite 1</h6>
@@ -2223,21 +2223,24 @@
                 </div>
               </div>
             </div>
-
+            <div class="row form-block flex-column flex-sm-row">
+              <div class="col text-center text-sm-left">
+                <button type="submit" class="btn btn-primary px-3">Avanti</button>
+              </div> 
+            </div>
           </form>
 
-            <div class="row form-block flex-column flex-sm-row">
-              <div class="col text-center text-sm-left"><a class="btn btn-link text-muted" href="/prenotazione/prenotazionePg1"> <i class="fa-chevron-left fa mr-2"></i>Indietro</a>
-              </div>
-              <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" type="submit" href="/prenotazioneDir/prenotazionePg3">Avanti<i class="fa-chevron-right fa ml-2"></i></a></div>
+      <!--<div class="row form-block flex-column flex-sm-row">
+            <div class="col text-center text-sm-left"><a class="btn btn-link text-muted" href="/prenotazione/prenotazionePg1"> <i class="fa-chevron-left fa mr-2"></i>Indietro</a>
             </div>
-          </div>
-
-        <!-- mini vista alloggio -->
-        <% include ../partials/miniViewAlloggio.ejs %>
-        <!-- mini vista alloggio -->
-        
+            <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" type="submit" href="/prenotazione/prenotazionePg3">Avanti<i class="fa-chevron-right fa ml-2"></i></a>
+            </div>
+          </div> -->
+     
         </div>
+                <!-- mini vista alloggio -->
+                <% include ../partials/miniViewAlloggio.ejs %>
+                <!-- mini vista alloggio -->
       </div>
     </section>
     <!-- Footer-->

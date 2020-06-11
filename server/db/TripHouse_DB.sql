@@ -107,7 +107,8 @@
 		data_fine DATE,
 		data_pren DATE,
 		prezzo_totale DECIMAL,
-		stato_prenotazione VARCHAR(20)
+		stato_prenotazione VARCHAR(20),
+		tipo_pagamento VARCHAR(20)
 	);
 
 	CREATE TABLE IF NOT EXISTS DatiOspiti (
@@ -118,8 +119,17 @@
 		num_doc VARCHAR(10),
 	--	Foto_doc, 
 		nazionalita VARCHAR(40),
-		scedenza_doc DATE,
+		scadenza_doc DATE,
 		eta INT,
+		prenotazione VARCHAR(36) REFERENCES Prenotazione(ID_PREN)
+	);
+
+	CREATE TABLE IF NOT EXISTS DocumentiUtenteR(
+		ID_DO VARCHAR(36) PRIMARY KEY, 
+		tipo_doc VARCHAR(20),
+		num_doc VARCHAR(10),
+		autorita_doc VARCHAR(40),
+		scadenza_doc DATE,
 		prenotazione VARCHAR(36) REFERENCES Prenotazione(ID_PREN)
 	);
 

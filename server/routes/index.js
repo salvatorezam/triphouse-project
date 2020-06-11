@@ -3,6 +3,9 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  //var elnull = null;
+  //req.app.locals.users = [elnull];
+  //res.send(req.session.user.id_utente);
   res.render('index');
 });
 

@@ -8,7 +8,20 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav ml-auto">
 
-            <% if(locals.user) { %>
+            <% console.log('locals.users ' + locals.users + ' ----------------------------------------------------------------------'); %>
+            <% console.log(locals.users); %>
+            <% console.log(locals.users.id_utente); %>
+
+            <% console.log(locals == undefined); %>
+
+            <% if (locals.users.size != 0) {
+                console.log('locals.users' + locals.users + '----------------------------------------------------------------------');
+                var user = locals.users.get(locals.user.id_utente); 
+              } else {
+                var user = false;
+              } %> 
+
+            <% if(user) { %>
             <!-- Megamenu-->
             <li class="nav-item dropdown position-static"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Profilo Utente</a>
               <div class="dropdown-menu megamenu py-lg-0">
@@ -23,7 +36,7 @@
                           <li class="megamenu-list-item"><a class="megamenu-list-link" href="/profiloUtenteControl/modificaDatiPersonali">Modifica dati personali   </a></li>
                         </ul> 
                       </div>
-                      <% if(locals.user.stato_host == 0) { %>
+                      <% if(user.stato_host == 0) { %>
                       <div class="col-lg-5"></div> <!-- nel caso in cui l'utente non è un host aggiungiamo un blocco vuoto per motivi stilistici-->
                       <% } else { %>
                       <!-- se l'utente autenticato è anche un host, visualizza le funzionalità aggiuntive di host-->
@@ -47,7 +60,7 @@
                                 <img class="avatar-profilo shadow p-1 bg-white" src="../images/Nino.jpg" alt="..."/>
                               </div>
                               <div class="col-6">
-                                <h5 class="card-title"><%= locals.user.nome %> <%= locals.user.cognome %></h5>
+                                <h5 class="card-title"><%= user.nome %> <%= user.cognome %></h5>
                                 <a href="/RegAutControl/logout" class="btn btn-info btn-sm" style="background-color: #4E66F8;">
                                   <span class="glyphicon glyphicon-log-out"></span> Log out
                                 </a>
@@ -65,9 +78,9 @@
             <!-- /Megamenu end-->
 
             <!-- Nome utente registrato-->
-            <li class="nav-item"><a class="nav-link"><%= locals.user.nome %> <%= locals.user.cognome %></a></li>
+            <li class="nav-item"><a class="nav-link"><%= user.nome %> <%= user.cognome %></a></li>
 
-            <% if(locals.user.stato_host == 0) { %>
+            <% if(user.stato_host == 0) { %>
               <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block"><a class="btn btn-primary" href="/diventahost">Diventa Host</a></li>
             <% }; %>
 
