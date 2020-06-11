@@ -141,6 +141,7 @@ async function autenticazione(req, res, next) { // sistemare il messaggio di err
 
                     req.app.locals.users.set(results[0].ID_UR, req.session.user);
 
+                    //req.flash('msg', 'Autenticazione effettuata con successo!');
                     res.redirect('/');
                 }
                 else {
