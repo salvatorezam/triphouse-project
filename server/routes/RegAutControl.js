@@ -141,31 +141,6 @@ async function autenticazione(req, res, next) { // sistemare il messaggio di err
 
                     req.app.locals.users.set(results[0].ID_UR, req.session.user);
 
-
-
-                    /*
-                    let userId = results[0].ID_UR;
-
-                    // let usersArray = [];
-
-                    console.log(req.app.locals.users);
-                    console.log('Autenticazione riuscita.');
-
-                    // req.app.locals.users = req.app.locals.users || usersArray;
-
-                    console.log(req.app.locals.users);
-
-                    console.log('Autenticazione riuscita.');
-
-                    req.app.locals.users = req.app.locals.session;
-
-                    req.app.locals.users.user.push(req.session.user);
-
-                    console.log(req.app.locals.users);
-
-                    console.log('Autenticazione riuscita.'); */
-
-                    //req.app.locals.users = req.app.locals.users + '-' + req.session.user;
                     res.redirect('/');
                 }
                 else {
