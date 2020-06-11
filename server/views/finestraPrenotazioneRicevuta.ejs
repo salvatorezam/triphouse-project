@@ -100,18 +100,18 @@
                     <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#recensisciCliente" aria-expanded="false" aria-controls="recensisciCliente" <%= data.data_rec %>>Recensisci Cliente</button>
                     <div class="collapse mt-4" id="recensisciCliente">
                       <h5 class="mb-4">Recensione</h5>
-                      <form class="form" id="contact-form" method="get" action="#">
+                      <form class="form" id="form_recensione" method="POST" action="/profiloHostControl/recensisciCliente">
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label class="form-label" for="name">Il tuo nome</label>
-                              <input class="form-control" type="text" name="name" id="name" required="required">
+                              <label class="form-label" for="nome"></label>
+                              <input class="form-control-plaintext" type="text" placeholder="Fai la tua recensione" readonly>
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label class="form-label" for="rating">La tua valutazione</label>
-                              <select class="custom-select focus-shadow-0" name="rating" id="rating">
+                              <label class="form-label" for="valutazione">La tua valutazione</label>
+                              <select class="custom-select focus-shadow-0" name="valutazione" id="valutazione">
                                 <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; 5</option>
                                 <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; 4</option>
                                 <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; 3</option>
@@ -122,10 +122,10 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="form-label" for="review">Testo </label>
-                          <textarea class="form-control" rows="4" name="review" id="review" placeholder="Scrivi qualcosa sul cliente" required="required"></textarea>
+                          <label class="form-label" for="testoRec">Testo </label>
+                          <textarea class="form-control" rows="4" name="testoRec" id="testoRec" placeholder="Scrivi qualcosa sul cliente" required="required"></textarea>
                         </div>
-                        <button class="btn btn-primary" type="submit">Invia</button>
+                        <button class="btn btn-primary" id="inviaRecensione" type="submit">Invia</button>
                       </form>
                     </div>
                   </div>
@@ -139,7 +139,7 @@
                       <h5 class="mb-4">Sei sicuro di voler annullare la prenotazione? </h5>
                       <div class="row">
                         <div class="col-sm-6 mb-2">
-                          <button class="col btn btn-success" type="submit">SI</button>
+                          <a href="/profiloHostControl/annullaPrenotazione" id="confermaAnnullamento"><button class="col btn btn-success">SI</button></a>
                         </div>
                         <div class="col-sm-6 mb-2">
                           <button class="col btn btn-danger" type="button" data-toggle="collapse" data-target="#annullaPrenotazione" aria-expanded="false" aria-controls="annullaPrenotazione">NO</button>
@@ -188,6 +188,20 @@
     
     <!-- scriptFooter -->
     <% include partials/scriptFooter.ejs %>
+
+    <script>
+
+      $(document).ready(function() {
+      
+      $('#confermaAnnullamento').on('click', function() {
+        window.alert('Operazione andata a buon fine');
+      });
+
+      $('#inviaRecensione').on('click', function() {
+        window.alert('Operazione andata a buon fine');
+      });
+      });
+    </script>
 
   </body>
 </html>

@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var createError = require('http-errors');
 const { transporter } = require('../mailsender/mailsender-config');
-const { inviaMailHost } = require('../mailsender/mailsender-middleware');
+const { inviaMailHost, inviaMailPagamento } = require('../mailsender/mailsender-middleware');
 
 //informazioni che mi serve mantenere in memoria
 var idUtente = "";
@@ -165,12 +165,13 @@ async function recensisciAlloggio(req, res, next) {
   try {
       await withTransaction(db, async() => {
           
-          let sql = "INSERT INTO RecensisciAlloggio VALUES (UUID(),?,?,?,?,?);";
+          let sql = "INSERT INTO RecensisciAlloggio VALUES (UUID(),?,?,?,?,?,?);";
           let values = [
             req.body.testoRec,
             today,
             idUtente,
             prenData.ID_ALL,
+            prenData.ID_PREN,
             req.body.valutazione
           ];
           recensione = await db.query(sql, values)
@@ -208,8 +209,8 @@ async function annullaPrenotazione(req, res, next) {
       let sql = "UPDATE Prenotazione \
                   SET stato_prenotazione = 'conclusa' \
                   WHERE ID_PREN = ?; \
-                  INSERT INTO RecensisciAlloggio VALUES (UUID(),'prenotazione annullata',?,?,?,null);";
-      annullamento = await db.query(sql, [prenData.ID_PREN, today, idUtente, prenData.ID_ALL])
+                  INSERT INTO RecensisciAlloggio VALUES (UUID(),'prenotazione annullata',?,?,?,?,null);";
+      annullamento = await db.query(sql, [prenData.ID_PREN, today, idUtente, prenData.ID_ALL, prenData.ID_PREN])
           .catch(err => {
               throw err;
           });
@@ -220,8 +221,46 @@ async function annullaPrenotazione(req, res, next) {
       console.log('Prenotazione annullata');
 
       // Invio della mail di conferma annullamento
-      let testo = "La prenotazione n." + prenData.ID_PREN + " è stata annullata dal cliente";
+      let testo = "La prenotazione n." + prenData.ID_PREN + " è stata annullata dal cliente.";
       inviaMailHost(transporter, prenData.email_uh, testo).catch(err => {throw err;});
+
+      let link = '/profiloUtenteControl/finestraPrenotazioneEffettuata?id=' + prenData.ID_PREN;
+      res.redirect(link);
+
+    });
+  } catch (err) {
+      console.log(err);
+      next(createError(500));
+  }
+}
+
+/* Pagamento */
+router.post('/pagamento', pagamento);
+
+async function pagamento(req, res, next) {
+
+  const db = await makeDb(config);
+  let last4digits = req.body.numeroCarta.toString().slice(15,19);
+  let today = new Date().toString().slice(0,24);
+
+  try {
+    await withTransaction(db, async() => {
+
+      let sql = "UPDATE Prenotazione \
+                  SET stato_prenotazione = 'pagata' \
+                  WHERE ID_PREN = ?;";
+      paga = await db.query(sql, prenData.ID_PREN)
+          .catch(err => {
+              throw err;
+          });
+
+      prenData.stato_prenotazione = 'pagata';
+
+      console.log('Pagamento avvenuto');
+
+      // Invio della mail di conferma annullamento
+      let testo = "Il pagamento per la prenotazione n." + prenData.ID_PREN + " è stato effettuato con successo. \n\nNome titolare carta: " + req.body.titolareCarta + " \nCarta di credito: xxxx-xxxx-xxxx-" + last4digits + " \nPagamento avvenuto in data: " + today + ".";
+      inviaMailPagamento(transporter, prenData.email_uh, testo).catch(err => {throw err;});
 
       let link = '/profiloUtenteControl/finestraPrenotazioneEffettuata?id=' + prenData.ID_PREN;
       res.redirect(link);

@@ -150,12 +150,13 @@ async function recensisciCliente(req, res, next) {
   try {
       await withTransaction(db, async() => {
           
-          let sql = "INSERT INTO RecensisciCliente VALUES (UUID(),?,?,?,?,?);";
+          let sql = "INSERT INTO RecensisciCliente VALUES (UUID(),?,?,?,?,?,?);";
           let values = [
             req.body.testoRec,
             today,
             idUtente,
             prenData.ID_UR,
+            prenData.ID_PREN,
             req.body.valutazione
           ];
           recensione = await db.query(sql, values)
@@ -193,8 +194,8 @@ async function annullaPrenotazione(req, res, next) {
       let sql = "UPDATE Prenotazione \
                   SET stato_prenotazione = 'conclusa' \
                   WHERE ID_PREN = ?; \
-                  INSERT INTO RecensisciCliente VALUES (UUID(),'prenotazione annullata,?,?,?,null);";
-      annullamento = await db.query(sql, [prenData.ID_PREN, today, idUtente, prenData.ID_UR])
+                  INSERT INTO RecensisciCliente VALUES (UUID(),'prenotazione annullata',?,?,?,?,null);";
+      annullamento = await db.query(sql, [prenData.ID_PREN, today, idUtente, prenData.ID_UR, prenData.ID_PREN])
           .catch(err => {
               throw err;
           });
@@ -205,7 +206,7 @@ async function annullaPrenotazione(req, res, next) {
       console.log('Prenotazione annullata');
 
       // Invio della mail di conferma annullamento
-      let testo = "La prenotazione n." + prenData.ID_PREN + " è stata annullata dall' host";
+      let testo = "La prenotazione n." + prenData.ID_PREN + " è stata annullata dall' host.";
       inviaMailCliente(transporter, prenData.email_ut, testo).catch(err => {throw err;});
 
       let link = '/profiloHostControl/finestraPrenotazioneRicevuta?id=' + prenData.ID_PREN;
