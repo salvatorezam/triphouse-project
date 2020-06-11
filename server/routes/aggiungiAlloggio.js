@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
   filename: function(req, file, cb){                //filenameviene utilizzato per determinare il nome del file all'interno della cartella
     console.log('uploaded' + file.originalname)
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, file.fieldname + '-' + uniqueSuffix + '-' + file.originalname)
+    cb(null, uniqueSuffix + '-' + file.originalname.slice(file.originalname.length-7,file.originalname.length))
     //fileName = file.originalname
     console.log("il nome è: "+ file.originalname)
   }
