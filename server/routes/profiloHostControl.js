@@ -6,7 +6,7 @@ const { inviaMailCliente } = require('../mailsender/mailsender-middleware');
 
 //creo degli array per salvare gli id delle prenotazioni
 var idUtente = "";
-var preRicevute = {};
+var prenRicevute = {};
 var prenData = {};
 
 //const crypto = require('crypto');
@@ -37,7 +37,6 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                 idUtente = datiUtente.user.id_utente;
             }
 
-            //DA DEFINIRE
             let sql1 = "SELECT p.ID_PREN AS ID_PREN, p.data_inizio AS data_inizio, p.data_fine AS data_fine, \
                         a.titolo AS titolo, a.tipo_all AS tipo_all, a.indirizzo AS indirizzo, a.n_civico AS n_civico, \
                         a.citta AS citta, p.stato_prenotazione AS stato_prenotazione, \
@@ -85,13 +84,6 @@ async function getListaPrenotazioniRicevute(req, res, next) {
 
             prenRicevute = prenRicevute[0];
 
-            // CONTROLLARE QUESTO CASO D'USO, MI SONO FERMATO PER FARE LA NAVBAR
-
-            //DA CANCELLARE
-            console.log('prenotazioni RICEVUTE');
-            console.log(prenRicevute.length);
-            console.log({data : prenRicevute});
-
             res.render('finestraListaPrenotazioniRicevute', {data : prenRicevute});
         });
     } catch (err) {
@@ -102,46 +94,53 @@ async function getListaPrenotazioniRicevute(req, res, next) {
   
 /* GET finestraPrenotazioneRicevuta */
 router.get('/finestraPrenotazioneRicevuta', getPrenotazioneRicevuta);
-async function getPrenotazioneRicevuta(req, res, next) {
-  const db = await makeDb(config);
-  let prenData = {};
-  let recData = {};
-  try {
-      await withTransaction(db, async() => {
-          //dati prenotazione che mi servono
-          let sql = "SELECT p.data_inizio AS data_inizio, p.data_fine AS data_fine, \
-                      a.titolo AS titolo, a.indirizzo AS indirizzo, a.n_civico AS n_civico, \
-                      a.citta AS citta, ur.telefono AS telefono_ut, a.tipo_all AS tipo_all, \
-                      ur.nome AS nome_ut, ur.cognome AS cognome_ut, p.prezzo_totale AS prezzo_totale, ur.email AS email_ut, \
-                      p.stato_prenotazione AS stato_prenotazione, dos.nome AS nome_osp \
-                      FROM Prenotazione p, Alloggio a, UtenteRegistrato ur, DatiOspiti dos \
-                      WHERE p.alloggio = a.ID_ALL AND p.utente = ur.ID_UR AND dos.prenotazione = p.ID_PREN;"; //DA DEFINIRE
-          prenData = await db.query(sql)
-              .catch(err => {
-                  throw err;
-              });
-          //FARE CHECK PER DISABILITARE I BUTTON
-          /*dati recensione
-          let sql_rec = "SELECT * FROM RecensioneCliente;"; //DA DEFINIRE
-          
-          recData = await db.query(sql_rec)
-              .catch(err => {
-                  throw err;
-              });
-          */
-          //FARE CHECK PER DISABILITARE I BUTTON
-          
-          //DA CANCELLARE
-          console.log('DATI PRENOTAZIONE: ');
-          console.log(prenData);
-          //console.log('DATI RECENSIONE: ');
-          //console.log(stato_rec);
-          res.render('finestraPrenotazioneRicevuta', {data : {data_pren : prenData /*e altro*/}});
-      });
-  } catch (err) {
-      console.log(err);
-      next(createError(500));
+
+function getPrenotazioneRicevuta(req, res, next) {
+ 
+  let prenDataArray = prenRicevute.filter((el) => { return el.ID_PREN == req.query.id });
+  
+  if (prenDataArray.length == 0) {
+    next(createError(500));
   }
+  else {
+    prenData = prenDataArray[0];
+  }
+
+  let stato_pren = "";
+  let stato_rec = "";
+  let stato_conf = "";
+
+  //check per verificare la possibilità di annullare la prenotazione o pagare
+  if (prenData.stato_prenotazione == 'conclusa') {
+    // METTERCI ANCHE LA DATA DI SCADENZA 
+
+    //disabilita tasto annullamento
+    stato_pren = "disabled";
+    //disabilita tasto conferma
+    stato_conf = "disabled";
+  }
+
+  //check per verificare la possibilità di pagamento
+  if (prenData.stato_prenotazione == 'richiesta') {
+
+    //disabilita tasto annullamento
+    stato_pren = "disabled";
+  }
+
+  if (prenData.stato_prenotazione == 'confermata') {
+
+    //disabilita tasto conferma
+    stato_conf = "disabled";
+  }
+
+  //check per verificare la possibilità di recensire (in base a recensioni già fatte o conclusione vacanza)
+  if (prenData.stato_prenotazione != 'conclusa' || prenData.recBoolean == true) {
+
+    //disabilita tasto recensione
+    stato_rec = "disabled";
+  }
+
+  res.render('finestraPrenotazioneRicevuta', {data : {data_pren : prenData, data_rec : stato_rec, data_ann : stato_pren, data_conf : stato_conf}});        
 }
 
   /* Recensisci Cliente */
