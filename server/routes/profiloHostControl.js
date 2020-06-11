@@ -41,7 +41,7 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                         a.titolo AS titolo, a.tipo_all AS tipo_all, a.indirizzo AS indirizzo, a.n_civico AS n_civico, \
                         a.citta AS citta, p.stato_prenotazione AS stato_prenotazione, \
                         ur.nome AS nome_ut, ur.cognome AS cognome_ut, ur.telefono AS telefono_ut, \
-                        ur.email AS email_ut, \
+                        ur.email AS email_ut, ur.ID_UR AS ID_UR, \
                         p.prezzo_totale AS prezzo_totale, p.data_pren AS data_prenotazione \
                         FROM Prenotazione p, Alloggio a, UtenteRegistrato ur \
                         WHERE p.alloggio = a.ID_ALL AND p.utente = ur.ID_UR AND a.proprietario = ? \
@@ -49,9 +49,9 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                         SELECT p.ID_PREN AS ID_PREN, dos.nome AS nome_osp \
                         FROM Prenotazione p, DatiOspiti dos \
                         WHERE p.ID_PREN = dos.prenotazione; \
-                        SELECT p.ID_PREN \
-                        FROM RecensisciCliente rc, UtenteRegistrato ur, Prenotazione p \
-                        WHERE rc.ricevente = ur.ID_UR AND p.utente = ur.ID_UR AND rc.scrittore = ?;";
+                        SELECT rc.prenotazione AS ID_PREN \
+                        FROM RecensisciCliente rc, UtenteRegistrato ur\
+                        WHERE rc.ricevente = ur.ID_UR AND rc.scrittore = ?;";
             prenRicevute = await db.query(sql1, [idUtente, idUtente])
                 .catch(err => {
                     throw err;
@@ -108,7 +108,7 @@ function getPrenotazioneRicevuta(req, res, next) {
 
   let stato_pren = "";
   let stato_rec = "";
-  let stato_conf = "";
+  let stato_conf = "disabled";
 
   //check per verificare la possibilità di annullare la prenotazione o pagare
   if (prenData.stato_prenotazione == 'conclusa') {
@@ -116,8 +116,6 @@ function getPrenotazioneRicevuta(req, res, next) {
 
     //disabilita tasto annullamento
     stato_pren = "disabled";
-    //disabilita tasto conferma
-    stato_conf = "disabled";
   }
 
   //check per verificare la possibilità di pagamento
@@ -125,12 +123,9 @@ function getPrenotazioneRicevuta(req, res, next) {
 
     //disabilita tasto annullamento
     stato_pren = "disabled";
-  }
 
-  if (prenData.stato_prenotazione == 'confermata') {
-
-    //disabilita tasto conferma
-    stato_conf = "disabled";
+    //abilita tasto conferma
+    stato_conf = "";
   }
 
   //check per verificare la possibilità di recensire (in base a recensioni già fatte o conclusione vacanza)
@@ -159,21 +154,24 @@ async function recensisciCliente(req, res, next) {
           let values = [
             req.body.testoRec,
             today,
-            'scrittore_rec',
-            'cliente_recensito',
+            idUtente,
+            prenData.ID_UR,
             req.body.valutazione
           ];
           recensione = await db.query(sql, values)
               .catch(err => {
                   throw err;
-              }); 
+              });
+
+          prenData.recBoolean = true;
           
           console.log(req.body);
           //DA CANCELLARE
           console.log('DATI RECENSIONE: ');
           console.log(values);
           
-          res.redirect('/profiloHostControl/finestraPrenotazioneRicevuta');
+          let link = '/profiloHostControl/finestraPrenotazioneRicevuta?id=' + prenData.ID_PREN;
+          res.redirect(link);
       });
   } catch (err) {
       console.log(err);
@@ -187,21 +185,32 @@ router.get('/annullaPrenotazione', annullaPrenotazione);
 async function annullaPrenotazione(req, res, next) {
 
   const db = await makeDb(config);
+  var today = new Date()
 
   try {
     await withTransaction(db, async() => {
 
-      //MODIFICARE SQL ASSOLUTAMENTE
       let sql = "UPDATE Prenotazione \
                   SET stato_prenotazione = 'conclusa' \
-                  WHERE ID_PREN = '485ae14d-a756-11ea-b30a-a066100a22be';";
-      annullamento = await db.query(sql)
+                  WHERE ID_PREN = ?; \
+                  INSERT INTO RecensisciCliente VALUES (UUID(),'prenotazione annullata,?,?,?,null);";
+      annullamento = await db.query(sql, [prenData.ID_PREN, today, idUtente, prenData.ID_UR])
           .catch(err => {
               throw err;
           });
+      
+      prenData.stato_prenotazione = 'conclusa';
+      prenData.recBoolean = true;
 
       console.log('Prenotazione annullata');
-      res.redirect('/profiloHostControl/finestraPrenotazioneRicevuta');
+
+      // Invio della mail di conferma annullamento
+      let testo = "La prenotazione n." + prenData.ID_PREN + " è stata annullata dall' host";
+      inviaMailCliente(transporter, prenData.email_ut, testo).catch(err => {throw err;});
+
+      let link = '/profiloHostControl/finestraPrenotazioneRicevuta?id=' + prenData.ID_PREN;
+      res.redirect(link);
+
     });
   } catch (err) {
       console.log(err);

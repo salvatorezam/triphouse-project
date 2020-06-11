@@ -6,7 +6,7 @@ const { inviaMailHost } = require('../mailsender/mailsender-middleware');
 
 //informazioni che mi serve mantenere in memoria
 var idUtente = "";
-var prenotazioni = {};
+var prenEffettuate = {};
 var prenData = {};
 
 //const crypto = require('crypto');
@@ -49,21 +49,21 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
                       SELECT p.ID_PREN AS ID_PREN, dos.nome AS nome_osp \
                       FROM Prenotazione p, DatiOspiti dos \
                       WHERE dos.prenotazione = p.ID_PREN; \
-                      SELECT p.ID_PREN \
-                      FROM RecensisciAlloggio ra, Alloggio a, Prenotazione p\
-                      WHERE ra.alloggio = a.ID_ALL AND p.alloggio = a.ID_ALL AND ra.scrittore = ?";
-          prenotazioni = await db.query(sql1, [idUtente, idUtente])
+                      SELECT ra.prenotazione AS ID_PREN \
+                      FROM RecensisciAlloggio ra, Alloggio a \
+                      WHERE ra.alloggio = a.ID_ALL AND ra.scrittore = ?";
+          prenEffettuate = await db.query(sql1, [idUtente, idUtente])
               .catch(err => {
                   throw err;
               });
           
           //unifico i risultati delle query
-          for (elPren of prenotazioni[0]) {
+          for (elPren of prenEffettuate[0]) {
 
             //ospiti
             elPren.nomi_ospiti = "";
-            if (prenotazioni[1].length != 0) {
-              for (elDatOsp of prenotazioni[1]) {
+            if (prenEffettuate[1].length != 0) {
+              for (elDatOsp of prenEffettuate[1]) {
                 if (elPren.ID_PREN == elDatOsp.ID_PREN) {
                   elPren.nomi_ospiti = elPren.nomi_ospiti + elDatOsp.nome_osp + "-";
                 }
@@ -71,8 +71,8 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
             }
 
             //recensioni
-            if (prenotazioni[2].length != 0) {
-              for (elRec of prenotazioni[2]) {
+            if (prenEffettuate[2].length != 0) {
+              for (elRec of prenEffettuate[2]) {
                 if (elPren.ID_PREN == elRec.ID_PREN) {
                   elPren.recBoolean = true;
                 } 
@@ -80,9 +80,9 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
             }
           }
 
-          prenotazioni = prenotazioni[0];
+          prenEffettuate = prenEffettuate[0];
 
-          for (el of prenotazioni) {
+          for (el of prenEffettuate) {
             if (el.stato_prenotazione == 'conclusa') {
               prenConcluse.push(el);
             }
@@ -104,7 +104,7 @@ router.get('/finestraPrenotazioneEffettuata', getPrenotazioneEffettuata);
 
 function getPrenotazioneEffettuata(req, res, next) {
 
-  let prenDataArray = prenotazioni.filter((el) => { return el.ID_PREN == req.query.id });
+  let prenDataArray = prenEffettuate.filter((el) => { return el.ID_PREN == req.query.id });
 
   if (prenDataArray.length == 0) {
     next(createError(500));
@@ -225,6 +225,7 @@ async function annullaPrenotazione(req, res, next) {
 
       let link = '/profiloUtenteControl/finestraPrenotazioneEffettuata?id=' + prenData.ID_PREN;
       res.redirect(link);
+
     });
   } catch (err) {
       console.log(err);
