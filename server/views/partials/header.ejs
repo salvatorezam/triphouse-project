@@ -57,7 +57,7 @@
                           <div class="card text-center" style="width: 18rem;">
                             <div class="card-body row">
                               <div class="col-6">
-                                <img class="avatar-profilo shadow p-1 bg-white" src="../images/Nino.jpg" alt="..."/>
+                                <img class="avatar-profilo shadow p-1 bg-white" src="../images/ominoUtente.png" alt="..."/>
                               </div>
                               <div class="col-6">
                                 <h5 class="card-title"><%= user.nome %> <%= user.cognome %></h5>
@@ -79,6 +79,7 @@
 
             <!-- Nome utente registrato-->
             <li class="nav-item"><a class="nav-link"><%= user.nome %> <%= user.cognome %></a></li>
+            <li><img class="avatar avatar-border-white mx-3 mb-2" src="../images/ominoUtente.png"/></li>
 
             <% if(user.stato_host == 0) { %>
               <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block"><a class="btn btn-primary" href="/diventahost">Diventa Host</a></li>
