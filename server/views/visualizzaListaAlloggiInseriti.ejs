@@ -25,11 +25,11 @@
           <% data.forEach(element => { %>
           <div class="col-xl-3 col-md-4 col-sm-6 mb-5" data-marker-id="59c0c8e33b1527bfe2abaf92">
             <div class="card h-100 border-0 shadow">
-              <div class="card-img-top overflow-hidden" ><a href="/visualizzaAlloggio/visualizzaAlloggio"><img class="img-fluid" src="/images/uploads/<%=element.foto_0 %>" alt="<%= element.titolo %>"/></a></div>
+              <div class="card-img-top overflow-hidden" ><a href="/visualizzaAlloggio/visualizzaAlloggioInserito?id=<%= element.ID_ALL %>"><img class="img-fluid" src="/images/uploads/<%=element.foto_0 %>" alt="<%= element.titolo %>"/></a></div>
               <div class="card-body d-flex align-items-center">
                 <div class="w-100">
                   <p class="subtitle font-weight-normal text-sm mb-2"><%= element.tipo_all %></p>
-                  <h6 class="card-title"><a class="text-decoration-none text-dark" href="/visualizzaAlloggio/visualizzaAlloggio"><%= element.titolo %></a></h6>
+                  <h6 class="card-title"><a class="text-decoration-none text-dark" href="/visualizzaAlloggio/visualizzaAlloggioInserito?id=<%= element.ID_ALL %>"><%= element.titolo %></a></h6>
                   <div class="d-flex card-subtitle mb-3">
                     <p class="flex-grow-1 mb-0 text-muted text-sm"><%= element.citta %></p>
                   </div>

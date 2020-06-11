@@ -11,7 +11,8 @@
     <!-- header -->
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-6 py-4 p-xl-5">
+        <!--ATTENZIONE: se si deve inserire la mappa, si deve usare col-lg-auto-->
+        <div class="col-lg-auto py-4 p-xl-5">
           <form action="#" autocomplete="off">
             <div class="row">
               <div class="col-md-6 col-lg-12 col-xl-8 mb-4">
@@ -175,6 +176,7 @@
               <p class="mb-3 mb-md-0"><strong>12</strong> risultati trovati</p>
             </div>
             <div>
+              <!--ORDINA PER: decidere se eliminare o meno-->
               <label class="form-label mr-2" for="form_sort">Ordina per</label>
               <select class="selectpicker" name="sort" id="form_sort" data-style="btn-selectpicker" title="">
                 <option value="sortBy_0">Più popolare   </option>
@@ -187,7 +189,7 @@
           </div>
           <div class="row">
             <!-- place item-->
-            <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
+            <div class="col-sm-4 mb-5 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
               <div class="card h-100 border-0 shadow">
                 <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1484154218962-a197022b5858.jpg" alt="Modern, Well-Appointed Room"/><a class="tile-link" href="/alloggio"></a>
                   <div class="card-img-overlay-bottom z-index-20">
@@ -214,7 +216,7 @@
               </div>
             </div>
             <!-- place item-->
-            <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e322f3375db4d89128">
+            <div class="col-sm-4 mb-5 hover-animate" data-marker-id="59c0c8e322f3375db4d89128">
               <div class="card h-100 border-0 shadow">
                 <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1426122402199-be02db90eb90.jpg" alt="Cute Quirky Garden apt, NYC adjacent"/><a class="tile-link" href="/alloggio"></a>
                   <div class="card-img-overlay-bottom z-index-20">
@@ -241,7 +243,7 @@
               </div>
             </div>
             <!-- place item-->
-            <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e3a31e62979bf147c9">
+            <div class="col-sm-4 mb-5 hover-animate" data-marker-id="59c0c8e3a31e62979bf147c9">
               <div class="card h-100 border-0 shadow">
                 <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="Modern Apt - Vibrant Neighborhood!"/><a class="tile-link" href="/alloggio"></a>
                   <div class="card-img-overlay-bottom z-index-20">
@@ -268,7 +270,7 @@
               </div>
             </div>
             <!-- place item-->
-            <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e3503eb77d487e8082">
+            <div class="col-sm-4 mb-5 hover-animate" data-marker-id="59c0c8e3503eb77d487e8082">
               <div class="card h-100 border-0 shadow">
                 <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1494526585095-c41746248156.jpg" alt="Sunny Private Studio-Apartment"/><a class="tile-link" href="/alloggio"></a>
                   <div class="card-img-overlay-bottom z-index-20">
@@ -295,7 +297,7 @@
               </div>
             </div>
             <!-- place item-->
-            <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e39aa2eed0626e485d">
+            <div class="col-sm-4 mb-5 hover-animate" data-marker-id="59c0c8e39aa2eed0626e485d">
               <div class="card h-100 border-0 shadow">
                 <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="Mid-Century Modern Garden Paradise"/><a class="tile-link" href="/alloggio"></a>
                   <div class="card-img-overlay-bottom z-index-20">
@@ -322,7 +324,7 @@
               </div>
             </div>
             <!-- place item-->
-            <div class="col-sm-6 mb-5 hover-animate" data-marker-id="59c0c8e39aa2edasd626e485d">
+            <div class="col-sm-4 mb-5 hover-animate" data-marker-id="59c0c8e39aa2edasd626e485d">
               <div class="card h-100 border-0 shadow">
                 <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" alt="Brooklyn Life, Easy to Manhattan"/><a class="tile-link" href="/alloggio"></a>
                   <div class="card-img-overlay-bottom z-index-20">
@@ -360,9 +362,11 @@
             </ul>
           </nav>
         </div>
-        <!-- Per farlo con Google mettere id="map-container"-->
+
+
+        <!-- Per farlo con Google mettere id="map-container"
         <div class="col-lg-6 map-side-lg pr-lg-0">
-          <div id="detailMap" class="z-depth-1-half map-full shadow-left"></div>
+          <div id="detailMap" class="z-depth-1-half map-full shadow-left"></div>-->
 
         </div>
       </div>
