@@ -1,7 +1,18 @@
-<div class="row" id="ospite">
+<div id="ospite">
+  <div class="form-row">
+    <div class="form-group col-sm-4">
+      <label class="form-label" for="nome"> Nome *</label>  
+      <input class="form-control" name="nome" id="nome" type="text" placeholder="Nome" maxlength="40" autocomplete="off" required>
+    </div>
+    <div class="form-group col-4">
+      <label class="form-label" for="cognome"> Cognome *</label>
+      <input class="form-control" name="cognome" id="cognome" type="text" placeholder="Cognome" maxlength="40" autocomplete="off" required>
+    </div>
+  </div>
+  <div class="row"> 
     <div class="form-group col-6">
       <label class="form-label" name="nazione" id="form_nazionalità" for="loginNazione" data-style="btn-selectpicker"> Nazione *</label>
-      <select id="nazione" name="nazione" class="form-control" required>
+      <select id="nazione" name="nazione" class="form-control">
           <option value="Afghanistan">Afghanistan</option>
           <option value="Åland Islands">Åland Islands</option>
           <option value="Albania">Albania</option>
@@ -250,11 +261,12 @@
     </div>
     <div class="col-md-5">
       <label class="form-label" name="nazione" id="form_nazionalità" for="loginNazione" data-style="btn-selectpicker"> Età *</label>
-      <select class="selectpicker form-control" name="età" id="eta_ospiti" data-style="btn-selectpicker" title=" ">
+      <select class="selectpicker form-control" name="età" id="eta_ospiti" data-style="btn-selectpicker">
           <option value="eta_0">Adulto</option>
           <option value="eta_1">Bambino</option>
           <option value="eta_2">Neonato</option>
       </select>
     </div>
 
+  </div>
 </div>
