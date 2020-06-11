@@ -162,10 +162,10 @@
                       <h5 class="mb-4">Accetta o declina la prenotazione </h5>
                       <div class="row">
                         <div class="col-sm-6 mb-2">
-                          <button class="col btn btn-success" type="submit">Accetta</button>
+                          <a href="/profiloHostControl/accettaPrenotazione" id="accettaPrenotazione"><button class="col btn btn-success">Accetta</button></a>
                         </div>
                         <div class="col-sm-6 mb-2">
-                          <button class="col btn btn-danger" type="submit">Declina</button>
+                          <a href="/profiloHostControl/declinaPrenotazione" id="declinaPrenotazione"><button class="col btn btn-danger">Declina</button></a>
                         </div>
                       </div>
                     </div>
@@ -193,13 +193,21 @@
 
       $(document).ready(function() {
       
-      $('#confermaAnnullamento').on('click', function() {
-        window.alert('Operazione andata a buon fine');
-      });
+        $('#confermaAnnullamento').on('click', function() {
+          window.alert('Operazione andata a buon fine');
+        });
 
-      $('#inviaRecensione').on('click', function() {
-        window.alert('Operazione andata a buon fine');
-      });
+        $('#inviaRecensione').on('click', function() {
+          window.alert('Operazione andata a buon fine');
+        });
+
+        $('#accettaPrenotazione').on('click', function() {
+          window.alert('Operazione andata a buon fine');
+        });
+
+        $('#declinaPrenotazione').on('click', function() {
+          window.alert('Operazione andata a buon fine');
+        });
       });
     </script>
 

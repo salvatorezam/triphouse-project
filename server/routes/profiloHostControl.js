@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var createError = require('http-errors');
 const { transporter } = require('../mailsender/mailsender-config');
-const { inviaMailCliente } = require('../mailsender/mailsender-middleware');
+const { inviaMailCliente, inviaMailConferma, inviaMailDeclinazione } = require('../mailsender/mailsender-middleware');
 
 //creo degli array per salvare gli id delle prenotazioni
 var idUtente = "";
@@ -45,7 +45,8 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                         p.prezzo_totale AS prezzo_totale, p.data_pren AS data_prenotazione \
                         FROM Prenotazione p, Alloggio a, UtenteRegistrato ur \
                         WHERE p.alloggio = a.ID_ALL AND p.utente = ur.ID_UR AND a.proprietario = ? \
-                        GROUP BY p.ID_PREN; \
+                        GROUP BY p.ID_PREN \
+                        ORDER BY data_inizio DESC; \
                         SELECT p.ID_PREN AS ID_PREN, dos.nome AS nome_osp \
                         FROM Prenotazione p, DatiOspiti dos \
                         WHERE p.ID_PREN = dos.prenotazione; \
@@ -186,7 +187,7 @@ router.get('/annullaPrenotazione', annullaPrenotazione);
 async function annullaPrenotazione(req, res, next) {
 
   const db = await makeDb(config);
-  var today = new Date()
+  let today = new Date();
 
   try {
     await withTransaction(db, async() => {
@@ -208,6 +209,81 @@ async function annullaPrenotazione(req, res, next) {
       // Invio della mail di conferma annullamento
       let testo = "La prenotazione n." + prenData.ID_PREN + " è stata annullata dall' host.";
       inviaMailCliente(transporter, prenData.email_ut, testo).catch(err => {throw err;});
+
+      let link = '/profiloHostControl/finestraPrenotazioneRicevuta?id=' + prenData.ID_PREN;
+      res.redirect(link);
+
+    });
+  } catch (err) {
+      console.log(err);
+      next(createError(500));
+  }
+}
+
+/* Accetta Prenotazione */
+router.get('/accettaPrenotazione', accettaPrenotazione);
+
+async function accettaPrenotazione(req, res, next) {
+
+  const db = await makeDb(config);
+
+  try {
+    await withTransaction(db, async() => {
+
+      let sql = "UPDATE Prenotazione \
+                  SET stato_prenotazione = 'confermata' \
+                  WHERE ID_PREN = ?;";
+      accetta = await db.query(sql, prenData.ID_PREN)
+          .catch(err => {
+              throw err;
+          });
+      
+      prenData.stato_prenotazione = 'confermata';
+
+      console.log('Prenotazione confermata');
+
+      // Invio della mail di conferma
+      let testo = "La prenotazione n." + prenData.ID_PREN + " è stata accettata dall' host.";
+      inviaMailConferma(transporter, prenData.email_ut, testo).catch(err => {throw err;});
+
+      let link = '/profiloHostControl/finestraPrenotazioneRicevuta?id=' + prenData.ID_PREN;
+      res.redirect(link);
+
+    });
+  } catch (err) {
+      console.log(err);
+      next(createError(500));
+  }
+}
+
+/* Declina Prenotazione */
+router.get('/declinaPrenotazione', declinaPrenotazione);
+
+async function declinaPrenotazione(req, res, next) {
+
+  const db = await makeDb(config);
+  let today = new Date()
+
+  try {
+    await withTransaction(db, async() => {
+
+      let sql = "UPDATE Prenotazione \
+                  SET stato_prenotazione = 'conclusa' \
+                  WHERE ID_PREN = ?; \
+                  INSERT INTO RecensisciCliente VALUES (UUID(),'prenotazione declinata',?,?,?,?,null);";
+      accetta = await db.query(sql, [prenData.ID_PREN, today, idUtente, prenData.ID_UR, prenData.ID_PREN])
+          .catch(err => {
+              throw err;
+          });
+      
+      prenData.stato_prenotazione = 'conclusa';
+      prenData.recBoolean = true;
+
+      console.log('Prenotazione declinata');
+
+      // Invio della mail di declinazione
+      let testo = "La prenotazione n." + prenData.ID_PREN + " è stata DECLINATA dall' host. Siamo spiacenti.";
+      inviaMailDeclinazione(transporter, prenData.email_ut, testo).catch(err => {throw err;});
 
       let link = '/profiloHostControl/finestraPrenotazioneRicevuta?id=' + prenData.ID_PREN;
       res.redirect(link);

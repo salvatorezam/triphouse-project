@@ -45,7 +45,8 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
                       a.nome_proprietario AS nome_proprietario, p.prezzo_totale AS prezzo_totale, uh.email AS email_uh, \
                       p.stato_prenotazione AS stato_prenotazione \
                       FROM Prenotazione p, Alloggio a , UtenteRegistrato uh \
-                      WHERE p.alloggio = a.ID_ALL AND a.proprietario = uh.ID_UR AND p.utente = ?; \
+                      WHERE p.alloggio = a.ID_ALL AND a.proprietario = uh.ID_UR AND p.utente = ? \
+                      ORDER BY data_inizio DESC; \
                       SELECT p.ID_PREN AS ID_PREN, dos.nome AS nome_osp \
                       FROM Prenotazione p, DatiOspiti dos \
                       WHERE dos.prenotazione = p.ID_PREN; \
