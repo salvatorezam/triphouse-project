@@ -13,10 +13,6 @@ let alloggiInseriti = [];
 const { config } = require('../db/config');
 const { makeDb, withTransaction } = require('../db/dbmiddleware');
 
-/* GET visualizzaAlloggioInserito */
-router.get('/visualizzaAlloggio', function(req, res, next) {
-  res.render('visualizzaAlloggio');
-});
 
 
 /* GET visualizzaListaAlloggiInseriti */
@@ -27,7 +23,6 @@ async function listaAlloggiInseriti(req, res, next) {
   const db = await makeDb(config);
   let results = {};
  
-  
     try {
       await withTransaction(db, async() => {
 
@@ -56,12 +51,32 @@ async function listaAlloggiInseriti(req, res, next) {
           //res.render('finestraListaPrenotazioniEffettuate', {data : {dataC: prenConcluse, dataNC: prenNonConcluse}}); //di mauro
 
           res.render('visualizzaListaAlloggiInseriti', {data : alloggiInseriti});
-
+    
       });
     } catch (err) {
         console.log(err);
         next(createError(500));
     }
 }
+
+
+/* GET visualizzaAlloggioInserito */
+router.get('/visualizzaAlloggioInserito', function(req, res, next) {
+
+    let alloggio;
+
+    alloggiInseriti.forEach(element => {
+        
+        if(element.ID_ALL == req.query.id){
+
+            console.log('funziona: ');
+            console.log( element);
+            return alloggio = element;
+        }
+    });
+
+
+    res.render('visualizzaAlloggioInserito', {data : alloggio});
+  });
 
 module.exports = router;
