@@ -106,7 +106,12 @@ function getPrenotazioneEffettuata(req, res, next) {
 
   let prenDataArray = prenotazioni.filter((el) => { return el.ID_PREN == req.query.id });
 
-  prenData = prenDataArray[0];
+  if (prenDataArray.length == 0) {
+    next(createError(500));
+  }
+  else {
+    prenData = prenDataArray[0];
+  }
 
   let stato_pren = "";
   let stato_rec = "";
@@ -125,11 +130,14 @@ function getPrenotazioneEffettuata(req, res, next) {
   //check per verificare la possibilità di pagamento
   if (prenData.stato_prenotazione == 'richiesta' || prenData.stato_prenotazione == 'pagata') {
 
+    //disabilita tasto pagamento
     stato_pag = "disabled";
   }
 
   //check per verificare la possibilità di recensire (in base a recensioni già fatte o conclusione vacanza)
   if (prenData.stato_prenotazione != 'conclusa' || prenData.recBoolean == true) {
+
+    //disabilita tasto recensione
     stato_rec = "disabled";
   }
 

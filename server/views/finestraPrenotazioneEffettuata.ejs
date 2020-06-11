@@ -75,11 +75,11 @@
           </div>
           <div class="text-block">
             <h6 class="mb-3">Chi viene con te</h6>
-            <div class="row mb-3"> <!-- DA FARE PER GLI OSPITI -->
+            <div class="row mb-3">
               <% let ospiti = data.data_pren.nomi_ospiti; if (ospiti == "") { %>
-              <p> Nessun altro ospite verrà con te</p>
+              <p class="text-muted mb-0 pl-3">Nessun altro ospite verrà con te</p>
               <% } else { ospiti = data.data_pren.nomi_ospiti.slice(0, (ospiti.length-1)); ospiti = ospiti.split('-'); for (osp of ospiti) { %>
-              <div class="col-auto text-center text-sm"><img class="avatar avatar-border-white mb-1" src="../images/ominoUtente.png" alt="Ondrej"><br><%= osp %></div>
+              <div class="col-auto text-center text-sm"><img class="avatar avatar-border-white mb-1" src="../images/ominoUtente.png"><br><%= osp %></div>
               <% }}; %>
               </div>
           </div>
