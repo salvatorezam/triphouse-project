@@ -1,5 +1,4 @@
 var express = require('express'); 
-const https = require('https');
 var router = express.Router();
 
 /* GET home page. */
@@ -20,6 +19,11 @@ router.get('/registrazione', function(req, res, next) {
 /* GET autenticazione. */
 router.get('/autenticazione', function(req, res, next) {
   res.render('autenticazione');
+});
+
+/* GET diventa host. */
+router.get('/diventahost', function(req, res, next) {
+  res.render('finestraDiventaHost');
 });
 
 /* GET aggiungiAlloggio */

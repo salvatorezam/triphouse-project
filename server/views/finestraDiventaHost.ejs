@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <% include partials/head.ejs %>
+  </head>
+
+  <body style="padding-top: 72px;">
+
+    <!-- header -->
+    <% include partials/header.ejs %>
+    <!-- header -->
+
+    <section class="py-5">
+      <div class="container">
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb pl-0  justify-content-start">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active">Diventa host  </li>
+        </ol>
+        <h1 class="hero-heading mb-0">Diventa Host</h1>
+        <p class="text-muted mb-5">Accedi ai servizi riservati agli host.</p>
+        <form method="POST" action="/RegAutControl/diventahost">
+         <div class="row">
+            <div class="col-lg-7">
+                <div class="text-block"> 
+                 <div class="row mb-3">
+                    <div class="col-sm-9">
+                     <h5>Conferma la password</h5>
+                    </div>
+                    <div class="col-sm-3 text-right">
+                     <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#inseriscipassword" aria-expanded="false" aria-controls="inseriscipassword">Inserisci</button>
+                    </div>
+                 </div>
+                 <p class="text-sm text-muted">Ci teniamo alla tua sicurezza.<br> Reinserisci la password del tuo account per confermare la tua identità e la tua intenzione di passare allo stato di host.</p>
+                 <div class="collapse" id="inseriscipassword">
+                  <div class="row pt-4">
+                   <div class="form-group col-md-6">
+                    <label class="form-label" for="name">Password</label> <!--  ------------------------------>
+                    <input class="form-control" type="password" name="password" id="password" size="32" maxlength="40" required>
+                    <div>&nbsp</div>
+                   </div>
+                  </div>
+                  <button class="btn btn-outline-primary mb-4" id="confermaPassword" type="button">Verifica</button>   
+                 </div>
+            </div>
+
+            <div class="text-block"> 
+             <div class="row mb-3">
+              <div class="col-sm-9">
+               <h5>Qualche ultimo promemoria</h5>
+              </div>
+              <div class="col-sm-3 text-right">
+              <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#conferma" aria-expanded="false" aria-controls="conferma">Leggi e conferma</button>
+             </div>
+            </div>
+            
+            <div class="collapse" id="conferma">  
+             <div class="row pt-4">
+              <div class="form-group col-md-12">
+               <p class="text-sm text-muted">Stai per diventare un host.<br> Da ora in poi avrai delle responsabilità aggiuntive, sia nei confronti di TripHouse che dei tuoi clienti.
+                    Ricordati di aggiornare le informazioni sul tuo profilo per permettere ai clienti di contattarti, e di aggiungere tutti i dati necessari sugli alloggi in cui vuoi ospitare i clienti.</p>
+              </div>
+              </div>
+              <button class="btn btn-outline-primary mb-4" id="confermaPassword" type="submit">Diventa host</button> 
+             </div>
+            </div>
+         </div>
+        </form>
+
+          <div class="col-md-6 col-lg-4 ml-lg-auto">
+            <div class="card border-0 shadow">
+              <div class="card-header bg-primary-light py-4 border-0">
+                <div class="media align-items-center">
+                  <div class="media-body">
+                    <h4 class="h6 subtitle text-sm text-primary">Perchè diventare host?</h4>
+                  </div>
+                  <svg class="svg-icon svg-icon svg-icon-light w-3rem h-3rem ml-3 text-primary">
+                    <use xlink:href="#identity-1"> </use>
+                  </svg>
+                </div>
+              </div>
+              <div class="card-body p-4">
+                <p class="text-muted text-sm card-text">TripHouse ti offre anche la possibilità di gestire agevolmente l'<strong>affitto delle tue proprietà</strong>.</p>
+                <p class="text-muted text-sm card-text"> <strong>Hai il controllo completo</strong> dei tuoi alloggi, delle prenotazioni e puoi persino effettuare con facilità le <strong>procedure economiche</strong> e di <strong>comunicazione dei dati degli ospiti!</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Footer-->
+    <% include partials/footer.ejs %>
+    <!-- Script Footer -->
+    <% include partials/scriptFooter.ejs %>
+
+    <script>
+        $('#confermaPassword').click(function(ev) {
+            let password = $('#password').val();
+            $.ajax({
+                context: this,
+                url: '/RegAutControl/controllopassword',
+                type: 'POST',
+                data: {password:password},
+                success: response => {
+                    console.log('Response from server is ' + response);
+                    if (response.localeCompare('WRONG-PASSWORD') == 0) {
+                        $('#password').siblings('div').removeClass('text-success').html('&nbsp');
+                        $('#password').val('').attr('placeholder', 'Password errata!').focus();
+                    }
+                    else {
+                        $('#password').siblings('div').addClass('text-success').text('Identità verificata!');   
+                    }
+                }
+            });
+        });
+    </script>
+  </body>
+</html>

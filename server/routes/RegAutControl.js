@@ -23,6 +23,14 @@ router.post('/utenteregistrato', registrazione);
 /* Autenticazione Utente */
 router.post('/accesso', autenticazione);
 
+/* Controllo della password scorpato dall'autenticazione */
+router.post('/controllopassword', controllopassword);
+
+/* Diventa Host per utenti già registrati */
+router.post('/diventahost', diventahost);
+
+/* Log out */
+router.get('/logout', logout);
 
 async function controllaMail(req, res, next) {
     const db = await makeDb(config);
@@ -101,8 +109,8 @@ async function autenticazione(req, res, next) { // sistemare il messaggio di err
     try {
         await withTransaction(db, async() => {  
             // ricerca utente
-            results = await db.query("SELECT ur.ID_UR AS ID_UR, c.email AS email, \
-                                    c.salt AS salt, c.password_hash AS password_hash \
+            results = await db.query("SELECT ur.ID_UR AS ID_UR, ur.nome AS nome, ur.cognome AS cognome, c.email AS email, \
+                                    ur.stato_host AS stato_host, c.salt AS salt, c.password_hash AS password_hash \
                                     FROM Credenziali c, UtenteRegistrato ur \
                                     WHERE ur.email = c.email AND c.email=?;", 
                         req.body.loginUsername)
@@ -124,10 +132,15 @@ async function autenticazione(req, res, next) { // sistemare il messaggio di err
                     req.session.user = {
                         loggedin : true,
                         id_utente : results[0].ID_UR,
+                        nome : results[0].nome,
+                        cognome : results[0].cognome,
+                        email : results[0].email,
+                        stato_host : results[0].stato_host
                     };
                     req.session.save();
 
-                    res.redirect('/');
+                    req.app.locals.user = req.session.user;
+                    res.render('index');
                 }
                 else {
                     res.send('WRONG-PASSWORD');
@@ -140,5 +153,73 @@ async function autenticazione(req, res, next) { // sistemare il messaggio di err
         next(createError(500));
     }
 }
+
+async function controllopassword(req, res, next) {
+    // istanziamo il middleware
+    const db = await makeDb(config);
+    let results = {};
+    try {
+        await withTransaction(db, async() => {  
+            results = await db.query("SELECT ur.ID_UR AS ID_UR, ur.nome AS nome, ur.cognome AS cognome, c.email AS email, \
+                                    ur.stato_host AS stato_host, c.salt AS salt, c.password_hash AS password_hash \
+                                    FROM Credenziali c, UtenteRegistrato ur \
+                                    WHERE ur.email = c.email AND c.email=?;", req.session.user.email)
+                .catch(err => {
+                    throw err;
+                });
+            let hashedPasswordDataCheck = sha512(req.body.password, results[0].salt);
+            if (hashedPasswordDataCheck.passwordHash == results[0].password_hash) {
+                console.log('Password confermata.');
+                res.send('PASSWORD-OK');  
+            }
+            else {
+                res.send('WRONG-PASSWORD');
+                //next(createError(403, 'Password errata'));
+            }      
+        });
+    } catch (err) {
+        console.log(err);
+        next(createError(500));
+    }
+}
+
+async function diventahost(req, res, next) { 
+   // istanziamo il middleware
+   const db = await makeDb(config);
+   let results = {};
+   try {
+       await withTransaction(db, async() => {  
+           results = await db.query("UPDATE UtenteRegistrato SET stato_host = 1 WHERE ID_UR = ?", req.session.user.id_utente)
+               .catch(err => {
+                   throw err;
+               });
+            req.session.user.stato_host = true;
+            console.log('Stato host aggiornato.'); 
+            res.render('index');        
+       });
+   } catch (err) {
+       console.log(err);
+       next(createError(500));
+   }
+}
+
+
+async function logout(req, res, next) { 
+    // istanziamo il middleware
+    const db = await makeDb(config);
+    let results = {};
+    try {
+        await withTransaction(db, async() => {  
+            req.session.user = undefined;
+            req.app.locals.user = req.session.user;
+            req.session.destroy();
+            console.log('Log out effettuato.'); 
+            res.redirect('/');
+        });
+    } catch (err) {
+        console.log(err);
+        next(createError(500));
+    }
+ }
 
 module.exports = router;
