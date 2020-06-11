@@ -1,9 +1,5 @@
-class DatiOspite {
+class DocUtenteR {
     constructor(){
-        this.nome=null;
-        this.cognome=null;
-        this.nazionalita=null;
-        this.eta=null;
         this.tipo_doc=null;
         this.num_doc=null;
         this.scadenza_doc=null;
@@ -11,8 +7,8 @@ class DatiOspite {
         this.prenotazione=null;
         this.foto_doc=null;
 
-        console.log('ospite istanziato');
+        console.log('documento utente istanziato');
     }
 }
 
-module.exports = DatiOspite;
+module.exports = DocUtenteR;

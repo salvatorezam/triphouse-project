@@ -7,6 +7,7 @@ class prenotazione {
         this.data_pren=null;
         this.prezzo_totale=null;
         this.stato_prenotazione=null;
+        this.tipo_pagamento=null;
 
         console.log('prenotazione istanziata');
     }
