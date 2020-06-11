@@ -27,6 +27,7 @@
 		data_rec DATE,
 		scrittore VARCHAR(36) REFERENCES UtenteRegistrato(ID_UR),
 		ricevente VARCHAR(36) REFERENCES UtenteRegistrato(ID_UR),
+    	prenotazione VARCHAR(36) REFERENCES Prenotazione(ID_PREN),
 		valutazione INT CHECK(valutazione >=1 AND valutazione <=5)
 	);
 
@@ -36,6 +37,7 @@
 		data_rec DATE,
 		scrittore VARCHAR(36) REFERENCES UtenteRegistrato(ID_UR),
 		alloggio VARCHAR(36) REFERENCES Alloggio(ID_ALL),
+	    prenotazione VARCHAR(36) REFERENCES Prenotazione(ID_PREN),
 		valutazione INT CHECK(valutazione >=1 AND valutazione <=5)
 	);
 
@@ -105,7 +107,8 @@
 		data_fine DATE,
 		data_pren DATE,
 		prezzo_totale DECIMAL,
-		stato_prenotazione VARCHAR(20)
+		stato_prenotazione VARCHAR(20),
+		tipo_pagamento VARCHAR(20)
 	);
 
 	CREATE TABLE IF NOT EXISTS DatiOspiti (
@@ -116,8 +119,17 @@
 		num_doc VARCHAR(10),
 	--	Foto_doc, 
 		nazionalita VARCHAR(40),
-		scedenza_doc DATE,
+		scadenza_doc DATE,
 		eta INT,
+		prenotazione VARCHAR(36) REFERENCES Prenotazione(ID_PREN)
+	);
+
+	CREATE TABLE IF NOT EXISTS DocumentiUtenteR(
+		ID_DO VARCHAR(36) PRIMARY KEY, 
+		tipo_doc VARCHAR(20),
+		num_doc VARCHAR(10),
+		autorita_doc VARCHAR(40),
+		scadenza_doc DATE,
 		prenotazione VARCHAR(36) REFERENCES Prenotazione(ID_PREN)
 	);
 
@@ -134,13 +146,13 @@
 	INSERT INTO Credenziali VALUES ('g.rosati@gmail.com','aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','giurosatipass');
 	INSERT INTO Credenziali VALUES ('piero.alex@gmail.com','aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','piealepass');
 
-	INSERT INTO RecensisciCliente VALUES (UUID(),'ha lasciato tutto in ordine','2020-3-6','b9db1cb1-a99e-11ea-b30a-a066100a22be','b532de10-a99e-11ea-b30a-a066100a22be','4');
+	INSERT INTO RecensisciCliente VALUES (UUID(),'ha lasciato tutto in ordine','2020-3-6','b9db1cb1-a99e-11ea-b30a-a066100a22be','b532de10-a99e-11ea-b30a-a066100a22be','495ea9e7-a9a0-11ea-b30a-a066100a22be','4');
 
 	INSERT INTO Alloggio VALUES (UUID(),'b9db1cb1-a99e-11ea-b30a-a066100a22be','casa vacanza','Giuseppe','via p. trino',120,90100,'Lazio','Roma','RM',7,'M',1,1,3,1,true,false,true,true,false,false,true,true,true,true,true,true,true,'Casa Roma','casa in città de roma','nun se po fa nulla','state attenti ar cane',3.5,36,null,null,null,null,null,null);
 	INSERT INTO Alloggio VALUES (UUID(),'b9db1cb1-a99e-11ea-b30a-a066100a22be','casa vacanza','Giuseppe','via catone',90,90100,'Lazio','Roma','RM',5,'M',1,1,3,1,true,false,true,true,false,false,true,true,true,true,true,true,true,'Casa Roma','casa in città de roma','nun se po fa nulla','state attenti ar cane',3.5,36,null,null,null,null,null,null);
 	INSERT INTO Alloggio VALUES (UUID(),'b9db1cb1-a99e-11ea-b30a-a066100a22be','casa vacanza','Giuseppe','via tirolo',60,90100,'Lazio','Roma','RM',7,'M',1,1,3,1,true,false,true,true,false,false,true,true,true,true,true,true,true,'Casa Roma','casa in città de roma','nun se po fa nulla','state attenti ar cane',3.5,36,null,null,null,null,null,null);
 
-	INSERT INTO RecensisciAlloggio VALUES (UUID(),'mi sono trovato bene','2020-3-7','b532de10-a99e-11ea-b30a-a066100a22be','8b3d4384-a99f-11ea-b30a-a066100a22be',4);
+	INSERT INTO RecensisciAlloggio VALUES (UUID(),'mi sono trovato bene','2020-3-7','b532de10-a99e-11ea-b30a-a066100a22be','8b3d4384-a99f-11ea-b30a-a066100a22be','495ea9e7-a9a0-11ea-b30a-a066100a22be',4);
 
 	INSERT INTO DateDisponibili VALUES (UUID(),'2020-7-1','2020-12-31','8b3d4384-a99f-11ea-b30a-a066100a22be');
 
