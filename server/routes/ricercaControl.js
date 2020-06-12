@@ -46,7 +46,7 @@ async function listaRicerca(req, res, next) {
             
         arrayAlloggi = results1;
 
-        contatoreAlloggi = 0;
+        (arrayAlloggi.length > 6 ? contatoreAlloggi = 6 : 0); 
         console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
         console.log(arrayAlloggi);
 
@@ -65,7 +65,7 @@ router.get('/paginaSuccessiva', paginaSuccessiva);
 
 async function paginaSuccessiva(req,res,next){
 
-    contatoreAlloggi = contatoreAlloggi + 6;
+    contatoreAlloggi = arrayAlloggi.length - contatoreAlloggi;
 
     res.render('listaRicerca', {data : {array : arrayAlloggi, contatore : contatoreAlloggi}})
 
