@@ -23,69 +23,21 @@
 
                 <h6 class="subtitle text-muted" style="margin-bottom:2em;">La parte noisa della prenotazione della tua vacanza</h6>
                 <div class="text-block">
-                  <!--inizio form documenti utenti registrati-->
+                  
                   <!-- in action bisogna specificare dove devono essere caricati i campi del form con il file-->
-                 <form name="formDocumenti" action="/prenotazione/prenotazionePg4" method="POST">
-                    <label class="h5">Inserisci i tuoi documenti</label>
-                    <p class="text-muted">seleziona il tipo di documento</p>
-                        <fieldset class=" col-lg-4">
-                            <div class="form-group" style="text-align: center; margin-top: 1em; ">
-                                <input type="radio" class="tipoDoc" id="caDocU" name="documentoU" value="carta di identità" autocomplete="off" required>
-                                <label for="caDocU">Carta d'identità</label><br />
-                                <input type="radio" class="tipoDoc" id="pasDocU" name="documentoU" value="passaporto" autocomplete="off" required>
-                                <label for="pasDocU">Passaporto</label><br />
-                            </div>
-                        </fieldset>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <label class="form-label" for="numDocU">Numero Documento</label>
-                                <input class="form-control" name="numeroDocU" id="numDocU" type="text">
-                            </div>
-                            <div class="col-lg-4">
-                                <label class="form-label" for="dataDocU">Data scadenza</label>
-                                <input class="form-control" name="scadenzaDocU" id="dataDocU" type="date">
-                            </div>
-                            <div class="col-lg-4">
-                                <label class="form-label" for="autoritaDocU">Rilasciato da:</label>
-                                <input class="form-control" name="autoritaDocumentoU" id="autoritaDocU" type="text">
-                            </div>
-                        </div>
+                 <form name="formDocumenti" action="/prenotazione/upload" method="POST" enctype="multipart/form-data" >
+                    <div name = "miomodulo">
                         <div class="row">
                             <div class="col-lg-8">
-                                <label class="form-label" for="fileDocU">Inserisci la scanzione del documento</label>
+                                <label class="form-label" for="fileDocU">Inserisci la scanzione del tuo documento</label>
                                 <input class="form-control" type="file" name="fileDocU" id="fileDocU" autocomplete="off">
-                            </div>   
-                        </div>
+                            </div> 
+                        </div>    
                         <!--inizio form documenti ospiti-->
-                        <button class="btn btn-link btn-collapse pl-0 text-muted" data-toggle="collapse" data-target="#formDocOspiti" aria-expanded="false" aria-controls="formDocOspiti" data-expanded-text="Chiudi" data-collapsed-text="Inserisci documenti ospiti">Inserisci documenti Ospiti</button>
+                        <div class="btn btn-link btn-collapse pl-0 text-muted" data-toggle="collapse" data-target="#formDocOspiti" aria-expanded="false" aria-controls="formDocOspiti" data-expanded-text="Chiudi" data-collapsed-text="Inserisci documenti ospiti">Inserisci documenti Ospiti</div>
                         <div class=" text-block row collapse" id="formDocOspiti"> 
                             <div id="Ospite1">
                                 <h5>Ospite 1</h5>
-                                <p class="text-muted">seleziona il tipo di documento</p>
-                                <!-- in action bisogna specificare dove devono essere caricati i campi del form con il file-->
-                                
-                                <fieldset class=" col-lg-4">
-                                    <div class="form-group" style="text-align: center; margin-top: 1em;">
-                                        <input type="radio" class="tipoDoc" id="caDoc1" name="documento1" value="carta di identità" autocomplete="off" required>
-                                        <label for="caDoc1">Carta d'identità</label><br />
-                                        <input type="radio" class="tipoDoc" id="pasDoc1" name="documento1" value="passaporto" autocomplete="off" required>
-                                        <label for="pasDoc1">Passaporto</label><br />
-                                    </div>
-                                </fieldset>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="numDoc1">Numero Documento</label>
-                                        <input class="form-control" name="numeroDoc1" id="numDoc1" type="text">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="dataDoc1">Data scadenza</label>
-                                        <input class="form-control" name="scadenzaDoc1" id="dataDoc1" type="date">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="autoritaDoc1">Rilasciato da:</label>
-                                        <input class="form-control" name="autoritaDocumento1" id="autoritaDoc1" type="text">
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-lg-8">
                                         <label class="form-label" for="fileDoc1">Inserisci la scanzione del documento</label>
@@ -95,31 +47,6 @@
                             </div> 
                             <div style="margin-top: 1em;" id="Ospite2">
                                 <h5>Ospite 2</h5>
-                                <p class="text-muted">seleziona il tipo di documento</p>
-                                <!-- in action bisogna specificare dove devono essere caricati i campi del form con il file-->
-                            
-                                <fieldset class=" col-lg-4">
-                                    <div class="form-group" style="text-align: center; margin-top: 1em;">
-                                        <input type="radio" class="tipoDoc" id="caDoc2" name="documento2" value="carta di identità" autocomplete="off" required>
-                                        <label for="caDoc2">Carta d'identità</label><br />
-                                        <input type="radio" class="tipoDoc" id="pasDoc2" name="documento2" value="passaporto" autocomplete="off" required>
-                                        <label for="pasDoc2">Passaporto</label><br />
-                                    </div>
-                                </fieldset>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="numDoc2">Numero Documento</label>
-                                        <input class="form-control" name="numeroDoc2" id="numDoc2" type="text">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="dataDoc2">Data scadenza</label>
-                                        <input class="form-control" name="scadenzaDoc2" id="dataDoc2" type="date">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="autoritaDoc2">Rilasciato da:</label>
-                                        <input class="form-control" name="autoritaDocumento2" id="autoritaDoc2" type="text">
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-lg-8">
                                         <label class="form-label" for="fileDoc2">Inserisci la scanzione del documento</label>
@@ -129,31 +56,6 @@
                             </div> 
                             <div style="margin-top:1em;" id="Ospite3">
                                 <h5>Ospite 3</h5>
-                                <p class="text-muted">seleziona il tipo di documento</p>
-                                <!-- in action bisogna specificare dove devono essere caricati i campi del form con il file-->
-                            
-                                <fieldset class=" col-lg-4">
-                                    <div class="form-group" style="text-align: center; margin-top: 1em; ">
-                                        <input type="radio" class="tipoDoc" id="caDoc3" name="documento3" value="carta di identità" autocomplete="off" required>
-                                        <label for="caDoc3">Carta d'identità</label><br />
-                                        <input type="radio" class="tipoDoc" id="pasDoc3" name="documento3" value="passaporto" autocomplete="off" required>
-                                        <label for="pasDoc3">Passaporto</label><br />
-                                    </div>
-                                </fieldset>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="numDoc3">Numero Documento</label>
-                                        <input class="form-control" name="numeroDoc3" id="numDoc3" type="text">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="dataDoc3">Data scadenza</label>
-                                        <input class="form-control" name="scadenzaDoc3" id="dataDoc3" type="date">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="autoritaDoc3">Rilasciato da:</label>
-                                        <input class="form-control" name="autoritaDocumento3" id="autoritaDoc3" type="text">
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-lg-8">
                                         <label class="form-label" for="fileDoc3">Inserisci la scanzione del documento</label>
@@ -163,30 +65,6 @@
                             </div>               
                             <div style="margin-top:1em;" id="Ospite4">
                                 <h5>Ospite 4</h5>
-                                <p class="text-muted">seleziona il tipo di documento</p>
-                            
-                                <fieldset class=" col-lg-4">
-                                    <div class="form-group" style="text-align: center; margin-top: 1em;">
-                                        <input type="radio" class="tipoDoc" id="caDoc4" name="documento4" value="carta di identità" autocomplete="off" required>
-                                        <label for="caDoc4">Carta d'identità</label><br />
-                                        <input type="radio" class="tipoDoc" id="pasDoc4" name="documento4" value="passaporto" autocomplete="off" required>
-                                        <label for="pasDoc4">Passaporto</label><br />
-                                    </div>
-                                </fieldset>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="numDoc4">Numero Documento</label>
-                                        <input class="form-control" name="numeroDoc4" id="numDoc4" type="text">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="dataDoc4">Data scadenza</label>
-                                        <input class="form-control" name="scadenzaDoc4" id="dataDoc4" type="date">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="autoritaDoc4">Rilasciato da:</label>
-                                        <input class="form-control" name="autoritaDocumento4" id="autoritaDoc4" type="text">
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-lg-8">
                                         <label class="form-label" for="fileDoc4">Inserisci la scanzione del documento</label>
@@ -196,31 +74,6 @@
                             </div>    
                             <div style="margin-top:1em;" id="Ospite5">
                                 <h5>Ospite 5</h5>
-                                <p class="text-muted">seleziona il tipo di documento</p>
-                                <!-- in action bisogna specificare dove devono essere caricati i campi del form con il file-->
-                            
-                                <fieldset class=" col-lg-4">
-                                    <div class="form-group" style="text-align: center; margin-top: 1em;">
-                                        <input type="radio" class="tipoDoc" id="caDoc5" name="documento5" value="carta di identità" autocomplete="off" required>
-                                        <label for="caDoc5">Carta d'identità</label><br />
-                                        <input type="radio" class="tipoDoc" id="pasDoc5" name="documento5" value="passaporto" autocomplete="off" required>
-                                        <label for="pasDoc5">Passaporto</label><br />
-                                    </div>
-                                </fieldset>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="numDoc5">Numero Documento</label>
-                                        <input class="form-control" name="numeroDoc5" id="numDoc5" type="text">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="dataDoc5">Data scadenza</label>
-                                        <input class="form-control" name="scadenzaDoc5" id="dataDoc5" type="date">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="autoritaDoc5">Rilasciato da:</label>
-                                        <input class="form-control" name="autoritaDocumento5" id="autoritaDoc5" type="text">
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-lg-8">
                                         <label class="form-label" for="fileDoc5">Inserisci la scanzione del documento</label>
@@ -230,31 +83,6 @@
                             </div> 
                             <div style="margin-top:1em;" id="Ospite6">
                                 <h5>Ospite 6</h5>
-                                <p class="text-muted">seleziona il tipo di documento</p>
-                                <!-- in action bisogna specificare dove devono essere caricati i campi del form con il file-->
-                            
-                                <fieldset class=" col-lg-4">
-                                    <div class="form-group" style="text-align: center; margin-top: 1em; ">
-                                        <input type="radio" class="tipoDoc" id="caDoc6" name="documento6" value="carta di identità" autocomplete="off" required>
-                                        <label for="caDoc6">Carta d'identità</label><br />
-                                        <input type="radio" class="tipoDoc" id="pasDoc6" name="documento6" value="passaporto" autocomplete="off" required>
-                                        <label for="pasDoc6">Passaporto</label><br />
-                                    </div>
-                                </fieldset>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="numDoc6">Numero Documento</label>
-                                        <input class="form-control" name="numeroDoc6" id="numDoc6" type="text">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="dataDoc6">Data scadenza</label>
-                                        <input class="form-control" name="scadenzaDoc6" id="dataDoc6" type="date">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="autoritaDoc6">Rilasciato da:</label>
-                                        <input class="form-control" name="autoritaDocumento6" id="autoritaDoc6" type="text">
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-lg-8">
                                         <label class="form-label" for="fileDoc6">Inserisci la scanzione del documento</label>
@@ -264,31 +92,6 @@
                             </div>                 
                             <div style="margin-top:1em;" id="Ospite7">
                                 <h5>Ospite 7</h5>
-                                <p class="text-muted">seleziona il tipo di documento</p>
-                                <!-- in action bisogna specificare dove devono essere caricati i campi del form con il file-->
-                            
-                                <fieldset class=" col-lg-4">
-                                    <div class="form-group" style="text-align: center; margin-top: 1em; ">
-                                        <input type="radio" class="tipoDoc" id="caDoc7" name="documento7" value="carta di identità" autocomplete="off" required>
-                                        <label for="caDoc7">Carta d'identità</label><br />
-                                        <input type="radio" class="tipoDoc" id="pasDoc7" name="documento7" value="passaporto" autocomplete="off" required>
-                                        <label for="pasDoc7">Passaporto</label><br />
-                                    </div>
-                                </fieldset>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="numDoc7">Numero Documento</label>
-                                        <input class="form-control" name="numeroDoc7" id="numDoc7" type="text">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="dataDoc7">Data scadenza</label>
-                                        <input class="form-control" name="scadenzaDoc7" id="dataDoc7" type="date">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label class="form-label" for="autoritaDoc7">Rilasciato da:</label>
-                                        <input class="form-control" name="autoritaDocumento7" id="autoritaDoc7" type="text">
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-lg-8">
                                         <label class="form-label" for="fileDoc7">Inserisci la scanzione del documento</label>
@@ -297,32 +100,7 @@
                                 </div>
                             </div>                                         
                             <div style="margin-top:1em;" id="Ospite8">
-                            <h5>Ospite 8</h5>
-                            <p class="text-muted">seleziona il tipo di documento</p>
-                            <!-- in action bisogna specificare dove devono essere caricati i campi del form con il file-->
-                            
-                            <fieldset class=" col-lg-4">
-                                <div class="form-group" style="text-align: center; margin-top: 1em;">
-                                    <input type="radio" class="tipoDoc" id="caDoc8" name="documento8" value="carta di identità" autocomplete="off" required>
-                                    <label for="caDoc8">Carta d'identità</label><br />
-                                    <input type="radio" class="tipoDoc" id="pasDoc8" name="documento8" value="passaporto" autocomplete="off" required>
-                                    <label for="pasDoc8">Passaporto</label><br />
-                                </div>
-                            </fieldset>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <label class="form-label" for="numDoc8">Numero Documento</label>
-                                    <input class="form-control" name="numeroDoc8" id="numDoc8" type="text">
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="form-label" for="dataDoc8">Data scadenza</label>
-                                    <input class="form-control" name="scadenzaDoc8" id="dataDoc8" type="date">
-                                </div>
-                                <div class="col-lg-4">
-                                    <label class="form-label" for="autoritaDoc7">Rilasciato da:</label>
-                                    <input class="form-control" name="autoritaDocumento8" id="autoritaDoc8" type="text">
-                                </div>
-                                </div>
+                                <h5>Ospite 8</h5>
                                 <div class="row">
                                     <div class="col-lg-8">
                                     <label class="form-label" for="fileDoc8">Inserisci la scanzione del documento</label>
@@ -332,6 +110,7 @@
                                 
                             </div>                                      
                         </div>
+                     </div>
                         <div class="row form-block flex-column flex-sm-row">
                             <div class="col text-center text-sm-right">
                               <button type="submit" class="btn btn-primary px-3">Avanti</button>

@@ -174,3 +174,6 @@
 	INSERT INTO Prenotazione VALUES (UUID(),'b532de10-a99e-11ea-b30a-a066100a22be','8b4822bb-a99f-11ea-b30a-a066100a22be','2020-1-3','2020-1-5','2020-1-2',100,'conclusa');
 
 	INSERT INTO DatiOspiti VALUES (UUID(),'Carmela','Mera','ID','AY009988','It',32,'495ea9e7-a9a0-11ea-b30a-a066100a22be');
+
+
+		
