@@ -133,6 +133,19 @@
 		prenotazione VARCHAR(36) REFERENCES Prenotazione(ID_PREN)
 	);
 
+	-- EVENT SCHEDULER PER STATO PRENOTAZIONE 
+
+	SET GLOBAL event_scheduler = ON;
+
+	CREATE EVENT IF NOT EXISTS `verifica_stato_pren` 
+	ON SCHEDULE EVERY 1 MINUTE
+	STARTS CURRENT_TIMESTAMP
+	ON COMPLETION PRESERVE
+	DO 
+	UPDATE Prenotazione
+	SET stato_prenotazione = 'conclusa'
+	WHERE data_fine <= CURDATE();
+
 	-- ###########
 	-- POPOLAMENTO
 	-- ###########

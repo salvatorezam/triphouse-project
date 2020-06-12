@@ -41,7 +41,9 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
                       a.titolo AS titolo, a.indirizzo AS indirizzo, a.n_civico AS n_civico, \
                       a.citta AS citta,  a.tipo_all AS tipo_all, uh.telefono AS telefono_uh, \
                       a.nome_proprietario AS nome_proprietario, p.prezzo_totale AS prezzo_totale, uh.email AS email_uh, \
-                      p.stato_prenotazione AS stato_prenotazione \
+                      p.stato_prenotazione AS stato_prenotazione, a.foto_0 AS foto_0, \
+                      a.foto_1 AS foto_1, a.foto_2 AS foto_2, a.foto_3 AS foto_3, \
+                      a.foto_4 AS foto_4, a.foto_5 AS foto_5 \
                       FROM Prenotazione p, Alloggio a , UtenteRegistrato uh \
                       WHERE p.alloggio = a.ID_ALL AND a.proprietario = uh.ID_UR AND p.utente = ? \
                       ORDER BY data_inizio DESC; \
@@ -117,6 +119,16 @@ function getPrenotazioneEffettuata(req, res, next) {
   let stato_pren = "";
   let stato_rec = "";
   let stato_pag = "";
+
+  let data_inizio_check = new Date(prenData.data_inizio);
+  let today = new Date();
+
+  //Il cliente può annullare la prenotazione fino a 3 giorni prima
+  if ((data_inizio_check - today) < (3*86400000)) {
+
+    //disabilita tasto annullamento
+    stato_pren = "disabled";
+  }
 
   //check per verificare la possibilità di annullare la prenotazione o pagare
   if (prenData.stato_prenotazione == 'conclusa') {
