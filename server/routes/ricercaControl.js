@@ -102,4 +102,13 @@ async function paginaPrecedente(req,res,next){
 }
 
 
+/*POST filtri*/
+router.post('/ricercaFiltri', ricercaFiltri);
+
+async function ricercaFiltri(req, res, next){
+
+    
+}
+
+
 module.exports = router;

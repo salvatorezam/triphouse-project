@@ -13,21 +13,21 @@
       <div class="row">
         <!--ATTENZIONE: se si deve inserire la mappa, si deve usare col-lg-auto-->
         <div class="col-lg-12 py-4 p-xl-5">
-          <form action="#" autocomplete="off">
+          <form method="POST" action="/ricercaControl/ricercaFiltri" autocomplete="off">
             <div class="row">
               <div class="col-md-6 col-lg-12 col-xl-8 mb-4">
                 <div>
                   <label class="form-label"><b>Tipo Alloggio</b></label>
                     <ul class="list-inline mb-0">
                       <li class="list-inline-item">
-                        <div class="custom-control custom-radio">
-                          <input class="custom-control-input" type="radio" id="bnb" name="tipoAlloggio">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="bnb" name="tipoAlloggio1">
                           <label class="custom-control-label" for="bnb"> B&B</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
-                        <div class="custom-control custom-radio">
-                          <input class="custom-control-input" type="radio" id="casaVacanza" name="tipoAlloggio">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="casaVacanza" name="tipoAlloggio2">
                           <label class="custom-control-label" for="casaVacanza">Casa Vacanza</label>
                         </div>
                       </li>
@@ -224,5 +224,34 @@
     <!-- Script Footer -->
     <% include partials/scriptFooter.ejs %>
     <!-- Script Footer -->
+
+     <!-- Price Slider-->
+     <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/nouislider/nouislider.min.js"></script>
+     <script>
+       var snapSlider = document.getElementById('slider-snap');
+       
+       noUiSlider.create(snapSlider, {
+           start: [ 30, 150 ],
+           snap: false,
+           connect: true,
+           step: 1,
+           range: {
+               'min': 30,
+               'max': 150
+           }
+       });
+       var snapValues = [
+           document.getElementById('slider-snap-value-from'),
+           document.getElementById('slider-snap-value-to')
+       ];
+       var inputValues = [
+           document.getElementById('slider-snap-input-from'),
+           document.getElementById('slider-snap-input-to')
+       ];
+       snapSlider.noUiSlider.on('update', function( values, handle ) {
+           snapValues[handle].innerHTML = values[handle];
+           inputValues[handle].value = values[handle];
+       })
+     </script>
   </body>
 </html>
