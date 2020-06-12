@@ -15,22 +15,22 @@
               <div class="swiper-wrapper">
                 <!-- Slides-->
                 <% if (data.data_pren.foto_0 != null && data.data_pren.foto_0 != undefined) { %>
-                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_0" alt="Our street"></div>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_0 %>"></div>
                 <% } %>
                 <% if (data.data_pren.foto_1 != null && data.data_pren.foto_1 != undefined) { %>
-                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_1" alt="Our street"></div>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_1 %>"></div>
                 <% } %>
                 <% if (data.data_pren.foto_2 != null && data.data_pren.foto_2 != undefined) { %>
-                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_2" alt="Our street"></div>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_2 %>"></div>
                 <% } %>
                 <% if (data.data_pren.foto_3 != null && data.data_pren.foto_3 != undefined) { %>
-                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_3" alt="Our street"></div>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_3 %>"></div>
                 <% } %>
                 <% if (data.data_pren.foto_4 != null && data.data_pren.foto_4 != undefined) { %>
-                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_4" alt="Our street"></div>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_4 %>"></div>
                 <% } %>
                 <% if (data.data_pren.foto_5 != null && data.data_pren.foto_5 != undefined) { %>
-                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_5" alt="Our street"></div>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_5 %>"></div>
                 <% } %>
               </div>
               <div class="swiper-pagination swiper-pagination-white"></div>
@@ -135,6 +135,7 @@
                         <div class="form-group">
                           <label class="form-label" for="testoRec">Testo </label>
                           <textarea class="form-control" rows="4" name="testoRec" id="testoRec" placeholder="Scrivi qualcosa su alloggio e cliente" required="required"></textarea>
+                          <div id="checkTestoRec">&nbsp</div>
                         </div>
                         <button class="btn btn-primary" id="inviaRecensione" type="submit">Invia</button>
                       </form>
@@ -175,28 +176,28 @@
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label class="form-label" for="name">Nome titolare</label>
-                              <input class="form-control" type="text" name="titolareCarta" id="titolareCarta" required="required">
+                              <label class="form-label" for="name">Nome titolare *</label>
+                              <input class="form-control" type="text" name="titolareCarta" id="titolareCarta" pattern="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$" required="required">
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label class="form-label" for="rating">Numero Carta</label>
-                              <input class="form-control" type="text" name="numeroCarta" id="numeroCarta" required="required">
+                              <label class="form-label" for="rating">Numero Carta *</label>
+                              <input class="form-control" type="text" name="numeroCarta" id="numeroCarta" pattern="([0-9]{4})(-)([0-9]{4})(-)([0-9]{4})(-)([0-9]{4})" placeholder="0000-0000-0000-0000" required="required">
                             </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label class="form-label" for="name">Scadenza</label>
-                              <input class="form-control" type="text" name="dataScadenza" id="dataScadenza" placeholder="MM/AAAA" required="required">
+                              <label class="form-label" for="name">Scadenza *</label>
+                              <input class="form-control" type="text" name="dataScadenza" id="dataScadenza" placeholder="MM/AAAA" pattern="([0-9]{2})(/)([0-9]{4})"required="required">
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label class="form-label" for="rating">CVV</label>
-                              <input class="form-control" type="text" name="cvv" id="cvv" required="required">
+                              <label class="form-label" for="rating">CVV *</label>
+                              <input class="form-control" type="text" name="cvv" id="cvv" placeholder="000" pattern="[0-9]{3}" required="required">
                             </div>
                           </div>
                         </div>
@@ -284,8 +285,6 @@
     <script>
       
       $(document).ready(function() {
-
-        // ONCLICK SICURI?
         
         $('#confermaAnnullamento').on('click', function() {
           window.alert('Operazione andata a buon fine');
@@ -295,8 +294,22 @@
           window.alert('Operazione andata a buon fine');
         });
 
-        $('#inviaPagamento').on('click', function() {
+        /*$('#inviaPagamento').on('click', function() {
           window.alert('Operazione andata a buon fine');
+        });*/
+
+        let caratteriSpeciali = /([~,@,#,$,^,&,*,-,_,+,=,>,<,',",`])/;
+
+        $('#testoRec').on('input', function(ev) {
+
+          if($('#testoRec').val().match(caratteriSpeciali)) {
+              $('#checkTestoRec').text('Carattere speciale non consentito!')
+              $('#inviaRecensione').attr('disabled','disabled');
+          }
+          else {
+            $('#checkTestoRec').text('')
+            $('#inviaRecensione').removeAttr('disabled','disabled');
+          }
         });
       });
       

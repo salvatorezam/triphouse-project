@@ -18,7 +18,6 @@ router.get('/finestraListaPrenotazioniEffettuate', getListaPrenotazioniEffettuat
 async function getListaPrenotazioniEffettuate(req, res, next) {
 
   const db = await makeDb(config);
-  let results = {};
   let prenConcluse = [];
   let prenNonConcluse = [];
 
@@ -157,14 +156,6 @@ function getPrenotazioneEffettuata(req, res, next) {
   res.render('finestraPrenotazioneEffettuata', {data : {data_pren : prenData, data_rec : stato_rec, data_ann : stato_pren, data_pag : stato_pag}});    
 }
   
-
-
-/* GET modificaDatiPersonali */
-router.get('/modificaDatiPersonali', function(req, res, next) {
-  res.render('modificaDatiPersonali');
-});
-
-
 /* Recensisci Alloggio */
 router.post('/recensisciAlloggio', recensisciAlloggio);
 
@@ -277,6 +268,84 @@ async function pagamento(req, res, next) {
       let link = '/profiloUtenteControl/finestraPrenotazioneEffettuata?id=' + prenData.ID_PREN;
       res.redirect(link);
 
+    });
+  } catch (err) {
+      console.log(err);
+      next(createError(500));
+  }
+}
+
+/* GET modificaDatiPersonali */
+router.get('/modificaDatiPersonali', async function(req, res, next) {
+
+  const db = await makeDb(config);
+  let datiPersonali = {};
+  //recupero l'id utente dalla sessione per poter interrogare il database
+  let utente = req.app.locals.users.get(req.session.user.id_utente);
+
+  if (utente) {
+    idUtente = utente.id_utente;
+  }
+  else {
+    console.log('Sessione Utente non trovata!');
+    next(createError(404, 'Sessione Utente non trovata'));
+  }
+
+  try {
+    await withTransaction(db, async() => {
+        
+      let sql = "SELECT * FROM UtenteRegistrato WHERE ID_UR = ?";
+      datiPersonali = await db.query(sql, idUtente)
+              .catch(err => {
+                  throw err;
+              });
+
+      datiPersonali = datiPersonali[0];
+      
+      res.render('modificaDatiPersonali', {data: datiPersonali});
+    });
+  } catch (err) {
+    console.log(err);
+    next(createError(500));
+  }
+});
+
+/* aggiornaDatiPersonali */
+router.post('/aggiornaDatiPersonali', aggiornaDatiPersonali);
+
+async function aggiornaDatiPersonali(req, res, next) {
+
+  const db = await makeDb(config);
+  //let last4digits = req.body.numeroCarta.toString().slice(15,19);
+  //let today = new Date().toString().slice(0,24);
+
+  try {
+    await withTransaction(db, async() => {
+
+      let sql = "UPDATE UtenteRegistrato \
+                  SET nome = ?, cognome = ?, sesso = ?, \
+                  nazione_nascita = ?, citta_nascita = ?, data_nascita = ?, \
+                  email = ?, telefono = ? \
+                  WHERE ID_UR = ?;";
+      let values = [
+        req.body.nome, 
+        req.body.cognome, 
+        req.body.sesso, 
+        req.body.nazione,
+        req.body.citta,
+        req.body.data_n,
+        req.body.email,
+        req.body.telefono,
+        idUtente
+      ];
+      aggiorna = await db.query(sql, values)
+          .catch(err => {
+              throw err;
+          });
+
+      console.log('Aggiornamento effettuato.');
+
+      res.redirect('/profiloUtenteControl/modificaDatiPersonali');
     });
   } catch (err) {
       console.log(err);
