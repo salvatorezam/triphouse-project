@@ -184,7 +184,7 @@
               </div>
             <% } else { %>
             <!-- place item-->
-            <% for(var x = 0; x < data.array.length; x++) { %>
+            <% for(var x = data.inizioCount; x < data.fineCount; x++) { %>
             <div class="col-xl-4 col-md-4 col-sm-6 mb-5">
               <div class="card h-100 border-0 shadow">
                 <div class="card-img-top overflow-hidden" ><a href="/visualizzaAlloggio/visualizzaAlloggioInserito?id=<%= data.array[ x].ID_ALL %>"><img class="img-fluid" src="/images/uploads/<%=data.array[ x].foto_0 %>" alt="<%= data.array[ x].titolo %>"/></a></div>
@@ -198,7 +198,6 @@
                   </div>
                 </div>
               </div>
-              <% if(x == (data.contatore-1) ) { break; } %>
             </div>
             <% };} %>
           </div>
@@ -206,22 +205,18 @@
         <div class="col-lg-12 py-4 p-xl-5">
           <!-- Paginazione -->
           <nav aria-label="Page navigation example">
-            <% if(data.array.length > data.contatore) { %>
+            <% if(data.array.length > 6) { %>
             <ul class="pagination pagination-template d-flex justify-content-center">
-              <% if(data.contatore > 6) { %>
+              <% if(data.inizioCount >= 6) { %>
               <li class="page-item"><a class="page-link" href="/ricercaControl/paginaPrecedente"> <i class="fa fa-angle-left"></i></a></li>
               <% }; %>
+              <% if((data.array.length - data.inizioCount) > 6) { %>
               <li class="page-item"><a class="page-link" href="/ricercaControl/paginaSuccessiva"> <i class="fa fa-angle-right"></i></a></li>
+              <% }; %>
             </ul>
             <% }; %>
           </nav>
         </div>
-
-
-        <!-- Per farlo con Google mettere id="map-container"
-        <div class="col-lg-6 map-side-lg pr-lg-0">
-          <div id="detailMap" class="z-depth-1-half map-full shadow-left"></div>-->
-
         </div>
       </div>
     </div>
