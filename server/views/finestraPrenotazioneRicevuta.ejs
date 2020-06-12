@@ -220,6 +220,20 @@
         $('#declinaPrenotazione').on('click', function() {
           window.alert('Operazione andata a buon fine');
         });
+
+        let caratteriSpeciali = /([~,@,#,$,^,&,*,-,_,+,=,>,<,',",`])/;
+
+        $('#testoRec').on('input', function(ev) {
+
+          if($('#testoRec').val().match(caratteriSpeciali)) {
+              $('#checkTestoRec').text('Carattere speciale non consentito!')
+              $('#inviaRecensione').attr('disabled','disabled');
+          }
+          else {
+            $('#checkTestoRec').text('')
+            $('#inviaRecensione').removeAttr('disabled','disabled');
+          }
+        });
       });
     </script>
 
