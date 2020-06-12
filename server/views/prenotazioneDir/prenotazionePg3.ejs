@@ -25,21 +25,21 @@
                 <div class="text-block">
                   
                   <!-- in action bisogna specificare dove devono essere caricati i campi del form con il file-->
-                 <form name="formDocumenti" action="/prenotazione/upload" method="POST" enctype="multipart/form-data" >
+                 <form name="formDocumenti" action="/prenotazioneControl/upload" method="POST" enctype="multipart/form-data" >
                     <div name = "miomodulo">
                         <div class="row">
-                            <div class="col-lg-8">
+                            <div class="col">
                                 <label class="form-label" for="fileDocU">Inserisci la scanzione del tuo documento</label>
-                                <input class="form-control" type="file" name="fileDocU" id="fileDocU" autocomplete="off">
+                                <input class="form-control" type="file" name="fileDocU" id="fileDocU" autocomplete="off" required>
                             </div> 
                         </div>    
                         <!--inizio form documenti ospiti-->
                         <div class="btn btn-link btn-collapse pl-0 text-muted" data-toggle="collapse" data-target="#formDocOspiti" aria-expanded="false" aria-controls="formDocOspiti" data-expanded-text="Chiudi" data-collapsed-text="Inserisci documenti ospiti">Inserisci documenti Ospiti</div>
-                        <div class=" text-block row collapse" id="formDocOspiti"> 
+                        <div class=" text-block row collapse ml-2" id="formDocOspiti"> 
                             <div id="Ospite1">
                                 <h5>Ospite 1</h5>
                                 <div class="row">
-                                    <div class="col-lg-8">
+                                    <div class="col">
                                         <label class="form-label" for="fileDoc1">Inserisci la scanzione del documento</label>
                                         <input class="form-control" type="file" name="fileDoc1" id="fileDoc1" autocomplete="off">
                                     </div>
@@ -48,7 +48,7 @@
                             <div style="margin-top: 1em;" id="Ospite2">
                                 <h5>Ospite 2</h5>
                                 <div class="row">
-                                    <div class="col-lg-8">
+                                    <div class="col">
                                         <label class="form-label" for="fileDoc2">Inserisci la scanzione del documento</label>
                                         <input class="form-control" type="file" name="fileDoc2" id="fileDoc2" autocomplete="off">
                                     </div>
@@ -57,7 +57,7 @@
                             <div style="margin-top:1em;" id="Ospite3">
                                 <h5>Ospite 3</h5>
                                 <div class="row">
-                                    <div class="col-lg-8">
+                                    <div class="col">
                                         <label class="form-label" for="fileDoc3">Inserisci la scanzione del documento</label>
                                         <input class="form-control" type="file" name="fileDoc3" id="fileDoc3" autocomplete="off">
                                     </div>
@@ -66,7 +66,7 @@
                             <div style="margin-top:1em;" id="Ospite4">
                                 <h5>Ospite 4</h5>
                                 <div class="row">
-                                    <div class="col-lg-8">
+                                    <div class="col">
                                         <label class="form-label" for="fileDoc4">Inserisci la scanzione del documento</label>
                                         <input class="form-control" type="file" name="fileDoc4" id="fileDoc4" autocomplete="off">
                                     </div>
@@ -75,7 +75,7 @@
                             <div style="margin-top:1em;" id="Ospite5">
                                 <h5>Ospite 5</h5>
                                 <div class="row">
-                                    <div class="col-lg-8">
+                                    <div class="col">
                                         <label class="form-label" for="fileDoc5">Inserisci la scanzione del documento</label>
                                         <input class="form-control" type="file" name="fileDoc5" id="fileDoc5" autocomplete="off">
                                     </div>
@@ -84,7 +84,7 @@
                             <div style="margin-top:1em;" id="Ospite6">
                                 <h5>Ospite 6</h5>
                                 <div class="row">
-                                    <div class="col-lg-8">
+                                    <div class="col">
                                         <label class="form-label" for="fileDoc6">Inserisci la scanzione del documento</label>
                                         <input class="form-control" type="file" name="fileDoc6" id="fileDoc6" autocomplete="off">
                                     </div>
@@ -93,7 +93,7 @@
                             <div style="margin-top:1em;" id="Ospite7">
                                 <h5>Ospite 7</h5>
                                 <div class="row">
-                                    <div class="col-lg-8">
+                                    <div class="col">
                                         <label class="form-label" for="fileDoc7">Inserisci la scanzione del documento</label>
                                         <input class="form-control" type="file" name="fileDoc7" id="fileDoc7" autocomplete="off">
                                     </div>
@@ -102,7 +102,7 @@
                             <div style="margin-top:1em;" id="Ospite8">
                                 <h5>Ospite 8</h5>
                                 <div class="row">
-                                    <div class="col-lg-8">
+                                    <div class="col">
                                     <label class="form-label" for="fileDoc8">Inserisci la scanzione del documento</label>
                                     <input class="form-control" type="file" name="fileDoc8" id="fileDoc8" autocomplete="off">
                                     </div>        
