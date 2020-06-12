@@ -4,12 +4,11 @@ var createError = require('http-errors');
 const { transporter } = require('../mailsender/mailsender-config');
 const { inviaMailCliente, inviaMailConferma, inviaMailDeclinazione } = require('../mailsender/mailsender-middleware');
 
-//creo degli array per salvare gli id delle prenotazioni
+//informazioni che mi serve mantenere in memoria
 var idUtente = "";
 var prenRicevute = {};
 var prenData = {};
 
-//const crypto = require('crypto');
 const { config } = require('../db/config');
 const { makeDb, withTransaction } = require('../db/dbmiddleware');
 
@@ -23,21 +22,8 @@ async function getListaPrenotazioniRicevute(req, res, next) {
     try {
         await withTransaction(db, async() => {
 
-            /*let sql0 = "SELECT * FROM USERS_SESSIONS WHERE session_id = ?;";
-            results = await db.query(sql0, [req.session.id])
-                .catch(err => {
-                    throw err;
-                }); */
-            
+            //recupero l'id utente dalla sessione per poter interrogare il database
             let utente = req.app.locals.users.get(req.session.user.id_utente);
-            
-            /*if (results.affectedRows == 0) {
-                console.log('Sessione Utente non trovata!');
-                next(createError(404, 'Sessione Utente non trovata'));
-            } else {
-                let datiUtente = JSON.parse(results[0].data);
-                idUtente = datiUtente.user.id_utente;
-            }*/
 
             if (utente) {
               idUtente = utente.id_utente;
@@ -46,7 +32,8 @@ async function getListaPrenotazioniRicevute(req, res, next) {
               console.log('Sessione Utente non trovata!');
               next(createError(404, 'Sessione Utente non trovata'));
             }
-
+            
+            //prendo dal database tutte le informazioni che mi servono
             let sql1 = "SELECT p.ID_PREN AS ID_PREN, p.data_inizio AS data_inizio, p.data_fine AS data_fine, \
                         a.titolo AS titolo, a.tipo_all AS tipo_all, a.indirizzo AS indirizzo, a.n_civico AS n_civico, \
                         a.citta AS citta, p.stato_prenotazione AS stato_prenotazione, \
@@ -107,7 +94,8 @@ async function getListaPrenotazioniRicevute(req, res, next) {
 router.get('/finestraPrenotazioneRicevuta', getPrenotazioneRicevuta);
 
 function getPrenotazioneRicevuta(req, res, next) {
- 
+  
+  //prendo i dati della prenotazione interessata
   let prenDataArray = prenRicevute.filter((el) => { return el.ID_PREN == req.query.id });
   
   if (prenDataArray.length == 0) {
@@ -121,7 +109,7 @@ function getPrenotazioneRicevuta(req, res, next) {
   let stato_rec = "";
   let stato_conf = "disabled";
 
-  //check per verificare la possibilità di annullare la prenotazione o pagare
+  //check per verificare la possibilità di annullare la prenotazione
   if (prenData.stato_prenotazione == 'conclusa') {
     // METTERCI ANCHE LA DATA DI SCADENZA 
 
@@ -129,7 +117,7 @@ function getPrenotazioneRicevuta(req, res, next) {
     stato_pren = "disabled";
   }
 
-  //check per verificare la possibilità di pagamento
+  //check per verificare la possibilità di annullamento o conferma
   if (prenData.stato_prenotazione == 'richiesta') {
 
     //disabilita tasto annullamento
@@ -174,13 +162,11 @@ async function recensisciCliente(req, res, next) {
               .catch(err => {
                   throw err;
               });
-
+          
+          //mi servirà per disabilitare il tasto di recensione
           prenData.recBoolean = true;
           
-          console.log(req.body);
-          //DA CANCELLARE
-          console.log('DATI RECENSIONE: ');
-          console.log(values);
+          console.log('Recensione completata.');
           
           let link = '/profiloHostControl/finestraPrenotazioneRicevuta?id=' + prenData.ID_PREN;
           res.redirect(link);
@@ -211,10 +197,11 @@ async function annullaPrenotazione(req, res, next) {
               throw err;
           });
       
+      //mi serviranno per i disabilitare i tasti recensione e annulla prenotazione
       prenData.stato_prenotazione = 'conclusa';
       prenData.recBoolean = true;
 
-      console.log('Prenotazione annullata');
+      console.log('Prenotazione annullata.');
 
       // Invio della mail di conferma annullamento
       let testo = "La prenotazione n." + prenData.ID_PREN + " è stata annullata dall' host.";
@@ -248,6 +235,7 @@ async function accettaPrenotazione(req, res, next) {
               throw err;
           });
       
+      //mi servirà per disabilitare il tasto gestisci prenotazione
       prenData.stato_prenotazione = 'confermata';
 
       console.log('Prenotazione confermata');
@@ -286,6 +274,7 @@ async function declinaPrenotazione(req, res, next) {
               throw err;
           });
       
+      //mi servirà per disabilitare i tasti gestisci prenotazione e recensione
       prenData.stato_prenotazione = 'conclusa';
       prenData.recBoolean = true;
 

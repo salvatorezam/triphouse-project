@@ -9,7 +9,6 @@ var idUtente = "";
 var prenEffettuate = {};
 var prenData = {};
 
-//const crypto = require('crypto');
 const { config } = require('../db/config');
 const { makeDb, withTransaction } = require('../db/dbmiddleware');
 
@@ -22,24 +21,12 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
   let results = {};
   let prenConcluse = [];
   let prenNonConcluse = [];
+
   try {
       await withTransaction(db, async() => {
 
-          /*let sql0 = "SELECT * FROM USERS_SESSIONS WHERE session_id = ?;";
-          results = await db.query(sql0, [req.session.id])
-              .catch(err => {
-                  throw err;
-              }); */
-
+          //recupero l'id utente dalla sessione per poter interrogare il database
           let utente = req.app.locals.users.get(req.session.user.id_utente);
-
-          /* if (results.affectedRows == 0) {
-              console.log('Sessione Utente non trovata!');
-              next(createError(404, 'Sessione Utente non trovata'));
-          } else {
-              let datiUtente = JSON.parse(results[0].data);
-              idUtente = datiUtente.user.id_utente;
-          }*/
 
           if (utente) {
             idUtente = utente.id_utente;
@@ -49,6 +36,7 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
             next(createError(404, 'Sessione Utente non trovata'));
           }
           
+          //prendo dal database tutte le informazioni che mi servono
           let sql1 = "SELECT p.ID_PREN AS ID_PREN, a.ID_ALL AS ID_ALL, p.data_inizio AS data_inizio, p.data_fine AS data_fine, \
                       a.titolo AS titolo, a.indirizzo AS indirizzo, a.n_civico AS n_civico, \
                       a.citta AS citta,  a.tipo_all AS tipo_all, uh.telefono AS telefono_uh, \
@@ -93,6 +81,7 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
 
           prenEffettuate = prenEffettuate[0];
 
+          //divido le prenotazioni in concluse e non
           for (el of prenEffettuate) {
             if (el.stato_prenotazione == 'conclusa') {
               prenConcluse.push(el);
@@ -115,6 +104,7 @@ router.get('/finestraPrenotazioneEffettuata', getPrenotazioneEffettuata);
 
 function getPrenotazioneEffettuata(req, res, next) {
 
+  //prendo i dati della prenotazione interessata
   let prenDataArray = prenEffettuate.filter((el) => { return el.ID_PREN == req.query.id });
 
   if (prenDataArray.length == 0) {
@@ -152,7 +142,6 @@ function getPrenotazioneEffettuata(req, res, next) {
     stato_rec = "disabled";
   }
 
-  console.log(prenData);
   res.render('finestraPrenotazioneEffettuata', {data : {data_pren : prenData, data_rec : stato_rec, data_ann : stato_pren, data_pag : stato_pag}});    
 }
   
@@ -190,12 +179,10 @@ async function recensisciAlloggio(req, res, next) {
                   throw err;
               }); 
           
+          //mi servirà per disabilitare il tasto di recensione
           prenData.recBoolean = true;
-          
-          console.log(req.body);
-          //DA CANCELLARE
-          console.log('DATI RECENSIONE: ');
-          console.log(values);
+
+          console.log('Recensione completata.');
           
           let link = '/profiloUtenteControl/finestraPrenotazioneEffettuata?id=' + prenData.ID_PREN;
           res.redirect(link);
@@ -226,10 +213,11 @@ async function annullaPrenotazione(req, res, next) {
               throw err;
           });
 
+      //mi serviranno per i disabilitare i tasti recensione e annulla prenotazione
       prenData.stato_prenotazione = 'conclusa';
       prenData.recBoolean = true;
 
-      console.log('Prenotazione annullata');
+      console.log('Prenotazione annullata.');
 
       // Invio della mail di conferma annullamento
       let testo = "La prenotazione n." + prenData.ID_PREN + " è stata annullata dal cliente.";
@@ -264,12 +252,13 @@ async function pagamento(req, res, next) {
           .catch(err => {
               throw err;
           });
-
+      
+      //mi servirà per disabilitare il tasto pagamento
       prenData.stato_prenotazione = 'pagata';
 
-      console.log('Pagamento avvenuto');
+      console.log('Pagamento avvenuto.');
 
-      // Invio della mail di conferma annullamento
+      // Invio della mail di pagamento avvenuto
       let testo = "Il pagamento per la prenotazione n." + prenData.ID_PREN + " è stato effettuato con successo. \n\nNome titolare carta: " + req.body.titolareCarta + " \nCarta di credito: xxxx-xxxx-xxxx-" + last4digits + " \nPagamento avvenuto in data: " + today + ".";
       inviaMailPagamento(transporter, prenData.email_uh, testo).catch(err => {throw err;});
 
