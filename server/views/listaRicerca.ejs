@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <!-- head -->
+    <% include partials/head.ejs %>
+    <!-- head -->
+  </head>
+  <body style="padding-top: 72px;">
+    <!-- header -->
+    <% include partials/header.ejs %>
+    <!-- header -->
+    <div class="container-fluid">
+      <div class="row">
+        <!--ATTENZIONE: se si deve inserire la mappa, si deve usare col-lg-auto-->
+        <div class="col-lg-12 py-4 p-xl-5">
+          <form action="#" autocomplete="off">
+            <div class="row">
+              <div class="col-md-6 col-lg-12 col-xl-8 mb-4">
+                <div>
+                  <label class="form-label"><b>Tipo Alloggio</b></label>
+                    <ul class="list-inline mb-0">
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-radio">
+                          <input class="custom-control-input" type="radio" id="bnb" name="tipoAlloggio">
+                          <label class="custom-control-label" for="bnb"> B&B</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-radio">
+                          <input class="custom-control-input" type="radio" id="casaVacanza" name="tipoAlloggio">
+                          <label class="custom-control-label" for="casaVacanza">Casa Vacanza</label>
+                        </div>
+                      </li>
+                    </ul>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-xl-4 col-md-6 mb-4">
+                <label class="form-label"><b>Fascia di prezzo</b></label>
+                <div class="text-primary" id="slider-snap"></div>
+                <div class="nouislider-values">
+                  <div class="min">€<span id="slider-snap-value-from"></span></div>
+                  <div class="max">€<span id="slider-snap-value-to"></span></div>
+                </div>
+                <input type="hidden" name="pricefrom" id="slider-snap-input-from" value="30">
+                <input type="hidden" name="priceto" id="slider-snap-input-to" value="150">
+              </div>
+              <!--Filtri-->
+              <div class="col-12 pb-4">
+                <div class="collapse" id="moreFilters">
+                  <div class="filter-block">
+                    <h6 class="my-4">Servizi</h6>
+                    <ul class="list-inline mb-0">
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities_0" name="amenities[]">
+                          <label class="custom-control-label" for="amenities_0">Cucina</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities_1" name="amenities[]">
+                          <label class="custom-control-label" for="amenities_1">Lavanderia</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities_2" name="amenities[]">
+                          <label class="custom-control-label" for="amenities_2">Aria Condizionata</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities_3" name="amenities[]">
+                          <label class="custom-control-label" for="amenities_3">Wifi</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities_4" name="amenities[]">
+                          <label class="custom-control-label" for="amenities_4">Colazione</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities_5" name="amenities[]">
+                          <label class="custom-control-label" for="amenities_5">Asciugacapelli</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities_6" name="amenities[]">
+                          <label class="custom-control-label" for="amenities_6">Tv</label>
+                        </div>
+                      </li>   
+                    </ul>
+                    <h6 class="my-4">Servizi Essenziali</h6>
+                    <ul class="list-inline mb-0">
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities2_0" name="amenities2[]">
+                          <label class="custom-control-label" for="amenities2_0">Carta igienica</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities2_1" name="amenities2[]">
+                          <label class="custom-control-label" for="amenities2_1">Sapone mani e corpo</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities2_2" name="amenities2[]">
+                          <label class="custom-control-label" for="amenities2_2">Asciugamao</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities2_3" name="amenities2[]">
+                          <label class="custom-control-label" for="amenities2_3">Accappatoio</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities2_4" name="amenities2[]">
+                          <label class="custom-control-label" for="amenities2_4">Cuscino</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="amenities2_5" name="amenities2[]">
+                          <label class="custom-control-label" for="amenities2_5">lenzuola</label>
+                        </div>
+                      </li>   
+                    </ul>
+                  </div>
+                  <div class="filter-block">
+                    <h6 class="my-4">Distanza dal centro</h6>
+                    <ul class="list-inline mb-0">
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-radio">
+                          <input class="custom-control-input" type="radio" id="distanza_0" name="distanza">
+                          <label class="custom-control-label" for="distanza_0"> Distante</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-radio">
+                          <input class="custom-control-input" type="radio" id="distanza_1" name="distanza">
+                          <label class="custom-control-label" for="distanza_1">Medio</label>
+                        </div>
+                      </li>
+                      <li class="list-inline-item">
+                        <div class="custom-control custom-radio">
+                          <input class="custom-control-input" type="radio" id="distanza_2" name="distanza">
+                          <label class="custom-control-label" for="distanza_2">Vicino</label>
+                        </div>
+                      </li> 
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Filtri fine-->
+            <div class="row">
+              <div class="col-sm-6 mb-4 order-2 order-sm-1">
+                <button class="btn btn-primary" type="submit"> <i class="fas fa-search mr-1"></i>Cerca</button>
+              </div>
+              <div class="col-sm-6 mb-4 text-sm-right order-1 order-sm-2">
+                <button class="btn btn-link btn-collapse pl-0 text-secondary" type="button" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters" data-expanded-text="Less filters" data-collapsed-text="More filters">Mostra Filtri</button>
+              </div>
+            </div>
+          </form>
+          <hr class="my-4">
+          <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4">
+            <div class="mr-3">
+              <p class="mb-3 mb-md-0"><strong><%= data.array.length %></strong> risultati trovati</p>
+            </div>
+          </div>
+          <div class="row">
+            <% if(data.array.length == 0) { %>
+              <div class="col-xl-3 col-md-4 col-sm-6 mb-5">
+                <h3 class="col-12 hero-heading mb-2">Nessun viaggio in programma</h3>
+                <img src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/illustration/undraw_celebration_0jvk.svg" alt="" style="width: 300px;">
+              </div>
+            <% } else { %>
+            <!-- place item-->
+            <% for(var x = 0; x < data.array.length; x++) { %>
+            <div class="col-xl-4 col-md-4 col-sm-6 mb-5" data-marker-id="59c0c8e33b1527bfe2abaf92">
+              <div class="card h-100 border-0 shadow">
+                <div class="card-img-top overflow-hidden" ><a href="/visualizzaAlloggio/visualizzaAlloggioInserito?id=<%= data.array[data.contatore + x].ID_ALL %>"><img class="img-fluid" src="/images/uploads/<%=data.array[data.contatore + x].foto_0 %>" alt="<%= data.array[data.contatore + x].titolo %>"/></a></div>
+                <div class="card-body d-flex align-items-center">
+                  <div class="w-100">
+                    <p class="subtitle font-weight-normal text-sm mb-2"><%= data.array[data.contatore + x].tipo_all %></p>
+                    <h6 class="card-title"><a class="text-decoration-none text-dark" href="/visualizzaAlloggio/visualizzaAlloggioInserito?id=<%= data.array[data.contatore + x].ID_ALL %>"><%= data.array[data.contatore + x].titolo %></a></h6>
+                    <div class="d-flex card-subtitle mb-3">
+                      <p class="flex-grow-1 mb-0 text-muted text-sm"><%= data.array[data.contatore + x].citta %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% if((x+1)==6) { break; } %>
+            </div>
+            <% };} %>
+          </div>
+        </div>
+        <div class="col-lg-12 py-4 p-xl-5">
+          <!-- Paginazione -->
+          <nav aria-label="Page navigation example">
+            <% if(data.array.length > data.contatore) { %>
+            <ul class="pagination pagination-template d-flex justify-content-center">
+              <% if(data.contatore > 6) { %>
+              <li class="page-item"><a class="page-link" href="/ricercaControl/paginaPrecedente"> <i class="fa fa-angle-left"></i></a></li>
+              <% }; %>
+              <li class="page-item"><a class="page-link" href="/ricercaControl/paginaSuccessiva"> <i class="fa fa-angle-right"></i></a></li>
+            </ul>
+            <% }; %>
+          </nav>
+        </div>
+
+
+        <!-- Per farlo con Google mettere id="map-container"
+        <div class="col-lg-6 map-side-lg pr-lg-0">
+          <div id="detailMap" class="z-depth-1-half map-full shadow-left"></div>-->
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Script Footer -->
+    <% include partials/scriptFooter.ejs %>
+    <!-- Script Footer -->
+  </body>
+</html>

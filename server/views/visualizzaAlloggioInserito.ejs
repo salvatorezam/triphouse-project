@@ -146,10 +146,11 @@
               <div class="media d-block d-sm-flex review">
                 <div class="text-md-center mr-4 mr-xl-5">
                   <!--<img class="d-block avatar avatar-xl p-2 mb-2" src="" alt="">-->
-                  <span class="text-uppercase text-muted text-sm"><%= element.data_rec %></span>
+                  <h6 class="mt-2 mb-1"><%= element.nome_scrittore %></h6>
+                  <span class="text-uppercase text-muted text-sm"><%= element.data_rec.toString().slice(0,15) %></span>
                 </div>
                 <div class="media-body">
-                  <h6 class="mt-2 mb-1"><%= element.nome_scrittore %></h6>
+                 
                   <div class="mb-2">
                     <% for(var x = 0; x < element.valutazione; x++){ %>
                       <i class="fa fa-xs fa-star text-primary"></i>
