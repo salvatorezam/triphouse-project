@@ -1,29 +1,29 @@
 <header class="header">
-  <!-- Navbar-->
-  <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
-    <div class="container-fluid">
-      <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="/"><img width="175" height="50" viewBox="0 0 175 50" fill="none" src="../images/logo.png" alt="TripHouse Logo"></a></div>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
-      <!-- Navbar Collapse -->
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <!-- if (locals.users.size != 0) -->
-        <!-- if (locals.users.has()) -- locals.users.has(document.cookie.split('=')[1]) -->
-        <!-- IF SACROSANTO: if (locals.user != undefined && locals.users.has(locals.user.id_utente)) -->
-        <!-- if (locals.users.size != 0 && locals.users.has(locals.user.id_utente)) NON VA BENE -->
-        <ul class="navbar-nav ml-auto">
+    <!-- Navbar-->
+    <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
+      <div class="container-fluid">
+        <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="/"><img width="175" height="50" viewBox="0 0 175 50" fill="none" src="../images/logo.png" alt="TripHouse Logo"></a></div>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+        <!-- Navbar Collapse -->
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <!-- if (locals.users.size != 0) -->
+          <!-- if (locals.users.has()) -- locals.users.has(document.cookie.split('=')[1]) -->
+          <!-- IF SACROSANTO: if (locals.user != undefined && locals.users.has(locals.user.id_utente)) -->
+          <!-- if (locals.users.size != 0 && locals.users.has(locals.user.id_utente)) NON VA BENE -->
+          <ul class="navbar-nav ml-auto">
 
           <% console.log('locals.users ' + locals.users + ' ----------------------------------------------------------------------'); %>
           <% console.log(locals.users); %>
           <% console.log(locals.users.id_utente); %>
 
-          <% /*console.log(locals.user == undefined); console.log('MAP HAS?'); console.log(locals.users.has(locals.user.id_utente));*/ %>
+            <% /*console.log(locals.user == undefined); console.log('MAP HAS?'); console.log(locals.users.has(locals.user.id_utente));*/ %>
 
-          <% if (locals.user != undefined && locals.users.has(locals.user.id_utente)) {
-              console.log('locals.users' + locals.users + '----------------------------------------------------------------------');
-              var user = locals.users.get(locals.user.id_utente); 
-            } else {
-              var user = false;
-            } %> 
+            <% if (locals.user != undefined && locals.users.has(locals.user.id_utente)) {
+                console.log('locals.users' + locals.users + '----------------------------------------------------------------------');
+                var user = locals.users.get(locals.user.id_utente); 
+              } else {
+                var user = false;
+              } %> 
 
           <% if(user) { %>
           <!-- Megamenu-->
