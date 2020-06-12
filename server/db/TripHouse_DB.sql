@@ -150,7 +150,7 @@
 	-- POPOLAMENTO
 	-- ###########
 
-	INSERT INTO UtenteRegistrato VALUES (UUID(),'Marco','Rossi','M','Italia','Roma','1992-6-25','marco.rossi@gmail.com','+393324567898',false);
+	INSERT INTO UtenteRegistrato VALUES (UUID(),'Marco','Rossi','M','Italia','Roma','1992-6-25','marco.rossi@gmail.com'	
 	INSERT INTO UtenteRegistrato VALUES (UUID(),'Giuseppe','Rosati','M','Italia','Roma','1991-8-25','g.rosati@gmail.com','+393324567898',true);
 	INSERT INTO UtenteRegistrato VALUES (UUID(),'Nicola','Carovana','M','Italia','Roma','1996-2-20','nic.caro@gmail.com','+393324567898',false);
 	INSERT INTO UtenteRegistrato VALUES (UUID(),'Piero','Alex','M','Italia','Roma','1990-11-11','piero.alex@gmail.com','+393324567898',false);
