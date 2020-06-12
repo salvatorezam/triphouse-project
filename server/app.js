@@ -27,7 +27,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   unset: 'destroy',
-  store: sessionStore,
+  //store: sessionStore,
   name: 'nome cookie sessione'
 }));
 

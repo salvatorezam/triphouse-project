@@ -6,15 +6,19 @@
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
         <!-- Navbar Collapse -->
         <div class="collapse navbar-collapse" id="navbarCollapse">
+          <!-- if (locals.users.size != 0) -->
+          <!-- if (locals.users.has()) -- locals.users.has(document.cookie.split('=')[1]) -->
+          <!-- IF SACROSANTO: if (locals.user != undefined && locals.users.has(locals.user.id_utente)) -->
+          <!-- if (locals.users.size != 0 && locals.users.has(locals.user.id_utente)) NON VA BENE -->
           <ul class="navbar-nav ml-auto">
 
             <% console.log('locals.users ' + locals.users + ' ----------------------------------------------------------------------'); %>
             <% console.log(locals.users); %>
             <% console.log(locals.users.id_utente); %>
 
-            <% console.log(locals == undefined); %>
+            <% /*console.log(locals.user == undefined); console.log('MAP HAS?'); console.log(locals.users.has(locals.user.id_utente));*/ %>
 
-            <% if (locals.users.size != 0) {
+            <% if (locals.user != undefined && locals.users.has(locals.user.id_utente)) {
                 console.log('locals.users' + locals.users + '----------------------------------------------------------------------');
                 var user = locals.users.get(locals.user.id_utente); 
               } else {
