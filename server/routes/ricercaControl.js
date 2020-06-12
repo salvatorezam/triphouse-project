@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var router = express.Router();
 
+var recensioni = [];
 var arrayAlloggi = [];
 var inizioArray;
 var fineArray;
@@ -36,16 +37,21 @@ async function listaRicerca(req, res, next) {
 		a.aria_condizionata AS aria_condizionata, a.wifi AS wifi, a.colazione AS colazione, a.asciugacapelli AS asciugacapelli, a.tv AS tv, a.carta_igienica AS carta_igienica, a.sapone_mani_corpo AS sapone_mani_corpo, a.asciugamano AS asciugacapelli, a.accappatoio AS accappatoio, a.cuscino AS cuscino,\
 		a.lenzuola AS lenzuola, a.titolo AS titolo, a.descrizione_alloggio AS descrizione_alloggio, a.descrizione_regole AS descrizione_regole, a.note AS note, a.tasse AS tasse, a.prezzo AS prezzo, a.foto_0 AS foto_0, a.foto_1 AS foto_1,a.foto_2 AS foto_2,a.foto_3 As foto_3,a.foto_4 AS foto_4,a.foto_5 AS foto_5\
         FROM Alloggio a \
-        WHERE a.citta = ? AND a.num_ospiti_max > ? AND a.ID_ALL NOT IN (SELECT d.alloggio \
+        WHERE a.citta = ? AND a.num_ospiti_max >= ? AND a.ID_ALL NOT IN (SELECT d.alloggio \
 																		FROM datedisponibili d \
-																		WHERE (? >= d.data_inizio AND ? <= d.data_fine ) OR (? > d.data_inizio AND ? < data_fine) OR ( ? < d.data_inizio AND ? > d.data_fine ));";
+                                                                        WHERE (? >= d.data_inizio AND ? <= d.data_fine ) OR (? > d.data_inizio AND ? < data_fine) OR ( ? < d.data_inizio AND ? > d.data_fine ));\
+        SELECT r.ID_RA AS ID_RA, r.testo AS testo, r.data_rec AS data_rec, r.scrittore AS scrittore, u.nome AS nome_scrittore, \
+                r.alloggio AS alloggio, r.prenotazione AS prenotazione, r.valutazione AS valutazione \
+        FROM recensiscialloggio r, alloggio a, utenteregistrato u \
+        WHERE (r.alloggio = a.ID_ALL) AND (a.citta = ?) AND (a.num_ospiti_max >= ?) AND (r.scrittore = u.ID_UR);";
 
-        results1 = await db.query(sql1, [req.body.citta, req.body.num_ospiti, data_inizio, data_inizio, data_fine, data_fine, data_inizio, data_fine])
+        results1 = await db.query(sql1, [req.body.citta, req.body.num_ospiti, data_inizio, data_inizio, data_fine, data_fine, data_inizio, data_fine, req.body.citta, req.body.num_ospiti])
             .catch(err => {
                 throw err;
             });
             
-        arrayAlloggi = results1;
+        arrayAlloggi = results1[0];
+        recensioni = results1[1];
 
         if(arrayAlloggi.length > 6){
             inizioArray = 0;
@@ -100,6 +106,39 @@ async function paginaPrecedente(req,res,next){
     res.render('listaRicerca', {data : {array : arrayAlloggi, inizioCount : inizioArray, fineCount : fineArray}})
 
 }
+
+/*GET visualizzaAlloggio */
+
+router.get('/visualizzaAlloggioRicerca', visualizzaAlloggioRicerca);
+
+async function visualizzaAlloggioRicerca(req, res, next){
+
+    let alloggio;
+    let recensioni_a = [];
+    let contatore = 0;
+
+    arrayAlloggi.forEach(element => {
+        
+        if(element.ID_ALL == req.query.id){
+
+            console.log('funzionaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ');
+            console.log( element);
+            return alloggio = element;
+        }
+    });
+
+    recensioni.forEach(element => {
+
+        if(element.alloggio == req.query.id){
+
+            recensioni_a[contatore] = element;
+            contatore++;
+        }
+    })
+
+
+    res.render('visualizzaAlloggioRicerca', {data : {data_a :alloggio, data_r: recensioni_a }});
+};
 
 
 /*POST filtri*/

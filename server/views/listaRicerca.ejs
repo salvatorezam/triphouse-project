@@ -187,11 +187,11 @@
             <% for(var x = data.inizioCount; x < data.fineCount; x++) { %>
             <div class="col-xl-4 col-md-4 col-sm-6 mb-5">
               <div class="card h-100 border-0 shadow">
-                <div class="card-img-top overflow-hidden" ><a href="/visualizzaAlloggio/visualizzaAlloggioInserito?id=<%= data.array[ x].ID_ALL %>"><img class="img-fluid" src="/images/uploads/<%=data.array[ x].foto_0 %>" alt="<%= data.array[ x].titolo %>"/></a></div>
+                <div class="card-img-top overflow-hidden" ><a href="/ricercaControl/visualizzaAlloggioRicerca?id=<%= data.array[ x].ID_ALL %>"><img class="img-fluid" src="/images/uploads/<%=data.array[ x].foto_0 %>" alt="<%= data.array[ x].titolo %>"/></a></div>
                 <div class="card-body d-flex align-items-center">
                   <div class="w-100">
                     <p class="subtitle font-weight-normal text-sm mb-2"><%= data.array[ x].tipo_all %></p>
-                    <h6 class="card-title"><a class="text-decoration-none text-dark" href="/visualizzaAlloggio/visualizzaAlloggioInserito?id=<%= data.array[ x].ID_ALL %>"><%= data.array[ x].titolo %></a></h6>
+                    <h6 class="card-title"><a class="text-decoration-none text-dark" href="/ricercaControl/visualizzaAlloggioRicerca?id=<%= data.array[ x].ID_ALL %>"><%= data.array[ x].titolo %></a></h6>
                     <div class="d-flex card-subtitle mb-3">
                       <p class="flex-grow-1 mb-0 text-muted text-sm"><%= data.array[ x].citta %></p>
                     </div>
