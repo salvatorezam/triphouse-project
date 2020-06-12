@@ -27,20 +27,22 @@
               <h1 class="display-3 font-weight-bold text-shadow">La meta è partire.</h1>
             </div>
             <div class="search-bar mt-5 p-3 p-lg-1 pl-lg-4">
-              <form action="#" autocomplete="off">
+              <form method="POST" action="/ricercaControl/listaRicerca" autocomplete="off">
                 <div class="row">
+                  <!--CITTA'-->
                   <div class="col-lg-3 d-flex align-items-center form-group">
-                    <input id="prova" class="form-control border-0 shadow-0" type="text" name="search" placeholder="Dove vuoi andare?">
+                    <input id="prova" class="form-control border-0 shadow-0" type="text" name="citta" id="citta" placeholder="Dove vuoi andare?" required>
                   </div>
                   <!--Data-->
                   <div class="col-lg-4 d-flex align-items-center form-group">
                     <label class="form-label" for="form_dates"></label>
                     <div class="datepicker-container datepicker-container-left">
-                      <input class="form-control" type="tetx" name="bookingDate" id="form_dates" placeholder="Scegli le tue date" required="required" style="border: none;">
+                      <input class="form-control" type="tetx" name="bookingDate" id="form_dates" placeholder="Scegli le tue date" required style="border: none;">
                     </div>
                   </div>
-                  <div class="col-lg d-flex align-items-center form-group no-divider">
-                    <select class="selectpicker" title="Quanti ospiti?" data-style="btn-form-control">
+                  <!--NUMERO OSPITI-->
+                  <div class="col-lg d-flex align-items-center form-group no-divider" required>
+                    <select class="selectpicker" title="Quanti ospiti?" name="num_ospiti" id="num_ospiti" data-style="btn-form-control">
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -49,12 +51,15 @@
                       <option value="6">6</option>
                       <option value="7">7</option>
                       <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
                     </select>
                   </div>
                   <div class="col-lg">
-                    <button class="btn btn-primary btn-block rounded-xl h-100" type="submit" formaction="ricerca">Cerca</button>
-                  </div>
-                  
+                    <button class="btn btn-primary btn-block rounded-xl h-100" type="submit">Cerca</button>
+                  </div>    
                 </div>
               </form>
             </div>

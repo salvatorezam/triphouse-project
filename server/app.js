@@ -18,6 +18,7 @@ var prenotazioneRouter = require('./routes/prenotazione');
 var aggiungiAlloggio = require('./routes/aggiungiAlloggio');
 var RegAutControl = require('./routes/RegAutControl');
 var visualizzaAlloggio = require('./routes/visualizzaAlloggio');
+var ricercaControl = require('./routes/ricercaControl');
 const { resolveTxt } = require('dns');
 
 var app = express();
@@ -56,6 +57,7 @@ app.use('/prenotazione', prenotazioneRouter);
 app.use('/aggiungiAlloggio', aggiungiAlloggio);
 app.use('/regAutControl', RegAutControl);
 app.use('/visualizzaAlloggio', visualizzaAlloggio);
+app.use('/ricercaControl', ricercaControl);
 
 app.use(bodyParser.json());
 
