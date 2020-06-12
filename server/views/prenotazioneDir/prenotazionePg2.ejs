@@ -18,9 +18,7 @@
             <h1 class="h2 mb-5"> Chi viene? <span class="text-muted float-right">Step 2</span>      </h1>
 
             <div class="text-block">
-              <label class="h5" for="form_guests">Ospiti</label>
-              
-              <p class="text-sm text-muted">Riempi solo i campi degli ospiti che serveno gli altri lasciali vuoti</p>
+
           <!-- <div class="row">
                 <div class="col-lg-6 mb-3">
                   <select class="selectpicker form-control" name="guests" id="form_guests" data-style="btn-selectpicker" required>
@@ -35,24 +33,50 @@
                 </div> 
               </div> -->
             </div>
-          <button class="btn btn-link btn-collapse pl-0 text-muted" data-toggle="collapse" data-target="#scatola" aria-expanded="false" aria-controls="#scatola" data-expanded-text="Chiudi" data-collapsed-text="Inserisci informazioni ospiti">Inserisci informazioni ospiti</button>
           <form name="myform" method="POST" action="/prenotazione/prenotazionePg3">
-            <div class=" text-block row collapse" id="scatola">
+            <label class="h5">Inserisci i  dati dei tuoi documenti</label>
+            <!--inizio form documenti utenti registrati-->
+            <div name="formDocUtenteR">
+                <p class="text-muted">seleziona il tipo di documento</p>
+                <fieldset class=" col-lg-4">
+                <div class="form-group" style="text-align: center; margin-top: 1em; ">
+                    <input type="radio" class="tipoDoc" id="caDocU" name="documentoU" value="cartaDiIdentità" autocomplete="off" required>
+                    <label for="caDocU">Carta d'identità</label><br />
+                    <input type="radio" class="tipoDoc" id="pasDocU" name="documentoU" value="passaporto" autocomplete="off" required>
+                    <label for="pasDocU">Passaporto</label><br />
+                </div>
+                </fieldset>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <label class="form-label" for="numDocU">Numero Documento</label>
+                    <input class="form-control" name="numeroDocU" id="numDocU" type="text" required>
+                  </div>
+                  <div class="col-lg-4">
+                    <label class="form-label" for="dataDocU">Data scadenza</label>
+                    <input class="form-control" name="scadenzaDocU" id="dataDocU" type="date" required>
+                  </div>
+                </div>
+            </div> 
+          <button class="btn btn-link btn-collapse pl-0 text-muted" data-toggle="collapse" data-target="#scatola" aria-expanded="false" aria-controls="#scatola" data-expanded-text="Chiudi" data-collapsed-text="Inserisci informazioni ospiti">Inserisci informazioni ospiti</button>
+
+            <div class=" text-block collapse" id="scatola">
+              <label class="h5" for="form_guests">Ospiti</label>    
+              <p class="text-sm text-muted">Riempi solo i campi degli ospiti che serveno gli altri lasciali vuoti</p>
               <div id="ospite1">
                 <h6>Ospite 1</h6>
                 <div class="form-row">
                   <div class="form-group col-sm-4">
-                    <label class="form-label" for="nome"> Nome *</label>  
-                    <input class="form-control" name="nome" id="nome" type="text" placeholder="Nome" maxlength="40" autocomplete="off" required>
+                    <label class="form-label" for="nome"> Nome </label>  
+                    <input class="form-control" name="nome" id="nome" type="text" placeholder="Nome" maxlength="40" autocomplete="off">
                   </div>
-                  <div class="form-group col-4">
-                    <label class="form-label" for="cognome"> Cognome *</label>
-                    <input class="form-control" name="cognome" id="cognome" type="text" placeholder="Cognome" maxlength="40" autocomplete="off" required>
+                  <div class="form-group col-sm-4">
+                    <label class="form-label" for="cognome"> Cognome </label>
+                    <input class="form-control" name="cognome" id="cognome" type="text" placeholder="Cognome" maxlength="40" autocomplete="off">
                   </div>
                 </div>
                 <div class="row"> 
-                  <div class="form-group col-6">
-                    <label class="form-label" name="nazione" id="form_nazionalita" for="nazione" data-style="btn-selectpicker"> Nazione *</label>
+                  <div class="form-group col-sm-4">
+                    <label class="form-label" name="nazione" id="form_nazionalita" for="nazione" data-style="btn-selectpicker"> Nazione </label>
                     <select id="nazione" name="nazione" class="form-control">
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Åland Islands">Åland Islands</option>
@@ -300,32 +324,49 @@
                         <option value="Zimbabwe">Zimbabwe</option>
                     </select>
                   </div>
-                  <div class="col-md-5">
-                    <label class="form-label" name="eta" id="eta" for="eta_ospiti" data-style="btn-selectpicker"> Età *</label>
+                  <div class="col-sm-4">
+                    <label class="form-label" name="eta" id="eta" for="eta_ospiti" data-style="btn-selectpicker"> Età</label>
                     <select class="selectpicker form-control" name="eta_ospiti" id="eta_ospiti" data-style="btn-selectpicker">
                         <option value="0">Adulto</option>
                         <option value="1">Bambino</option>
                         <option value="2">Neonato</option>
                     </select>
                   </div>
-              
+                </div>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <label class="form-label" for="numDoc1">Numero Documento</label>
+                    <input class="form-control" name="numeroDoc1" id="numDoc1" type="text">
+                  </div>
+                  <div class="col-lg-4">
+                    <label class="form-label" for="dataDoc1">Data scadenza</label>
+                    <input class="form-control" name="scadenzaDoc1" id="dataDoc1" type="date">
+                  </div>
+                  <fieldset class=" col-lg-4">
+                    <div class="form-group" style="text-align: center; margin-top: 1em;">
+                        <input type="radio" class="tipoDoc" id="caDoc1" name="documento1" value="carta di identità" autocomplete="off" required>
+                        <label for="caDoc1">Carta d'identità</label><br />
+                        <input type="radio" class="tipoDoc" id="pasDoc1" name="documento1" value="passaporto" autocomplete="off" required>
+                        <label for="pasDoc1">Passaporto</label><br />
+                    </div>
+                  </fieldset>
                 </div>
               </div>
               <div id="ospite2">
                 <h6>Ospite 2</h6>
                 <div class="form-row">
                   <div class="form-group col-sm-4">
-                    <label class="form-label" for="nome2"> Nome *</label>  
-                    <input class="form-control" name="nome2" id="nome2" type="text" placeholder="Nome" maxlength="40" autocomplete="off" required>
+                    <label class="form-label" for="nome2"> Nome </label>  
+                    <input class="form-control" name="nome2" id="nome2" type="text" placeholder="Nome" maxlength="40" autocomplete="off">
                   </div>
                   <div class="form-group col-4">
-                    <label class="form-label" for="cognome2"> Cognome *</label>
-                    <input class="form-control" name="cognome2" id="cognome2" type="text" placeholder="Cognome" maxlength="40" autocomplete="off" required>
+                    <label class="form-label" for="cognome2"> Cognome </label>
+                    <input class="form-control" name="cognome2" id="cognome2" type="text" placeholder="Cognome" maxlength="40" autocomplete="off">
                   </div>
                 </div>
                 <div class="row"> 
                   <div class="form-group col-6">
-                    <label class="form-label" name="nazione2" id="form_nazionalita2" for="nazione2" data-style="btn-selectpicker"> Nazione *</label>
+                    <label class="form-label" name="nazione2" id="form_nazionalita2" for="nazione2" data-style="btn-selectpicker"> Nazione </label>
                     <select id="nazione2" name="nazione2" class="form-control">
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Åland Islands">Åland Islands</option>
@@ -574,26 +615,43 @@
                     </select>
                   </div>
                   <div class="col-md-5">
-                    <label class="form-label" name="eta2" id="eta2" for="eta_ospiti2" data-style="btn-selectpicker"> Età *</label>
+                    <label class="form-label" name="eta2" id="eta2" for="eta_ospiti2" data-style="btn-selectpicker"> Età </label>
                     <select class="selectpicker form-control" name="eta_ospiti2" id="eta_ospiti2" data-style="btn-selectpicker">
                         <option value="eta_0">Adulto</option>
                         <option value="eta_1">Bambino</option>
                         <option value="eta_2">Neonato</option>
                     </select>
                   </div>
-              
+                </div>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <label class="form-label" for="numDoc2">Numero Documento</label>
+                    <input class="form-control" name="numeroDoc2" id="numDoc2" type="text">
+                  </div>
+                  <div class="col-lg-4">
+                    <label class="form-label" for="dataDoc2">Data scadenza</label>
+                    <input class="form-control" name="scadenzaDoc2" id="dataDoc2" type="date">
+                  </div>
+                  <fieldset class=" col-lg-4">
+                    <div class="form-group" style="text-align: center; margin-top: 1em;">
+                        <input type="radio" class="tipoDoc" id="caDoc2" name="documento2" value="carta di identità" autocomplete="off">
+                        <label for="caDoc2">Carta d'identità</label><br />
+                        <input type="radio" class="tipoDoc" id="pasDoc2" name="documento2" value="passaporto" autocomplete="off">
+                        <label for="pasDoc2">Passaporto</label><br />
+                    </div>
+                  </fieldset>
                 </div>
               </div>
               <div id="ospite3">
                 <h6>Ospite 3</h6>
                 <div class="form-row">
                   <div class="form-group col-sm-4">
-                    <label class="form-label" for="nome3"> Nome *</label>  
-                    <input class="form-control" name="nome3" id="nome3" type="text" placeholder="Nome" maxlength="40" autocomplete="off" required>
+                    <label class="form-label" for="nome3"> Nome </label>  
+                    <input class="form-control" name="nome3" id="nome3" type="text" placeholder="Nome" maxlength="40" autocomplete="off">
                   </div>
                   <div class="form-group col-4">
-                    <label class="form-label" for="cognome3"> Cognome *</label>
-                    <input class="form-control" name="cognome3" id="cognome3" type="text" placeholder="Cognome" maxlength="40" autocomplete="off" required>
+                    <label class="form-label" for="cognome3"> Cognome </label>
+                    <input class="form-control" name="cognome3" id="cognome3" type="text" placeholder="Cognome" maxlength="40" autocomplete="off">
                   </div>
                 </div>
                 <div class="row"> 
@@ -856,22 +914,40 @@
                   </div>
               
                 </div>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <label class="form-label" for="numDoc3">Numero Documento</label>
+                    <input class="form-control" name="numeroDoc3" id="numDoc3" type="text">
+                  </div>
+                  <div class="col-lg-4">
+                    <label class="form-label" for="dataDoc3">Data scadenza</label>
+                    <input class="form-control" name="scadenzaDoc3" id="dataDoc3" type="date">
+                  </div>
+                  <fieldset class=" col-lg-4">
+                    <div class="form-group" style="text-align: center; margin-top: 1em;">
+                        <input type="radio" class="tipoDoc" id="caDoc3" name="documento3" value="carta di identità" autocomplete="off">
+                        <label for="caDoc3">Carta d'identità</label><br />
+                        <input type="radio" class="tipoDoc" id="pasDoc3" name="documento3" value="passaporto" autocomplete="off">
+                        <label for="pasDoc3">Passaporto</label><br />
+                    </div>
+                  </fieldset>
+                </div>
               </div>
               <div id="ospite4">
                 <h6>Ospite 4</h6>
                 <div class="form-row">
                   <div class="form-group col-sm-4">
-                    <label class="form-label" for="nome4"> Nome *</label>  
-                    <input class="form-control" name="nome4" id="nome4" type="text" placeholder="Nome" maxlength="40" autocomplete="off" required>
+                    <label class="form-label" for="nome4"> Nome </label>  
+                    <input class="form-control" name="nome4" id="nome4" type="text" placeholder="Nome" maxlength="40" autocomplete="off">
                   </div>
                   <div class="form-group col-4">
-                    <label class="form-label" for="cognome4"> Cognome *</label>
-                    <input class="form-control" name="cognome4" id="cognome4" type="text" placeholder="Cognome" maxlength="40" autocomplete="off" required>
+                    <label class="form-label" for="cognome4"> Cognome </label>
+                    <input class="form-control" name="cognome4" id="cognome4" type="text" placeholder="Cognome" maxlength="40" autocomplete="off">
                   </div>
                 </div>
                 <div class="row"> 
                   <div class="form-group col-6">
-                    <label class="form-label" name="nazione" id="form_nazionalità" for="nazione4" data-style="btn-selectpicker"> Nazione *</label>
+                    <label class="form-label" name="nazione" id="form_nazionalità" for="nazione4" data-style="btn-selectpicker"> Nazione </label>
                     <select id="nazione4" name="nazione4" class="form-control">
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Åland Islands">Åland Islands</option>
@@ -1120,7 +1196,7 @@
                     </select>
                   </div>
                   <div class="col-md-5">
-                    <label class="form-label" name="eta4" id="eta4" for="eta_ospiti4" data-style="btn-selectpicker"> Età *</label>
+                    <label class="form-label" name="eta4" id="eta4" for="eta_ospiti4" data-style="btn-selectpicker"> Età </label>
                     <select class="selectpicker form-control" name="eta_ospiti4" id="eta_ospiti4" data-style="btn-selectpicker">
                         <option value="eta_0">Adulto</option>
                         <option value="eta_1">Bambino</option>
@@ -1129,22 +1205,40 @@
                   </div>
               
                 </div>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <label class="form-label" for="numDoc4">Numero Documento</label>
+                    <input class="form-control" name="numeroDoc4" id="numDoc4" type="text">
+                  </div>
+                  <div class="col-lg-4">
+                    <label class="form-label" for="dataDoc5">Data scadenza</label>
+                    <input class="form-control" name="scadenzaDoc4" id="dataDoc4" type="date">
+                  </div>
+                  <fieldset class=" col-lg-4">
+                    <div class="form-group" style="text-align: center; margin-top: 1em;">
+                        <input type="radio" class="tipoDoc" id="caDoc4" name="documento4" value="carta di identità" autocomplete="off">
+                        <label for="caDoc4">Carta d'identità</label><br />
+                        <input type="radio" class="tipoDoc" id="pasDoc4" name="documento4" value="passaporto" autocomplete="off">
+                        <label for="pasDoc4">Passaporto</label><br />
+                    </div>
+                  </fieldset>
+                </div>
               </div>
               <div id="ospite5">
                 <h6>Ospite 5</h6>
                 <div class="form-row">
                   <div class="form-group col-sm-4">
-                    <label class="form-label" for="nome5"> Nome *</label>  
-                    <input class="form-control" name="nome5" id="nome5" type="text" placeholder="Nome" maxlength="40" autocomplete="off" required>
+                    <label class="form-label" for="nome5"> Nome </label>  
+                    <input class="form-control" name="nome5" id="nome5" type="text" placeholder="Nome" maxlength="40" autocomplete="off">
                   </div>
                   <div class="form-group col-4">
-                    <label class="form-label" for="cognome5"> Cognome *</label>
-                    <input class="form-control" name="cognome5" id="cognome5" type="text" placeholder="Cognome" maxlength="40" autocomplete="off" required>
+                    <label class="form-label" for="cognome5"> Cognome </label>
+                    <input class="form-control" name="cognome5" id="cognome5" type="text" placeholder="Cognome" maxlength="40" autocomplete="off">
                   </div>
                 </div>
                 <div class="row"> 
                   <div class="form-group col-6">
-                    <label class="form-label" name="nazione" id="form_nazionalità" for="nazione5" data-style="btn-selectpicker"> Nazione *</label>
+                    <label class="form-label" name="nazione" id="form_nazionalità" for="nazione5" data-style="btn-selectpicker"> Nazione </label>
                     <select id="nazione5" name="nazione5" class="form-control">
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Åland Islands">Åland Islands</option>
@@ -1393,7 +1487,7 @@
                     </select>
                   </div>
                   <div class="col-md-5">
-                    <label class="form-label" name="eta" id="eta5" for="eta_ospiti5" data-style="btn-selectpicker"> Età *</label>
+                    <label class="form-label" name="eta" id="eta5" for="eta_ospiti5" data-style="btn-selectpicker"> Età </label>
                     <select class="selectpicker form-control" name="eta_ospiti5" id="eta_ospiti5" data-style="btn-selectpicker">
                         <option value="eta_0">Adulto</option>
                         <option value="eta_1">Bambino</option>
@@ -1402,22 +1496,40 @@
                   </div>
               
                 </div>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <label class="form-label" for="numDoc5">Numero Documento</label>
+                    <input class="form-control" name="numeroDoc5" id="numDoc5" type="text">
+                  </div>
+                  <div class="col-lg-4">
+                    <label class="form-label" for="dataDoc5">Data scadenza</label>
+                    <input class="form-control" name="scadenzaDoc5" id="dataDoc5" type="date">
+                  </div>
+                  <fieldset class=" col-lg-4">
+                    <div class="form-group" style="text-align: center; margin-top: 1em;">
+                        <input type="radio" class="tipoDoc" id="caDoc5" name="documento5" value="carta di identità" autocomplete="off">
+                        <label for="caDoc5">Carta d'identità</label><br />
+                        <input type="radio" class="tipoDoc" id="pasDoc5" name="documento5" value="passaporto" autocomplete="off">
+                        <label for="pasDoc5">Passaporto</label><br />
+                    </div>
+                  </fieldset>
+                </div>
               </div>
               <div id="ospite6">
                 <h6>Ospite 6</h6>
                 <div class="form-row">
                   <div class="form-group col-sm-4">
-                    <label class="form-label" for="nome6"> Nome *</label>  
-                    <input class="form-control" name="nome6" id="nome6" type="text" placeholder="Nome" maxlength="40" autocomplete="off" required>
+                    <label class="form-label" for="nome6"> Nome </label>  
+                    <input class="form-control" name="nome6" id="nome6" type="text" placeholder="Nome" maxlength="40" autocomplete="off">
                   </div>
                   <div class="form-group col-4">
-                    <label class="form-label" for="cognome6"> Cognome *</label>
-                    <input class="form-control" name="cognome6" id="cognome6" type="text" placeholder="Cognome" maxlength="40" autocomplete="off" required>
+                    <label class="form-label" for="cognome6"> Cognome </label>
+                    <input class="form-control" name="cognome6" id="cognome6" type="text" placeholder="Cognome" maxlength="40" autocomplete="off">
                   </div>
                 </div>
                 <div class="row"> 
                   <div class="form-group col-6">
-                    <label class="form-label" name="nazione" id="form_nazionalità" for="nazione6" data-style="btn-selectpicker"> Nazione *</label>
+                    <label class="form-label" name="nazione" id="form_nazionalità" for="nazione6" data-style="btn-selectpicker"> Nazione </label>
                     <select id="nazione6" name="nazione6" class="form-control">
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Åland Islands">Åland Islands</option>
@@ -1666,31 +1778,48 @@
                     </select>
                   </div>
                   <div class="col-md-5">
-                    <label class="form-label" name="eta" id="eta6" for="eta_ospiti6" data-style="btn-selectpicker"> Età *</label>
+                    <label class="form-label" name="eta" id="eta6" for="eta_ospiti6" data-style="btn-selectpicker"> Età </label>
                     <select class="selectpicker form-control" name="eta_ospiti6" id="eta_ospiti6" data-style="btn-selectpicker">
                         <option value="eta_0">Adulto</option>
                         <option value="eta_1">Bambino</option>
                         <option value="eta_2">Neonato</option>
                     </select>
                   </div>
-              
+                </div>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <label class="form-label" for="numDoc6">Numero Documento</label>
+                    <input class="form-control" name="numeroDoc6" id="numDoc6" type="text">
+                  </div>
+                  <div class="col-lg-4">
+                    <label class="form-label" for="dataDoc6">Data scadenza</label>
+                    <input class="form-control" name="scadenzaDoc6" id="dataDoc6" type="date">
+                  </div>
+                  <fieldset class=" col-lg-4">
+                    <div class="form-group" style="text-align: center; margin-top: 1em;">
+                        <input type="radio" class="tipoDoc" id="caDoc6" name="documento6" value="carta di identità" autocomplete="off">
+                        <label for="caDoc6">Carta d'identità</label><br />
+                        <input type="radio" class="tipoDoc" id="pasDoc6" name="documento6" value="passaporto" autocomplete="off">
+                        <label for="pasDoc6">Passaporto</label><br />
+                    </div>
+                  </fieldset>
                 </div>
               </div>
               <div id="ospite7">
                 <h6>Ospite 7</h6>
                 <div class="form-row">
                   <div class="form-group col-sm-4">
-                    <label class="form-label" for="nome7"> Nome *</label>  
-                    <input class="form-control" name="nome7" id="nome7" type="text" placeholder="Nome" maxlength="40" autocomplete="off" required>
+                    <label class="form-label" for="nome7"> Nome </label>  
+                    <input class="form-control" name="nome7" id="nome7" type="text" placeholder="Nome" maxlength="40" autocomplete="off">
                   </div>
                   <div class="form-group col-4">
-                    <label class="form-label" for="cognome7"> Cognome *</label>
-                    <input class="form-control" name="cognome7" id="cognome7" type="text" placeholder="Cognome" maxlength="40" autocomplete="off" required>
+                    <label class="form-label" for="cognome7"> Cognome </label>
+                    <input class="form-control" name="cognome7" id="cognome7" type="text" placeholder="Cognome" maxlength="40" autocomplete="off">
                   </div>
                 </div>
                 <div class="row"> 
                   <div class="form-group col-6">
-                    <label class="form-label" name="nazione" id="form_nazionalità" for="nazione7" data-style="btn-selectpicker"> Nazione *</label>
+                    <label class="form-label" name="nazione" id="form_nazionalità" for="nazione7" data-style="btn-selectpicker"> Nazione </label>
                     <select id="nazione7" name="nazione7" class="form-control">
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Åland Islands">Åland Islands</option>
@@ -1939,31 +2068,48 @@
                     </select>
                   </div>
                   <div class="col-md-5">
-                    <label class="form-label" name="eta" id="eta7" for="eta_ospiti7" data-style="btn-selectpicker"> Età *</label>
+                    <label class="form-label" name="eta" id="eta7" for="eta_ospiti7" data-style="btn-selectpicker"> Età </label>
                     <select class="selectpicker form-control" name="eta_ospiti7" id="eta_ospiti7" data-style="btn-selectpicker">
                         <option value="eta_0">Adulto</option>
                         <option value="eta_1">Bambino</option>
                         <option value="eta_2">Neonato</option>
                     </select>
                   </div>
-              
+                </div>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <label class="form-label" for="numDoc7">Numero Documento</label>
+                    <input class="form-control" name="numeroDoc7" id="numDoc7" type="text">
+                  </div>
+                  <div class="col-lg-4">
+                    <label class="form-label" for="dataDoc7">Data scadenza</label>
+                    <input class="form-control" name="scadenzaDoc7" id="dataDoc7" type="date">
+                  </div>
+                  <fieldset class=" col-lg-4">
+                    <div class="form-group" style="text-align: center; margin-top: 1em;">
+                        <input type="radio" class="tipoDoc" id="caDoc7" name="documento7" value="carta di identità" autocomplete="off">
+                        <label for="caDoc7">Carta d'identità</label><br />
+                        <input type="radio" class="tipoDoc" id="pasDoc7" name="documento7" value="passaporto" autocomplete="off">
+                        <label for="pasDoc7">Passaporto</label><br />
+                    </div>
+                  </fieldset>
                 </div>
               </div>
               <div id="ospite8">
                 <h6>Ospite 8</h6>
                 <div class="form-row">
                   <div class="form-group col-sm-4">
-                    <label class="form-label" for="nome8"> Nome *</label>  
-                    <input class="form-control" name="nome8" id="nome8" type="text" placeholder="Nome" maxlength="40" autocomplete="off" required>
+                    <label class="form-label" for="nome8"> Nome </label>  
+                    <input class="form-control" name="nome8" id="nome8" type="text" placeholder="Nome" maxlength="40" autocomplete="off">
                   </div>
                   <div class="form-group col-4">
                     <label class="form-label" for="cognome8"> Cognome *</label>
-                    <input class="form-control" name="cognome8" id="cognome8" type="text" placeholder="Cognome" maxlength="40" autocomplete="off" required>
+                    <input class="form-control" name="cognome8" id="cognome8" type="text" placeholder="Cognome" maxlength="40" autocomplete="off">
                   </div>
                 </div>
                 <div class="row"> 
                   <div class="form-group col-6">
-                    <label class="form-label" name="nazione" id="form_nazionalita8" for="nazione8" data-style="btn-selectpicker"> Nazione *</label>
+                    <label class="form-label" name="nazione" id="form_nazionalita8" for="nazione8" data-style="btn-selectpicker"> Nazione </label>
                     <select id="nazione8" name="nazione8" class="form-control">
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Åland Islands">Åland Islands</option>
@@ -2212,14 +2358,31 @@
                     </select>
                   </div>
                   <div class="col-md-5">
-                    <label class="form-label" name="eta" id="eta8" for="eta_ospiti8" data-style="btn-selectpicker"> Età *</label>
+                    <label class="form-label" name="eta" id="eta8" for="eta_ospiti8" data-style="btn-selectpicker"> Età </label>
                     <select class="selectpicker form-control" name="eta_ospiti8" id="eta_ospiti8" data-style="btn-selectpicker">
                         <option value="eta_0">Adulto</option>
                         <option value="eta_1">Bambino</option>
                         <option value="eta_2">Neonato</option>
                     </select>
                   </div>
-              
+                </div>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <label class="form-label" for="numDoc8">Numero Documento</label>
+                    <input class="form-control" name="numeroDoc8" id="numDoc8" type="text">
+                  </div>
+                  <div class="col-lg-4">
+                    <label class="form-label" for="dataDoc8">Data scadenza</label>
+                    <input class="form-control" name="scadenzaDoc8" id="dataDoc8" type="date">
+                  </div>
+                  <fieldset class=" col-lg-4">
+                    <div class="form-group" style="text-align: center; margin-top: 1em;">
+                        <input type="radio" class="tipoDoc" id="caDoc8" name="documento8" value="carta di identità" autocomplete="off">
+                        <label for="caDoc8">Carta d'identità</label><br />
+                        <input type="radio" class="tipoDoc" id="pasDoc8" name="documento8" value="passaporto" autocomplete="off">
+                        <label for="pasDoc8">Passaporto</label><br />
+                    </div>
+                  </fieldset>
                 </div>
               </div>
             </div>
