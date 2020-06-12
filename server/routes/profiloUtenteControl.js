@@ -197,6 +197,7 @@ async function recensisciAlloggio(req, res, next) {
           console.log('Recensione completata.');
           
           let link = '/profiloUtenteControl/finestraPrenotazioneEffettuata?id=' + prenData.ID_PREN;
+          //req.flash('Operazione andata a buon fine.');
           res.redirect(link);
       });
   } catch (err) {
