@@ -23,20 +23,22 @@
 
                 <h6 class="subtitle text-muted" style="margin-bottom:2em;">La parte noisa della prenotazione della tua vacanza</h6>
                 <div class="text-block">
-                  <!--inizio form documenti utenti registrati-->
+                  
                   <!-- in action bisogna specificare dove devono essere caricati i campi del form con il file-->
-                 <form name="formDocumenti" action="/prenotazione/prenotazionePg4" method="POST">
+                 <form name="formDocumenti" action="/prenotazione/prenotazionePg4" method="POST" enctype="multipart/form-data" >
                     <label class="h5">Inserisci i tuoi documenti</label>
-                    <p class="text-muted">seleziona il tipo di documento</p>
-                        <fieldset class=" col-lg-4">
+                        <!--inizio form documenti utenti registrati-->
+                        <div name="formDocUtenteR">
+                            <p class="text-muted">seleziona il tipo di documento</p>
+                            <fieldset class=" col-lg-4">
                             <div class="form-group" style="text-align: center; margin-top: 1em; ">
-                                <input type="radio" class="tipoDoc" id="caDocU" name="documentoU" value="carta di identità" autocomplete="off" required>
+                                <input type="radio" class="tipoDoc" id="caDocU" name="documentoU" value="cartaDiIdentità" autocomplete="off" required>
                                 <label for="caDocU">Carta d'identità</label><br />
                                 <input type="radio" class="tipoDoc" id="pasDocU" name="documentoU" value="passaporto" autocomplete="off" required>
                                 <label for="pasDocU">Passaporto</label><br />
                             </div>
-                        </fieldset>
-                        <div class="row">
+                            </fieldset>
+                            <div class="row">
                             <div class="col-lg-4">
                                 <label class="form-label" for="numDocU">Numero Documento</label>
                                 <input class="form-control" name="numeroDocU" id="numDocU" type="text">
@@ -49,13 +51,14 @@
                                 <label class="form-label" for="autoritaDocU">Rilasciato da:</label>
                                 <input class="form-control" name="autoritaDocumentoU" id="autoritaDocU" type="text">
                             </div>
-                        </div>
-                        <div class="row">
+                            </div>
+                            <div class="row">
                             <div class="col-lg-8">
                                 <label class="form-label" for="fileDocU">Inserisci la scanzione del documento</label>
                                 <input class="form-control" type="file" name="fileDocU" id="fileDocU" autocomplete="off">
                             </div>   
-                        </div>
+                            </div>
+                        </div>    
                         <!--inizio form documenti ospiti-->
                         <button class="btn btn-link btn-collapse pl-0 text-muted" data-toggle="collapse" data-target="#formDocOspiti" aria-expanded="false" aria-controls="formDocOspiti" data-expanded-text="Chiudi" data-collapsed-text="Inserisci documenti ospiti">Inserisci documenti Ospiti</button>
                         <div class=" text-block row collapse" id="formDocOspiti"> 
