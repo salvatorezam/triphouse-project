@@ -6,6 +6,7 @@ var router = express.Router();
 
 var idUtente = "";
 let alloggiInseriti = [];
+let recensioni = [];
 
 
 /*carichiamo il middleware*/
@@ -40,13 +41,18 @@ async function listaAlloggiInseriti(req, res, next) {
               idUtente = datiUtente.user.id_utente;
           }
           
-          let sql1 = "SELECT* FROM Alloggio a WHERE proprietario = ?";
-          results1 = await db.query(sql1, [idUtente])
+          let sql1 = "  SELECT* FROM Alloggio a WHERE a.proprietario = ?; \
+                        SELECT r.ID_RA AS ID_RA, r.testo AS testo, r.data_rec AS data_rec, r.scrittore AS scrittore, u.nome AS nome_scrittore, \
+                                r.alloggio AS alloggio, r.prenotazione AS prenotazione, r.valutazione AS valutazione \
+                        FROM recensiscialloggio r, alloggio a, utenteregistrato u \
+                        WHERE (r.alloggio = a.ID_ALL) AND (a.proprietario = ?) AND (r.scrittore = u.ID_UR);";
+          results1 = await db.query(sql1, [idUtente, idUtente])
               .catch(err => {
                   throw err;
               });
 
-          alloggiInseriti = results1;
+          alloggiInseriti = results1[0];
+          recensioni = results1[1];
           
           //res.render('finestraListaPrenotazioniEffettuate', {data : {dataC: prenConcluse, dataNC: prenNonConcluse}}); //di mauro
 
@@ -64,6 +70,8 @@ async function listaAlloggiInseriti(req, res, next) {
 router.get('/visualizzaAlloggioInserito', function(req, res, next) {
 
     let alloggio;
+    let recensioni_a = [];
+    let contatore = 0;
 
     alloggiInseriti.forEach(element => {
         
@@ -75,8 +83,26 @@ router.get('/visualizzaAlloggioInserito', function(req, res, next) {
         }
     });
 
+    recensioni.forEach(element => {
 
-    res.render('visualizzaAlloggioInserito', {data : alloggio});
+        if(element.alloggio == req.query.id){
+
+            recensioni_a[contatore] = element;
+            contatore++;
+        }
+    })
+
+
+    res.render('visualizzaAlloggioInserito', {data : {data_a :alloggio, data_r: recensioni_a }});
   });
+
+
+/*GET modificaInformazioniAlloggio */
+
+router.get('/modificaInformazioniAlloggio', function(req, res, next){
+
+    res.render('modificaInformazioniAlloggio');
+
+});
 
 module.exports = router;
