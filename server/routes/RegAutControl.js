@@ -137,7 +137,7 @@ async function autenticazione(req, res, next) { // sistemare il messaggio di err
                         email : results[0].email,
                         stato_host : results[0].stato_host
                     };
-                    req.session.save();
+                    //req.session.save();
 
                     req.app.locals.users.set(results[0].ID_UR, req.session.user);
 

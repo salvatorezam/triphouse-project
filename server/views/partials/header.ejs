@@ -1,97 +1,101 @@
 <header class="header">
-    <!-- Navbar-->
-    <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
-      <div class="container-fluid">
-        <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="/"><img width="175" height="50" viewBox="0 0 175 50" fill="none" src="../images/logo.png" alt="TripHouse Logo"></a></div>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
-        <!-- Navbar Collapse -->
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav ml-auto">
+  <!-- Navbar-->
+  <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
+    <div class="container-fluid">
+      <div class="d-flex align-items-center"><a class="navbar-brand py-1" href="/"><img width="175" height="50" viewBox="0 0 175 50" fill="none" src="../images/logo.png" alt="TripHouse Logo"></a></div>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+      <!-- Navbar Collapse -->
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <!-- if (locals.users.size != 0) -->
+        <!-- if (locals.users.has()) -- locals.users.has(document.cookie.split('=')[1]) -->
+        <!-- IF SACROSANTO: if (locals.user != undefined && locals.users.has(locals.user.id_utente)) -->
+        <!-- if (locals.users.size != 0 && locals.users.has(locals.user.id_utente)) NON VA BENE -->
+        <ul class="navbar-nav ml-auto">
 
-            <% console.log('locals.users ' + locals.users + ' ----------------------------------------------------------------------'); %>
-            <% console.log(locals.users); %>
-            <% console.log(locals.users.id_utente); %>
+          <% console.log('locals.users ' + locals.users + ' ----------------------------------------------------------------------'); %>
+          <% console.log(locals.users); %>
+          <% console.log(locals.users.id_utente); %>
 
-            <% console.log(locals == undefined); %>
+          <% /*console.log(locals.user == undefined); console.log('MAP HAS?'); console.log(locals.users.has(locals.user.id_utente));*/ %>
 
-            <% if (locals.users.size != 0) {
-                console.log('locals.users' + locals.users + '----------------------------------------------------------------------');
-                var user = locals.users.get(locals.user.id_utente); 
-              } else {
-                var user = false;
-              } %> 
+          <% if (locals.user != undefined && locals.users.has(locals.user.id_utente)) {
+              console.log('locals.users' + locals.users + '----------------------------------------------------------------------');
+              var user = locals.users.get(locals.user.id_utente); 
+            } else {
+              var user = false;
+            } %> 
 
-            <% if(user) { %>
-            <!-- Megamenu-->
-            <li class="nav-item dropdown position-static"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Profilo Utente</a>
-              <div class="dropdown-menu megamenu py-lg-0">
-                <div class="row">
-                  <div class="col-lg-9">
-                    <div class="row p-3 pr-lg-0 pl-lg-5 pt-lg-5">
-                      <div class="col-lg-3">
-                        <!-- Megamenu list -->
-                        <h6 class="text-uppercase">Utente</h6>
-                        <ul class="megamenu-list list-unstyled">
-                          <li class="megamenu-list-item"><a class="megamenu-list-link" href="/profiloUtenteControl/finestraListaPrenotazioniEffettuate">Visualizza prenotazione effettuata   </a></li>
-                          <li class="megamenu-list-item"><a class="megamenu-list-link" href="/profiloUtenteControl/modificaDatiPersonali">Modifica dati personali   </a></li>
-                        </ul> 
-                      </div>
-                      <% if(user.stato_host == 0) { %>
-                      <div class="col-lg-5"></div> <!-- nel caso in cui l'utente non è un host aggiungiamo un blocco vuoto per motivi stilistici-->
-                      <% } else { %>
-                      <!-- se l'utente autenticato è anche un host, visualizza le funzionalità aggiuntive di host-->
-                      <div class="col-lg-5">
-                        <!-- Megamenu list -->
-                        <h6 class="text-uppercase">Host</h6>
-                        <ul class="megamenu-list list-unstyled">
-                          <li class="megamenu-list-item"><a class="megamenu-list-link" href="/profiloHostControl/finestraListaPrenotazioniRicevute">Visualizza prenotazione ricevuta   </a></li>
-                          <li class="megamenu-list-item"><a class="megamenu-list-link" href="/aggiungiAlloggio">Aggiungi alloggio   </a></li>
-                          <li class="megamenu-list-item"><a class="megamenu-list-link" href="/visualizzaAlloggio/visualizzaListaAlloggiInseriti">Visualizza alloggio   </a></li>
-                          <li class="megamenu-list-item"><a class="megamenu-list-link" href="/profiloHostControl/finestraComDatiOspiti">Supporto economico e legale   </a></li>
-                          <li class="megamenu-list-item"><a class="megamenu-list-link" href="/profiloHostControl/finestraComDatiOspiti">Comunicazione dati ospiti    </a></li>
-                        </ul>
-                      </div>
-                      <% }; %>
-                      <div class="col-lg-1">
-                        <div class="col-lg-10 offset-lg-1">
-                          <div class="card text-center" style="width: 18rem;">
-                            <div class="card-body row">
-                              <div class="col-6">
-                                <img class="avatar-profilo shadow p-1 bg-white" src="../images/ominoUtente.png" alt="..."/>
-                              </div>
-                              <div class="col-6">
-                                <h5 class="card-title"><%= user.nome %> <%= user.cognome %></h5>
-                                <a href="/RegAutControl/logout" class="btn btn-info btn-sm" style="background-color: #4E66F8;">
-                                  <span class="glyphicon glyphicon-log-out"></span> Log out
-                                </a>
-                              </div>
+          <% if(user) { %>
+          <!-- Megamenu-->
+          <li class="nav-item dropdown position-static"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Profilo Utente</a>
+            <div class="dropdown-menu megamenu py-lg-0">
+              <div class="row">
+                <div class="col-lg-9">
+                  <div class="row p-3 pr-lg-0 pl-lg-5 pt-lg-5">
+                    <div class="col-lg-3">
+                      <!-- Megamenu list -->
+                      <h6 class="text-uppercase">Utente</h6>
+                      <ul class="megamenu-list list-unstyled">
+                        <li class="megamenu-list-item"><a class="megamenu-list-link" href="/profiloUtenteControl/finestraListaPrenotazioniEffettuate">Visualizza prenotazione effettuata   </a></li>
+                        <li class="megamenu-list-item"><a class="megamenu-list-link" href="/profiloUtenteControl/modificaDatiPersonali">Modifica dati personali   </a></li>
+                      </ul> 
+                    </div>
+                    <% if(user.stato_host == 0) { %>
+                    <div class="col-lg-5"></div> <!-- nel caso in cui l'utente non è un host aggiungiamo un blocco vuoto per motivi stilistici-->
+                    <% } else { %>
+                    <!-- se l'utente autenticato è anche un host, visualizza le funzionalità aggiuntive di host-->
+                    <div class="col-lg-5">
+                      <!-- Megamenu list -->
+                      <h6 class="text-uppercase">Host</h6>
+                      <ul class="megamenu-list list-unstyled">
+                        <li class="megamenu-list-item"><a class="megamenu-list-link" href="/profiloHostControl/finestraListaPrenotazioniRicevute">Visualizza prenotazione ricevuta   </a></li>
+                        <li class="megamenu-list-item"><a class="megamenu-list-link" href="/aggiungiAlloggio">Aggiungi alloggio   </a></li>
+                        <li class="megamenu-list-item"><a class="megamenu-list-link" href="/visualizzaAlloggio/visualizzaListaAlloggiInseriti">Visualizza alloggio   </a></li>
+                        <li class="megamenu-list-item"><a class="megamenu-list-link" href="/profiloHostControl/finestraComDatiOspiti">Supporto economico e legale   </a></li>
+                        <li class="megamenu-list-item"><a class="megamenu-list-link" href="/profiloHostControl/finestraComDatiOspiti">Comunicazione dati ospiti    </a></li>
+                      </ul>
+                    </div>
+                    <% }; %>
+                    <div class="col-lg-1">
+                      <div class="col-lg-10 offset-lg-1">
+                        <div class="card text-center" style="width: 18rem;">
+                          <div class="card-body row">
+                            <div class="col-6">
+                              <img class="avatar-profilo shadow p-1 bg-white" src="../images/ominoUtente.png" alt="..."/>
+                            </div>
+                            <div class="col-6">
+                              <h5 class="card-title"><%= user.nome %> <%= user.cognome %></h5>
+                              <a href="/RegAutControl/logout" class="btn btn-info btn-sm" style="background-color: #4E66F8;">
+                                <span class="glyphicon glyphicon-log-out"></span> Log out
+                              </a>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 d-none d-lg-block"><img class="bg-image" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1521170665346-3f21e2291d8b.jpg" alt=""></div>
                 </div>
+                <div class="col-lg-3 d-none d-lg-block"><img class="bg-image" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1521170665346-3f21e2291d8b.jpg" alt=""></div>
               </div>
-            </li>
-            <!-- /Megamenu end-->
+            </div>
+          </li>
+          <!-- /Megamenu end-->
 
-            <!-- Nome utente registrato-->
-            <li class="nav-item"><a class="nav-link"><%= user.nome %> <%= user.cognome %></a></li>
-            <li><img class="avatar avatar-border-white mx-3 mb-2" src="../images/ominoUtente.png"/></li>
+          <!-- Nome utente registrato-->
+          <li class="nav-item"><a class="nav-link"><%= user.nome %> <%= user.cognome %></a></li>
+          <li><img class="avatar avatar-border-white mx-3 mb-2" src="../images/ominoUtente.png"/></li>
 
-            <% if(user.stato_host == 0) { %>
-              <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block"><a class="btn btn-primary" href="/diventahost">Diventa Host</a></li>
-            <% }; %>
+          <% if(user.stato_host == 0) { %>
+            <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block"><a class="btn btn-primary" href="/diventahost">Diventa Host</a></li>
+          <% }; %>
 
-            <% } else { %>
-              <li class="nav-item"><a class="nav-link" href="/registrazione">Registrati</a></li>
-              <li class="nav-item"><a class="nav-link" href="/autenticazione">Accedi</a></li>
-            <% }; %>
-          </ul>
-        </div>
+          <% } else { %>
+            <li class="nav-item"><a class="nav-link" href="/registrazione">Registrati</a></li>
+            <li class="nav-item"><a class="nav-link" href="/autenticazione">Accedi</a></li>
+          <% }; %>
+        </ul>
       </div>
-    </nav>
-    <!-- /Navbar -->
+    </div>
+  </nav>
+  <!-- /Navbar -->
 </header>
