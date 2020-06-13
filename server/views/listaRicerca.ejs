@@ -42,8 +42,8 @@
                   <div class="min">€<span id="slider-snap-value-from"></span></div>
                   <div class="max">€<span id="slider-snap-value-to"></span></div>
                 </div>
-                <input type="hidden" name="pricefrom" id="slider-snap-input-from" value="30">
-                <input type="hidden" name="priceto" id="slider-snap-input-to" value="150">
+                <input type="hidden" name="pricefrom" id="slider-snap-input-from" value="0">
+                <input type="hidden" name="priceto" id="slider-snap-input-to" value="200">
               </div>
               <!--Filtri-->
               <div class="col-12 pb-4">
@@ -139,19 +139,19 @@
                     <ul class="list-inline mb-0">
                       <li class="list-inline-item">
                         <div class="custom-control custom-radio">
-                          <input class="custom-control-input" type="radio" id="distanza_0" name="distanza">
+                          <input class="custom-control-input" type="radio" value="D" id="distanza_0" name="distanza">
                           <label class="custom-control-label" for="distanza_0"> Distante</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-radio">
-                          <input class="custom-control-input" type="radio" id="distanza_1" name="distanza">
+                          <input class="custom-control-input" type="radio" value="M" id="distanza_1" name="distanza">
                           <label class="custom-control-label" for="distanza_1">Medio</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-radio">
-                          <input class="custom-control-input" type="radio" id="distanza_2" name="distanza">
+                          <input class="custom-control-input" type="radio" value="V" id="distanza_2" name="distanza">
                           <label class="custom-control-label" for="distanza_2">Vicino</label>
                         </div>
                       </li> 
@@ -166,7 +166,7 @@
                 <button class="btn btn-primary" type="submit"><i class="fas fa-search mr-1"></i>Cerca</button>
               </div>
               <div class="col-sm-6 mb-4 text-sm-right order-1 order-sm-2">
-                <button class="btn btn-link btn-collapse pl-0 text-secondary" type="button" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters" data-expanded-text="Less filters" data-collapsed-text="More filters">Mostra Filtri</button>
+                <button class="btn btn-link btn-collapse pl-0 text-secondary" type="button" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters" data-expanded-text="Riduci Filtri" data-collapsed-text="Mostra Filtri">Mostra Filtri</button>
               </div>
             </div>
           </form>
@@ -203,19 +203,36 @@
           </div>
         </div>
         <div class="col-lg-12 py-4 p-xl-5">
-          <!-- Paginazione -->
-          <nav aria-label="Page navigation example">
-            <% if(data.array.length > 6) { %>
-            <ul class="pagination pagination-template d-flex justify-content-center">
-              <% if(data.inizioCount >= 6) { %>
-              <li class="page-item"><a class="page-link" href="/ricercaControl/paginaPrecedente"> <i class="fa fa-angle-left"></i></a></li>
+          <!-- Impaginazione tipo 0 -->
+          <% if(data.tipo == 0) { %>
+            <nav aria-label="Page navigation example">
+              <% if(data.array.length > 6) { %>
+              <ul class="pagination pagination-template d-flex justify-content-center">
+                <% if(data.inizioCount >= 6) { %>
+                <li class="page-item"><a class="page-link" href="/ricercaControl/paginaPrecedente"> <i class="fa fa-angle-left"></i></a></li>
+                <% }; %>
+                <% if((data.array.length - data.inizioCount) > 6) { %>
+                <li class="page-item"><a class="page-link" href="/ricercaControl/paginaSuccessiva"> <i class="fa fa-angle-right"></i></a></li>
+                <% }; %>
+              </ul>
               <% }; %>
-              <% if((data.array.length - data.inizioCount) > 6) { %>
-              <li class="page-item"><a class="page-link" href="/ricercaControl/paginaSuccessiva"> <i class="fa fa-angle-right"></i></a></li>
-              <% }; %>
-            </ul>
+            </nav>
             <% }; %>
-          </nav>
+          <!-- Impaginazione tipo 1 -->
+          <% if(data.tipo == 1) { %>
+            <nav aria-label="Page navigation example">
+              <% if(data.array.length > 6) { %>
+              <ul class="pagination pagination-template d-flex justify-content-center">
+                <% if(data.inizioCount >= 6) { %>
+                <li class="page-item"><a class="page-link" href="/ricercaControl/paginaPrecedenteFiltri"> <i class="fa fa-angle-left"></i></a></li>
+                <% }; %>
+                <% if((data.array.length - data.inizioCount) > 6) { %>
+                <li class="page-item"><a class="page-link" href="/ricercaControl/paginaSuccessivaFiltri"> <i class="fa fa-angle-right"></i></a></li>
+                <% }; %>
+              </ul>
+              <% }; %>
+            </nav>
+            <% }; %>
         </div>
         </div>
       </div>
@@ -231,13 +248,13 @@
        var snapSlider = document.getElementById('slider-snap');
        
        noUiSlider.create(snapSlider, {
-           start: [ 30, 150 ],
+           start: [ 0, 200 ],
            snap: false,
            connect: true,
            step: 1,
            range: {
-               'min': 30,
-               'max': 150
+               'min': 0,
+               'max': 200
            }
        });
        var snapValues = [

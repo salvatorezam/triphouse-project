@@ -6,6 +6,9 @@ var recensioni = [];
 var arrayAlloggi = [];
 var inizioArray;
 var fineArray;
+var arrayAlloggiFiltri = [];
+var inizioArrayFiltri;
+var fineArrayFiltri;
 
 
 /*carichiamo il middleware*/
@@ -65,8 +68,8 @@ async function listaRicerca(req, res, next) {
             inizioArray = 0;
             fineArray = arrayAlloggi.length;
         }
-
-        res.render('listaRicerca', {data : {array : arrayAlloggi, inizioCount : inizioArray, fineCount : fineArray}});
+        // il dato tipo indica se è una ricerca in base ai filtri o meno; se è 0 non è in base ai filtri
+        res.render('listaRicerca', {data : {array : arrayAlloggi, inizioCount : inizioArray, fineCount : fineArray, tipo : 0}});
     
       });
     } catch (err) {
@@ -91,7 +94,7 @@ async function paginaSuccessiva(req,res,next){
         fineArray = arrayAlloggi.length;
     }
 
-    res.render('listaRicerca', {data : {array : arrayAlloggi, inizioCount : inizioArray, fineCount : fineArray}})
+    res.render('listaRicerca', {data : {array : arrayAlloggi, inizioCount : inizioArray, fineCount : fineArray, tipo: 0}})
 
 }
 
@@ -107,7 +110,43 @@ async function paginaPrecedente(req,res,next){
     inizioArray = inizioArray - 6;
 
 
-    res.render('listaRicerca', {data : {array : arrayAlloggi, inizioCount : inizioArray, fineCount : fineArray}})
+    res.render('listaRicerca', {data : {array : arrayAlloggi, inizioCount : inizioArray, fineCount : fineArray, tipo: 0}})
+
+}
+
+/* GET paginaSuccessivaFiltri */
+
+router.get('/paginaSuccessivaFiltri', paginaSuccessivaFiltri);
+
+async function paginaSuccessivaFiltri(req,res,next){
+
+    inizioArrayFiltri = fineArrayFiltri;
+
+    if(arrayAlloggiFiltri.length > (fineArrayFiltri + 6)){
+
+        fineArrayFiltri = fineArrayFiltri + 6;
+    }
+    else{
+        fineArrayFiltri = arrayAlloggiFiltri.length;
+    }
+
+    res.render('listaRicerca', {data : {array : arrayAlloggiFiltri, inizioCount : inizioArrayFiltri, fineCount : fineArrayFiltri, tipo: 1}})
+
+}
+
+/*GET paginaPrecedenteFiltri*/
+
+router.get('/paginaPrecedenteFiltri', paginaPrecedenteFiltri);
+
+async function paginaPrecedenteFiltri(req,res,next){
+
+
+    fineArrayFiltri = inizioArrayFiltri;
+
+    inizioArrayFiltri = inizioArrayFiltri - 6;
+
+
+    res.render('listaRicerca', {data : {array : arrayAlloggiFiltri, inizioCount : inizioArrayFiltri, fineCount : fineArrayFiltri, tipo:1}})
 
 }
 
@@ -178,15 +217,27 @@ async function ricercaFiltri(req, res, next){
             }
         });
 
-        console.log('da dalilaaaaaaaaaaaaaaaaaaaaaaaaaa');
-        console.log(alloggiFiltrati);
-
-
         //FILTO IN BASE AL PREZZO        DA FARE
-       /* alloggiFiltrati.forEach(element => {
+        
+        console.log(req.body.pricefrom);
+        console.log(req.body.priceto);
 
+        let alloggiFiltratiPrezzo = [];
+        let z = 0;
 
-        });*/
+        alloggiFiltrati.forEach(element => {
+            
+            if(req.body.pricefrom == 0 && req.body.priceto == 200){
+                return alloggiFiltratiPrezzo = alloggiFiltrati;
+            }
+            else if(element.prezzo > req.body.pricefrom && element.prezzo < req.body.priceto){
+
+                alloggiFiltratiPrezzo[z] = element;
+                z++;
+            }
+        });
+
+        alloggiFiltrati = alloggiFiltratiPrezzo;
 
         //FILTRO IN BASE AI SERVIZI
 
@@ -230,7 +281,7 @@ async function ricercaFiltri(req, res, next){
             (element.lenzuola && req.body.lenzuola) ? countElementFiltri++ : countElementFiltri = countElementFiltri;
 
             if(countElementFiltri == countFiltri){
-                console.log('idruuuuuuuuuuuuuuuuuuuu èèèèèèèèèèèèèèèèèèèèè')
+                
                 alloggiFiltratiServizi[x] = element;
                 x++;
             }
@@ -249,17 +300,50 @@ async function ricercaFiltri(req, res, next){
 
         console.log(alloggiFiltratiServizi);
 
-        if(alloggiFiltratiServizi.length > 6){
-            inizioArray = 0;
-            fineArray = 6;
+        //FILTRO IN BASE ALLA DISTANZA DAL CENTRO
+
+        let alloggiFiltratiDistanza = [];
+        let y = 0; //contatore per alloggi filtrati in base alla distanza dal centro
+
+        alloggiFiltratiServizi.forEach(element => {
+            
+            if((req.body.distanza == 'D') && (element.distanza_centro == 'D')){
+
+                alloggiFiltratiDistanza[y] = element;
+                y++;
+            }
+            else if((req.body.distanza == 'M') && (element.distanza_centro == 'M')){
+
+                alloggiFiltratiDistanza[y] = element;
+                y++;
+            }
+            else if( (req.body.distanza == 'V') && (element.distanza_centro == 'V')){
+                alloggiFiltratiDistanza[y] = element;
+                y++;
+                
+            }
+        });
+        
+        if(req.body.distanza && alloggiFiltratiDistanza.length == 0 ){
+            alloggiFiltratiDistanza = [];
+        }
+        else if((alloggiFiltratiDistanza.length == 0)){
+            alloggiFiltratiDistanza = alloggiFiltratiServizi
+        };
+
+
+        if(alloggiFiltratiDistanza.length > 6){
+            inizioArrayFiltri = 0;
+            fineArrayFiltri = 6;
         }
         else{
-            inizioArray = 0;
-            fineArray = alloggiFiltratiServizi.length;
+            inizioArrayFiltri = 0;
+            fineArrayFiltri = alloggiFiltratiDistanza.length;
         }
 
+        arrayAlloggiFiltri = alloggiFiltratiDistanza;
 
-        res.render('listaRicerca', {data : {array : alloggiFiltratiServizi, inizioCount : inizioArray, fineCount : fineArray}});
+        res.render('listaRicerca', {data : {array : arrayAlloggiFiltri, inizioCount : inizioArray, fineCount : fineArray, tipo:1}});
 
 
       } catch (err) {

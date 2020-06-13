@@ -8,7 +8,6 @@ var pippo; // memorizza i dati relativi ai documenti dell'utente registrato
 var prenEffettuata; // memorizza la prenotazione
 
 var idUtente = "";
-
 /*carica il middleware */
 
 const { config } = require('../db/config');
