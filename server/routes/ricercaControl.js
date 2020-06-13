@@ -117,27 +117,31 @@ async function visualizzaAlloggioRicerca(req, res, next){
     let recensioni_a = [];
     let contatore = 0;
 
-    arrayAlloggi.forEach(element => {
-        
-        if(element.ID_ALL == req.query.id){
+    try{
+        arrayAlloggi.forEach(element => {
+            
+            if(element.ID_ALL == req.query.id){
 
-            console.log('funzionaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ');
-            console.log( element);
-            return alloggio = element;
-        }
-    });
+                return alloggio = element;
+            }
+        });
 
-    recensioni.forEach(element => {
+        recensioni.forEach(element => {
 
-        if(element.alloggio == req.query.id){
+            if(element.alloggio == req.query.id){
 
-            recensioni_a[contatore] = element;
-            contatore++;
-        }
-    })
+                recensioni_a[contatore] = element;
+                contatore++;
+            }
+        })
 
 
-    res.render('visualizzaAlloggioRicerca', {data : {data_a :alloggio, data_r: recensioni_a }});
+        res.render('visualizzaAlloggioRicerca', {data : {data_a :alloggio, data_r: recensioni_a }});
+
+    } catch (err) {
+        console.log(err);
+        next(createError(500));
+    }
 };
 
 
@@ -146,7 +150,118 @@ router.post('/ricercaFiltri', ricercaFiltri);
 
 async function ricercaFiltri(req, res, next){
 
-    
+    let alloggiFiltrati = [];
+    let count = 0;
+
+    try {
+       
+        // FILRO IN BASE AL TIPO DI ALLOGGIO
+        arrayAlloggi.forEach(element => {
+            
+            if(req.body.tipoAlloggio1 == req.body.tipoAlloggio2){
+
+                return alloggiFiltrati = arrayAlloggi;
+            }
+            else if(req.body.tipoAlloggio1 && (element.tipo_all == 'B&B')){
+
+                alloggiFiltrati[count] = element;
+                count++
+            }
+            else if( req.body.tipoAlloggio2 && (element.tipo_all == 'casa vacanza' || element.tipo_all == 'Casa Vacanza')){
+                alloggiFiltrati[count] = element;
+                count++
+                // DA SISTEMARE LA CONDIZIONE DI SOPRA
+            }
+        });
+
+        console.log('da dalilaaaaaaaaaaaaaaaaaaaaaaaaaa');
+        console.log(alloggiFiltrati);
+
+
+        //FILTO IN BASE AL PREZZO        DA FARE
+       /* alloggiFiltrati.forEach(element => {
+
+
+        });*/
+
+        //FILTRO IN BASE AI SERVIZI
+
+        countFiltri = 0;
+
+        req.body.cucina ? countFiltri++ : countFiltri = countFiltri;
+        req.body.lavanderia  ? countFiltri++ : countFiltri = countFiltri;
+        req.body.aria_condizionata  ? countFiltri++ : countFiltri = countFiltri;
+        req.body.wifi  ? countFiltri++ : countFiltri = countFiltri;
+        req.body.colazione  ? countFiltri++ : countFiltri = countFiltri;
+        req.body.asciugacapelli  ? countFiltri++ : countFiltri = countFiltri;
+        req.body.tv  ? countFiltri++ : countFiltri = countFiltri;
+        req.body.carta_igienica  ? countFiltri++ : countFiltri = countFiltri;
+        req.body.sapone_mani_corpo  ? countFiltri++ : countFiltri = countFiltri;
+        req.body.asciugamano  ? countFiltri++ : countFiltri = countFiltri;
+        req.body.accappatoio  ? countFiltri++ : countFiltri = countFiltri;
+        req.body.cuscino  ? countFiltri++ : countFiltri = countFiltri;
+        req.body.lenzuola  ? countFiltri++ : countFiltri = countFiltri;
+
+        console.log(countFiltri);
+
+        let x=0; //contatore per elemento alloggiFiltratiServizi
+        let alloggiFiltratiServizi = [];
+
+        alloggiFiltrati.forEach(element => {
+
+            let countElementFiltri=0;
+
+            (element.cucina && req.body.cucina) ? countElementFiltri++ : countElementFiltri = countElementFiltri;
+            (element.lavanderia && req.body.lavanderia) ? countElementFiltri++ : countElementFiltri = countElementFiltri;
+            (element.aria_condizionata && req.body.aria_condizionata) ? countElementFiltri++ : countElementFiltri = countElementFiltri;
+            (element.wifi && req.body.wifi) ? countElementFiltri++ : countElementFiltri = countElementFiltri;
+            (element.colazione && req.body.colazione) ? countElementFiltri++ : countElementFiltri = countElementFiltri;
+            (element.asciugacapelli && req.body.asciugacapelli) ? countElementFiltri++ : countElementFiltri = countElementFiltri;
+            (element.tv && req.body.tv) ? countElementFiltri++ : countElementFiltri = countElementFiltri;
+            (element.carta_igienica && req.body.carta_igienica) ? countElementFiltri++ : countElementFiltri = countElementFiltri;
+            (element.sapone_mani_corpo && req.body.sapone_mani_corpo) ? countElementFiltri++ : countElementFiltri = countElementFiltri;
+            (element.asciugamano && req.body.asciugamano) ? countElementFiltri++ : countElementFiltri = countElementFiltri;
+            (element.accappatoio && req.body.accappatoio) ? countElementFiltri++ : countElementFiltri = countElementFiltri;
+            (element.cuscino && req.body.cuscino) ? countElementFiltri++ : countElementFiltri = countElementFiltri;
+            (element.lenzuola && req.body.lenzuola) ? countElementFiltri++ : countElementFiltri = countElementFiltri;
+
+            if(countElementFiltri == countFiltri){
+                console.log('idruuuuuuuuuuuuuuuuuuuu èèèèèèèèèèèèèèèèèèèèè')
+                alloggiFiltratiServizi[x] = element;
+                x++;
+            }
+            
+        });
+
+
+        if((req.body.cucina || req.body.lavanderia || req.body.aria_condizionata || req.body.wifi || req.body.colazione || req.body.asciugacapelli ||
+            req.body.tv || req.body.carta_igienica || req.body.sapone_mani_corpo || req.body.asciugamano || req.body.accappatoio ||
+            req.body.cuscino || req.body.lenzuola) && alloggiFiltratiServizi.length == 0){
+                alloggiFiltratiServizi = [];
+            }
+        else if(alloggiFiltratiServizi.length == 0){
+            alloggiFiltratiServizi = alloggiFiltrati;
+        }
+
+        console.log(alloggiFiltratiServizi);
+
+        if(alloggiFiltratiServizi.length > 6){
+            inizioArray = 0;
+            fineArray = 6;
+        }
+        else{
+            inizioArray = 0;
+            fineArray = alloggiFiltratiServizi.length;
+        }
+
+
+        res.render('listaRicerca', {data : {array : alloggiFiltratiServizi, inizioCount : inizioArray, fineCount : fineArray}});
+
+
+      } catch (err) {
+          console.log(err);
+          next(createError(500));
+      }
 }
 
 
