@@ -196,7 +196,7 @@
                                   <td><%= naz_ospiti[i] %></td>
                                   <td><%= eta_ospiti[i] %></td>
                                   <% if (naz_ospiti[i] != 'It' || eta_ospiti[i] > 6) { totaleTasse += data.data_pren.tasse_alloggio; %>
-                                    <td>&euro; <%= data.data_pren.tasse_alloggio %></td>
+                                    <td>&euro; <%= data.data_pren.tasse_alloggio  %></td>
                                   <% } else { %>
                                     <td>&euro; 0</td>
                                   <% } %>
@@ -205,7 +205,7 @@
                             <% }; %> 
                         
                                 <tr>
-                                  <th scope="row">Totale</th>
+                                  <th scope="row">Totale giornaliero</th>
                                   <td></td>
                                   <td></td>
                                   <td></td>

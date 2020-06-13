@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <% include partials/head.ejs %>
+  </head>
+  <body style="padding-top: 72px;">
+    <% include partials/header.ejs %>
+    <section class="py-5">
+      <div class="container">
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb pl-0  justify-content-start">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active">Calcola guadagni   </li>
+        </ol>
+        <div class="d-flex justify-content-between align-items-end mb-5">
+          <h1 class="hero-heading mb-0">Bilancio delle prenotazioni concluse </h1>
+        </div>
+        <div class="d-flex justify-content-between align-items-center flex-column flex-lg-row mb-5">
+          <div class="mr-3">
+            <p class="mb-3 mb-lg-0">Hai <strong><%= data.length %></strong> prenotazioni concluse.</p>
+          </div>
+        </div>
+        <div class="list-group shadow mb-5">
+          <% if(data.length == 0) { %>
+            <div class="col-xl-3 col-md-4 col-sm-6 mb-5">
+              <h3 class="col-12 hero-heading mb-2">Non hai ancora ricevuto prenotazioni.</h3>
+              <img src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/illustration/undraw_celebration_0jvk.svg" alt="" style="width: 300px;">
+            </div>
+          <% } else { %>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Numero</th>
+                  <th scope="col">Alloggio</th>
+                  <th scope="col">Data inizio</th>
+                  <th scope="col">Data fine</th>
+                  <th scope="col">Guadagni</th>
+                </tr>
+              </thead>
+              <% let totaleGuadagni = 0; for (let i = 0; i < data.length; i++) { %>
+              <tbody>
+                <tr>
+                  <th scope="row"><%= i+1%></th>
+                  <td><%= data[i].titolo %></td>
+                  <td><%= data[i].data_inizio %></td>
+                  <td><%= data[i].data_fine %></td>
+                  <td><%= data[i].prezzo_totale %></td>
+                  <% totaleGuadagni += data[i].prezzo_totale %>
+                </tr>
+              <% } %>
+              <tr>
+                <th scope="row">Totale</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>&euro; <span><%= totaleGuadagni %></span></td>
+              </tr>
+              </tbody>
+            </table>
+             
+          <% } %>
+        </div>
+      </div>
+    </section>
+    <!-- Footer-->
+    <% include partials/footer.ejs %>
+
+    <!-- scriptFooter -->
+    <% include partials/scriptFooter.ejs %>
+  </body>
+</html>

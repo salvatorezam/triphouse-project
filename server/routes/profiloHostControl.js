@@ -360,9 +360,31 @@ async function inviaTasse(req, res, next) {
   }
 }
   
-/* GET finestraComDatiOspiti */
-router.get('/finestraComDatiOspiti', function(req, res, next) {
-  res.render('finestraComDatiOspiti');
-});
+
+router.get('/finestraCalcolaGuadagni', calcolaGuadagni);
+
+async function calcolaGuadagni(req, res, next) {
+
+  const db = await makeDb(config);
+
+  try {
+    await withTransaction(db, async() => {
+
+      let utente = req.app.locals.users.get(req.session.user.id_utente);
+
+      results = await db.query('SELECT a.titolo AS titolo, pr.data_inizio AS data_inizio, pr.data_fine AS data_fine, (DATEDIFF(pr.data_fine,pr.data_inizio))*a.prezzo AS prezzo_totale\
+                                FROM UtenteRegistrato ur, Alloggio a, Prenotazione pr \
+                                WHERE ur.ID_UR = a.proprietario AND a.ID_ALL = pr.alloggio AND pr.stato_prenotazione = \'conclusa\';', utente)
+              .catch(err => {
+                throw err;
+              });
+
+      res.render('finestraCalcolaGuadagni', { data : results });
+    });
+  } catch (err) {
+      console.log(err);
+      next(createError(500));
+  }
+}
 
 module.exports = router;
