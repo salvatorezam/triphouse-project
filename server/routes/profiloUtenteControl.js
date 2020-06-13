@@ -300,7 +300,9 @@ async function pagamento(req, res, next) {
 }
 
 /* GET modificaDatiPersonali */
-router.get('/modificaDatiPersonali', async function(req, res, next) {
+router.get('/modificaDatiPersonali', modificaDatiPersonali);
+
+async function modificaDatiPersonali(req, res, next) {
 
   const db = await makeDb(config);
   let datiPersonali = {};
