@@ -118,7 +118,7 @@
 		cognome VARCHAR(40),
 		tipo_doc VARCHAR(20),
 		num_doc VARCHAR(10),
-	--	Foto_doc, 
+		foto_doc VARCHAR(80), 
 		nazionalita VARCHAR(40),
 		scadenza_doc DATE,
 		eta INT,
@@ -133,6 +133,19 @@
 		scadenza_doc DATE,
 		prenotazione VARCHAR(36) REFERENCES Prenotazione(ID_PREN)
 	);
+
+	-- EVENT SCHEDULER PER STATO PRENOTAZIONE 
+
+	SET GLOBAL event_scheduler = ON;
+
+	CREATE EVENT IF NOT EXISTS `verifica_stato_pren` 
+	ON SCHEDULE EVERY 1 MINUTE
+	STARTS CURRENT_TIMESTAMP
+	ON COMPLETION PRESERVE
+	DO 
+	UPDATE Prenotazione
+	SET stato_prenotazione = 'conclusa'
+	WHERE data_fine <= CURDATE();
 
 	-- ###########
 	-- POPOLAMENTO
@@ -152,6 +165,11 @@
 	INSERT INTO Alloggio VALUES (UUID(),'b9db1cb1-a99e-11ea-b30a-a066100a22be','casa vacanza','Giuseppe','via p. trino',120,90100,'Lazio','Roma','RM',7,'M',1,1,3,1,true,false,true,true,false,false,true,true,true,true,true,true,true,'Casa Roma','casa in città de roma','nun se po fa nulla','state attenti ar cane',3.5,36,null,null,null,null,null,null);
 	INSERT INTO Alloggio VALUES (UUID(),'b9db1cb1-a99e-11ea-b30a-a066100a22be','casa vacanza','Giuseppe','via catone',90,90100,'Lazio','Roma','RM',5,'M',1,1,3,1,true,false,true,true,false,false,true,true,true,true,true,true,true,'Casa Roma','casa in città de roma','nun se po fa nulla','state attenti ar cane',3.5,36,null,null,null,null,null,null);
 	INSERT INTO Alloggio VALUES (UUID(),'b9db1cb1-a99e-11ea-b30a-a066100a22be','casa vacanza','Giuseppe','via tirolo',60,90100,'Lazio','Roma','RM',7,'M',1,1,3,1,true,false,true,true,false,false,true,true,true,true,true,true,true,'Casa Roma','casa in città de roma','nun se po fa nulla','state attenti ar cane',3.5,36,null,null,null,null,null,null);
+	INSERT INTO Alloggio VALUES (UUID(),'f9687a45-ab51-11ea-84aa-9829a63eb004','casa vacanza','Giuseppe','via p. trino',120,90100,'Sicilia','Palermo','PA',7,'M',1,1,3,1,true,false,true,true,false,false,true,true,true,true,true,true,true,'Prova1','casa in città de roma','nun se po fa nulla','state attenti ar cane',3.5,36,'fileToUpload-1591822493509-409332266-prova_casa.jpg',null,null,null,null,null);
+	INSERT INTO Alloggio VALUES (UUID(),'f9687a45-ab51-11ea-84aa-9829a63eb004','B&B','Giuseppe','via catone',90,90100,'Lazio','Roma','RM',5,'M',1,1,3,1,true,false,true,true,false,false,true,true,true,true,true,true,true,'Prova2','casa in città de roma','nun se po fa nulla','state attenti ar cane',3.5,36,'fileToUpload-1591822493516-370799831-prova_casa_2.jpg',null,null,null,null,null);
+	INSERT INTO Alloggio VALUES (UUID(),'f9687a45-ab51-11ea-84aa-9829a63eb004','casa vacanza','Giuseppe','via tirolo',60,90100,'Lazio','Roma','RM',7,'M',1,1,3,1,true,false,true,true,false,false,true,true,true,true,true,true,true,'Prova3','casa in città de roma','nun se po fa nulla','state attenti ar cane',3.5,36,'fileToUpload-1591822493521-664964272-prova_casa_3.png',null,null,null,null,null);
+	INSERT INTO Alloggio VALUES (UUID(),'f9687a45-ab51-11ea-84aa-9829a63eb004','casa vacanza','Giuseppe','via tirolo',60,90100,'Lazio','Roma','RM',7,'M',1,1,3,1,true,false,true,true,false,false,true,true,true,true,true,true,true,'Prova4','casa in città de roma','nun se po fa nulla','state attenti ar cane',3.5,36,'fileToUpload-1591822493521-664964272-prova_casa_3.png',null,null,null,null,null);
+	INSERT INTO Alloggio VALUES (UUID(),'f9687a45-ab51-11ea-84aa-9829a63eb004','casa vacanza','Giuseppe','via tirolo',60,90100,'Lazio','Roma','RM',7,'M',1,1,3,1,true,false,true,true,false,false,true,true,true,true,true,true,true,'Provaaaaaaaaa','casa in città de roma','nun se po fa nulla','state attenti ar cane',3.5,36,'fileToUpload-1591822493521-664964272-prova_casa_3.png',null,null,null,null,null);
 
 	INSERT INTO RecensisciAlloggio VALUES (UUID(),'mi sono trovato bene','2020-3-7','b532de10-a99e-11ea-b30a-a066100a22be','8b3d4384-a99f-11ea-b30a-a066100a22be','495ea9e7-a9a0-11ea-b30a-a066100a22be',4);
 

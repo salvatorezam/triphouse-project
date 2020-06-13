@@ -5,6 +5,19 @@
         <!-- head -->
         <% include partials/head.ejs %>
         <!-- head -->
+        <style>
+          /* Chrome, Safari, Edge, Opera */
+          input::-webkit-outer-spin-button,
+          input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+  
+          /* Firefox */
+          input[type=number] {
+            -moz-appearance: textfield;
+          }
+      </style>
     </head>
   <body style="padding-top: 72px;">
     <!-- header -->
@@ -16,128 +29,246 @@
         <p class="text-muted mb-5">Gestisci le informazioni del tuo Alloggio.</p>
         <div class="row">
           <div class="col-lg-7">
+            <!--INFORMAZIONI BASE-->
             <div class="text-block"> 
               <div class="row mb-3">
                 <div class="col-sm-9">
-                  <h5>Personal Details</h5>
+                  <h5>Informazioni di Base</h5>
                 </div>
                 <div class="col-sm-3 text-right">
-                  <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#personalDetails" aria-expanded="false" aria-controls="personalDetails">Update</button>
+                  <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#informazioni" aria-expanded="false" aria-controls="informazioni">Modifica</button>
                 </div>
               </div>
-              <p class="text-sm text-muted"><i class="fa fa-id-card fa-fw mr-2"></i>John Doe<br><i class="fa fa-birthday-cake fa-fw mr-2"></i>06/22/1980<br><i class="fa fa-envelope-open fa-fw mr-2"></i>john.doe@directory.com  <span class="mx-2"> | </span>  <i class="fa fa-phone fa-fw mr-2"></i>+42055544466</p>
-              <div class="collapse" id="personalDetails">
-                <form action="#">
+              <div class="collapse" id="informazioni">
+                <form method="POST" action="/visualizzaAlloggio/effettuaModifiche">
                   <div class="row pt-4">
                     <div class="form-group col-md-6">
-                      <label class="form-label" for="name">Name</label>
-                      <input class="form-control" type="text" name="name" id="name" value="John Doe">
+                      <label class="form-label" for="tipo_all">Tipo Alloggio</label>
+                        <select class="selectpicker form-control" name="tipo_all" id="tipo_all" data-style="btn-selectpicker" title="" aria-describedby="propertyTypeHelp" >
+                          <option value="" disabled selected><%= data.tipo_all %></option>
+                          <option value="B&B">B&B</option>
+                          <option value="Casa Vacanza">Casa Vacanza</option>
+                        </select>
                     </div>
                     <div class="form-group col-md-6">
-                      <label class="form-label" for="date">Date of birth</label>
-                      <input class="form-control" type="text" name="date" id="date" value="06/22/1980">
+                      <label class="form-label" for="name">Nome</label>
+                      <input class="form-control" type="text" name="nome_proprietario" id="nome_proprietario" value="<%= data.nome_proprietario %>">
+                    </div>
+                    <div class="form-group col-md-12">
+                      <label class="form-label" for="indirizzo">Via e numero civico (Es. Via Roma, 1)</label>
+                      <input class="form-control" name="indirizzo" id="indirizzo" value="<%= data.indirizzo %>, <%= data.n_civico %>"  >
                     </div>
                     <div class="form-group col-md-6">
-                      <label class="form-label" for="email">Email address</label>
-                      <input class="form-control" type="email" name="email" id="email" value="john.doe@directory.com">
+                      <label class="form-label" for="citta">Città</label>
+                      <input class="form-control" name="citta" required maxlength="20" id="citta" value="<%= data.citta %>" > 
                     </div>
                     <div class="form-group col-md-6">
-                      <label class="form-label" for="phone">Phone number</label>
-                      <input class="form-control" type="text" name="phone" id="phone" value="+42055544466">
-                    </div>
-                  </div>
-                  <button class="btn btn-outline-primary mb-4" type="submit">Save your personal details</button>
-                </form>
-              </div>
-            </div>
-            <div class="text-block"> 
-              <div class="row mb-3">
-                <div class="col-sm-9">
-                  <h5>Address</h5>
-                </div>
-                <div class="col-sm-3 text-right">
-                  <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#address" aria-expanded="false" aria-controls="address">Change</button>
-                </div>
-              </div>
-              <div class="media text-sm text-muted"> <i class="fa fa-address-book fa-fw mr-2"></i>
-                <div class="media-body mt-n1">123 Main St., Apt #7<br>San Francisco, CA, 902 10</div>
-              </div>
-              <div class="collapse" id="address">
-                <form action="#">
-                  <div class="row pt-4">
-                    <div class="form-group col-md-6">
-                      <label class="form-label" for="street">Street</label>
-                      <input class="form-control" type="text" name="street" id="street" value="123 Main St.">
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label class="form-label" for="apt">Apt. (optional)</label>
-                      <input class="form-control" type="text" name="apt" id="apt" value="Apt #7">
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label class="form-label" for="city">City</label>
-                      <input class="form-control" type="text" name="city" id="city" value="San Francisco">
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label class="form-label" for="state">State</label>
-                      <select class="selectpicker form-control" name="state" id="state" data-style="btn-selectpicker">
-                        <option value="state_0">Alabama    </option>
-                        <option value="state_1">Alaska    </option>
-                        <option value="state_2">Arizona    </option>
-                        <option value="state_3">Arkansas    </option>
-                        <option value="state_4" selected>California    </option>
-                        <option value="state_5">Colorado    </option>
-                        <option value="state_6">Connecticut    </option>
-                        <option value="state_7">Delaware    </option>
-                        <option value="state_8">Florida    </option>
-                        <option value="state_9">Georgia    </option>
-                        <option value="state_10">Hawaii    </option>
-                        <option value="state_11">Idaho    </option>
-                        <option value="state_12">Illinois    </option>
-                        <option value="state_13">Indiana    </option>
-                        <option value="state_14">Iowa    </option>
-                        <option value="state_15">Kansas    </option>
-                        <option value="state_16">Kentucky    </option>
-                        <option value="state_17">Louisiana    </option>
-                        <option value="state_18">Maine    </option>
-                        <option value="state_19">Maryland    </option>
-                        <option value="state_20">Massachusetts    </option>
-                        <option value="state_21">Michigan    </option>
-                        <option value="state_22">Minnesota    </option>
-                        <option value="state_23">Mississippi    </option>
-                        <option value="state_24">Missouri    </option>
-                        <option value="state_25">Montana    </option>
-                        <option value="state_26">Nebraska    </option>
-                        <option value="state_27">Nevada    </option>
-                        <option value="state_28">New Hampshire    </option>
-                        <option value="state_29">New Jersey    </option>
-                        <option value="state_30">New Mexico    </option>
-                        <option value="state_31">New York    </option>
-                        <option value="state_32">North Carolina    </option>
-                        <option value="state_33">North Dakota    </option>
-                        <option value="state_34">Ohio    </option>
-                        <option value="state_35">Oklahoma    </option>
-                        <option value="state_36">Oregon    </option>
-                        <option value="state_37">Pennsylvania    </option>
-                        <option value="state_38">Rhode Island    </option>
-                        <option value="state_39">South Carolina    </option>
-                        <option value="state_40">South Dakota    </option>
-                        <option value="state_41">Tennessee    </option>
-                        <option value="state_42">Texas    </option>
-                        <option value="state_43">Utah    </option>
-                        <option value="state_44">Vermont    </option>
-                        <option value="state_45">Virginia    </option>
-                        <option value="state_46">Washington    </option>
-                        <option value="state_47">West Virginia    </option>
-                        <option value="state_48">Wisconsin    </option>
-                        <option value="state_49">Wyoming    </option>
+                      <label class="form-label" for="regione">Regione</label>
+                      <select class="selectpicker form-control" name="regione" id="regione" data-style="btn-selectpicker" title="" aria-describedby="propertyTypeHelp" >
+                        <option value="" disabled selected><%= data.regione %></option>
+                        <option value="Abruzzo">Abruzzo</option>
+                        <option value="Basilicata">Basilicata</option>
+                        <option value="Calabria">Calabria</option>
+                        <option value="Campania">Campania</option>
+                        <option value="Emilia-Romagna">Emilia-Romagna</option>
+                        <option value="Friuli-Venezia Giulia">Friuli-Venezia Giulia</option>
+                        <option value="Lazio">Lazio</option>
+                        <option value="Liguria">Liguria</option>
+                        <option value="Lombardia">Lombardia</option>
+                        <option value="Marche">Marche</option>
+                        <option value="Molise">Molise</option>
+                        <option value="Piemonte">Piemonte</option>
+                        <option value="Puglia">Puglia</option>
+                        <option value="Sardegna">Sardegna</option>
+                        <option value="Sicilia">Sicilia</option>
+                        <option value="Toscana">Toscana</option>
+                        <option value="Trentino-Alto Adige">Trentino-Alto Adige</option>
+                        <option value="Umbria">Umbria</option>
+                        <option value="Valle d'Aosta">Valle d'Aosta</option>
+                        <option value="Veneto">Veneto</option>
                       </select>
                     </div>
                     <div class="form-group col-md-6">
-                      <label class="form-label" for="zip">ZIP</label>
-                      <input class="form-control" type="text" name="zip" id="zip" value="902 10">
+                      <label class="form-label" for="provincia">Provincia</label>
+                      <input class="form-control" name="provincia" id="provincia" value="<%= data.provincia %>" > 
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label class="form-label" for="cap">CAP</label>
+                      <input class="form-control" type="number" name="cap" id="cap" value="<%= data.cap%>" > 
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label class="form-label" for="ospiti">Numero Ospiti</label>
+                      <input class="form-control" type="number" name="num_ospiti" id="num_ospiti" min="2" max="12" value="<%= data.num_ospiti_max %>" > 
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label class="form-label">Distanza dal centro</label>
+                      <ul class="list-inline mb-0">
+                        <li class="list-inline-item">
+                          <div class="custom-control custom-radio">
+                            <input class="custom-control-input" type="radio" id="distanza_centro_0" value="D" name="distanza_centro" <%= data.distanza_centro == 'D' ? "checked" : "" %> >
+                            <label class="custom-control-label" for="distanza_centro_0">Distante</label>
+                          </div>
+                        </li>
+                        <li class="list-inline-item">
+                          <div class="custom-control custom-radio">
+                            <input class="custom-control-input" type="radio" id="distanza_centro_1" value="M" name="distanza_centro" <%= data.distanza_centro == 'M' ? "checked" : "" %> >
+                            <label class="custom-control-label" for="distanza_centro_1">Medio</label>
+                          </div>
+                        </li>
+                        <li class="list-inline-item">
+                          <div class="custom-control custom-radio">
+                            <input class="custom-control-input" type="radio" id="distanza_centro_2" value="V" name="distanza_centro"  <%= data.distanza_centro == 'V' ? "checked" : "" %>>
+                            <label class="custom-control-label" for="distanza_centro_2">Vicino</label>
+                          </div>
+                        </li>
+                      </ul> 
                     </div>
                   </div>
-                  <button class="btn btn-outline-primary">Save address</button>
+                  <button class="btn btn-outline-primary mb-4" type="submit">Salva Modifiche</button>
+                </form>
+              </div>
+            </div>
+            <!--SERVIZI-->
+            <div class="text-block"> 
+              <div class="row mb-3">
+                <div class="col-sm-9">
+                  <h5>SERVIZI</h5>
+                </div>
+                <div class="col-sm-3 text-right">
+                  <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#servizi" aria-expanded="false" aria-controls="servizi">Modifica</button>
+                </div>
+              </div>
+              <div class="collapse" id="servizi">
+                <form method="POST" action="/visualizzaAlloggio/effettuaModifiche">
+                  <div class="row pt-4">
+                    <div class="form-group col-md-12">
+                      <div class="col-lg ml-auto">
+                        <div class="row align-items-center">
+                          <div class="col-lg-3">
+                            <label class="form-label col-sm-6">Letti Singoli</label>
+                            <div class="d-flex align-items-center">
+                              <div class="btn btn-items btn-items-decrease">-</div>
+                              <input class="form-control input-items" name="num_letti_singoli" type="number" value="<%= data.num_letti_singoli %>" required max="10" min="0">
+                              <div class="btn btn-items btn-items-increase">+</div>
+                            </div>
+                          </div>
+                          <div class="col-lg-3">
+                            <label class="form-label col-sm-6">Letti Matrimoniali</label>
+                            <div class="d-flex align-items-center">
+                              <div class="btn btn-items btn-items-decrease">-</div>
+                              <input class="form-control input-items" name="num_letti_matrimoniali" type="number" value="<%= data.num_letti_matrimoniali %>" required max="10" min="0">
+                              <div class="btn btn-items btn-items-increase">+</div>
+                            </div>
+                          </div>
+                          <div class="col-lg-3">
+                            <label class="form-label col-sm-6">Camere &nbsp &nbsp &nbsp </label>
+                            <div class="d-flex align-items-center">
+                              <div class="btn btn-items btn-items-decrease">-</div>
+                              <input class="form-control input-items" name="num_camere" type="number" value="<%= data.num_camere %>" required max="10" min="0">
+                              <div class="btn btn-items btn-items-increase">+</div>
+                            </div>
+                          </div>
+                          <div class="col-lg-3">
+                            <label class="form-label col-sm-6">Bagni &nbsp &nbsp &nbsp </label>
+                            <div class="d-flex align-items-center">
+                              <div class="btn btn-items btn-items-decrease">-</div>
+                              <input class="form-control input-items" name="num_bagni" type="number" value="<%= data.num_bagni %>" required max="10" min="0">
+                              <div class="btn btn-items btn-items-increase">+</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                      <div class="form-group" id="checkbox-value">
+                        <label class="form-label">Servizi</label>
+                            <ul class="list-inline mb-0">
+                              <li class="list-inline-item">
+                                <div class="custom-control custom-checkbox">
+                                  <input class="custom-control-input" type="checkbox" id="servizi_0" value="true" name="servizi_0" <%= data.cucina ? "checked" : "" %>>
+                                  <label class="custom-control-label" for="servizi_0">Cucina</label>
+                                </div>
+                              </li>
+                              <li class="list-inline-item">
+                                <div class="custom-control custom-checkbox">
+                                  <input class="custom-control-input" type="checkbox" id="servizi_1" value="true" name="servizi_1" <%= data.lavanderia ? "checked" : "" %>>
+                                  <label class="custom-control-label" for="servizi_1">Lavanderia</label>
+                                </div>
+                              </li>
+                              <li class="list-inline-item">
+                                <div class="custom-control custom-checkbox">
+                                  <input class="custom-control-input" type="checkbox" id="servizi_2" value="true" name="servizi_2" <%= data.aria_condizionata ? "checked" : "" %>>
+                                  <label class="custom-control-label" for="servizi_2">Aria Condizionata</label>
+                                </div>
+                              </li>
+                              <li class="list-inline-item">
+                                <div class="custom-control custom-checkbox">
+                                  <input class="custom-control-input" type="checkbox" id="servizi_3" value="true" name="servizi_3" <%= data.wifi ? "checked" : "" %>>
+                                  <label class="custom-control-label" for="servizi_3">Wifi</label>
+                                </div>
+                              </li>
+                              <li class="list-inline-item">
+                                <div class="custom-control custom-checkbox">
+                                  <input class="custom-control-input" type="checkbox" id="servizi_4" value="true" name="servizi_4" <%= data.colazione ? "checked" : "" %>>
+                                  <label class="custom-control-label" for="servizi_4">Colazione</label>
+                                </div>
+                              </li>
+                              <li class="list-inline-item">
+                                <div class="custom-control custom-checkbox">
+                                  <input class="custom-control-input" type="checkbox" id="servizi_5" value="true" name="servizi_5" <%= data.asciugacapelli ? "checked" : "" %>>
+                                  <label class="custom-control-label" for="servizi_5">Asciugacapelli</label>
+                                </div>
+                              </li>
+                              <li class="list-inline-item">
+                                <div class="custom-control custom-checkbox">
+                                  <input class="custom-control-input" type="checkbox" id="servizi_6" value="true" name="servizi_6" <%= data.tv ? "checked" : "" %>>
+                                  <label class="custom-control-label" for="servizi_6">Tv</label>
+                                </div>
+                              </li>   
+                            </ul>
+                            <label class="form-label" style="margin-top: .7rem;">Servizi Essenziali</label>
+                            <ul class="list-inline mb-0">
+                              <li class="list-inline-item">
+                                <div class="custom-control custom-checkbox">
+                                  <input class="custom-control-input" type="checkbox" id="servizi2_0" value="true" name="servizi2_0" <%= data.carta_igienica ? "checked" : "" %>>
+                                  <label class="custom-control-label" for="servizi2_0">Carta igienica</label>
+                                </div>
+                              </li>
+                              <li class="list-inline-item">
+                                <div class="custom-control custom-checkbox">
+                                  <input class="custom-control-input" type="checkbox" id="servizi2_1" value="true" name="servizi2_1" <%= data.sapone_mani_corpo ? "checked" : "" %>>
+                                  <label class="custom-control-label" for="servizi2_1">Sapone mani e corpo</label>
+                                </div>
+                              </li>
+                              <li class="list-inline-item">
+                                <div class="custom-control custom-checkbox">
+                                  <input class="custom-control-input" type="checkbox" id="servizi2_2" value="true" name="servizi2_2" <%= data.asciugamano ? "checked" : "" %>>
+                                  <label class="custom-control-label" for="servizi2_2">Asciugamano</label>
+                                </div>
+                              </li>
+                              <li class="list-inline-item">
+                                <div class="custom-control custom-checkbox">
+                                  <input class="custom-control-input" type="checkbox" id="servizi2_3" value="true" name="servizi2_3" <%= data.accappatoio ? "checked" : "" %>>
+                                  <label class="custom-control-label" for="servizi2_3">Accappatoio</label>
+                                </div>
+                              </li>
+                              <li class="list-inline-item">
+                                <div class="custom-control custom-checkbox">
+                                  <input class="custom-control-input" type="checkbox" id="servizi2_4" value="true" name="servizi2_4" <%= data.cuscino ? "checked" : "" %>>
+                                  <label class="custom-control-label" for="servizi2_4">Cuscino</label>
+                                </div>
+                              </li>
+                              <li class="list-inline-item">
+                                <div class="custom-control custom-checkbox">
+                                  <input class="custom-control-input" type="checkbox" id="servizi2_5" value="true" name="servizi2_5" <%= data.lenzuola ? "checked" : "" %>>
+                                  <label class="custom-control-label" for="servizi2_5">lenzuola</label>
+                                </div>
+                              </li>   
+                            </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-outline-primary mb-4" type="submit">Salva Modifiche</button>
                 </form>
               </div>
             </div>

@@ -8,3 +8,113 @@
         
     </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include partials/head.ejs %>
+  </head>
+    
+  <body style="padding-top: 72px;">
+    <% include partials/header.ejs %>
+    <section class="py-5">
+      <div class="container">
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb pl-0  justify-content-start">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active">Modifica dati personali   </li>
+        </ol>
+        <h1 class="hero-heading mb-0">Dati personali</h1>
+        <p class="text-muted mb-5">Visualizza e gestisci i tuoi dati personali.</p>
+        <div class="row">
+          <div class="col-lg-7">
+            <div class="text-block"> 
+              <div class="row mb-3">
+                <div class="col-sm-9">
+                  <h5>Dettagli Personali</h5>
+                </div>
+                <div class="col-sm-3 text-right">
+                </div>
+              </div>
+              <% console.log('DATI PERSONALI'); console.log(data); %>
+              <p class="text-sm text-muted"><i class="fa fa-id-card fa-fw mr-2"></i><%= data.nome %> <%= data.cognome %><br><i class="fa fa-birthday-cake fa-fw mr-2"></i><%= data.data_nascita %><br><i class="fa fa-envelope-open fa-fw mr-2"></i><%= data.email %>  <span class="mx-2"> | </span>  <i class="fa fa-phone fa-fw mr-2"></i><%= data.telefono %></p>
+              <div class="text-block"> 
+                <div class="row mb-3">
+                  <div class="col-sm-9">
+                    <h5>Dettagli nascita</h5>
+                  </div>
+                  <div class="col-sm-3 text-right">
+                  </div>
+                </div>
+                <div class="media text-sm text-muted"> <i class="fa fa-address-book fa-fw mr-2"></i>
+                  <div class="media-body mt-n1"><%= data.nazione_nascita %>, <%= data.citta_nascita %><br></div>
+                </div>
+              </div>
+              <div id="personalDetails">
+                <form method="POST" action="/profiloUtenteControl/aggiornaDatiPersonali">
+                  <div class="row pt-4">
+                    <div class="form-group col-md-6">
+                      <label class="form-label" for="nome">Nome</label>
+                      <input class="form-control" type="text" name="nome" id="nome" value="<%= data.nome %>" pattern="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label class="form-label" for="cognome">Cognome</label>
+                      <input class="form-control" type="text" name="cognome" id="cognome" value="<%= data.cognome %>" pattern="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label class="form-label" for="sesso">Sesso</label>
+                      <input class="form-control" type="text" name="sesso" id="sesso" value="<%= data.sesso %>" pattern=(M|F)>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label class="form-label" for="email">Indirizzo email</label>
+                      <input class="form-control" type="email" name="email" id="email" value="<%= data.email %>"> <!-- AGGIUNGERE PATTERN EMAIL-->
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label class="form-label" for="telefono">Telefono</label>
+                      <input class="form-control" type="text" name="telefono" id="telefono" value="<%= data.telefono %>">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label class="form-label" for="nazione">Nazionalità</label>
+                      <input class="form-control" type="text" name="nazione" id="nazione" value="<%= data.nazione_nascita %>">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label class="form-label" for="citta">Citta di Nascita</label>
+                      <input class="form-control" type="text" name="citta" id="citta" value="<%= data.citta_nascita %>">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label class="form-label" for="data_n">Data di Nascita</label>
+                      <input class="form-control" type="text" name="data_n" id="data_n" value="<%= data.data_nascita.toString().slice(0,10) %>">
+                    </div>
+                  </div>
+                  <button class="btn btn-outline-primary mb-4" type="submit">Aggiorna dati</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 ml-lg-auto">
+            <div class="card border-0 shadow">
+              <div class="card-header bg-primary-light py-4 border-0">
+                <div class="media align-items-center">
+                  <div class="media-body">
+                    <h4 class="h6 subtitle text-sm text-primary">Con chi sono condivisi questi dati?</h4>
+                  </div>
+                  <svg class="svg-icon svg-icon svg-icon-light w-3rem h-3rem ml-3 text-primary">
+                    <use xlink:href="#identity-1"> </use>
+                  </svg>
+                </div>
+              </div>
+              <div class="card-body p-4">
+                <p class="text-muted text-sm card-text">Alcuni di questi dati potrebbero essere visibili ad un host/cliente in caso di <strong>prenotazione</strong>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer-->
+    <% include partials/footer.ejs %>
+    
+    <!-- scriptFooter -->
+    <% include partials/scriptFooter.ejs %>
+  </body>
+</html>

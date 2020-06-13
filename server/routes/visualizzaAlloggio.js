@@ -7,6 +7,7 @@ var router = express.Router();
 var idUtente = "";
 let alloggiInseriti = [];
 let recensioni = [];
+let alloggioVisualizzato;
 
 
 /*carichiamo il middleware*/
@@ -27,19 +28,15 @@ async function listaAlloggiInseriti(req, res, next) {
     try {
       await withTransaction(db, async() => {
 
-          let sql0 = "SELECT * FROM USERS_SESSIONS WHERE session_id = ?;";
-          results = await db.query(sql0, [req.session.id])
-              .catch(err => {
-                  throw err;
-              });
+        let utente = req.app.locals.users.get(req.session.user.id_utente);
 
-          if (results.affectedRows == 0) {
-              console.log('Sessione Utente non trovata!');
-              next(createError(404, 'Sessione Utente non trovata'));
-          } else {
-              let datiUtente = JSON.parse(results[0].data);
-              idUtente = datiUtente.user.id_utente;
-          }
+        if (utente) {
+        idUtente = utente.id_utente;
+        }
+        else {
+        console.log('Sessione Utente non trovata!');
+        next(createError(404, 'Sessione Utente non trovata'));
+        }
           
           let sql1 = "  SELECT* FROM Alloggio a WHERE a.proprietario = ?; \
                         SELECT r.ID_RA AS ID_RA, r.testo AS testo, r.data_rec AS data_rec, r.scrittore AS scrittore, u.nome AS nome_scrittore, \
@@ -92,6 +89,7 @@ router.get('/visualizzaAlloggioInserito', function(req, res, next) {
         }
     })
 
+    alloggioVisualizzato = alloggio;
 
     res.render('visualizzaAlloggioInserito', {data : {data_a :alloggio, data_r: recensioni_a }});
   });
@@ -101,8 +99,27 @@ router.get('/visualizzaAlloggioInserito', function(req, res, next) {
 
 router.get('/modificaInformazioniAlloggio', function(req, res, next){
 
-    res.render('modificaInformazioniAlloggio');
+    res.render('modificaInformazioniAlloggio', {data: alloggioVisualizzato });
 
 });
+
+/* POST EFFETTUA MODIFICHE*/
+
+router.post('/effettuaModifiche', effettuaModifiche);
+
+async function effettuaModifiche(req, res, next){
+
+    try{
+
+
+        
+
+
+    } catch (err) {
+        console.log(err);
+        next(createError(500));
+    }
+
+};
 
 module.exports = router;

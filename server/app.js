@@ -14,10 +14,11 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var profiloUtenteRouter = require('./routes/profiloUtenteControl');
 var profiloHostRouter = require('./routes/profiloHostControl');
-var prenotazioneRouter = require('./routes/prenotazione');
+var prenotazioneRouter = require('./routes/prenotazioneControl');
 var aggiungiAlloggio = require('./routes/aggiungiAlloggio');
 var RegAutControl = require('./routes/RegAutControl');
 var visualizzaAlloggio = require('./routes/visualizzaAlloggio');
+var ricercaControl = require('./routes/ricercaControl');
 const { resolveTxt } = require('dns');
 
 var app = express();
@@ -35,6 +36,8 @@ app.locals.users = new Map();
 
 app.use(function(req, res, next) {
   res.locals.user = req.session.user;
+  res.locals.date = req.session.date;
+  res.locals.alloggio = req.session.alloggio;
   next();
 });
 
@@ -52,10 +55,11 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/profiloUtenteControl', profiloUtenteRouter);
 app.use('/profiloHostControl', profiloHostRouter);
-app.use('/prenotazione', prenotazioneRouter);
+app.use('/prenotazioneControl', prenotazioneRouter);
 app.use('/aggiungiAlloggio', aggiungiAlloggio);
 app.use('/regAutControl', RegAutControl);
 app.use('/visualizzaAlloggio', visualizzaAlloggio);
+app.use('/ricercaControl', ricercaControl);
 
 app.use(bodyParser.json());
 

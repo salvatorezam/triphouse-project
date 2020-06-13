@@ -14,12 +14,24 @@
               <!-- Additional required wrapper-->
               <div class="swiper-wrapper">
                 <!-- Slides-->
-                <div class="swiper-slide"><img class="img-fluid" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1426122402199-be02db90eb90.jpg" alt="Our street"></div>
-                <div class="swiper-slide"><img class="img-fluid" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="Outside"></div>
-                <div class="swiper-slide"><img class="img-fluid" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1494526585095-c41746248156.jpg" alt="Rear entrance"></div>
-                <div class="swiper-slide"><img class="img-fluid" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1484154218962-a197022b5858.jpg" alt="Kitchen"></div>
-                <div class="swiper-slide"><img class="img-fluid" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="Bedroom"></div>
-                <div class="swiper-slide"><img class="img-fluid" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" alt="Bedroom"></div>
+                <% if (data.data_pren.foto_0 != null && data.data_pren.foto_0 != undefined) { %>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_0 %>"></div>
+                <% } %>
+                <% if (data.data_pren.foto_1 != null && data.data_pren.foto_1 != undefined) { %>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_1 %>"></div>
+                <% } %>
+                <% if (data.data_pren.foto_2 != null && data.data_pren.foto_2 != undefined) { %>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_2 %>"></div>
+                <% } %>
+                <% if (data.data_pren.foto_3 != null && data.data_pren.foto_3 != undefined) { %>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_3 %>"></div>
+                <% } %>
+                <% if (data.data_pren.foto_4 != null && data.data_pren.foto_4 != undefined) { %>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_4 %>"></div>
+                <% } %>
+                <% if (data.data_pren.foto_5 != null && data.data_pren.foto_5 != undefined) { %>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_5 %>"></div>
+                <% } %>
               </div>
               <div class="swiper-pagination swiper-pagination-white"></div>
               <div class="swiper-button-prev swiper-button-white"></div>
@@ -33,23 +45,23 @@
             <li class="breadcrumb-item active">Prenotazione effettuata   </li>
           </ol>
           <div class="text-block">
-            <p class="subtitle"><%= data.data_pren.data_inizio.toString().slice(0,15) %> - <%= data.data_pren.data_fine.toString().slice(0,15) %></p>
+            <p class="subtitle"><%= data.data_pren.data_inizio %> - <%= data.data_pren.data_fine %></p>
             <h1 class="hero-heading mb-3"><%= data.data_pren.titolo %></h1>
           </div>
           <div class="text-block">
-            <!-- h6 class="mb-4">Numero Notti</h6   DA ELIMINARE?    -->
+            <h6 class="mb-4"><%= data.data_pren.data_fine.toString().split(' ')[0] - data.data_pren.data_inizio.toString().split(' ')[0] %> Notti</h6>
             <div class="row mb-3">
               <div class="col-md-6 d-flex align-items-center mb-3 mb-md-0">
                 <div class="date-tile mr-3">
-                  <div class="text-uppercase"> <span class="text-sm"><%= data.data_pren.data_inizio.toString().slice(4,7) %></span><br><strong class="text-lg"><%= data.data_pren.data_inizio.toString().slice(8,10) %></strong></div>
+                  <div class="text-uppercase"> <span class="text-sm"><%= data.data_pren.data_inizio.toString().split(' ')[1] %></span><br><strong class="text-lg"><%= data.data_pren.data_inizio.toString().slice(0,2) %></strong></div>
                 </div>
-                <p class="text-sm mb-0"><%= data.data_pren.data_inizio.toString().slice(0,3) %><br/>check-in</p>
+                <p class="text-sm mb-0">check-in</p>
               </div>
               <div class="col-md-6 d-flex align-items-center">
                 <div class="date-tile mr-3">
-                  <div class="text-uppercase"> <span class="text-sm"><%= data.data_pren.data_fine.toString().slice(4,7) %></span><br><strong class="text-lg"><%= data.data_pren.data_fine.toString().slice(8,10) %></strong></div>
+                  <div class="text-uppercase"> <span class="text-sm"><%= data.data_pren.data_fine.toString().split(' ')[1] %></span><br><strong class="text-lg"><%= data.data_pren.data_fine.toString().slice(0,2) %></strong></div>
                 </div>
-                <p class="text-sm mb-0"><%= data.data_pren.data_fine.toString().slice(0,3) %><br/>check-out</p>
+                <p class="text-sm mb-0">check-out</p>
               </div>
             </div>
           </div>
@@ -123,6 +135,7 @@
                         <div class="form-group">
                           <label class="form-label" for="testoRec">Testo </label>
                           <textarea class="form-control" rows="4" name="testoRec" id="testoRec" placeholder="Scrivi qualcosa su alloggio e cliente" required="required"></textarea>
+                          <div id="checkTestoRec">&nbsp</div>
                         </div>
                         <button class="btn btn-primary" id="inviaRecensione" type="submit">Invia</button>
                       </form>
@@ -163,28 +176,28 @@
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label class="form-label" for="name">Nome titolare</label>
-                              <input class="form-control" type="text" name="titolareCarta" id="titolareCarta" required="required">
+                              <label class="form-label" for="name">Nome titolare *</label>
+                              <input class="form-control" type="text" name="titolareCarta" id="titolareCarta" pattern="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$" required="required">
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label class="form-label" for="rating">Numero Carta</label>
-                              <input class="form-control" type="text" name="numeroCarta" id="numeroCarta" required="required">
+                              <label class="form-label" for="rating">Numero Carta *</label>
+                              <input class="form-control" type="text" name="numeroCarta" id="numeroCarta" pattern="([0-9]{4})(-)([0-9]{4})(-)([0-9]{4})(-)([0-9]{4})" placeholder="0000-0000-0000-0000" required="required">
                             </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label class="form-label" for="name">Scadenza</label>
-                              <input class="form-control" type="text" name="dataScadenza" id="dataScadenza" placeholder="MM/AAAA" required="required">
+                              <label class="form-label" for="name">Scadenza *</label>
+                              <input class="form-control" type="text" name="dataScadenza" id="dataScadenza" placeholder="MM/AAAA" pattern="([0-9]{2})(/)([0-9]{4})"required="required">
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label class="form-label" for="rating">CVV</label>
-                              <input class="form-control" type="text" name="cvv" id="cvv" required="required">
+                              <label class="form-label" for="rating">CVV *</label>
+                              <input class="form-control" type="text" name="cvv" id="cvv" placeholder="000" pattern="[0-9]{3}" required="required">
                             </div>
                           </div>
                         </div>
@@ -272,8 +285,6 @@
     <script>
       
       $(document).ready(function() {
-
-        // ONCLICK SICURI?
         
         $('#confermaAnnullamento').on('click', function() {
           window.alert('Operazione andata a buon fine');
@@ -283,8 +294,22 @@
           window.alert('Operazione andata a buon fine');
         });
 
-        $('#inviaPagamento').on('click', function() {
+        /*$('#inviaPagamento').on('click', function() {
           window.alert('Operazione andata a buon fine');
+        });*/
+
+        let caratteriSpeciali = /([~,@,#,$,^,&,*,-,_,+,=,>,<,',",`])/;
+
+        $('#testoRec').on('input', function(ev) {
+
+          if($('#testoRec').val().match(caratteriSpeciali)) {
+              $('#checkTestoRec').text('Carattere speciale non consentito!')
+              $('#inviaRecensione').attr('disabled','disabled');
+          }
+          else {
+            $('#checkTestoRec').text('')
+            $('#inviaRecensione').removeAttr('disabled','disabled');
+          }
         });
       });
       

@@ -8,7 +8,7 @@
   <body style="padding-top: 72px;">
     
       <!-- header utente loggato -->
-      <% include ../partials/headerUtenteLogin.ejs %>
+      <% include ../partials/header.ejs %>
       <!-- header utente loggato -->
 
     <div class="progress rounded-0 sticky-top" style="height: 8px; top: 71px;">
@@ -22,26 +22,28 @@
             <h1 class="h2 mb-5"> Conferma <span class="text-muted float-right">Step 4</span>      </h1>
 
             <div class="text-block">
-              <form method="POST" action="#">
+              <form name="formMetodoPagamento" method="POST" action="/prenotazioneControl/prenotazionePg5">
                 <div class="d-flex justify-content-between align-items-end mb-4">
                   <h5 class="mb-0">Seleziona quando pagare</h5>
-                  
                 </div>
                 <fieldset class=" col-lg-8">
-                  <div class="form-group style="text-align: center; margin-top: 1em; ">
-                      <input type="radio" class="tipoPagamento" id="pagAntCap" name="metodoPagamento" value="caparra" autocomplete="off" required>
+                  <div class="form-group" style="text-align: center; margin-top: 1em; ">
+                      <input type="radio" class="tipoPagamento" id="pagAntCap" name="metodoPagamento" value="pagamentoCaparra" autocomplete="off" required>
                       <label for="pagAntCap">Pagameto anticipato della caparra</label><br />
-                      <input type="radio" class="tipoPagamento" id="pagAntPren" name="metodoPagamento" value="interoImporto" autocomplete="off" required>
-                      <label for="pagAntPren">Pagamento anticipato intera somma</label><br />
                       <input type="radio" class="tipoPagamento" id="pagLoco" name="metodoPagamento" value="pagamentoLoco" autocomplete="off" required>
                       <label for="pagLoco">Pagamento in loco</label>
                   </div>
                 </fieldset>
+                <div class="row form-block flex-column flex-sm-row">
+                  <div class="col text-center text-sm-right">
+                    <button type="submit" class="btn btn-primary px-3">Avanti</button>
+                  </div> 
+              </div>
               </form>
 
               <div class="text-block" style="margin-top: 1em;" >
                 <h6>Attenzione</small></h6>
-                <p><small>Se viene scelta una delle due forme di pagamento anticipato,
+                <p><small>Se viene scelta la forma di pagamento anticipato,
                 trovere il modulo di pagamento dentro la pagina visualizza
                 prenotazione effettuata.</small></p>
               </div>
@@ -51,12 +53,13 @@
               <p class="text-sm text-muted">Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of .</p>
               <p class="text-sm text-muted">He must have tried it a hundred times, shut his eyes so that he wouldn't have to look at the flounde.</p>
             </div>
+        <!--    
             <div class="row form-block flex-column flex-sm-row">
               <div class="col text-center text-sm-left"><a class="btn btn-link text-muted" href="/prenotazione/prenotazionePg3"> <i class="fa-chevron-left fa mr-2"></i>Indietro</a>
               </div>
               <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/prenotazione/prenotazionePg5">Conferma<i class="fa-chevron-right fa ml-2"></i></a></div>
             </div>
-          </div>
+          </div> -->
 
         <!-- mini vista alloggio -->
         <% include ../partials/miniViewAlloggio.ejs %>

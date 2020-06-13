@@ -42,19 +42,15 @@ router.get('/agg-all-1', async function(req, res, next) {
   try {
     await withTransaction(db, async() => {
 
-      let sql0 = "SELECT * FROM USERS_SESSIONS WHERE session_id = ?;";
-      results = await db.query(sql0, [req.session.id])
-          .catch(err => {
-              throw err;
-          });
+      let utente = req.app.locals.users.get(req.session.user.id_utente);
 
-      if (results.affectedRows == 0) {
-          console.log('Sessione Utente non trovata!');
-          next(createError(404, 'Sessione Utente non trovata'));
-      } else {
-          let datiUtente = JSON.parse(results[0].data);
-          idUtente = datiUtente.user.id_utente;
-      }
+        if (utente) {
+        idUtente = utente.id_utente;
+        }
+        else {
+        console.log('Sessione Utente non trovata!');
+        next(createError(404, 'Sessione Utente non trovata'));
+        }
 
       res.render('aggiungiAlloggioDir/agg-all-1');
 

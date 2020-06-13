@@ -6,7 +6,7 @@
   <body style="padding-top: 72px;">
       
       <!-- header utente loggato -->
-      <% include ../partials/headerUtenteLogin.ejs %>
+      <% include ../partials/header.ejs %>
       <!-- header utente loggato -->
 
     <div class="progress rounded-0 sticky-top" style="height: 8px; top: 71px;">
@@ -33,15 +33,15 @@
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center mb-3 mb-md-0">
                   <div class="date-tile mr-3">
-                    <div class="text-uppercase"> <span class="text-sm">Apr</span><br><strong class="text-lg">17</strong></div>
+                    <div class="text-uppercase"> <span class="text-sm"><%= data.data_i.toString().slice(5,7) %></span><br><strong class="text-lg"><%= data.data_i.toString().slice(8,10) %></strong></div>
                   </div>
-                  <p class="text-sm mb-0">Wednesday check-in<br>3PM - 7PM</p>
+                  <p class="text-sm mb-0">check-in</p>
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <div class="date-tile mr-3">
-                    <div class="text-uppercase"> <span class="text-sm">Apr</span><br><strong class="text-lg">18</strong></div>
+                    <div class="text-uppercase"> <span class="text-sm"><%= data.data_f.toString().slice(5,7) %></span><br><strong class="text-lg"><%= data.data_f.toString().slice(8,10) %></strong></div>
                   </div>
-                  <p class="text-sm mb-0">Thursday check-out<br>11AM</p>
+                  <p class="text-sm mb-0">check-out</p>
                 </div>
               </div>
             </div>
@@ -77,7 +77,7 @@
             <div class="row form-block flex-column flex-sm-row">
               <div class="col text-center text-sm-left">
               </div>
-              <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/prenotazione/prenotazionePg2">Avanti<i class="fa-chevron-right fa ml-2"></i></a></div>
+              <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/prenotazioneControl/prenotazionePg2">Avanti<i class="fa-chevron-right fa ml-2"></i></a></div>
             </div>
           </div>
 

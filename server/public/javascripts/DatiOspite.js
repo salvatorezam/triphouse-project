@@ -7,7 +7,6 @@ class DatiOspite {
         this.tipo_doc=null;
         this.num_doc=null;
         this.scadenza_doc=null;
-        this.autorita_doc=null;
         this.prenotazione=null;
         this.foto_doc=null;
 

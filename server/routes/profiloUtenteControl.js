@@ -4,6 +4,27 @@ var createError = require('http-errors');
 const { transporter } = require('../mailsender/mailsender-config');
 const { inviaMailHost, inviaMailPagamento } = require('../mailsender/mailsender-middleware');
 
+const mesi = [
+  "meseZero",
+  "Gen",
+  "Feb",
+  "Mar",
+  "Apr",
+  "Mag",
+  "Giu",
+  "Lug",
+  "Ago",
+  "Set",
+  "Ott",
+  "Nov",
+  "Dic"
+];
+
+const dataGiornoMeseAnno = function(data) {
+  data = data.split('/');
+  return (data[0] + ' ' + mesi[parseInt(data[1])] + ' ' + data[2]);
+};
+
 //informazioni che mi serve mantenere in memoria
 var idUtente = "";
 var prenEffettuate = {};
@@ -18,7 +39,6 @@ router.get('/finestraListaPrenotazioniEffettuate', getListaPrenotazioniEffettuat
 async function getListaPrenotazioniEffettuate(req, res, next) {
 
   const db = await makeDb(config);
-  let results = {};
   let prenConcluse = [];
   let prenNonConcluse = [];
 
@@ -41,7 +61,9 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
                       a.titolo AS titolo, a.indirizzo AS indirizzo, a.n_civico AS n_civico, \
                       a.citta AS citta,  a.tipo_all AS tipo_all, uh.telefono AS telefono_uh, \
                       a.nome_proprietario AS nome_proprietario, p.prezzo_totale AS prezzo_totale, uh.email AS email_uh, \
-                      p.stato_prenotazione AS stato_prenotazione \
+                      p.stato_prenotazione AS stato_prenotazione, a.foto_0 AS foto_0, \
+                      a.foto_1 AS foto_1, a.foto_2 AS foto_2, a.foto_3 AS foto_3, \
+                      a.foto_4 AS foto_4, a.foto_5 AS foto_5 \
                       FROM Prenotazione p, Alloggio a , UtenteRegistrato uh \
                       WHERE p.alloggio = a.ID_ALL AND a.proprietario = uh.ID_UR AND p.utente = ? \
                       ORDER BY data_inizio DESC; \
@@ -58,6 +80,9 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
           
           //unifico i risultati delle query
           for (elPren of prenEffettuate[0]) {
+
+            elPren.data_inizio = dataGiornoMeseAnno(elPren.data_inizio.toLocaleDateString());
+            elPren.data_fine = dataGiornoMeseAnno(elPren.data_fine.toLocaleDateString());
 
             //ospiti
             elPren.nomi_ospiti = "";
@@ -118,6 +143,16 @@ function getPrenotazioneEffettuata(req, res, next) {
   let stato_rec = "";
   let stato_pag = "";
 
+  let data_inizio_check = new Date(prenData.data_inizio);
+  let today = new Date();
+
+  //Il cliente può annullare la prenotazione fino a 3 giorni prima
+  if ((data_inizio_check - today) < (3*86400000)) {
+
+    //disabilita tasto annullamento
+    stato_pren = "disabled";
+  }
+
   //check per verificare la possibilità di annullare la prenotazione o pagare
   if (prenData.stato_prenotazione == 'conclusa') {
     // METTERCI ANCHE LA DATA DI SCADENZA 
@@ -145,14 +180,6 @@ function getPrenotazioneEffettuata(req, res, next) {
   res.render('finestraPrenotazioneEffettuata', {data : {data_pren : prenData, data_rec : stato_rec, data_ann : stato_pren, data_pag : stato_pag}});    
 }
   
-
-
-/* GET modificaDatiPersonali */
-router.get('/modificaDatiPersonali', function(req, res, next) {
-  res.render('modificaDatiPersonali');
-});
-
-
 /* Recensisci Alloggio */
 router.post('/recensisciAlloggio', recensisciAlloggio);
 
@@ -265,6 +292,87 @@ async function pagamento(req, res, next) {
       let link = '/profiloUtenteControl/finestraPrenotazioneEffettuata?id=' + prenData.ID_PREN;
       res.redirect(link);
 
+    });
+  } catch (err) {
+      console.log(err);
+      next(createError(500));
+  }
+}
+
+/* GET modificaDatiPersonali */
+router.get('/modificaDatiPersonali', modificaDatiPersonali);
+
+async function modificaDatiPersonali(req, res, next) {
+
+  const db = await makeDb(config);
+  let datiPersonali = {};
+  //recupero l'id utente dalla sessione per poter interrogare il database
+  let utente = req.app.locals.users.get(req.session.user.id_utente);
+
+  if (utente) {
+    idUtente = utente.id_utente;
+  }
+  else {
+    console.log('Sessione Utente non trovata!');
+    next(createError(404, 'Sessione Utente non trovata'));
+  }
+
+  try {
+    await withTransaction(db, async() => {
+        
+      let sql = "SELECT * FROM UtenteRegistrato WHERE ID_UR = ?";
+      datiPersonali = await db.query(sql, idUtente)
+              .catch(err => {
+                  throw err;
+              });
+
+      datiPersonali[0].data_nascita = datiPersonali[0].data_nascita.toLocaleDateString();
+      datiPersonali = datiPersonali[0];
+      
+      res.render('modificaDatiPersonali', {data: datiPersonali});
+    });
+  } catch (err) {
+    console.log(err);
+    next(createError(500));
+  }
+};
+
+/* aggiornaDatiPersonali */
+router.post('/aggiornaDatiPersonali', aggiornaDatiPersonali);
+
+async function aggiornaDatiPersonali(req, res, next) {
+
+  const db = await makeDb(config);
+  //let last4digits = req.body.numeroCarta.toString().slice(15,19);
+  //let today = new Date().toString().slice(0,24);
+
+  try {
+    await withTransaction(db, async() => {
+
+      let sql = "UPDATE UtenteRegistrato \
+                  SET nome = ?, cognome = ?, sesso = ?, \
+                  nazione_nascita = ?, citta_nascita = ?, data_nascita = ?, \
+                  email = ?, telefono = ? \
+                  WHERE ID_UR = ?;";
+      let values = [
+        req.body.nome, 
+        req.body.cognome, 
+        req.body.sesso, 
+        req.body.nazione,
+        req.body.citta,
+        req.body.data_n,
+        req.body.email,
+        req.body.telefono,
+        idUtente
+      ];
+      aggiorna = await db.query(sql, values)
+          .catch(err => {
+              throw err;
+          });
+
+      console.log('Aggiornamento effettuato.');
+
+      res.redirect('/profiloUtenteControl/modificaDatiPersonali');
     });
   } catch (err) {
       console.log(err);

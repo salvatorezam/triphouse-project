@@ -18,8 +18,8 @@
           <div class="text-block">
             <div class="row">
               <div class="col-lg-7">
-                <p class="text-primary"><i class="fa-map-marker-alt fa mr-1"></i> <%= data.data_a.citta %>,  <%= data.data_a.regione%></p>
-                <h1><%=  data.data_a.titolo %> </h1
+                <p class="text-primary"><i class="fa-map-marker-alt fa mr-1"></i> <%= data.data_a.citta %>,  <%= data.data_a.regione %></p>
+                <h1><%=  data.data_a.titolo %> </h1>
                 <p class="text-muted text-uppercase mb-4"> <%= data.data_a.tipo_all %> </p>
                 <ul class="list-inline text-sm mb-4">
                   <li class="list-inline-item mr-3"><i class="fa fa-users mr-1 text-secondary"> </i><%= data.data_a.num_ospiti_max %> Ospiti</li>
@@ -164,11 +164,7 @@
         </div>
         <div class="col-lg-4">
           <div class="py-3">
-            <a class="btn btn-primary px-3" href="/visualizzaAlloggio/modificaInformazioniAlloggio">Modifica informazioni alloggio</a>
-          </div>
-          <div class="py-3">
-            <a class="btn btn-primary px-6" href="/visualizzaAlloggio/rimuoviAlloggio">Rimuovi alloggio</a>
-            <!-- <button class="btn btn-primary btn-block" type="submit" >Prenota il tuo soggiorno</button> -->
+           <a href="/prenotazioneControl/prenotazionePg1"><button class="btn btn-primary btn-block">1 notte <h4><%= data.data_a.prezzo %>€</h4> Prenota il tuo soggiorno</button></a>
           </div>
         </div>
       </div>
