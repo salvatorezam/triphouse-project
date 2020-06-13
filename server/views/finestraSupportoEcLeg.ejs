@@ -34,7 +34,7 @@
                 <div class="d-flex align-items-center mb-3">
                   <h2 class="h5 mb-0"><%= element.nome_ut + ' ' + element.cognome_ut %></h2><img class="avatar avatar-sm avatar-border-white ml-3" src="../images/ominoUtente.png">
                 </div>
-                <p class="text-sm text-muted"><%= element.tipo_all %></p><span class="badge badge-pill p-2 badge-secondary-light"><%= element.data_inizio %> - <%= element.data_fine %></span>
+                <p class="text-sm text-muted"><%= element.tipo_all %></p><span class="badge badge-pill p-2 badge-secondary-light"><%= element.data_inizio.toString().slice(0,11) %> - <%= element.data_fine.toString().slice(0,11) %></span>
               </div>
               <div class="col-lg-8">
                 <div class="row">
@@ -42,7 +42,7 @@
                     <h6 class="label-heading">Titolo alloggio</h6>
                     <p class="text-sm font-weight-bold"><%= element.titolo %></p>
                     <h6 class="label-heading">Notti </h6>
-                    <p class="text-sm font-weight-bold mb-0"><%= element.data_fine.toString().split(' ')[0] - element.data_inizio.toString().split(' ')[0] %></p>
+                    <p class="text-sm font-weight-bold mb-0"><%= element.data_fine.toString().slice(9,11) - element.data_inizio.toString().slice(9,11) %></p>
                   </div>
                   <div class="col-6 col-md-4 col-lg-3 py-3">
                     <h6 class="label-heading">Ospiti</h6>
@@ -52,7 +52,7 @@
                   </div>
                   <div class="col-6 col-md-4 col-lg-3 py-3">
                     <h6 class="label-heading">Data prenotazione</h6>
-                    <p class="text-sm font-weight-bold"><%= element.data_prenotazione %>                                        </p>
+                    <p class="text-sm font-weight-bold"><%= element.data_prenotazione.toString().slice(0,11) %>                                        </p>
                     <h6 class="label-heading">Indirizzo</h6>
                     <p class="text-sm font-weight-bold mb-0"><%= element.indirizzo %>, <%= element.n_civico %></p>
                   </div>

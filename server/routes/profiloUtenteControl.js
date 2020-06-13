@@ -4,6 +4,27 @@ var createError = require('http-errors');
 const { transporter } = require('../mailsender/mailsender-config');
 const { inviaMailHost, inviaMailPagamento } = require('../mailsender/mailsender-middleware');
 
+const mesi = [
+  "meseZero",
+  "Gen",
+  "Feb",
+  "Mar",
+  "Apr",
+  "Mag",
+  "Giu",
+  "Lug",
+  "Ago",
+  "Set",
+  "Ott",
+  "Nov",
+  "Dic"
+];
+
+const dataGiornoMeseAnno = function(data) {
+  data = data.split('/');
+  return (data[0] + ' ' + mesi[parseInt(data[1])] + ' ' + data[2]);
+};
+
 //informazioni che mi serve mantenere in memoria
 var idUtente = "";
 var prenEffettuate = {};
@@ -59,6 +80,9 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
           
           //unifico i risultati delle query
           for (elPren of prenEffettuate[0]) {
+
+            elPren.data_inizio = dataGiornoMeseAnno(elPren.data_inizio.toLocaleDateString());
+            elPren.data_fine = dataGiornoMeseAnno(elPren.data_fine.toLocaleDateString());
 
             //ospiti
             elPren.nomi_ospiti = "";
@@ -275,8 +299,10 @@ async function pagamento(req, res, next) {
   }
 }
 
-/* GET modificaDatiPersonali */
-router.get('/modificaDatiPersonali', async function(req, res, next) {
+/* GET visualizzaDatiPersonali */
+router.get('/visualizzaDatiPersonali', visualizzaDatiPersonali);
+
+async function visualizzaDatiPersonali(req, res, next) {
 
   const db = await makeDb(config);
   let datiPersonali = {};
@@ -300,16 +326,18 @@ router.get('/modificaDatiPersonali', async function(req, res, next) {
                   throw err;
               });
 
-      datiPersonali[0].data_nascita = datiPersonali[0].data_nascita.toString().slice(0,10);
+      let data_format = datiPersonali[0].data_nascita.toLocaleDateString();
+      let array = data_format.split('/');
+      datiPersonali[0].data_nascita = array[2] + '-' + array[1] + '-' + array[0];
       datiPersonali = datiPersonali[0];
       
-      res.render('modificaDatiPersonali', {data: datiPersonali});
+      res.render('visualizzaDatiPersonali', {data: datiPersonali});
     });
   } catch (err) {
     console.log(err);
     next(createError(500));
   }
-});
+};
 
 /* aggiornaDatiPersonali */
 router.post('/aggiornaDatiPersonali', aggiornaDatiPersonali);
@@ -346,7 +374,7 @@ async function aggiornaDatiPersonali(req, res, next) {
 
       console.log('Aggiornamento effettuato.');
 
-      res.redirect('/profiloUtenteControl/modificaDatiPersonali');
+      res.redirect('/profiloUtenteControl/visualizzaDatiPersonali');
     });
   } catch (err) {
       console.log(err);
