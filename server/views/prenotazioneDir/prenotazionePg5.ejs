@@ -13,24 +13,22 @@
     <section class="py-5">
       <div class="container">
         <div class="row">
-          <div class="col-lg-7">
+          <div class="col-lg-7 col-md-8 col-sm-8">
             <p class="subtitle text-primary">Prenota la tua casa vacanza</p>
             <h1 class="h2 mb-5"> Prenotazione effettuata <span class="text-muted float-right">Step 5</span>      </h1>
             <div class="text-block">
-              <p class="text-muted">Grazie per la prenotazione, Ondrej. </p>
-              <p class="text-muted mb-5">Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.</p>
+              <p class="text-muted">Grazie per la prenotazione, <%= nomeUtSes %> </p>
+              <p class="text-muted mb-5">Anche un viaggio di mille mila miglia inizia con un piccolo passo </p>
               <div class="row form-block flex-column flex-sm-row">
-                <p class="text-center mb-5"><a class="btn btn-primary mx-2 mb-2" href="/prenotazione/recapPrenotazione"> <i class="far fa-file mr-2"></i>Vedi la tua prenotazione</a></p>
-                <p class="text-center mb-5"><a class="btn btn-link mx-2 mb-2" href="#"> <i class="far fa-file mr-2"></i>Torna alla home</a></p>
+                <p class="text-center mb-5"><a class="btn btn-primary mx-2 mb-2" href="/prenotazioneControl/recapPrenotazione"> <i class="far fa-file mr-2"></i>Vedi la tua prenotazione</a></p>
+                <p class="text-center mb-5"><a class="btn btn-link mx-2 mb-2" href="/"> <i class="far fa-file mr-2"></i>Torna alla home</a></p>
               </div>
-              <p class="mb-5 text-center"><img class="img-fluid" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/illustration/undraw_celebration_0jvk.svg" alt="" style="width: 400px;"></p>
             </div>
+          </div>            
+          <!--Immagine background-->
+          <div class="col-lg-5 col-md-5 col-sm-6" >
+            <p class="mb-5 text-center"><img class="img-fluid" src="https://d19m59y37dris4.cloudfront.net/directory/1-5/img/illustration/undraw_celebration_0jvk.svg" alt="" style="width: 400px;"></p>
           </div>
-
-        <!-- mini vista alloggio -->
-        <% include ../partials/miniViewAlloggio.ejs %>
-        <!-- mini vista alloggio -->
-
         </div>
       </div>
     </section>

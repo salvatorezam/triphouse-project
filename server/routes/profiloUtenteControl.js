@@ -299,10 +299,10 @@ async function pagamento(req, res, next) {
   }
 }
 
-/* GET modificaDatiPersonali */
-router.get('/modificaDatiPersonali', modificaDatiPersonali);
+/* GET visualizzaDatiPersonali */
+router.get('/visualizzaDatiPersonali', visualizzaDatiPersonali);
 
-async function modificaDatiPersonali(req, res, next) {
+async function visualizzaDatiPersonali(req, res, next) {
 
   const db = await makeDb(config);
   let datiPersonali = {};
@@ -326,10 +326,12 @@ async function modificaDatiPersonali(req, res, next) {
                   throw err;
               });
 
-      datiPersonali[0].data_nascita = datiPersonali[0].data_nascita.toLocaleDateString();
+      let data_format = datiPersonali[0].data_nascita.toLocaleDateString();
+      let array = data_format.split('/');
+      datiPersonali[0].data_nascita = array[2] + '-' + array[1] + '-' + array[0];
       datiPersonali = datiPersonali[0];
       
-      res.render('modificaDatiPersonali', {data: datiPersonali});
+      res.render('visualizzaDatiPersonali', {data: datiPersonali});
     });
   } catch (err) {
     console.log(err);
@@ -372,7 +374,7 @@ async function aggiornaDatiPersonali(req, res, next) {
 
       console.log('Aggiornamento effettuato.');
 
-      res.redirect('/profiloUtenteControl/modificaDatiPersonali');
+      res.redirect('/profiloUtenteControl/visualizzaDatiPersonali');
     });
   } catch (err) {
       console.log(err);

@@ -20,7 +20,6 @@
           <div class="col-lg-7">
             <p class="subtitle text-primary">Prenota la tua casa vacanza</p>
             <h1 class="h2 mb-5"> Conferma <span class="text-muted float-right">Step 4</span>      </h1>
-
             <div class="text-block">
               <form name="formMetodoPagamento" method="POST" action="/prenotazioneControl/prenotazionePg5">
                 <div class="d-flex justify-content-between align-items-end mb-4">
@@ -40,34 +39,52 @@
                   </div> 
               </div>
               </form>
-
-              <div class="text-block" style="margin-top: 1em;" >
-                <h6>Attenzione</small></h6>
-                <p><small>Se viene scelta la forma di pagamento anticipato,
-                trovere il modulo di pagamento dentro la pagina visualizza
-                prenotazione effettuata.</small></p>
+            </div>  
+          </div>
+          <div class="col-lg-5 pl-xl-5">
+            <div class="card border-0 shadow">
+              <div class="card-body p-4">
+                <div class="text-block py-3">
+                  <ul class="list-unstyled mb-0">
+                    <li class="mb-3"><i class="fas fa-users fa-fw text-muted mr-2"></i><%= dataNumOsp %> ospite/i</li>
+                    <li class="mb-0"><i class="far fa-calendar fa-fw text-muted mr-2"></i><%= data.data_i %><i class="fas fa-arrow-right fa-fw text-muted mx-3"></i><%= data.data_f %></li>
+                  </ul>
+                </div>
+                <div class="text-block pt-3 pb-0">
+                  <table class="w-100">
+                    <tbody>
+                      <tr>
+                        <th class="font-weight-normal py-2"><%= dataPrezzoNotte %>€ x <%= dataNotti %> notte/i</th>
+                        <td class="text-right py-2"><%= dataPrezzoNotte*dataNotti %>€ </td>
+                      </tr>
+                      <tr>
+                        <th class="font-weight-normal pt-2 pb-3">Tassa Soggiorno</th>
+                        <td class="text-right pt-2 pb-3"><%= dataPrezzoTassa %>€</td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr class="border-top">
+                        <th class="pt-3">Totale</th>
+                        <td class="font-weight-bold text-right pt-3"><%= dataTotale %>€</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+              <div class="card-footer bg-primary-light py-4 border-0">
+                <div class="media align-items-center">
+                  <div class="media-body">
+                    <h6 class="text-primary">Come viene calcolato il totale?</h6>
+                    <p class="text-sm text-primary opacity-8 mb-0">Il totale viene calcolato sommando il prezzo delle notti alla tassa di soggiorno moltiplicata per un massimo di 3 giorni </p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="text-block">
-              <h6>Politica di cancellazione</h6>
-              <p class="text-sm text-muted">Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of .</p>
-              <p class="text-sm text-muted">He must have tried it a hundred times, shut his eyes so that he wouldn't have to look at the flounde.</p>
-            </div>
-        <!--    
-            <div class="row form-block flex-column flex-sm-row">
-              <div class="col text-center text-sm-left"><a class="btn btn-link text-muted" href="/prenotazione/prenotazionePg3"> <i class="fa-chevron-left fa mr-2"></i>Indietro</a>
-              </div>
-              <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" href="/prenotazione/prenotazionePg5">Conferma<i class="fa-chevron-right fa ml-2"></i></a></div>
-            </div>
-          </div> -->
-
-        <!-- mini vista alloggio -->
-        <% include ../partials/miniViewAlloggio.ejs %>
-        <!-- mini vista alloggio -->
-
+          </div>
         </div>
       </div>
-    </section>
+    </section> 
+      
 
     <!-- Footer-->
     <% include ../partials/footer.ejs %>

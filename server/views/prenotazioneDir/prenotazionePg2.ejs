@@ -17,22 +17,6 @@
             <p class="subtitle text-primary">Prenota la tua casa vacanza</p>
             <h1 class="h2 mb-5"> Chi viene? <span class="text-muted float-right">Step 2</span>      </h1>
 
-            <div class="text-block">
-
-          <!-- <div class="row">
-                <div class="col-lg-6 mb-3">
-                  <select class="selectpicker form-control" name="guests" id="form_guests" data-style="btn-selectpicker" required>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                  </select>
-                </div> 
-              </div> -->
-            </div>
           <form name="myform" method="POST" action="/prenotazioneControl/prenotazionePg3">
             <label class="h5">Inserisci i  dati dei tuoi documenti</label>
             <!--inizio form documenti utenti registrati-->
@@ -344,9 +328,9 @@
                   </div>
                   <fieldset class=" col-lg-4">
                     <div class="form-group" style="text-align: center; margin-top: 1em;">
-                        <input type="radio" class="tipoDoc" id="caDoc1" name="documento1" value="carta di identità" autocomplete="off" required>
+                        <input type="radio" class="tipoDoc" id="caDoc1" name="documento1" value="carta di identità" autocomplete="off">
                         <label for="caDoc1">Carta d'identità</label><br />
-                        <input type="radio" class="tipoDoc" id="pasDoc1" name="documento1" value="passaporto" autocomplete="off" required>
+                        <input type="radio" class="tipoDoc" id="pasDoc1" name="documento1" value="passaporto" autocomplete="off">
                         <label for="pasDoc1">Passaporto</label><br />
                     </div>
                   </fieldset>
@@ -617,9 +601,9 @@
                   <div class="col-md-5">
                     <label class="form-label" name="eta2" id="eta2" for="eta_ospiti2" data-style="btn-selectpicker"> Età </label>
                     <select class="selectpicker form-control" name="eta_ospiti2" id="eta_ospiti2" data-style="btn-selectpicker">
-                        <option value="eta_0">Adulto</option>
-                        <option value="eta_1">Bambino</option>
-                        <option value="eta_2">Neonato</option>
+                        <option value="0">Adulto</option>
+                        <option value="1">Bambino</option>
+                        <option value="2">Neonato</option>
                     </select>
                   </div>
                 </div>
@@ -905,11 +889,11 @@
                     </select>
                   </div>
                   <div class="col-md-5">
-                    <label class="form-label" name="eta3" id="eta3" for="eta_ospiti3" data-style="btn-selectpicker"> Età *</label>
+                    <label class="form-label" name="eta3" id="eta3" for="eta_ospiti3" data-style="btn-selectpicker"> Età </label>
                     <select class="selectpicker form-control" name="eta_ospiti3" id="eta_ospiti3" data-style="btn-selectpicker">
-                        <option value="eta_0">Adulto</option>
-                        <option value="eta_1">Bambino</option>
-                        <option value="eta_2">Neonato</option>
+                        <option value="0">Adulto</option>
+                        <option value="1">Bambino</option>
+                        <option value="2">Neonato</option>
                     </select>
                   </div>
               
@@ -1198,9 +1182,9 @@
                   <div class="col-md-5">
                     <label class="form-label" name="eta4" id="eta4" for="eta_ospiti4" data-style="btn-selectpicker"> Età </label>
                     <select class="selectpicker form-control" name="eta_ospiti4" id="eta_ospiti4" data-style="btn-selectpicker">
-                        <option value="eta_0">Adulto</option>
-                        <option value="eta_1">Bambino</option>
-                        <option value="eta_2">Neonato</option>
+                        <option value="0">Adulto</option>
+                        <option value="1">Bambino</option>
+                        <option value="2">Neonato</option>
                     </select>
                   </div>
               
@@ -1489,9 +1473,9 @@
                   <div class="col-md-5">
                     <label class="form-label" name="eta" id="eta5" for="eta_ospiti5" data-style="btn-selectpicker"> Età </label>
                     <select class="selectpicker form-control" name="eta_ospiti5" id="eta_ospiti5" data-style="btn-selectpicker">
-                        <option value="eta_0">Adulto</option>
-                        <option value="eta_1">Bambino</option>
-                        <option value="eta_2">Neonato</option>
+                        <option value="0">Adulto</option>
+                        <option value="1">Bambino</option>
+                        <option value="2">Neonato</option>
                     </select>
                   </div>
               
@@ -1780,9 +1764,9 @@
                   <div class="col-md-5">
                     <label class="form-label" name="eta" id="eta6" for="eta_ospiti6" data-style="btn-selectpicker"> Età </label>
                     <select class="selectpicker form-control" name="eta_ospiti6" id="eta_ospiti6" data-style="btn-selectpicker">
-                        <option value="eta_0">Adulto</option>
-                        <option value="eta_1">Bambino</option>
-                        <option value="eta_2">Neonato</option>
+                        <option value="0">Adulto</option>
+                        <option value="1">Bambino</option>
+                        <option value="2">Neonato</option>
                     </select>
                   </div>
                 </div>
@@ -2070,9 +2054,9 @@
                   <div class="col-md-5">
                     <label class="form-label" name="eta" id="eta7" for="eta_ospiti7" data-style="btn-selectpicker"> Età </label>
                     <select class="selectpicker form-control" name="eta_ospiti7" id="eta_ospiti7" data-style="btn-selectpicker">
-                        <option value="eta_0">Adulto</option>
-                        <option value="eta_1">Bambino</option>
-                        <option value="eta_2">Neonato</option>
+                        <option value="0">Adulto</option>
+                        <option value="1">Bambino</option>
+                        <option value="2">Neonato</option>
                     </select>
                   </div>
                 </div>
@@ -2360,9 +2344,9 @@
                   <div class="col-md-5">
                     <label class="form-label" name="eta" id="eta8" for="eta_ospiti8" data-style="btn-selectpicker"> Età </label>
                     <select class="selectpicker form-control" name="eta_ospiti8" id="eta_ospiti8" data-style="btn-selectpicker">
-                        <option value="eta_0">Adulto</option>
-                        <option value="eta_1">Bambino</option>
-                        <option value="eta_2">Neonato</option>
+                        <option value="0">Adulto</option>
+                        <option value="1">Bambino</option>
+                        <option value="2">Neonato</option>
                     </select>
                   </div>
                 </div>
@@ -2392,18 +2376,49 @@
               </div> 
             </div>
           </form>
-
-      <!--<div class="row form-block flex-column flex-sm-row">
-            <div class="col text-center text-sm-left"><a class="btn btn-link text-muted" href="/prenotazione/prenotazionePg1"> <i class="fa-chevron-left fa mr-2"></i>Indietro</a>
-            </div>
-            <div class="col text-center text-sm-right"><a class="btn btn-primary px-3" type="submit" href="/prenotazione/prenotazionePg3">Avanti<i class="fa-chevron-right fa ml-2"></i></a>
-            </div>
-          </div> -->
-     
         </div>
-                <!-- mini vista alloggio -->
-                <% include ../partials/miniViewAlloggio.ejs %>
-                <!-- mini vista alloggio -->
+        <!-- mini vista alloggio -->
+        <div class="col-lg-5 pl-xl-5">
+          <div class="card border-0 shadow">
+            <div class="card-body p-4">
+              <div class="text-block py-3">
+                <ul class="list-unstyled mb-0">
+                  <li class="mb-3"><i class="fas fa-users fa-fw text-muted mr-2"></i><%= dataNumOsp %> ospite/i</li>
+                  <li class="mb-0"><i class="far fa-calendar fa-fw text-muted mr-2"></i><%= data.data_i %><i class="fas fa-arrow-right fa-fw text-muted mx-3"></i><%= data.data_f %></li>
+                </ul>
+              </div>
+              <div class="text-block pt-3 pb-0">
+                <table class="w-100">
+                  <tbody>
+                    <tr>
+                      <th class="font-weight-normal py-2"><%= dataPrezzoNotte %>€ x <%= dataNotti %> notte/i</th>
+                      <td class="text-right py-2"><%= dataPrezzoNotte*dataNotti %>€ </td>
+                    </tr>
+                    <tr>
+                      <th class="font-weight-normal pt-2 pb-3">Tassa Soggiorno</th>
+                      <td class="text-right pt-2 pb-3"><%= dataPrezzoTassa %>€</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr class="border-top">
+                      <th class="pt-3">Totale</th>
+                      <td class="font-weight-bold text-right pt-3"><%= dataTotale %>€</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer bg-primary-light py-4 border-0">
+              <div class="media align-items-center">
+                <div class="media-body">
+                  <h6 class="text-primary">Come viene calcolato il totale?</h6>
+                  <p class="text-sm text-primary opacity-8 mb-0">Il totale viene calcolato sommando il prezzo delle notti alla tassa di soggiorno moltiplicata per un massimo di 3 giorni </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- mini vista alloggio -->
       </div>
     </section>
     <!-- Footer-->

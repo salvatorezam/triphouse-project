@@ -116,12 +116,12 @@
 		ID_DO VARCHAR(36) PRIMARY KEY,
 		nome VARCHAR(40),
 		cognome VARCHAR(40),
+		nazionalita VARCHAR(40),
+		eta INT,
 		tipo_doc VARCHAR(20),
 		num_doc VARCHAR(10),
-		foto_doc VARCHAR(80), 
-		nazionalita VARCHAR(40),
 		scadenza_doc DATE,
-		eta INT,
+		foto_doc VARCHAR(80), 
 		prenotazione VARCHAR(36) REFERENCES Prenotazione(ID_PREN)
 	);
 
@@ -129,8 +129,8 @@
 		ID_DO VARCHAR(36) PRIMARY KEY, 
 		tipo_doc VARCHAR(20),
 		num_doc VARCHAR(10),
-		autorita_doc VARCHAR(40),
 		scadenza_doc DATE,
+		foto_doc VARCHAR(80),
 		prenotazione VARCHAR(36) REFERENCES Prenotazione(ID_PREN)
 	);
 
