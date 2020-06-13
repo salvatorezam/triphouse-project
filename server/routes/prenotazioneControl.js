@@ -253,7 +253,6 @@ router.post('/upload', cpUpload, async function (req, res, next) {
 
 
 
-
 //POST prenotazionePg4
 router.post('/prenotazionePg5', compilaPt3);
 
@@ -271,13 +270,13 @@ async function compilaPt3(req, res, next){
         prenEffettuata.tipo_pagamento = req.body.metodoPagamento;   
          
         console.log(prenEffettuata);
-        const db = await makeDb(config); 
+        const db = await makeDb(config);
         var results = {};
 
         await withTransaction(db, async() => {
             // inserimento prenotazione
-            let sql = "INSERT INTO Prenotazione VALUES (UUID(),?,?,?,?,?,?,?,?);\
-                       INSERT INTO DocumentiUtenteR VALUES (UUID(),?,?,?,?,(SELECT ID_PREN FROM Prenotazione WHERE utente=? AND alloggio=? AND data_pren=?));";
+            let sql = "INSERT INTO Prenotazione VALUES (UUID(),?,?,?,?,?,?,?,?,?);\
+                       SELECT LAST_INSERT_ID()";
             let values = [
                 //creazione query prenotazione
                 prenEffettuata.utente,
@@ -288,13 +287,12 @@ async function compilaPt3(req, res, next){
                 prenEffettuata.prezzo_totale,
                 prenEffettuata.stato_prenotazione,
                 prenEffettuata.tipo_pagamento,
+                prenEffettuata.tasse_pagate = null,
+
                 datiUtenteR.tipo_doc,
                 datiUtenteR.num_doc,
                 datiUtenteR.scadenza_doc,
-                datiUtenteR.foto_doc,
-                prenEffettuata.utente,
-                prenEffettuata.alloggio,
-                prenEffettuata.data_pren                
+                datiUtenteR.foto_doc
             ];
       
             results = await db.query(sql, values)
@@ -302,6 +300,27 @@ async function compilaPt3(req, res, next){
                         throw err;
                     });
             console.log("Prenotazione Effettuata con successo");
+
+
+            let sql1 = "INSERT INTO DocumentiUtenteR VALUES (UUID(),?,?,?,?,?;";
+            let values1 = [
+                //creazione query prenotazione
+                datiUtenteR.tipo_doc,
+                datiUtenteR.num_doc,
+                datiUtenteR.scadenza_doc,
+                datiUtenteR.foto_doc,
+                results[0].LAST_INSERT_ID()
+            ];
+      
+            results1 = await db.query(sql1, values1)
+                    .catch(err => {
+                        throw err;
+                    });
+            console.log("Documenti inviati");
+        });
+
+
+
 
           //  let sql2 =  "INSERT INTO DatiOspiti VALUES (UUID(),?,?,?,?,?,?,?,?,(SELECT ID_PREN FROM Prenotazione WHERE utente=? AND alloggio=? AND data_pren=?));";
                          
@@ -324,13 +343,13 @@ async function compilaPt3(req, res, next){
             console.log("Dati inseriti correttamente");   */  
 
 
-          });
+        
 
-        res.render('prenotazioneDir/prenotazionePg5',{nomeUtSes:nomeUtenteSessione});  
-    } catch (err) {
-        console.log(err);
-        next(createError(500));
-    }
+            res.render('prenotazioneDir/prenotazionePg5',{nomeUtSes:nomeUtenteSessione});  
+        } catch (err) {
+            console.log(err);
+            next(createError(500));
+        }
 }
 
 /* GET recapPrenotazione */
