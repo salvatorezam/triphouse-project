@@ -81,7 +81,7 @@
             <div class="media align-items-center mb-3">
               <div class="media-body">
                 <h6><%= data.data_pren.tipo_all %></h6>
-                <p class="text-muted mb-0">Ospite <a href="user-profile.html" class="text-reset"><%= data.data_pren.nome_ut %> <%= data.data_pren.cognome_ut %></a></p>
+                <p class="text-muted mb-0"><a href="user-profile.html" class="text-reset"><%= data.data_pren.nome_ut %> <%= data.data_pren.cognome_ut %></a> ha prenotato.</p>
               </div><a href="user-profile.html"><img class="avatar avatar-lg avatar-border-white ml-4" src="../images/ominoUtente.png"></a>
             </div>
           </div>
@@ -103,15 +103,23 @@
               </div>
             </div>
           </div>
+
           <div class="text-block">
             <h6 class="mb-4">Azioni </h6>
             <ul class="list-unstyled">
+
+              <li class="mb-2"> 
+                <div class="media align-items-center mb-3">
+                  <div class="media-body"><a role="button" class="btn btn-outline-info" href="mailto:<%= data.data_pren.email_ut %>">Contatta cliente</a></div>
+                </div>
+              </li>
+
               <li class="mb-2"> 
                 <div class="media align-items-center mb-3">
                   <div class="py-0">
                     <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#recensisciCliente" aria-expanded="false" aria-controls="recensisciCliente" <%= data.data_rec %>>Recensisci Cliente</button>
                     <div class="collapse mt-4" id="recensisciCliente">
-                      <h5 class="mb-4">Recensione</h5>
+                      <h5 class="mb-4">Calcolo tasse di soggiorno</h5>
                       <form class="form" id="form_recensione" method="POST" action="/profiloHostControl/recensisciCliente">
                         <div class="row">
                           <div class="col-sm-6">
@@ -143,29 +151,81 @@
                   </div>
                 </div>
               </li>
+
               <li class="mb-2"> 
                 <div class="media align-items-center mb-3">
                   <div class="py-0">
-                    <button class="btn btn-outline-danger" type="button" data-toggle="collapse" data-target="#annullaPrenotazione" aria-expanded="false" aria-controls="annullaPrenotazione" <%= data.data_ann %>>Annulla prenotazione</button>
-                    <div class="collapse mt-4" id="annullaPrenotazione">
-                      <h5 class="mb-4">Sei sicuro di voler annullare la prenotazione? </h5>
-                      <div class="row">
-                        <div class="col-sm-6 mb-2">
-                          <a href="/profiloHostControl/annullaPrenotazione" id="confermaAnnullamento"><button class="col btn btn-success">SI</button></a>
-                        </div>
-                        <div class="col-sm-6 mb-2">
-                          <button class="col btn btn-danger" type="button" data-toggle="collapse" data-target="#annullaPrenotazione" aria-expanded="false" aria-controls="annullaPrenotazione">NO</button>
-                        </div>
-                      </div>
+                    <button class="btn btn-outline-secondary" id="calcolatasse" type="button" data-toggle="collapse" data-target="#calcolaTasse" aria-expanded="false" aria-controls="calcolaTasse">Calcola tasse</button>
+                   
+                    <div class="collapse mt-4" id="calcolaTasse">
+                      <h5 class="mb-4">Tasse di soggiorno</h5>
+                      
+                        <table class="table col-sm-6">
+                          <thead>
+                            <tr>
+                              <th scope="col">Ospite</th>
+                              <th scope="col">Nome</th>
+                              <th scope="col">Nazionalità</th>
+                              <th scope="col">Età</th>
+                              <th scope="col">Paga</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td><%= data.data_pren.nome_ut %> <%= data.data_pren.cognome_ut %></td>
+                              <td><%= data.data_pren.naz_prenotante %></td>
+                              <td><%= data.data_pren.eta_prenotante %></td>
+                              <% var totaleTasse = 0.0; if (data.data_pren.naz_prenotante != 'Italia') { totaleTasse += data.data_pren.tasse_alloggio; %>
+                                <td>&euro; <%= data.data_pren.tasse_alloggio %></td>
+                              <% } else { %>
+                                <td>&euro; 0.00</td>
+                              <% } %>
+                            </tr>
+                            <% if (ospiti == "") { %>
+                              <!-- Non ci sono ospiti oltre al prenotante, quindi non ci sono ulteriori righe della tabella-->
+                            <% } else { %>
+                              <% let nomi_ospiti = data.data_pren.nomi_ospiti.slice(0, (data.data_pren.nomi_ospiti.length-1)); nomi_ospiti = nomi_ospiti.split('-'); %>
+                              <% let naz_ospiti = data.data_pren.naz_ospiti.slice(0, (data.data_pren.naz_ospiti.length-1)); naz_ospiti = naz_ospiti.split('-'); %>
+                              <% let eta_ospiti = data.data_pren.eta_osp.slice(0, (data.data_pren.eta_osp.length-1)); eta_ospiti = eta_ospiti.split('-'); %>
+                              <!-- Stampa una riga della tabella per ogni ospite-->
+                              <% for (let i = 0; i < ospiti.length; i++) { %>  
+                                <tr>
+                                  <th scope="row"><%= i+2 %></th>
+                                  <td><%= nomi_ospiti[i] %></td>
+                                  <td><%= naz_ospiti[i] %></td>
+                                  <td><%= eta_ospiti[i] %></td>
+                                  <% if (naz_ospiti[i] != 'It' || eta_ospiti[i] > 6) { totaleTasse += data.data_pren.tasse_alloggio; %>
+                                    <td>&euro; <%= data.data_pren.tasse_alloggio %></td>
+                                  <% } else { %>
+                                    <td>&euro; 0</td>
+                                  <% } %>
+                                </tr>
+                              <% } %>
+                            <% }; %> 
+                        
+                                <tr>
+                                  <th scope="row">Totale</th>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td name="tassepagate" id="tassepagate">&euro; <span><%= totaleTasse %></span></td>
+                                </tr>
+
+                          </tbody>
+                        </table>
+                        <button class="btn btn-primary" id="confermaPagamentoTasse">Conferma pagamento</button>
                     </div>
                   </div>
                 </div>
               </li>
+
               <li class="mb-2"> 
                 <div class="media align-items-center mb-3">
-                  <div class="media-body"><a role="button" class="btn btn-outline-info" href="mailto:<%= data.data_pren.email_ut %>">Contatta cliente</a></div>
+                  <div class="media-body"><a role="button" class="btn btn-outline-dark" href="mailto:<%= data.data_pren.email_ut %>">Comunica dati ospiti</a></div>
                 </div>
               </li>
+
               <li class="mb-2"> 
                 <div class="media align-items-center mb-3">
                   <div class="py-0">
@@ -184,6 +244,27 @@
                   </div>
                 </div>
               </li>
+
+              
+              <li class="mb-2"> 
+                <div class="media align-items-center mb-3">
+                  <div class="py-0">
+                    <button class="btn btn-outline-danger" type="button" data-toggle="collapse" data-target="#annullaPrenotazione" aria-expanded="false" aria-controls="annullaPrenotazione" <%= data.data_ann %>>Annulla prenotazione</button>
+                    <div class="collapse mt-4" id="annullaPrenotazione">
+                      <h5 class="mb-4">Sei sicuro di voler annullare la prenotazione? </h5>
+                      <div class="row">
+                        <div class="col-sm-6 mb-2">
+                          <a href="/profiloHostControl/annullaPrenotazione" id="confermaAnnullamento"><button class="col btn btn-success">SI</button></a>
+                        </div>
+                        <div class="col-sm-6 mb-2">
+                          <button class="col btn btn-danger" type="button" data-toggle="collapse" data-target="#annullaPrenotazione" aria-expanded="false" aria-controls="annullaPrenotazione">NO</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
             </ul>
           </div>
           <div class="text-block d-print-none"> <!-- PENSARE PER LA RICEVUTA -->
@@ -204,7 +285,7 @@
     <script>
 
       $(document).ready(function() {
-      
+
         $('#confermaAnnullamento').on('click', function() {
           window.alert('Operazione andata a buon fine');
         });
@@ -219,6 +300,20 @@
 
         $('#declinaPrenotazione').on('click', function() {
           window.alert('Operazione andata a buon fine');
+        });
+
+        // Aggiornamento stato tasse -----------------------------------------------------------------------
+        $('#confermaPagamentoTasse').click(function(ev) {
+          $.ajax({
+            context: this,
+            url: '/profiloHostControl/inviatasse',
+            type: 'POST',
+            data: { tasse : parseFloat($('#tassepagate').children('span').text())},
+            success: response => {
+              console.log('Response from server is ' + response);
+              window.alert('Pagamento tasse aggiornato!')
+            }
+          });
         });
 
         let caratteriSpeciali = /([~,@,#,$,^,&,*,-,_,+,=,>,<,',",`])/;

@@ -57,9 +57,10 @@ async function getListaPrenotazioniRicevute(req, res, next) {
             //prendo dal database tutte le informazioni che mi servono
             let sql1 = "SELECT p.ID_PREN AS ID_PREN, p.data_inizio AS data_inizio, p.data_fine AS data_fine, \
                         a.titolo AS titolo, a.tipo_all AS tipo_all, a.indirizzo AS indirizzo, a.n_civico AS n_civico, \
-                        a.citta AS citta, p.stato_prenotazione AS stato_prenotazione, \
+                        a.citta AS citta, a.tasse AS tasse_alloggio, p.stato_prenotazione AS stato_prenotazione, \
                         ur.nome AS nome_ut, ur.cognome AS cognome_ut, ur.telefono AS telefono_ut, \
-                        ur.email AS email_ut, ur.ID_UR AS ID_UR, \
+                        ur.email AS email_ut, ur.nazione_nascita AS naz_prenotante, DATEDIFF(CURDATE(),ur.data_nascita)/365 AS eta_prenotante, \
+                        ur.ID_UR AS ID_UR, \
                         p.prezzo_totale AS prezzo_totale, p.data_pren AS data_prenotazione, \
                         a.foto_0 AS foto_0, a.foto_1 AS foto_1, a.foto_2 AS foto_2, \
                         a.foto_3 AS foto_3, a.foto_4 AS foto_4, a.foto_5 AS foto_5 \
@@ -67,7 +68,7 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                         WHERE p.alloggio = a.ID_ALL AND p.utente = ur.ID_UR AND a.proprietario = ? \
                         GROUP BY p.ID_PREN \
                         ORDER BY data_inizio DESC; \
-                        SELECT p.ID_PREN AS ID_PREN, dos.nome AS nome_osp \
+                        SELECT p.ID_PREN AS ID_PREN, dos.nome AS nome_osp, dos.nazionalita AS naz_osp, dos.eta AS eta_osp \
                         FROM Prenotazione p, DatiOspiti dos \
                         WHERE p.ID_PREN = dos.prenotazione; \
                         SELECT rc.prenotazione AS ID_PREN \
@@ -87,11 +88,15 @@ async function getListaPrenotazioniRicevute(req, res, next) {
   
                 //ospiti
                 elPren.nomi_ospiti = "";
+                elPren.naz_ospiti = "";
+                elPren.eta_ospiti = "";
                 elPren.num_ospiti = 0;
                 if (prenRicevute[1].length != 0) {
                     for (elDatOsp of prenRicevute[1]) {
                         if (elPren.ID_PREN == elDatOsp.ID_PREN) {
                             elPren.nomi_ospiti = elPren.nomi_ospiti + elDatOsp.nome_osp + "-";
+                            elPren.naz_ospiti = elPren.naz_ospiti + elDatOsp.naz_osp + "-";
+                            elPren.eta_osp = elPren.eta_ospiti + elDatOsp.eta_osp + "-";
                             elPren.num_ospiti++;
                         }
                     }
@@ -324,6 +329,30 @@ async function declinaPrenotazione(req, res, next) {
       let link = '/profiloHostControl/finestraPrenotazioneRicevuta?id=' + prenData.ID_PREN;
       res.redirect(link);
 
+    });
+  } catch (err) {
+      console.log(err);
+      next(createError(500));
+  }
+}
+
+
+/* Calcola tasse */
+router.post('/inviatasse', inviaTasse);
+
+async function inviaTasse(req, res, next) {
+
+  const db = await makeDb(config);
+
+  try {
+    await withTransaction(db, async() => {
+
+      results = await db.query('UPDATE Prenotazione SET tasse_pagate = ? WHERE ID_PREN = ?', [req.body.tasse, prenData.ID_PREN])
+              .catch(err => {
+                throw err;
+              });
+
+      res.send('UPDATE-SUCCESSFUL');
     });
   } catch (err) {
       console.log(err);
