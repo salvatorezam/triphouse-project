@@ -196,12 +196,7 @@ async function compilaPt1(req, res, next){
        datiOspiti[7].scadenza_doc = req.body.scadenzaDoc8;
 
        console.log('Inserimento valori step 1');
-       console.log('');
-       console.log(datiUtenteR);
-       console.log('');
-       for (let index = 0; index < 8; index++) {
-            console.log(datiOspiti[index]);           
-       }
+
        
        res.render('prenotazioneDir/prenotazionePg3',{data:datePren,dataPrezzoNotte:prezzoNotte,dataPrezzoTassa:prezzoTassa,dataNotti:notti,dataTotale:totale,dataNumOsp:numOspit});
 
@@ -240,6 +235,12 @@ router.post('/upload', cpUpload, async function (req, res, next) {
       
 
       console.log('step 2 valori inseriti');
+      console.log('');
+      console.log(datiUtenteR);
+      console.log('');
+      for (let index = 0; index < 8; index++) {
+           console.log(datiOspiti[index]);           
+      }
 
       res.render('prenotazioneDir/prenotazionePg4',{data:datePren,dataPrezzoNotte:prezzoNotte,dataPrezzoTassa:prezzoTassa,dataNotti:notti,dataTotale:totale,dataNumOsp:numOspit});
 
