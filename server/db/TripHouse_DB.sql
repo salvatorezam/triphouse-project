@@ -117,7 +117,7 @@
 		cognome VARCHAR(40),
 		tipo_doc VARCHAR(20),
 		num_doc VARCHAR(10),
-	--	Foto_doc, 
+		foto_doc VARCHAR(80), 
 		nazionalita VARCHAR(40),
 		scadenza_doc DATE,
 		eta INT,

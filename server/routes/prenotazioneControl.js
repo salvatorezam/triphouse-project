@@ -40,13 +40,22 @@ var moduloPrenotazione = require('../public/javascripts/prenotazione(E).js');
 var moduloOspite = require('../public/javascripts/DatiOspite.js');
 var moduloDocUtente = require('../public/javascripts/DocUtenteR.js');
 
-
+var datePren;
 
 
 /* GET prenotazionePg1 */
 router.get('/prenotazionePg1', async function(req, res, next) {
+    prenEffettuata = new moduloPrenotazione();
+    console.log(res.locals.date);
+    datePren = res.locals.date;
+    idAlloggio = res.locals.alloggio.ID_ALL;
+    prezzoNotte = res.locals.alloggio.prezzo;
+    prezzoTassa = res.locals.alloggio.tasse; // fare check per le tasse 
+    console.log(idAlloggio);
+    
+    
 
-  const db = await makeDb(config);
+    const db = await makeDb(config);
     try {
         await withTransaction(db, async() => {
             console.log(req.session.user);
@@ -60,7 +69,7 @@ router.get('/prenotazionePg1', async function(req, res, next) {
             
             if( utente!= undefined) {
                 idUtente = utente.id_utente;
-                res.render('prenotazioneDir/prenotazionePg1');
+                res.render('prenotazioneDir/prenotazionePg1',{data:datePren});
             }else {
                 console.log('sessione Utente non trovata!');
                 res.render('Autenticazione')
@@ -230,15 +239,47 @@ router.post('/prenotazionePg5', compilaPt3);
 async function compilaPt3(req, res, next){
 
     try {
-        prenEffettuata = new moduloPrenotazione();
+        // calcolo le notti per determinare il prezzo totale
+        d_i = new Date(datePren.data_i);
+        d_f = new Date(datePren.data_f);
+        var notti = Math.floor((d_f - d_i)/86400000);
         prenEffettuata.utente = req.session.user.id_utente;
-        prenEffettuata.alloggio = "null"
-        prenEffettuata.data_inizio = "null"
-        prenEffettuata.data_fine = "null"
-        prenEffettuata.data_pren = "null"
-        prenEffettuata.prezzo_totale = "null"
+        prenEffettuata.alloggio = idAlloggio;
+        prenEffettuata.data_inizio = datePren.data_i;
+        prenEffettuata.data_fine = datePren.data_f;
+        prenEffettuata.data_pren = new Date();
+        prenEffettuata.prezzo_totale = (prezzoNotte * notti);
         prenEffettuata.stato_prenotazione = "richiesta";
-        prenEffettuata.tipo_pagamento = req.body.metodoPagamento;         
+        prenEffettuata.tipo_pagamento = req.body.metodoPagamento;   
+         
+        console.log(prenEffettuata);
+        const db = await makeDb(config); 
+        var results = {};
+
+        await withTransaction(db, async() => {
+            // inserimento prenotazione
+            let sql = "INSERT INTO Prenotazione VALUES (UUID(),?,?,?,?,?,?,?,?);" ;
+                      // INSERT INTO DatiOspiti VALUES (UUID(),?,?,?,?,?,?,?,?,?); ";
+            let values = [
+                //creazione query prenotazione
+                prenEffettuata.utente,
+                prenEffettuata.alloggio,
+                prenEffettuata.data_inizio,
+                prenEffettuata.data_fine,
+                prenEffettuata.data_pren,
+                prenEffettuata.prezzo_totale,
+                prenEffettuata.stato_prenotazione,
+                prenEffettuata.tipo_pagamento
+                
+                //creazione query datiOspiti
+            ];
+      
+            results = await db.query(sql, values)
+                    .catch(err => {
+                        throw err;
+                    });
+                console.log("Prenotazione Effettuata con successo");
+          });
 
         res.render('prenotazioneDir/prenotazionePg5');  
     } catch (err) {

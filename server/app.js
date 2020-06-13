@@ -36,6 +36,8 @@ app.locals.users = new Map();
 
 app.use(function(req, res, next) {
   res.locals.user = req.session.user;
+  res.locals.date = req.session.date;
+  res.locals.alloggio = req.session.alloggio;
   next();
 });
 
