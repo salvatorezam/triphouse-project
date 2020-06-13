@@ -1,19 +1,20 @@
 var createError = require('http-errors');
 var express = require('express');
 var router = express.Router();
-var datiOspiti = new Array(8);
-var pippo;
 
 
-var idUtente ="" //sessione se non sbaglio
+var datiOspiti = new Array(8); // memorizza i valori dei campi form relativi agli ospiti
+var pippo; // memorizza i dati relativi ai documenti dell'utente registrato
+var prenEffettuata; // memorizza la prenotazione
+
+var idUtente = "";
 
 /*carica il middleware */
+
 const { config } = require('../db/config');
 const {makeDb, withTransaction } = require('../db/dbmiddleware');
 
-/*carica il multer, è un middleware per la gestione
- dei multipart/form-data, ossia per la gestione dei
- file caricati*/
+// dichiaro multer per la foto del documento
 var multer = require('multer');
 
 
@@ -26,20 +27,51 @@ var storage = multer.diskStorage({
     filename: function(req, file, cb){
         console.log('caricato '+ file.originalname)
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random()*1E9)
-        cb(null, file.fieldname + '-' + uniqueSuffix + '-' + file.originalname)
-        console.log("il nome è: " + file.originalname)
+        cb(null, uniqueSuffix + '-' + file.originalname)
+        console.log("il nome è: " + file.originalname.slice(file.originalname.length-7,file.originalname.length))
     }
 })
 
 var upload = multer ( { storage : storage });
+
+
 //carico i moduli prenotazione ed Ospiti
 var moduloPrenotazione = require('../public/javascripts/prenotazione(E).js');
 var moduloOspite = require('../public/javascripts/DatiOspite.js');
 var moduloDocUtente = require('../public/javascripts/DocUtenteR.js');
 
+
+
+
 /* GET prenotazionePg1 */
-router.get('/prenotazionePg1', function(req, res, next) {
-    res.render('prenotazioneDir/prenotazionePg1');
+router.get('/prenotazionePg1', async function(req, res, next) {
+
+  const db = await makeDb(config);
+    try {
+        await withTransaction(db, async() => {
+            console.log(req.session.user);
+            if(req.session.user == undefined) {
+               
+                console.log("metto true");
+                req.app.locals.prenLogin = true;
+            }else {
+                var utente = req.app.locals.users.get(req.session.user.id_utente);
+            }
+            
+            if( utente!= undefined) {
+                idUtente = utente.id_utente;
+                res.render('prenotazioneDir/prenotazionePg1');
+            }else {
+                console.log('sessione Utente non trovata!');
+                res.render('Autenticazione')
+            }
+            
+        });
+    } catch (err) {
+        console.log(err);
+        next(createError(500));
+    } 
+    
 });
 
 /* GET prenotazionePg2 */
@@ -53,29 +85,7 @@ router.get('/prenotazionePg2', async function(req, res, next) {
     datiOspiti[5]= new moduloOspite();
     datiOspiti[6]= new moduloOspite();
     datiOspiti[7]= new moduloOspite(); 
-    //const db = await makeDb(config);
-
-    /*try{
-        await withTransection(db, async()=>{
-
-            let sql0 = "SELECT * FROM_SESSIONS WHERE session_id = ?;";
-            results = await db.query(sql0, [req.session.id])
-                .catch(err => {
-                    throw err;
-                });
-            if (results.affectedRows == 0) {
-                console.log('sessione utente non trovata!');
-                next(createError(404, 'Sessione utente non trovata'));
-            } else {
-                let datiUtente = JSON.parse(results[0].data);
-                idUtente = datiUtente.user.id_utente;
-            }
-                
-        });
-    } catch(err){
-        console.log(err);
-        next(createError(500));
-    } */
+    
     res.render('prenotazioneDir/prenotazionePg2');
 });
 
@@ -183,7 +193,7 @@ var cpUpload = upload.fields( [{name: 'fileDocU', maxCount: 2 },{name: 'fileDoc1
 router.post('/upload', cpUpload, async function (req, res, next) {
 
     try {
-      pippo.foto_doc = req.files['fileDocU'][0];
+      pippo.foto_doc = req.files['fileDocU'][0].filename;
       datiOspiti[0].foto_doc = req.files['fileDoc1'];
       datiOspiti[1].foto_doc = req.files['fileDoc2']; 
       datiOspiti[2].foto_doc = req.files['fileDoc3'];   
@@ -191,14 +201,17 @@ router.post('/upload', cpUpload, async function (req, res, next) {
       datiOspiti[4].foto_doc = req.files['fileDoc5']; 
       datiOspiti[5].foto_doc = req.files['fileDoc6']; 
       datiOspiti[6].foto_doc = req.files['fileDoc7']; 
-      datiOspiti[7].foto_doc = req.files['fileDoc8']; 
-
+      datiOspiti[7].foto_doc = req.files['fileDoc8'];
+      for (let index = 0; index < 8; index++) {
+          if(datiOspiti[index].foto_doc == undefined){
+              datiOspiti[index].foto_doc = null;
+          }else{
+            datiOspiti[index].foto_doc = datiOspiti[index].foto_doc[0].filename;
+          }
+      }
       
+      console.log('step 2 valori inseriti');
 
-      console.log('Inserimento valori step 2');
-      console.log(pippo.foto_doc);
-      
-      console.log(datiOspiti[0].foto_doc[5]);
       res.render('prenotazioneDir/prenotazionePg4');
 
     } catch (error) {
@@ -208,27 +221,35 @@ router.post('/upload', cpUpload, async function (req, res, next) {
     
 });  
 
-/* GET prenotazionePg3 */
-/*router.get('/prenotazionePg3', function(req, res, next) {
-    res.render('prenotazioneDir/prenotazionePg3');
-}); */
 
-/* GET prenotazionePg4 
-router.get('/prenotazionePg4', function(req, res, next) {
-    //this.prenotazione = new moduloPrenotazione();
-    res.render('prenotazioneDir/prenotazionePg4');
-}); */
 
-/* GET prenotazionePg5 */
-router.get('/prenotazionePg5', function(req, res, next) {
-    res.render('prenotazioneDir/prenotazionePg5');
-});
+
+//POST prenotazionePg4
+router.post('/prenotazionePg5', compilaPt3);
+
+async function compilaPt3(req, res, next){
+
+    try {
+        prenEffettuata = new moduloPrenotazione();
+        prenEffettuata.utente = req.session.user.id_utente;
+        prenEffettuata.alloggio = "null"
+        prenEffettuata.data_inizio = "null"
+        prenEffettuata.data_fine = "null"
+        prenEffettuata.data_pren = "null"
+        prenEffettuata.prezzo_totale = "null"
+        prenEffettuata.stato_prenotazione = "richiesta";
+        prenEffettuata.tipo_pagamento = req.body.metodoPagamento;         
+
+        res.render('prenotazioneDir/prenotazionePg5');  
+    } catch (err) {
+        console.log(err);
+        next(createError(500));
+    }
+}
 
 /* GET recapPrenotazione */
 router.get('/recapPrenotazione', function(req, res, next) {
     res.render('prenotazioneDir/recapPrenotazione');
 });
-
-
 
 module.exports = router;
