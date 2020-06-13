@@ -7,6 +7,7 @@ var router = express.Router();
 var idUtente = "";
 let alloggiInseriti = [];
 let recensioni = [];
+let alloggioVisualizzato;
 
 
 /*carichiamo il middleware*/
@@ -88,6 +89,7 @@ router.get('/visualizzaAlloggioInserito', function(req, res, next) {
         }
     })
 
+    alloggioVisualizzato = alloggio;
 
     res.render('visualizzaAlloggioInserito', {data : {data_a :alloggio, data_r: recensioni_a }});
   });
@@ -97,8 +99,27 @@ router.get('/visualizzaAlloggioInserito', function(req, res, next) {
 
 router.get('/modificaInformazioniAlloggio', function(req, res, next){
 
-    res.render('modificaInformazioniAlloggio');
+    res.render('modificaInformazioniAlloggio', {data: alloggioVisualizzato });
 
 });
+
+/* POST EFFETTUA MODIFICHE*/
+
+router.post('/effettuaModifiche', effettuaModifiche);
+
+async function effettuaModifiche(req, res, next){
+
+    try{
+
+
+        
+
+
+    } catch (err) {
+        console.log(err);
+        next(createError(500));
+    }
+
+};
 
 module.exports = router;
