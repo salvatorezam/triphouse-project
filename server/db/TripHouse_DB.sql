@@ -81,8 +81,8 @@
 		descrizione_alloggio TEXT,
 		descrizione_regole TEXT,
 		note TEXT,
-		tasse DECIMAL,
-		prezzo DECIMAL,
+		tasse DECIMAL(13, 4),
+		prezzo DECIMAL(13, 4),
 		-- FOTO
 		foto_0 VARCHAR(60),
 		foto_1 VARCHAR(60),
@@ -108,7 +108,8 @@
 		data_pren DATE,
 		prezzo_totale DECIMAL,
 		stato_prenotazione VARCHAR(20),
-		tipo_pagamento VARCHAR(20)
+		tipo_pagamento VARCHAR(20),
+		tasse_pagate DECIMAL(13, 4)
 	);
 
 	CREATE TABLE IF NOT EXISTS DatiOspiti (
@@ -137,7 +138,7 @@
 	-- POPOLAMENTO
 	-- ###########
 
-	INSERT INTO UtenteRegistrato VALUES (UUID(),'Marco','Rossi','M','Italia','Roma','1992-6-25','marco.rossi@gmail.com'	
+	INSERT INTO UtenteRegistrato VALUES (UUID(),'Marco','Rossi','M','Italia','Roma','1992-6-25','marco.rossi@gmail.com','+393324567898',false);
 	INSERT INTO UtenteRegistrato VALUES (UUID(),'Giuseppe','Rosati','M','Italia','Roma','1991-8-25','g.rosati@gmail.com','+393324567898',true);
 	INSERT INTO UtenteRegistrato VALUES (UUID(),'Nicola','Carovana','M','Italia','Roma','1996-2-20','nic.caro@gmail.com','+393324567898',false);
 	INSERT INTO UtenteRegistrato VALUES (UUID(),'Piero','Alex','M','Italia','Roma','1990-11-11','piero.alex@gmail.com','+393324567898',false);
@@ -156,8 +157,8 @@
 
 	INSERT INTO DateDisponibili VALUES (UUID(),'2020-7-1','2020-12-31','8b3d4384-a99f-11ea-b30a-a066100a22be');
 
-	INSERT INTO Prenotazione VALUES (UUID(),'b532de10-a99e-11ea-b30a-a066100a22be','8b3d4384-a99f-11ea-b30a-a066100a22be','2020-2-20','2020-2-25','2020-1-2',100,'conclusa');
-	INSERT INTO Prenotazione VALUES (UUID(),'b532de10-a99e-11ea-b30a-a066100a22be','8b4288f3-a99f-11ea-b30a-a066100a22be','2020-7-20','2020-7-25','2020-1-2',100,'pagata');
-	INSERT INTO Prenotazione VALUES (UUID(),'b532de10-a99e-11ea-b30a-a066100a22be','8b4822bb-a99f-11ea-b30a-a066100a22be','2020-1-3','2020-1-5','2020-1-2',100,'conclusa');
+	INSERT INTO Prenotazione VALUES (UUID(),'b532de10-a99e-11ea-b30a-a066100a22be','8b3d4384-a99f-11ea-b30a-a066100a22be','2020-2-20','2020-2-25','2020-1-2',100,'conclusa','in loco',0.0);
+	INSERT INTO Prenotazione VALUES (UUID(),'b532de10-a99e-11ea-b30a-a066100a22be','8b4288f3-a99f-11ea-b30a-a066100a22be','2020-7-20','2020-7-25','2020-1-2',100,'pagata','in loco',0.0);
+	INSERT INTO Prenotazione VALUES (UUID(),'b532de10-a99e-11ea-b30a-a066100a22be','8b4822bb-a99f-11ea-b30a-a066100a22be','2020-1-3','2020-1-5','2020-1-2',100,'conclusa','in loco',0.0);
 
-	INSERT INTO DatiOspiti VALUES (UUID(),'Carmela','Mera','ID','AY009988','It',32,'495ea9e7-a9a0-11ea-b30a-a066100a22be');
+	INSERT INTO DatiOspiti VALUES (UUID(),'Carmela','Mera','ID','AY009988','It','2022-01-01',32,'495ea9e7-a9a0-11ea-b30a-a066100a22be');
