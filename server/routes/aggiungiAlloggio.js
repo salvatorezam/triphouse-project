@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
   }
 });
 
-var upload = multer({ storage: storage }).array('fileToUpload',6);  
+var upload = multer({ storage: storage }).array('fileToUpload',6);
 
 //Carico il modulo alloggio per poter salvare i dati mano a mamo che si compila il form
 //in modo che i dati verranno inviati al db solo alla fine della compilazione del form
