@@ -24,6 +24,7 @@ async function listaRicerca(req, res, next) {
 
     let data_inizio;
     let data_fine;
+    let n_Ospiti;
 
   const db = await makeDb(config);
   //let results = {};
@@ -32,12 +33,16 @@ async function listaRicerca(req, res, next) {
       await withTransaction(db, async() => {
 
         let x = req.body.bookingDate.split(' to '); // divido le date in data inzio e data fine
+        n_Ospiti = req.body.num_ospiti;
         data_inizio = x[0];
         data_fine = x[1];
         req.session.date={
             data_i : data_inizio,
-            data_f : data_fine
+            data_f : data_fine,
+            data_n_o : n_Ospiti
         };
+
+        
 
         let sql1 = "SELECT a.ID_ALL AS ID_ALL, a.proprietario AS proprietario, a.tipo_all AS tipo_all, a.nome_proprietario AS nome_proprietario, a.indirizzo AS indirizzo, a.n_civico AS n_civico, a.cap AS cap, a.regione AS regione, a.citta AS citta, a.provincia AS provincia, \
 		a.num_ospiti_max AS num_ospiti_max, a.distanza_centro AS distanza_centro, a.num_letti_singoli AS num_letti_singoli, a.num_letti_matrimoniali AS num_letti_matrimoniali, a.num_camere AS num_camere, a.num_bagni AS num_bagni, a.cucina AS cucina, a.lavanderia AS lavanderia, \

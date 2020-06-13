@@ -62,10 +62,11 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                         ur.email AS email_ut, ur.nazione_nascita AS naz_prenotante, DATEDIFF(CURDATE(),ur.data_nascita)/365 AS eta_prenotante, \
                         ur.ID_UR AS ID_UR, \
                         p.prezzo_totale AS prezzo_totale, p.data_pren AS data_prenotazione, \
+                        dur.tipo_doc AS tipo_doc_ur, dur.num_doc AS num_doc_ur, dur.scadenza_doc AS scadenza_doc_ur, \
                         a.foto_0 AS foto_0, a.foto_1 AS foto_1, a.foto_2 AS foto_2, \
                         a.foto_3 AS foto_3, a.foto_4 AS foto_4, a.foto_5 AS foto_5 \
-                        FROM Prenotazione p, Alloggio a, UtenteRegistrato ur \
-                        WHERE p.alloggio = a.ID_ALL AND p.utente = ur.ID_UR AND a.proprietario = ? \
+                        FROM DocumentiUtenteR dur, Prenotazione p, Alloggio a, UtenteRegistrato ur \
+                        WHERE dur.prenotazione = p.ID_PREN AND p.alloggio = a.ID_ALL AND p.utente = ur.ID_UR AND a.proprietario = ? \
                         GROUP BY p.ID_PREN \
                         ORDER BY data_inizio DESC; \
                         SELECT p.ID_PREN AS ID_PREN, dos.nome AS nome_osp, dos.nazionalita AS naz_osp, dos.eta AS eta_osp \
@@ -360,9 +361,31 @@ async function inviaTasse(req, res, next) {
   }
 }
   
-/* GET finestraComDatiOspiti */
-router.get('/finestraComDatiOspiti', function(req, res, next) {
-  res.render('finestraComDatiOspiti');
-});
+
+router.get('/finestraCalcolaGuadagni', calcolaGuadagni);
+
+async function calcolaGuadagni(req, res, next) {
+
+  const db = await makeDb(config);
+
+  try {
+    await withTransaction(db, async() => {
+
+      let utente = req.app.locals.users.get(req.session.user.id_utente);
+
+      results = await db.query('SELECT a.titolo AS titolo, pr.data_inizio AS data_inizio, pr.data_fine AS data_fine, (DATEDIFF(pr.data_fine,pr.data_inizio))*a.prezzo AS prezzo_totale\
+                                FROM UtenteRegistrato ur, Alloggio a, Prenotazione pr \
+                                WHERE ur.ID_UR = a.proprietario AND a.ID_ALL = pr.alloggio AND pr.stato_prenotazione = \'conclusa\';', utente)
+              .catch(err => {
+                throw err;
+              });
+
+      res.render('finestraCalcolaGuadagni', { data : results });
+    });
+  } catch (err) {
+      console.log(err);
+      next(createError(500));
+  }
+}
 
 module.exports = router;
