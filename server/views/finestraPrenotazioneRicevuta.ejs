@@ -45,23 +45,23 @@
             <li class="breadcrumb-item active">Prenotazione ricevuta   </li>
           </ol>
           <div class="text-block">
-            <p class="subtitle"><%= data.data_pren.data_inizio.toString().slice(0,15) %> - <%= data.data_pren.data_fine.toString().slice(0,15) %></p>
+            <p class="subtitle"><%= data.data_pren.data_inizio %> - <%= data.data_pren.data_fine %></p>
             <h1 class="hero-heading mb-3"><%= data.data_pren.titolo %></h1>
           </div>
           <div class="text-block">
-            <h6 class="mb-4"><%= data.data_pren.data_fine.toString().slice(9,11) - data.data_pren.data_inizio.toString().slice(9,11) %> notti</h6>
+            <h6 class="mb-4"><%= data.data_pren.data_fine.toString().split(' ')[0] - data.data_pren.data_inizio.toString().split(' ')[0] %> notti</h6>
             <div class="row mb-3">
               <div class="col-md-6 d-flex align-items-center mb-3 mb-md-0">
                 <div class="date-tile mr-3">
-                  <div class="text-uppercase"> <span class="text-sm"><%= data.data_pren.data_inizio.toString().slice(4,7) %></span><br><strong class="text-lg"><%= data.data_pren.data_inizio.toString().slice(8,10) %></strong></div>
+                  <div class="text-uppercase"> <span class="text-sm"><%= data.data_pren.data_inizio.toString().split(' ')[1] %></span><br><strong class="text-lg"><%= data.data_pren.data_inizio.toString().slice(0,2) %></strong></div>
                 </div>
-                <p class="text-sm mb-0"><%= data.data_pren.data_inizio.toString().slice(0,3) %><br/>check-in</p>
+                <p class="text-sm mb-0">check-in</p>
               </div>
               <div class="col-md-6 d-flex align-items-center">
                 <div class="date-tile mr-3">
-                  <div class="text-uppercase"> <span class="text-sm"><%= data.data_pren.data_fine.toString().slice(4,7) %></span><br><strong class="text-lg"><%= data.data_pren.data_fine.toString().slice(8,10) %></strong></div>
+                  <div class="text-uppercase"> <span class="text-sm"><%= data.data_pren.data_fine.toString().split(' ')[1] %></span><br><strong class="text-lg"><%= data.data_pren.data_fine.toString().slice(0,2) %></strong></div>
                 </div>
-                <p class="text-sm mb-0"><%= data.data_pren.data_fine.toString().slice(0,3) %><br/>check-out</p>
+                <p class="text-sm mb-0">check-out</p>
               </div>
             </div>
           </div>

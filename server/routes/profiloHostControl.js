@@ -4,6 +4,27 @@ var createError = require('http-errors');
 const { transporter } = require('../mailsender/mailsender-config');
 const { inviaMailCliente, inviaMailConferma, inviaMailDeclinazione } = require('../mailsender/mailsender-middleware');
 
+const mesi = [
+  "meseZero",
+  "Gen",
+  "Feb",
+  "Mar",
+  "Apr",
+  "Mag",
+  "Giu",
+  "Lug",
+  "Ago",
+  "Set",
+  "Ott",
+  "Nov",
+  "Dic"
+];
+
+const dataGiornoMeseAnno = function(data) {
+  data = data.split('/');
+  return (data[0] + ' ' + mesi[parseInt(data[1])] + ' ' + data[2]);
+};
+
 //informazioni che mi serve mantenere in memoria
 var idUtente = "";
 var prenRicevute = {};
@@ -60,6 +81,10 @@ async function getListaPrenotazioniRicevute(req, res, next) {
             //unifico i risultati delle query
             for (elPren of prenRicevute[0]) {
 
+                elPren.data_inizio = dataGiornoMeseAnno(elPren.data_inizio.toLocaleDateString());
+                elPren.data_fine = dataGiornoMeseAnno(elPren.data_fine.toLocaleDateString());
+                elPren.data_prenotazione = dataGiornoMeseAnno(elPren.data_prenotazione.toLocaleDateString());
+  
                 //ospiti
                 elPren.nomi_ospiti = "";
                 elPren.num_ospiti = 0;

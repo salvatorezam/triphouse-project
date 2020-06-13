@@ -4,6 +4,27 @@ var createError = require('http-errors');
 const { transporter } = require('../mailsender/mailsender-config');
 const { inviaMailHost, inviaMailPagamento } = require('../mailsender/mailsender-middleware');
 
+const mesi = [
+  "meseZero",
+  "Gen",
+  "Feb",
+  "Mar",
+  "Apr",
+  "Mag",
+  "Giu",
+  "Lug",
+  "Ago",
+  "Set",
+  "Ott",
+  "Nov",
+  "Dic"
+];
+
+const dataGiornoMeseAnno = function(data) {
+  data = data.split('/');
+  return (data[0] + ' ' + mesi[parseInt(data[1])] + ' ' + data[2]);
+};
+
 //informazioni che mi serve mantenere in memoria
 var idUtente = "";
 var prenEffettuate = {};
@@ -59,6 +80,9 @@ async function getListaPrenotazioniEffettuate(req, res, next) {
           
           //unifico i risultati delle query
           for (elPren of prenEffettuate[0]) {
+
+            elPren.data_inizio = dataGiornoMeseAnno(elPren.data_inizio.toLocaleDateString());
+            elPren.data_fine = dataGiornoMeseAnno(elPren.data_fine.toLocaleDateString());
 
             //ospiti
             elPren.nomi_ospiti = "";
@@ -300,7 +324,7 @@ router.get('/modificaDatiPersonali', async function(req, res, next) {
                   throw err;
               });
 
-      datiPersonali[0].data_nascita = datiPersonali[0].data_nascita.toString().slice(0,10);
+      datiPersonali[0].data_nascita = datiPersonali[0].data_nascita.toLocaleDateString();
       datiPersonali = datiPersonali[0];
       
       res.render('modificaDatiPersonali', {data: datiPersonali});
