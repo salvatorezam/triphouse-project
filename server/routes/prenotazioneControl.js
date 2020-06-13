@@ -20,14 +20,15 @@ var multer = require('multer');
 var storage = multer.diskStorage({
     /* usiamo destination per deterimare in quale cartella salvare i file*/
     destination: function(req, file, cb){
-        cb(null,'./public/images/uploads/documentiPrenotazione/')
+        cb(null,'./public/images/uploads/') //./public/images/uploads/documentiPrenotazione/
     },
     /*filename determina il nome del file all'interno della cartella */
     filename: function(req, file, cb){
+        file.originalname = file.originalname.slice(file.originalname.length-7,file.originalname.length);
         console.log('caricato '+ file.originalname)
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random()*1E9)
         cb(null, uniqueSuffix + '-' + file.originalname)
-        console.log("il nome è: " + file.originalname.slice(file.originalname.length-7,file.originalname.length))
+        console.log("il nome è: " + uniqueSuffix + '-' + file.originalname)
     }
 })
 

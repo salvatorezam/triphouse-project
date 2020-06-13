@@ -165,6 +165,7 @@ async function visualizzaAlloggioRicerca(req, res, next){
             
             if(element.ID_ALL == req.query.idAlloggio){
 
+                req.session.alloggio = element;
                 return alloggio = element;
             }
         });
