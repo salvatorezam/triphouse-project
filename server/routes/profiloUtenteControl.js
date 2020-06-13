@@ -335,7 +335,7 @@ async function modificaDatiPersonali(req, res, next) {
     console.log(err);
     next(createError(500));
   }
-});
+};
 
 /* aggiornaDatiPersonali */
 router.post('/aggiornaDatiPersonali', aggiornaDatiPersonali);
