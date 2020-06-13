@@ -203,7 +203,7 @@ router.post('/effettuaModifiche', upload, async function (req, res, next){
         var results = {};
 
         await withTransaction(db, async() => {
-        // inserimento utente
+        
         let sql = "UPDATE Alloggio SET tipo_all = ?, nome_proprietario  = ?, indirizzo  = ?, n_civico  = ?, cap  = ?, regione  = ?, citta  = ?, provincia  = ?, \
                     num_ospiti_max  = ?, distanza_centro  = ?, num_letti_singoli  = ?, num_letti_matrimoniali  = ?, num_camere  = ?, num_bagni  = ?, cucina  = ?,\
                     lavanderia  = ?, aria_condizionata  = ?, wifi  = ?, colazione  = ?, asciugacapelli  = ?, tv  = ?, carta_igienica  = ?, sapone_mani_corpo  = ?,\
@@ -272,5 +272,39 @@ router.post('/effettuaModifiche', upload, async function (req, res, next){
     }
 
 });
+
+/* GET RIMUOVI ALLOGGIO*/
+
+router.get('/rimuoviAlloggio', rimuoviAlloggio);
+
+async function rimuoviAlloggio(req, res, next){
+
+    try {
+
+        const db = await makeDb(config); 
+        var results = {};
+
+        await withTransaction(db, async() => {
+        
+        let sql = "DELETE FROM Alloggio WHERE ID_ALL = ? ";
+        let values = [
+            alloggioVisualizzato.ID_ALL
+        ];
+
+        results = await db.query(sql, values)
+                .catch(err => {
+                    throw err;
+                });
+
+        });
+
+        res.render('index');
+
+        
+    } catch (err) {
+        console.log(err);
+        next(createError(500));
+    }
+}
 
 module.exports = router;
