@@ -146,33 +146,39 @@ router.post('/effettuaModifiche', upload, async function (req, res, next){
 
         //AGGIORNAMENTO VARIABILI SERVIZI
 
-        (req.body.num_letti_singoli ? alloggioVisualizzato.num_letti_singoli = req.body.num_letti_singoli : null);
-        (req.body.num_letti_matrimoniali ? alloggioVisualizzato.num_letti_matrimoniali = req.body.num_letti_matrimoniali : null);
-        (req.body.num_camere ? alloggioVisualizzato.num_camere = req.body.num_camere : null);
-        (req.body.num_bagni ? alloggioVisualizzato.num_bagni = req.body.num_bagni : null);
+        if(req.body.num_letti_singoli && req.body.num_letti_matrimoniali && req.body.num_camere && req.body.num_bagni){
 
-        (req.body.cucina ? alloggioVisualizzato.cucina = req.body.cucina : alloggioVisualizzato.cucina = undefined);
-        (req.body.lavanderia ? alloggioVisualizzato.lavanderia = req.body.lavanderia : alloggioVisualizzato.lavanderia = undefined);
-        (req.body.aria_condizionata ? alloggioVisualizzato.aria_condizionata = req.body.aria_condizionata : alloggioVisualizzato.aria_condizionata = undefined);
-        (req.body.wifi ? alloggioVisualizzato.wifi = req.body.wifi : alloggioVisualizzato.wifi = undefined);
-        (req.body.colazione ? alloggioVisualizzato.colazione = req.body.colazione : alloggioVisualizzato.colazione = undefined);
-        (req.body.asciugacapelli ? alloggioVisualizzato.asciugacapelli = req.body.asciugacapelli : alloggioVisualizzato.asciugacapelli = undefined);
-        (req.body.tv ? alloggioVisualizzato.tv = req.body.tv : alloggioVisualizzato.tv = undefined);
-        (req.body.carta_igienica ? alloggioVisualizzato.carta_igienica = req.body.carta_igienica : alloggioVisualizzato.carta_igienica = undefined);
-        (req.body.sapone_mani_corpo ? alloggioVisualizzato.sapone_mani_corpo = req.body.sapone_mani_corpo : alloggioVisualizzato.sapone_mani_corpo = undefined);
-        (req.body.asciugamano ? alloggioVisualizzato.asciugamano = req.body.asciugamano : alloggioVisualizzato.asciugamano = undefined);
-        (req.body.accappatoio ? alloggioVisualizzato.accappatoio = req.body.accappatoio : alloggioVisualizzato.accappatoio = undefined);
-        (req.body.cuscino ? alloggioVisualizzato.cuscino = req.body.cuscino : alloggioVisualizzato.cuscino = undefined);
-        (req.body.lenzuola ? alloggioVisualizzato.lenzuola = req.body.lenzuola : alloggioVisualizzato.lenzuola = undefined);
-        
+            (req.body.num_letti_singoli ? alloggioVisualizzato.num_letti_singoli = req.body.num_letti_singoli : null);
+            (req.body.num_letti_matrimoniali ? alloggioVisualizzato.num_letti_matrimoniali = req.body.num_letti_matrimoniali : null);
+            (req.body.num_camere ? alloggioVisualizzato.num_camere = req.body.num_camere : null);
+            (req.body.num_bagni ? alloggioVisualizzato.num_bagni = req.body.num_bagni : null);
+
+            (req.body.cucina ? alloggioVisualizzato.cucina = true : alloggioVisualizzato.cucina = false);
+            (req.body.lavanderia ? alloggioVisualizzato.lavanderia = true : alloggioVisualizzato.lavanderia = false);
+            (req.body.aria_condizionata ? alloggioVisualizzato.aria_condizionata = true : alloggioVisualizzato.aria_condizionata = false);
+            (req.body.wifi ? alloggioVisualizzato.wifi = true : alloggioVisualizzato.wifi = false);
+            (req.body.colazione ? alloggioVisualizzato.colazione = true : alloggioVisualizzato.colazione = false);
+            (req.body.asciugacapelli ? alloggioVisualizzato.asciugacapelli = true : alloggioVisualizzato.asciugacapelli =  false);
+            (req.body.tv ? alloggioVisualizzato.tv = true : alloggioVisualizzato.tv = false);
+            (req.body.carta_igienica ? alloggioVisualizzato.carta_igienica = true : alloggioVisualizzato.carta_igienica = false);
+            (req.body.sapone_mani_corpo ? alloggioVisualizzato.sapone_mani_corpo = true : alloggioVisualizzato.sapone_mani_corpo = false);
+            (req.body.asciugamano ? alloggioVisualizzato.asciugamano = true : alloggioVisualizzato.asciugamano = false);
+            (req.body.accappatoio ? alloggioVisualizzato.accappatoio = true : alloggioVisualizzato.accappatoio = false);
+            (req.body.cuscino ? alloggioVisualizzato.cuscino = true : alloggioVisualizzato.cuscino = false);
+            (req.body.lenzuola ? alloggioVisualizzato.lenzuola = true : alloggioVisualizzato.lenzuola = false);
+        }
         //AGGIORNAMENTO VARIABILI TESTO
 
         (req.body.titolo_annuncio ? alloggioVisualizzato.titolo = req.body.titolo_annuncio : null);
         (req.body.descrizione_alloggio ? alloggioVisualizzato.descrizione_alloggio = req.body.descrizione_alloggio : null);
         (req.body.descrizione_regole ? alloggioVisualizzato.descrizione_regole = req.body.descrizione_regole : null);
-        (req.body.descrizione_note ? alloggioVisualizzato.note = req.body.descrizione_note : alloggioVisualizzato.note = undefined);
         (req.body.prezzo ? alloggioVisualizzato.prezzo = req.body.prezzo : null);
         (req.body.tassa ? alloggioVisualizzato.tasse = req.body.tassa : null);
+
+        if(req.body.titolo_annuncio){
+
+            (req.body.descrizione_note ? alloggioVisualizzato.note = req.body.descrizione_note : alloggioVisualizzato.note = undefined);
+        }
 
         //AGGIORNAMENTO FOTO
 
@@ -192,6 +198,69 @@ router.post('/effettuaModifiche', upload, async function (req, res, next){
             (arrayFoto[5] ? alloggioVisualizzato.foto_5 = arrayFoto[5]  : alloggioVisualizzato.foto_5 = undefined);
         }
 
+
+        const db = await makeDb(config); 
+        var results = {};
+
+        await withTransaction(db, async() => {
+        // inserimento utente
+        let sql = "UPDATE Alloggio SET tipo_all = ?, nome_proprietario  = ?, indirizzo  = ?, n_civico  = ?, cap  = ?, regione  = ?, citta  = ?, provincia  = ?, \
+                    num_ospiti_max  = ?, distanza_centro  = ?, num_letti_singoli  = ?, num_letti_matrimoniali  = ?, num_camere  = ?, num_bagni  = ?, cucina  = ?,\
+                    lavanderia  = ?, aria_condizionata  = ?, wifi  = ?, colazione  = ?, asciugacapelli  = ?, tv  = ?, carta_igienica  = ?, sapone_mani_corpo  = ?,\
+                    asciugamano = ?, accappatoio = ?, cuscino = ?, lenzuola = ?, titolo = ?, descrizione_alloggio= ?, descrizione_regole = ?, note= ?, tasse = ?, \
+                    prezzo = ?, foto_0 = ?, foto_1 = ?, foto_2 = ?, foto_3 = ?, foto_4 = ?, foto_5 = ?\
+                    WHERE ID_ALL = ?";
+        let values = [
+            
+            alloggioVisualizzato.tipo_all,
+            alloggioVisualizzato.nome_proprietario,
+            alloggioVisualizzato.indirizzo,
+            alloggioVisualizzato.n_civico,
+            alloggioVisualizzato.cap,
+            alloggioVisualizzato.regione,
+            alloggioVisualizzato.citta,
+            alloggioVisualizzato.provincia,
+            alloggioVisualizzato.num_ospiti_max,
+            alloggioVisualizzato.distanza_centro,
+            alloggioVisualizzato.num_letti_singoli,
+            alloggioVisualizzato.num_letti_matrimoniali,
+            alloggioVisualizzato.num_camere,
+            alloggioVisualizzato.num_bagni,
+            alloggioVisualizzato.cucina,
+            alloggioVisualizzato.lavanderia,
+            alloggioVisualizzato.aria_condizionata,
+            alloggioVisualizzato.wifi,
+            alloggioVisualizzato.colazione,
+            alloggioVisualizzato.asciugacapelli,
+            alloggioVisualizzato.tv,
+            alloggioVisualizzato.carta_igienica,
+            alloggioVisualizzato.sapone_mani_corpo,
+            alloggioVisualizzato.asciugamano,
+            alloggioVisualizzato.accappatoio,
+            alloggioVisualizzato.cuscino,
+            alloggioVisualizzato.lenzuola,
+            alloggioVisualizzato.titolo,
+            alloggioVisualizzato.descrizione_alloggio,
+            alloggioVisualizzato.descrizione_regole,
+            alloggioVisualizzato.note,
+            alloggioVisualizzato.tasse,
+            alloggioVisualizzato.prezzo,
+            alloggioVisualizzato.foto_0,
+            alloggioVisualizzato.foto_1,
+            alloggioVisualizzato.foto_2,
+            alloggioVisualizzato.foto_3,
+            alloggioVisualizzato.foto_4,
+            alloggioVisualizzato.foto_5,
+            alloggioVisualizzato.ID_ALL
+            
+        ];
+
+        results = await db.query(sql, values)
+                .catch(err => {
+                    throw err;
+                });
+
+        });
 
         res.render('modificaInformazioniAlloggio', {data : alloggioVisualizzato});
 
