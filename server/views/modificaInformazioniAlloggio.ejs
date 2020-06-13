@@ -132,7 +132,7 @@
             <div class="text-block"> 
               <div class="row mb-3">
                 <div class="col-sm-9">
-                  <h5>SERVIZI</h5>
+                  <h5>Servizi</h5>
                 </div>
                 <div class="col-sm-3 text-right">
                   <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#servizi" aria-expanded="false" aria-controls="servizi">Modifica</button>
@@ -272,22 +272,123 @@
                 </form>
               </div>
             </div>
+            <!--TESTO-->
+            <div class="text-block"> 
+              <div class="row mb-3">
+                <div class="col-sm-9">
+                  <h5>Testo</h5>
+                </div>
+                <div class="col-sm-3 text-right">
+                  <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#testo" aria-expanded="false" aria-controls="testo">Modifica</button>
+                </div>
+              </div>
+              <div class="collapse" id="testo">
+                <form method="POST" action="/visualizzaAlloggio/effettuaModifiche">
+                  <div class="row pt-4">
+                    <div class="form-group col-md-12">
+                      <div class="form-group">
+                        <label class="form-label" for="titolo_annuncio">titolo annuncio</label>
+                        <input class="form-control" type="text" name="titolo_annuncio" id="titolo_annuncio" value="<%= data.titolo %>" required maxlength="40">
+                      </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                      <div class="form-group"> 
+                        <div class="form-group mb-5">
+                          <label class="form-label" for="descrizione">Descrizione Alloggio</label>
+                          <textarea class="form-control" name="descrizione" id="descrizione" rows="5" aria-describedby="descriptionHelp"><%= data.descrizione_alloggio %></textarea>
+                        </div>
+                        <div class="form-group mb-5">
+                          <label class="form-label" for="descrizione_regole">Descrizione Regole Alloggio</label>
+                          <textarea class="form-control" name="descrizione_regole" id="descrizione_regole" rows="3" aria-describedby="availabilityHelp" ><%= data.descrizione_regole %></textarea>
+                        </div>
+                        <div class="form-group mb-5">
+                          <label class="form-label" for="descrizione_note">note</label>
+                          <textarea class="form-control" name="descrizione_note" id="descrizione_note" rows="3" aria-describedby="availabilityHelp"><%= data.note %></textarea>
+                          <small class="form-text text-muted mt-2" id="commento_note">(Facoltativo)</small>
+                          <small class="form-text text-muted mt-2" id="commento_note_2">Aggiungi delle note per precisare alcuni aspetti dell'alloggio. (Es. Camera con bagno, salone con divano letto, etc..)</small>
+                        </div>   
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <div class="form-group">
+                        <label class="form-label" for="prezzo">Prezzo €</label>
+                        <input class="form-control col-lg-3" name="prezzo" id="prezzo" type="number" value="<%= data.prezzo %>">
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <div class="form-group">
+                        <label class="form-label" for="tassa">Tassa di soggiorno €</label>
+                        <input class="form-control col-lg-3" name="tassa" id="tassa" type="number" value="<%= data.tasse %>">
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-outline-primary mb-4" type="submit">Salva Modifiche</button>
+                </form>
+              </div>
+            </div>
+            <!--FOTO-->
+            <div class="text-block"> 
+              <div class="row mb-3">
+                <div class="col-sm-9">
+                  <h5>Foto</h5>
+                </div>
+                <div class="col-sm-3 text-right">
+                  <button class="btn btn-link pl-0 text-primary collapsed" type="button" data-toggle="collapse" data-target="#foto" aria-expanded="false" aria-controls="foto">Modifica</button>
+                </div>
+              </div>
+              <div class="collapse" id="foto">
+                <form method="POST" action="/visualizzaAlloggio/effettuaModifiche" enctype="multipart/form-data">
+                  <div class="row pt-4">
+                    <div class="form-group col-md-12">
+                      <div class="text-block">
+                        <div class="text-block dz-message text-muted">
+                          <input type="file" name="fileToUpload" multiple>
+                        </div>
+                      </div>
+                    </div>
+                    <!--GALLERIA-->
+                    <div class="form-group col-md-12">
+                      <div class="text-block">
+                        <h7 class="mb-4">Galleria</h7>
+                        <div class="row gallery mb-3 ml-n1 mr-n1">
+                          <% if(data.foto_0 != undefined) { %>
+                            <div class="col-lg-4 col-6 px-1 mb-2"><a href="/images/uploads/<%= data.foto_0 %>" data-fancybox="gallery" ><img class="img-fluid" src="/images/uploads/<%= data.foto_0 %>" alt="..."></a></div>
+                          <% } %>
+                          <% if(data.foto_1 != undefined) { %>
+                            <div class="col-lg-4 col-6 px-1 mb-2"><a href="/images/uploads/<%= data.foto_1 %>" data-fancybox="gallery" ><img class="img-fluid" src="/images/uploads/<%= data.foto_1 %>" alt="..."></a></div>
+                          <% } %>
+                          <% if(data.foto_2 != undefined) { %>
+                            <div class="col-lg-4 col-6 px-1 mb-2"><a href="/images/uploads/<%= data.foto_2 %>" data-fancybox="gallery" ><img class="img-fluid" src="/images/uploads/<%= data.foto_2 %>" alt="..."></a></div>
+                          <% } %>
+                          <% if(data.foto_3 != undefined) { %>
+                            <div class="col-lg-4 col-6 px-1 mb-2"><a href="/images/uploads/<%= data.foto_3 %>" data-fancybox="gallery" ><img class="img-fluid" src="/images/uploads/<%= data.foto_3 %>" alt="..."></a></div>
+                          <% } %>
+                          <% if(data.foto_4 != undefined) { %>
+                            <div class="col-lg-4 col-6 px-1 mb-2"><a href="/images/uploads/<%= data.foto_4 %>" data-fancybox="gallery" ><img class="img-fluid" src="/images/uploads/<%= data.foto_4 %>" alt="..."></a></div>
+                          <% } %>
+                          <% if(data.foto_5 != undefined) { %>
+                            <div class="col-lg-4 col-6 px-1 mb-2"><a href="/images/uploads/<%= data.foto_5 %>" data-fancybox="gallery" ><img class="img-fluid" src="/images/uploads/<%= data.foto_5 %>" alt="..."></a></div>
+                          <% } %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-outline-primary mb-4" type="submit">Salva Modifiche</button>
+                </form>
+              </div>
+            </div>
           </div>
           <div class="col-md-6 col-lg-4 ml-lg-auto">
             <div class="card border-0 shadow">
               <div class="card-header bg-primary-light py-4 border-0">
                 <div class="media align-items-center">
                   <div class="media-body">
-                    <h4 class="h6 subtitle text-sm text-primary">What info is shared with others?</h4>
+                    <h4 class="h6 subtitle text-sm text-primary">Modfica le informazioni del tuo alloggio</h4>
                   </div>
-                  <svg class="svg-icon svg-icon svg-icon-light w-3rem h-3rem ml-3 text-primary">
-                    <use xlink:href="#identity-1"> </use>
-                  </svg>
                 </div>
               </div>
               <div class="card-body p-4">
-                <p class="text-muted text-sm card-text">Directory only releases contact information for hosts and guests <strong>after a reservation is confirmed</strong>.</p>
-                <p class="text-muted text-sm card-text">Amet nisi eiusmod minim commodo sit voluptate aute ut quis ea veniam sunt proident ex. <strong>Exercitation culpa laboris</strong> consequat fugiat non ipsum veniam Lorem aliqua deserunt tempor elit veniam.</p>
+                <p class="text-muted text-sm card-text">Seleziona il campo che ti interessa e inzia con le modifiche.</p>
               </div>
             </div>
           </div>
