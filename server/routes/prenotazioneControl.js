@@ -275,10 +275,9 @@ async function compilaPt3(req, res, next){
 
         await withTransaction(db, async() => {
             // inserimento prenotazione
-            let sql = "INSERT INTO Prenotazione VALUES (UUID(),?,?,?,?,?,?,?,?,?);\
-                       SELECT LAST_INSERT_ID()";
+            let sql = "INSERT INTO Prenotazione VALUES (UUID(),?,?,?,?,?,?,?,?,?); \
+            INSERT INTO DocumentiUtenteR VALUES (UUID(),?,?,?,?,(SELECT ID_PREN FROM PRENOTAZIONE WHERE utente = ? AND alloggio = ?));";
             let values = [
-                //creazione query prenotazione
                 prenEffettuata.utente,
                 prenEffettuata.alloggio,
                 prenEffettuata.data_inizio,
@@ -288,11 +287,12 @@ async function compilaPt3(req, res, next){
                 prenEffettuata.stato_prenotazione,
                 prenEffettuata.tipo_pagamento,
                 prenEffettuata.tasse_pagate = null,
-
                 datiUtenteR.tipo_doc,
                 datiUtenteR.num_doc,
                 datiUtenteR.scadenza_doc,
-                datiUtenteR.foto_doc
+                datiUtenteR.foto_doc,
+                prenEffettuata.utente,
+                prenEffettuata.alloggio
             ];
       
             results = await db.query(sql, values)
@@ -302,7 +302,7 @@ async function compilaPt3(req, res, next){
             console.log("Prenotazione Effettuata con successo");
 
 
-            let sql1 = "INSERT INTO DocumentiUtenteR VALUES (UUID(),?,?,?,?,?;";
+            /*let sql1 = "INSERT INTO DocumentiUtenteR VALUES (UUID(),?,?,?,?,?;";
             let values1 = [
                 //creazione query prenotazione
                 datiUtenteR.tipo_doc,
@@ -315,7 +315,7 @@ async function compilaPt3(req, res, next){
             results1 = await db.query(sql1, values1)
                     .catch(err => {
                         throw err;
-                    });
+                    });*/
             console.log("Documenti inviati");
         });
 
