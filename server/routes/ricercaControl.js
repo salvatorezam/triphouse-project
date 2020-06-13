@@ -31,6 +31,10 @@ async function listaRicerca(req, res, next) {
         let x = req.body.bookingDate.split(' to '); // divido le date in data inzio e data fine
         data_inizio = x[0];
         data_fine = x[1];
+        req.session.date={
+            data_i : data_inizio,
+            data_f : data_fine
+        };
 
         let sql1 = "SELECT a.ID_ALL AS ID_ALL, a.proprietario AS proprietario, a.tipo_all AS tipo_all, a.nome_proprietario AS nome_proprietario, a.indirizzo AS indirizzo, a.n_civico AS n_civico, a.cap AS cap, a.regione AS regione, a.citta AS citta, a.provincia AS provincia, \
 		a.num_ospiti_max AS num_ospiti_max, a.distanza_centro AS distanza_centro, a.num_letti_singoli AS num_letti_singoli, a.num_letti_matrimoniali AS num_letti_matrimoniali, a.num_camere AS num_camere, a.num_bagni AS num_bagni, a.cucina AS cucina, a.lavanderia AS lavanderia, \
@@ -120,7 +124,7 @@ async function visualizzaAlloggioRicerca(req, res, next){
     try{
         arrayAlloggi.forEach(element => {
             
-            if(element.ID_ALL == req.query.id){
+            if(element.ID_ALL == req.query.idAlloggio){
 
                 return alloggio = element;
             }
@@ -128,7 +132,7 @@ async function visualizzaAlloggioRicerca(req, res, next){
 
         recensioni.forEach(element => {
 
-            if(element.alloggio == req.query.id){
+            if(element.alloggio == req.query.idAlloggio){
 
                 recensioni_a[contatore] = element;
                 contatore++;

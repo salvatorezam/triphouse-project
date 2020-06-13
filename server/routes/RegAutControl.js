@@ -143,7 +143,8 @@ async function autenticazione(req, res, next) { // sistemare il messaggio di err
                     console.log(req.app.locals.prenLogin);
                     if(req.app.locals.prenLogin != undefined){
                         req.app.locals.prenLogin = undefined;
-                        res.render('prenotazioneDir/prenotazionePg1');
+                        datePren = res.locals.date;
+                        res.render('prenotazioneDir/prenotazionePg1',{data: datePren});
                     }else {
 
                     //req.flash('msg', 'Autenticazione effettuata con successo!');

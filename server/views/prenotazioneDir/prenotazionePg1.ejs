@@ -33,15 +33,15 @@
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center mb-3 mb-md-0">
                   <div class="date-tile mr-3">
-                    <div class="text-uppercase"> <span class="text-sm">Apr</span><br><strong class="text-lg">17</strong></div>
+                    <div class="text-uppercase"> <span class="text-sm"><%= data.data_i.toString().slice(5,7) %></span><br><strong class="text-lg"><%= data.data_i.toString().slice(8,10) %></strong></div>
                   </div>
-                  <p class="text-sm mb-0">Wednesday check-in<br>3PM - 7PM</p>
+                  <p class="text-sm mb-0">check-in</p>
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <div class="date-tile mr-3">
-                    <div class="text-uppercase"> <span class="text-sm">Apr</span><br><strong class="text-lg">18</strong></div>
+                    <div class="text-uppercase"> <span class="text-sm"><%= data.data_f.toString().slice(5,7) %></span><br><strong class="text-lg"><%= data.data_f.toString().slice(8,10) %></strong></div>
                   </div>
-                  <p class="text-sm mb-0">Thursday check-out<br>11AM</p>
+                  <p class="text-sm mb-0">check-out</p>
                 </div>
               </div>
             </div>
