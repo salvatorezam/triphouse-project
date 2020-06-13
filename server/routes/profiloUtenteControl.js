@@ -300,6 +300,7 @@ router.get('/modificaDatiPersonali', async function(req, res, next) {
                   throw err;
               });
 
+      datiPersonali[0].data_nascita = datiPersonali[0].data_nascita.toString().slice(0,10);
       datiPersonali = datiPersonali[0];
       
       res.render('modificaDatiPersonali', {data: datiPersonali});
