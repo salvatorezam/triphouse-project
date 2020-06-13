@@ -13,21 +13,21 @@
       <div class="row">
         <!--ATTENZIONE: se si deve inserire la mappa, si deve usare col-lg-auto-->
         <div class="col-lg-12 py-4 p-xl-5">
-          <form action="#" autocomplete="off">
+          <form method="POST" action="/ricercaControl/ricercaFiltri" autocomplete="off">
             <div class="row">
               <div class="col-md-6 col-lg-12 col-xl-8 mb-4">
                 <div>
                   <label class="form-label"><b>Tipo Alloggio</b></label>
                     <ul class="list-inline mb-0">
                       <li class="list-inline-item">
-                        <div class="custom-control custom-radio">
-                          <input class="custom-control-input" type="radio" id="bnb" name="tipoAlloggio">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="bnb" value="true" name="tipoAlloggio1">
                           <label class="custom-control-label" for="bnb"> B&B</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
-                        <div class="custom-control custom-radio">
-                          <input class="custom-control-input" type="radio" id="casaVacanza" name="tipoAlloggio">
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" type="checkbox" id="casaVacanza" value="true" name="tipoAlloggio2">
                           <label class="custom-control-label" for="casaVacanza">Casa Vacanza</label>
                         </div>
                       </li>
@@ -53,44 +53,44 @@
                     <ul class="list-inline mb-0">
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities_0" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_0">Cucina</label>
+                          <input class="custom-control-input" type="checkbox" id="cucina" value="true" name="cucina">
+                          <label class="custom-control-label" for="cucina">Cucina</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities_1" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_1">Lavanderia</label>
+                          <input class="custom-control-input" type="checkbox" id="lavanderia" name="lavanderia">
+                          <label class="custom-control-label" for="lavanderia">Lavanderia</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities_2" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_2">Aria Condizionata</label>
+                          <input class="custom-control-input" type="checkbox" id="aria_condizionata" name="aria_condizionata">
+                          <label class="custom-control-label" for="aria_condizionata">Aria Condizionata</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities_3" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_3">Wifi</label>
+                          <input class="custom-control-input" type="checkbox" id="wifi" name="wifi">
+                          <label class="custom-control-label" for="wifi">Wifi</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities_4" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_4">Colazione</label>
+                          <input class="custom-control-input" type="checkbox" id="colazione" name="colazione">
+                          <label class="custom-control-label" for="colazione">Colazione</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities_5" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_5">Asciugacapelli</label>
+                          <input class="custom-control-input" type="checkbox" id="asciugacapelli" name="asciugacapelli">
+                          <label class="custom-control-label" for="asciugacapelli">Asciugacapelli</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities_6" name="amenities[]">
-                          <label class="custom-control-label" for="amenities_6">Tv</label>
+                          <input class="custom-control-input" type="checkbox" id="tv" name="tv">
+                          <label class="custom-control-label" for="tv">Tv</label>
                         </div>
                       </li>   
                     </ul>
@@ -98,38 +98,38 @@
                     <ul class="list-inline mb-0">
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities2_0" name="amenities2[]">
-                          <label class="custom-control-label" for="amenities2_0">Carta igienica</label>
+                          <input class="custom-control-input" type="checkbox" id="carta_igienica" name="carta_igienica">
+                          <label class="custom-control-label" for="carta_igienica">Carta igienica</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities2_1" name="amenities2[]">
-                          <label class="custom-control-label" for="amenities2_1">Sapone mani e corpo</label>
+                          <input class="custom-control-input" type="checkbox" id="sapone_mani_corpo" name="sapone_mani_corpo">
+                          <label class="custom-control-label" for="sapone_mani_corpo">Sapone mani e corpo</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities2_2" name="amenities2[]">
-                          <label class="custom-control-label" for="amenities2_2">Asciugamao</label>
+                          <input class="custom-control-input" type="checkbox" id="asciugamano" name="asciugamano">
+                          <label class="custom-control-label" for="asciugamano">Asciugamano</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities2_3" name="amenities2[]">
-                          <label class="custom-control-label" for="amenities2_3">Accappatoio</label>
+                          <input class="custom-control-input" type="checkbox" id="accappatoio" name="accappatoio">
+                          <label class="custom-control-label" for="accappatoio">Accappatoio</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities2_4" name="amenities2[]">
-                          <label class="custom-control-label" for="amenities2_4">Cuscino</label>
+                          <input class="custom-control-input" type="checkbox" id="cuscino" name="cuscino">
+                          <label class="custom-control-label" for="cuscino">Cuscino</label>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" id="amenities2_5" name="amenities2[]">
-                          <label class="custom-control-label" for="amenities2_5">lenzuola</label>
+                          <input class="custom-control-input" type="checkbox" id="lenzuola" name="lenzuola">
+                          <label class="custom-control-label" for="lenzuola">lenzuola</label>
                         </div>
                       </li>   
                     </ul>
@@ -163,7 +163,7 @@
             <!--Filtri fine-->
             <div class="row">
               <div class="col-sm-6 mb-4 order-2 order-sm-1">
-                <button class="btn btn-primary" type="submit"> <i class="fas fa-search mr-1"></i>Cerca</button>
+                <button class="btn btn-primary" type="submit"><i class="fas fa-search mr-1"></i>Cerca</button>
               </div>
               <div class="col-sm-6 mb-4 text-sm-right order-1 order-sm-2">
                 <button class="btn btn-link btn-collapse pl-0 text-secondary" type="button" data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters" data-expanded-text="Less filters" data-collapsed-text="More filters">Mostra Filtri</button>
@@ -184,21 +184,20 @@
               </div>
             <% } else { %>
             <!-- place item-->
-            <% for(var x = 0; x < data.array.length; x++) { %>
+            <% for(var x = data.inizioCount; x < data.fineCount; x++) { %>
             <div class="col-xl-4 col-md-4 col-sm-6 mb-5">
               <div class="card h-100 border-0 shadow">
-                <div class="card-img-top overflow-hidden" ><a href="/visualizzaAlloggio/visualizzaAlloggioInserito?id=<%= data.array[ x].ID_ALL %>"><img class="img-fluid" src="/images/uploads/<%=data.array[ x].foto_0 %>" alt="<%= data.array[ x].titolo %>"/></a></div>
+                <div class="card-img-top overflow-hidden" ><a href="/ricercaControl/visualizzaAlloggioRicerca?id=<%= data.array[ x].ID_ALL %>"><img class="img-fluid" src="/images/uploads/<%=data.array[ x].foto_0 %>" alt="<%= data.array[ x].titolo %>"/></a></div>
                 <div class="card-body d-flex align-items-center">
                   <div class="w-100">
                     <p class="subtitle font-weight-normal text-sm mb-2"><%= data.array[ x].tipo_all %></p>
-                    <h6 class="card-title"><a class="text-decoration-none text-dark" href="/visualizzaAlloggio/visualizzaAlloggioInserito?id=<%= data.array[ x].ID_ALL %>"><%= data.array[ x].titolo %></a></h6>
+                    <h6 class="card-title"><a class="text-decoration-none text-dark" href="/ricercaControl/visualizzaAlloggioRicerca?id=<%= data.array[ x].ID_ALL %>"><%= data.array[ x].titolo %></a></h6>
                     <div class="d-flex card-subtitle mb-3">
                       <p class="flex-grow-1 mb-0 text-muted text-sm"><%= data.array[ x].citta %></p>
                     </div>
                   </div>
                 </div>
               </div>
-              <% if(x == (data.contatore-1) ) { break; } %>
             </div>
             <% };} %>
           </div>
@@ -206,22 +205,18 @@
         <div class="col-lg-12 py-4 p-xl-5">
           <!-- Paginazione -->
           <nav aria-label="Page navigation example">
-            <% if(data.array.length > data.contatore) { %>
+            <% if(data.array.length > 6) { %>
             <ul class="pagination pagination-template d-flex justify-content-center">
-              <% if(data.contatore > 6) { %>
+              <% if(data.inizioCount >= 6) { %>
               <li class="page-item"><a class="page-link" href="/ricercaControl/paginaPrecedente"> <i class="fa fa-angle-left"></i></a></li>
               <% }; %>
+              <% if((data.array.length - data.inizioCount) > 6) { %>
               <li class="page-item"><a class="page-link" href="/ricercaControl/paginaSuccessiva"> <i class="fa fa-angle-right"></i></a></li>
+              <% }; %>
             </ul>
             <% }; %>
           </nav>
         </div>
-
-
-        <!-- Per farlo con Google mettere id="map-container"
-        <div class="col-lg-6 map-side-lg pr-lg-0">
-          <div id="detailMap" class="z-depth-1-half map-full shadow-left"></div>-->
-
         </div>
       </div>
     </div>
@@ -229,5 +224,34 @@
     <!-- Script Footer -->
     <% include partials/scriptFooter.ejs %>
     <!-- Script Footer -->
+
+     <!-- Price Slider-->
+     <script src="https://d19m59y37dris4.cloudfront.net/directory/1-5/vendor/nouislider/nouislider.min.js"></script>
+     <script>
+       var snapSlider = document.getElementById('slider-snap');
+       
+       noUiSlider.create(snapSlider, {
+           start: [ 30, 150 ],
+           snap: false,
+           connect: true,
+           step: 1,
+           range: {
+               'min': 30,
+               'max': 150
+           }
+       });
+       var snapValues = [
+           document.getElementById('slider-snap-value-from'),
+           document.getElementById('slider-snap-value-to')
+       ];
+       var inputValues = [
+           document.getElementById('slider-snap-input-from'),
+           document.getElementById('slider-snap-input-to')
+       ];
+       snapSlider.noUiSlider.on('update', function( values, handle ) {
+           snapValues[handle].innerHTML = values[handle];
+           inputValues[handle].value = values[handle];
+       })
+     </script>
   </body>
 </html>

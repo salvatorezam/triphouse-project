@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <!-- head -->
+    <% include partials/head.ejs %>
+    <!-- head -->
+  </head>
+  <body style="padding-top: 72px;">
+    <!-- header -->
+    <% include partials/header.ejs %>
+    <!-- header -->
+    <section>
+      
+    </section>
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-lg-8"> 
+          <div class="text-block">
+            <div class="row">
+              <div class="col-lg-7">
+                <p class="text-primary"><i class="fa-map-marker-alt fa mr-1"></i> <%= data.data_a.citta %>,  <%= data.data_a.regione%></p>
+                <h1><%=  data.data_a.titolo %> </h1
+                <p class="text-muted text-uppercase mb-4"> <%= data.data_a.tipo_all %> </p>
+                <ul class="list-inline text-sm mb-4">
+                  <li class="list-inline-item mr-3"><i class="fa fa-users mr-1 text-secondary"> </i><%= data.data_a.num_ospiti_max %> Ospiti</li>
+                  <li class="list-inline-item mr-3"><i class="fa fa-door-open mr-1 text-secondary"> </i> <%= data.data_a.num_camere %> Stanze</li>
+                  <li class="list-inline-item mr-3"><i class="fa fa-bed mr-1 text-secondary"></i> <%= data.data_a.num_letti_singoli %> Letti Singoli</li>
+                  <li class="list-inline-item mr-3"><i class="fa fa-bed mr-1 text-secondary"> </i> <%= data.data_a.num_letti_matrimoniali %> Letti Matrimoniali </li>
+                  <li class="list-inline-item mr-3"><i class="fa fa-bath mr-1 text-secondary"></i><%= data.data_a.num_bagni %> Bagni</li>
+                </ul>
+              </div>
+              <div class="col-lg-5">
+                <div class="media"><img class="avatar avatar-lg mr-4" src="/images/ominoUtente.png" alt="Jack London">
+                  <div class="media-body">
+                    <p> <span class="text-muted text-uppercase text-sm">Hosted by </span><br><strong><%= data.data_a.nome_proprietario %></strong></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h6 class="mb-3">Descrizione</h6>
+            <p class="text-muted font-weight-light"><%= data.data_a.descrizione_alloggio %> </p>
+            <h6 class="mb-3">Regole</h6>
+            <p class="text-muted font-weight-light"><%= data.data_a.descrizione_regole %> </p>
+            <p class="text-muted font-weight-light">Also in the apartment:</p>
+            <% if(data.data_a.note != undefined) { %>
+              <h6 class="mb-3">Note</h6>
+              <p class="text-muted font-weight-light"><%= data.data_a.note %></p>
+              <% } %>
+          </div>
+          <div class="text-block">
+            <h4 class="mb-4">Servizi</h4>
+            <div class="row"> 
+              <div class="col-md-6">
+                <ul class="list-unstyled text-muted">
+                  <% if(data.data_a.colazione != false) { %>
+                    <li class="mb-2"> <i class="fa fa-coffee text-secondary w-1rem mr-3 text-center"></i><span class="text-sm">Colazione</span></li>
+                  <% } %>
+                  <% if(data.data_a.wifi != false) { %>
+                    <li class="mb-2"> <i class="fa fa-wifi text-secondary w-1rem mr-3 text-center"></i><span class="text-sm">Wifi</span></li>
+                  <% } %>
+                  <% if(data.data_a.tv != false) { %>
+                    <li class="mb-2"> <i class="fa fa-tv text-secondary w-1rem mr-3 text-center"></i><span class="text-sm">TV</span></li>
+                  <% } %>
+                  <% if(data.data_a.aria_condizionata != false) { %>
+                    <li class="mb-2"> <i class="fa fa-snowflake text-secondary w-1rem mr-3 text-center"></i><span class="text-sm">Aria Condizionata</span></li>
+                  <% } %>
+                  <% if(data.data_a.lavanderia != false) { %>
+                    <li class="mb-2"> <i class="fa fa-shopping-basket text-secondary w-1rem mr-3 text-center"></i><span class="text-sm">Lavanderia</span></li>
+                  <% } %>
+                  <% if(data.data_a.cucina != false) { %>
+                    <li class="mb-2"> <i class="fa fa-utensils text-secondary w-1rem mr-3 text-center"></i><span class="text-sm">Cucina</span></li>
+                  <% } %>
+                  <% if(data.data_a.asciugacapelli != false) { %>
+                    <li class="mb-2"> <i class="fa fa-bath text-secondary w-1rem mr-3 text-center"></i><span class="text-sm">asciugacapelli</span></li>
+                  <% } %>
+                  
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <ul class="list-unstyled text-muted">
+                  <% if(data.data_a.carta_igienica != false) { %>
+                    <li class="mb-2"> <i class="fa fa-bath text-secondary w-1rem mr-3 text-center"></i><span class="text-sm">Carta Igienica</span></li>
+                  <% } %>
+                  <% if(data.data_a.sapone_mani_corpo != false) { %>
+                    <li class="mb-2"> <i class="fa fa-bath text-secondary w-1rem mr-3 text-center"></i><span class="text-sm">Sapone Mani Corpo</span></li>
+                  <% } %>
+                  <% if(data.data_a.asciugamano != false) { %>
+                    <li class="mb-2"> <i class="fa fa-bath text-secondary w-1rem mr-3 text-center"></i><span class="text-sm">Asciugamano</span></li>
+                  <% } %>
+                  <% if(data.data_a.accappatoio != false) { %>
+                    <li class="mb-2"> <i class="fa fa-bath text-secondary w-1rem mr-3 text-center"></i><span class="text-sm">Accappatoio</span></li>
+                  <% } %>
+                  <% if(data.data_a.cuscino != false) { %>
+                    <li class="mb-2"> <i class="fa fa-bed text-secondary w-1rem mr-3 text-center"></i><span class="text-sm">Cuscino</span></li>
+                  <% } %>
+                  <% if(data.data_a.lenzuola != false) { %>
+                    <li class="mb-2"> <i class="fa fa-bed text-secondary w-1rem mr-3 text-center"></i><span class="text-sm">Lenzuola</span></li>
+                  <% } %>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!--MAPPA: decomenta per inserire mappa-->
+          <!--
+          <div class="text-block">
+            <h5 class="mb-4">Listing location</h5>
+            <div class="map-wrapper-300 mb-3">
+
+              <div class="h-100" id="detailMap"></div>
+
+            </div>
+          </div>-->
+          <!--GALLERIA-->
+          <div class="text-block">
+            <h5 class="mb-4">Galleria</h5>
+            <div class="row gallery mb-3 ml-n1 mr-n1">
+              <% if(data.data_a.foto_0 != undefined) { %>
+                <div class="col-lg-4 col-6 px-1 mb-2"><a href="/images/uploads/<%= data.data_a.foto_0 %>" data-fancybox="gallery" ><img class="img-fluid" src="/images/uploads/<%= data.data_a.foto_0 %>" alt="..."></a></div>
+              <% } %>
+              <% if(data.data_a.foto_1 != undefined) { %>
+                <div class="col-lg-4 col-6 px-1 mb-2"><a href="/images/uploads/<%= data.data_a.foto_1 %>" data-fancybox="gallery" ><img class="img-fluid" src="/images/uploads/<%= data.data_a.foto_1 %>" alt="..."></a></div>
+              <% } %>
+              <% if(data.data_a.foto_2 != undefined) { %>
+                <div class="col-lg-4 col-6 px-1 mb-2"><a href="/images/uploads/<%= data.data_a.foto_2 %>" data-fancybox="gallery" ><img class="img-fluid" src="/images/uploads/<%= data.data_a.foto_2 %>" alt="..."></a></div>
+              <% } %>
+              <% if(data.data_a.foto_3 != undefined) { %>
+                <div class="col-lg-4 col-6 px-1 mb-2"><a href="/images/uploads/<%= data.data_a.foto_3 %>" data-fancybox="gallery" ><img class="img-fluid" src="/images/uploads/<%= data.data_a.foto_3 %>" alt="..."></a></div>
+              <% } %>
+              <% if(data.data_a.foto_4 != undefined) { %>
+                <div class="col-lg-4 col-6 px-1 mb-2"><a href="/images/uploads/<%= data.data_a.foto_4 %>" data-fancybox="gallery" ><img class="img-fluid" src="/images/uploads/<%= data.data_a.foto_4 %>" alt="..."></a></div>
+              <% } %>
+              <% if(data.data_a.foto_5 != undefined) { %>
+                <div class="col-lg-4 col-6 px-1 mb-2"><a href="/images/uploads/<%= data.data_a.foto_5 %>" data-fancybox="gallery" ><img class="img-fluid" src="/images/uploads/<%= data.data_a.foto_5 %>" alt="..."></a></div>
+              <% } %>
+            </div>
+          </div>
+          <div class="text-block">
+            <p class="subtitle text-sm text-primary">Recensioni</p>
+            <h5 class="mb-4">Lista delle Recensioni </h5>
+            <% if(data.data_r.length == 0) { %>
+              <div class="col-xl-3 col-md-4 col-sm-6 mb-5">
+                <h3 class="col-12 hero-heading mb-2">Nessuna Recensione</h3>
+              </div>
+            <% } else { %>
+            <% data.data_r.forEach(element => { %>
+              <div class="media d-block d-sm-flex review">
+                <div class="text-md-center mr-4 mr-xl-5">
+                  <!--<img class="d-block avatar avatar-xl p-2 mb-2" src="" alt="">-->
+                  <h6 class="mt-2 mb-1"><%= element.nome_scrittore %></h6>
+                  <span class="text-uppercase text-muted text-sm"><%= element.data_rec.toString().slice(0,15) %></span>
+                </div>
+                <div class="media-body">
+                 
+                  <div class="mb-2">
+                    <% for(var x = 0; x < element.valutazione; x++){ %>
+                      <i class="fa fa-xs fa-star text-primary"></i>
+                    <% }; %>
+                  </div>
+                  <p class="text-muted text-sm"><%= element.testo %></p>
+                </div>
+              </div>
+            <% });} %>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="py-3">
+            <button class="btn btn-primary btn-block" type="submit" >Prenota il tuo soggiorno</button> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer-->
+    <% include partials/footer.ejs %>
+    <!-- Footer-->
+    <!-- Script Footer -->
+    <% include partials/scriptFooter.ejs %>
+    <!-- Script Footer -->
+  </body>
+</html>
