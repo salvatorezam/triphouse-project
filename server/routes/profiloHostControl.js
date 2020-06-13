@@ -59,8 +59,8 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                         a.titolo AS titolo, a.tipo_all AS tipo_all, a.indirizzo AS indirizzo, a.n_civico AS n_civico, \
                         a.citta AS citta, a.tasse AS tasse_alloggio, p.stato_prenotazione AS stato_prenotazione, \
                         ur.nome AS nome_ut, ur.cognome AS cognome_ut, ur.telefono AS telefono_ut, \
-                        p.prezzo_totale AS prezzo_totale, p.data_pren AS data_prenotazione \
-                        ur.email AS email_ut, ur.nazione_nascita AS naz_prenotante, DATEDIFF(CURDATE(),ur.data_nascita)/365 AS eta_prenotante, ur.ID_UR AS ID_UR, \
+                        ur.email AS email_ut, ur.nazione_nascita AS naz_prenotante, DATEDIFF(CURDATE(),ur.data_nascita)/365 AS eta_prenotante, \
+                        ur.ID_UR AS ID_UR, \
                         p.prezzo_totale AS prezzo_totale, p.data_pren AS data_prenotazione, \
                         a.foto_0 AS foto_0, a.foto_1 AS foto_1, a.foto_2 AS foto_2, \
                         a.foto_3 AS foto_3, a.foto_4 AS foto_4, a.foto_5 AS foto_5 \
