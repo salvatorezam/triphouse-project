@@ -25,6 +25,28 @@ const dataGiornoMeseAnno = function(data) {
   return (data[0] + ' ' + mesi[parseInt(data[1])] + ' ' + data[2]);
 };
 
+//DICHIARO MULTER PER FOTO
+
+var multer  = require('multer');
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb){             //destination viene utilizzato per determinare in quale cartella devono essere archiviati i file caricati.
+    cb(null, './public/images/uploads/documentiPrenotazione')
+  },
+  filename: function(req, file, cb){                //filenameviene utilizzato per determinare il nome del file all'interno della cartella
+    console.log('uploaded' + file.originalname)
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, uniqueSuffix + '-' + file.originalname.slice(file.originalname.length-7,file.originalname.length))
+    //fileName = file.originalname
+    console.log("il nome è: "+ file.originalname)
+  }
+});
+
+var upload1 = multer({ storage: storage }).array('fileToUpload',2);
+
+var upload2 = multer({ storage: storage }).array('fileToUpload',2);
+
+
 //informazioni che mi serve mantenere in memoria
 var idUtente = "";
 var prenRicevute = {};
@@ -67,13 +89,13 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                         p.prezzo_totale AS prezzo_totale, p.data_pren AS data_prenotazione, \
                         dur.tipo_doc AS tipo_doc_ur, dur.num_doc AS num_doc_ur, dur.scadenza_doc AS scadenza_doc_ur, \
                         dur.foto_fronte_doc AS foto_fronte_doc_dur, dur.foto_retro_doc AS foto_retro_doc_dur, \
-                        a.foto_0 AS foto_0, a.foto_1 AS foto_1, a.foto_2 AS foto_2, \
+                        dur.ID_DUR AS ID_DUR,a.foto_0 AS foto_0, a.foto_1 AS foto_1, a.foto_2 AS foto_2, \
                         a.foto_3 AS foto_3, a.foto_4 AS foto_4, a.foto_5 AS foto_5 \
                         FROM DocumentiUtenteR dur, Prenotazione p, Alloggio a, UtenteRegistrato ur \
                         WHERE dur.prenotazione = p.ID_PREN AND p.alloggio = a.ID_ALL AND p.utente = ur.ID_UR AND a.proprietario = ? \
                         GROUP BY p.ID_PREN \
                         ORDER BY data_inizio DESC; \
-                        SELECT p.ID_PREN AS ID_PREN, dos.nome AS nome_osp, dos.cognome AS cognome_osp, \
+                        SELECT p.ID_PREN AS ID_PREN, dos.ID_DO AS ID_DO, dos.nome AS nome_osp, dos.cognome AS cognome_osp, \
                         dos.tipo_doc AS tipo_doc, dos.foto_fronte_doc AS foto_fronte_doc, \
                         dos.foto_retro_doc AS foto_retro_doc, dos.nazionalita AS naz_osp, \
                         dos.scadenza_doc AS scadenza_doc, dos.eta AS eta_osp \
@@ -118,6 +140,7 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                             elPren.naz_ospiti = elPren.naz_ospiti + elDatOsp.naz_osp + "-";
                             elPren.eta_osp = elPren.eta_ospiti + elDatOsp.eta_osp + "-";
                             elPren.foto_fronte_doc = elDatOsp.foto_fronte_doc;
+                            elPren.ID_DO = elDatOsp.ID_DO;
                             elPren.num_ospiti++;
                         }
                     }
@@ -550,6 +573,182 @@ async function visualizzaResocontoTrimestrale(req, res, next) {
   }
 
 };
+
+
+// modifica documenti DUR
+
+router.post('/modificaDocumentiDur', upload1, async function(req, res, next){
+
+    try {
+        
+      //AGGIORNAMENTO FOTO
+
+      let arrayFoto = [];
+
+
+      if(req.files && req.files.length != 0){
+          for(var x  = 0; x < req.files.length; x++){
+              arrayFoto[x]= req.files[x].filename;
+          }
+
+          (arrayFoto[0] ? prenData.foto_fronte_doc_dur = arrayFoto[0]  : prenData.foto_fronte_doc_dur = undefined);
+          (arrayFoto[1] ? prenData.foto_retro_doc_dur = arrayFoto[1]  : prenData.foto_retro_doc_dur = undefined);
+
+          const db = await makeDb(config); 
+        var results = {};
+
+        await withTransaction(db, async() => {
+        
+        let sql = "UPDATE DocumentiUtenteR SET foto_fronte_doc = ?, foto_retro_doc = ? WHERE ID_DUR = ?";
+        let values = [
+            prenData.foto_fronte_doc_dur,
+            prenData.foto_retro_doc_dur,
+            prenData.ID_DUR
+        ];
+
+        results = await db.query(sql, values)
+                .catch(err => {
+                    throw err;
+                });
+
+        });
+
+        let stato_pren = "";
+        let stato_rec = "";
+        let stato_conf = "disabled";
+
+        let data_inizio_check = new Date(prenData.data_inizio);
+        let today = new Date();
+
+        //L'host può annullare la prenotazione fino a 7 giorni prima
+        if ((data_inizio_check - today) < (7*86400000)) {
+
+          //disabilita tasto annullamento
+          stato_pren = "disabled";
+        }
+
+        //check per verificare la possibilità di annullare la prenotazione
+        if (prenData.stato_prenotazione == 'conclusa') {
+          // METTERCI ANCHE LA DATA DI SCADENZA 
+
+          //disabilita tasto annullamento
+          stato_pren = "disabled";
+        }
+
+        //check per verificare la possibilità di annullamento o conferma
+        if (prenData.stato_prenotazione == 'richiesta') {
+
+          //disabilita tasto annullamento
+          stato_pren = "disabled";
+
+          //abilita tasto conferma
+          stato_conf = "";
+        }
+
+        //check per verificare la possibilità di recensire (in base a recensioni già fatte o conclusione vacanza)
+        if (prenData.stato_prenotazione != 'conclusa' || prenData.recBoolean == true) {
+
+          //disabilita tasto recensione
+          stato_rec = "disabled";
+        }
+
+        res.render('finestraPrenotazioneRicevuta', {data : {data_pren : prenData, data_rec : stato_rec, data_ann : stato_pren, data_conf : stato_conf}});
+      }
+
+    } catch (err) {
+      console.log(err);
+      next(createError(500));
+    }
+});
+
+// modifica documenti OSPITI
+
+router.post('/modificaDocumentiOspiti', upload2, async function(req, res, next){
+
+  try {
+        
+      //AGGIORNAMENTO FOTO
+
+      let arrayFoto = [];
+
+
+      if(req.files && req.files.length != 0){
+          for(var x  = 0; x < req.files.length; x++){
+              arrayFoto[x]= req.files[x].filename;
+          }
+
+          (arrayFoto[0] ? prenData.foto_fronte_doc = arrayFoto[0]  : prenData.foto_fronte_doc = undefined);
+          (arrayFoto[1] ? prenData.foto_retro_doc = arrayFoto[1]  : prenData.foto_retro_doc = undefined);
+
+          const db = await makeDb(config); 
+        var results = {};
+
+        await withTransaction(db, async() => {
+        
+        let sql = "UPDATE DatiOspiti SET foto_fronte_doc = ?, foto_retro_doc = ? WHERE ID_DO = ?";
+        let values = [
+            prenData.foto_fronte_doc,
+            prenData.foto_retro_doc,
+            prenData.ID_DO
+        ];
+
+        results = await db.query(sql, values)
+                .catch(err => {
+                    throw err;
+                });
+
+        });
+
+        let stato_pren = "";
+        let stato_rec = "";
+        let stato_conf = "disabled";
+
+        let data_inizio_check = new Date(prenData.data_inizio);
+        let today = new Date();
+
+        //L'host può annullare la prenotazione fino a 7 giorni prima
+        if ((data_inizio_check - today) < (7*86400000)) {
+
+          //disabilita tasto annullamento
+          stato_pren = "disabled";
+        }
+
+        //check per verificare la possibilità di annullare la prenotazione
+        if (prenData.stato_prenotazione == 'conclusa') {
+          // METTERCI ANCHE LA DATA DI SCADENZA 
+
+          //disabilita tasto annullamento
+          stato_pren = "disabled";
+        }
+
+        //check per verificare la possibilità di annullamento o conferma
+        if (prenData.stato_prenotazione == 'richiesta') {
+
+          //disabilita tasto annullamento
+          stato_pren = "disabled";
+
+          //abilita tasto conferma
+          stato_conf = "";
+        }
+
+        //check per verificare la possibilità di recensire (in base a recensioni già fatte o conclusione vacanza)
+        if (prenData.stato_prenotazione != 'conclusa' || prenData.recBoolean == true) {
+
+          //disabilita tasto recensione
+          stato_rec = "disabled";
+        }
+
+        res.render('finestraPrenotazioneRicevuta', {data : {data_pren : prenData, data_rec : stato_rec, data_ann : stato_pren, data_conf : stato_conf}});
+      }
+   
+
+  } catch (err) {
+    console.log(err);
+    next(createError(500));
+  }
+});
+
+
 
 router.post('/inviaresocontotrimestrale', inviaResocontoTrimestrale);
 
