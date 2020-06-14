@@ -368,6 +368,19 @@
           });
         });
 
+        // Invio dati ospiti -----------------------------------------------------------------------
+        $('#confermaInvioDocumenti').click(function(ev) {
+          $.ajax({
+            context: this,
+            url: '/profiloHostControl/inviadocumenti',
+            type: 'POST',
+            success: response => {
+              console.log('Response from server is ' + response);
+              window.alert('Documenti inviati!')
+            }
+          });
+        });
+
         let caratteriSpeciali = /([~,@,#,$,^,&,*,-,_,+,=,>,<,',",`])/;
 
         $('#testoRec').on('input', function(ev) {
