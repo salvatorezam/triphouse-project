@@ -270,7 +270,7 @@ async function compilaPt1(req, res, next){
        console.log(datiOspiti);
         
        let invioDoc = "";
-       if (datiOspiti[1].num_doc == null) {
+       if (datiOspiti[1] == undefined || datiOspiti[1].num_doc == null) {
 
             invioDoc = "disabled";
        }
