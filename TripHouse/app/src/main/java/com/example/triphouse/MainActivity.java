@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
         webview = (WebView) findViewById(R.id.webview);
         webview.setWebViewClient(new WebViewClient());
-        webview.loadUrl("http://localhost:3000");
+        webview.loadUrl("https://localhost:3000");
 
         WebSettings webSettings = webview.getSettings();
         webSettings.setJavaScriptEnabled(true);
