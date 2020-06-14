@@ -91,7 +91,7 @@ async function registrazione(req, res, next) {
             console.log(`Utente ${req.body.email} inserito!`);
 
             // Invio della mail di conferma
-            // results = sendRegistrationEmail(transporter, req.body.email).catch(err => {throw err;});
+            results = sendRegistrationEmail(transporter, req.body.email).catch(err => {throw err;});
                     
             // render?
             res.redirect('/');
