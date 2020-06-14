@@ -114,6 +114,7 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                             elPren.nomi_ospiti = elPren.nomi_ospiti + elDatOsp.nome_osp + "-";
                             elPren.naz_ospiti = elPren.naz_ospiti + elDatOsp.naz_osp + "-";
                             elPren.eta_osp = elPren.eta_ospiti + elDatOsp.eta_osp + "-";
+                            elPren.foto_fronte_doc = elDatOsp.foto_fronte_doc;
                             elPren.num_ospiti++;
                         }
                     }

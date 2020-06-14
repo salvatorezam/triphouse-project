@@ -244,6 +244,7 @@
                               <td><%= data.data_pren.tipo_doc_ur %></td>
                               <td><%= data.data_pren.num_doc_ur %></td>
                               <td><%= data.data_pren.scadenza_doc_ur.toDateString().slice(0,15) %></td>
+                              <td><a href="../images/uploads/documentiPrenotazione/<%= data.data_pren.foto_fronte_doc_dur %>">Foto</a></td>
                             </tr>
                             <% if (ospiti == "") { %>
                               <!-- Non ci sono ospiti oltre al prenotante, quindi non ci sono ulteriori righe della tabella-->
@@ -262,6 +263,7 @@
                                   <% } else { %>
                                     <td>&euro; 0</td>
                                   <% } %>
+                                  <td><a href="../images/uploads/documentiPrenotazione/<%= data.data_pren.foto_fronte_doc %>">Foto</a></td>
                                 </tr>
                               <% } %>
                             <% }; %> 
