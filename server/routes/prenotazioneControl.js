@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 
-var datiOspiti = new Array(8); // memorizza i valori dei campi form relativi agli ospiti
+var datiOspiti; // memorizza i valori dei campi form relativi agli ospiti
 var datiUtenteR; // memorizza i dati relativi ai documenti dell'utente registrato
 var prenEffettuata; // memorizza la prenotazione
 
@@ -47,7 +47,7 @@ var numOspit;
 var notti;
 var totale;
 var nomeUtenteSessione;
-
+var arrDoc = [];
 
 /* GET prenotazionePg1 */
 router.get('/prenotazionePg1', async function(req, res, next) {
@@ -55,9 +55,21 @@ router.get('/prenotazionePg1', async function(req, res, next) {
     console.log(res.locals.date);
     datePren = res.locals.date;
     numOspit = res.locals.date.data_n_o;
+    numOspit = numOspit - 1;
     idAlloggio = res.locals.alloggio.ID_ALL;
     prezzoNotte = res.locals.alloggio.prezzo;
     prezzoTassa = res.locals.alloggio.tasse;
+
+    arrDoc.push({name: 'fronteUtente', maxCount: 1});
+    arrDoc.push({name: 'retroUtente', maxCount:1});
+    for (let x = 1; x <= numOspit; x++) {
+
+        let f = 'fronteDocOsp' + x;
+        let r = 'retroDocOsp' + x;
+
+        arrDoc.push({name: f, maxCount:1});
+        arrDoc.push({name: r, maxCount:1});
+    }
 
     
     
@@ -106,14 +118,7 @@ router.get('/prenotazionePg1', async function(req, res, next) {
 /* GET prenotazionePg2 */
 router.get('/prenotazionePg2', async function(req, res, next) {
     datiUtenteR = new moduloOspite(); 
-    datiOspiti[0]= new moduloOspite();
-    datiOspiti[1]= new moduloOspite();
-    datiOspiti[2]= new moduloOspite();
-    datiOspiti[3]= new moduloOspite();
-    datiOspiti[4]= new moduloOspite();
-    datiOspiti[5]= new moduloOspite();
-    datiOspiti[6]= new moduloOspite();
-    datiOspiti[7]= new moduloOspite(); 
+    datiOspiti = new Array(numOspit+1); 
     
     res.render('prenotazioneDir/prenotazionePg2',{data:datePren,dataPrezzoNotte:prezzoNotte,dataPrezzoTassa:prezzoTassa,dataNotti:notti,dataTotale:totale,dataNumOsp:numOspit});
 });
@@ -131,71 +136,21 @@ async function compilaPt1(req, res, next){
         datiUtenteR.num_doc = req.body.numeroDocU;
         datiUtenteR.scadenza_doc = req.body.scadenzaDocU;
 
-       datiOspiti[0].nome = req.body.nome;
-       datiOspiti[0].cognome = req.body.cognome;
-       datiOspiti[0].nazionalita = req.body.nazione;
-       datiOspiti[0].eta = req.body.eta_ospiti;
-       datiOspiti[0].tipo_doc = req.body.documento1;
-       datiOspiti[0].num_doc = req.body.numeroDoc1;
-       datiOspiti[0].scadenza_doc = req.body.scadenzaDoc1;
+        for (let x = 1; x <= numOspit; x++) {
 
-       datiOspiti[1].nome = req.body.nome2;
-       datiOspiti[1].cognome = req.body.cognome2;
-       datiOspiti[1].nazionalita = req.body.nazione2;
-       datiOspiti[1].eta = req.body.eta_ospiti2;
-       datiOspiti[1].tipo_doc = req.body.documento2;
-       datiOspiti[1].num_doc = req.body.numeroDoc2;
-       datiOspiti[1].scadenza_doc = req.body.scadenzaDoc2;
+            datiOspiti[x] = {};
+            datiOspiti[x].nome = req.body['nome' + x];
+            datiOspiti[x].cognome = req.body['cognome' + x];
+            datiOspiti[x].nazionalita = req.body['nazione' + x];
+            datiOspiti[x].eta = req.body['eta_ospite' + x];
+            datiOspiti[x].num_doc = req.body['numDoc' + x];
+            datiOspiti[x].scadenza_doc = req.body['dataScad' + x];
+            datiOspiti[x].tipo_doc = req.body['tipoDoc' + x];
+        }
 
-       datiOspiti[2].nome = req.body.nome3;
-       datiOspiti[2].cognome = req.body.cognome3;
-       datiOspiti[2].nazionalita = req.body.nazione3;
-       datiOspiti[2].eta = req.body.eta_ospiti3;
-       datiOspiti[2].tipo_doc = req.body.documente3;
-       datiOspiti[2].num_doc = req.body.numeroDoc3;
-       datiOspiti[2].scadenza_doc = req.body.scadenzaDoc3;
-
-       datiOspiti[3].nome = req.body.nome4;
-       datiOspiti[3].cognome = req.body.cognome4;
-       datiOspiti[3].nazionalita = req.body.nazione4;
-       datiOspiti[3].eta = req.body.eta_ospiti4;
-       datiOspiti[3].tipo_doc = req.body.documento4;
-       datiOspiti[3].num_doc = req.body.numeroDoc4;
-       datiOspiti[3].scadenza_doc = req.body.scadenzaDoc4;
-
-       datiOspiti[4].nome = req.body.nome5;
-       datiOspiti[4].cognome = req.body.cognome5;
-       datiOspiti[4].nazionalita = req.body.nazione5;
-       datiOspiti[4].eta = req.body.eta_ospiti5;
-       datiOspiti[4].tipo_doc = req.body.documento5;
-       datiOspiti[4].num_doc = req.body.numeroDoc5;
-       datiOspiti[4].scadenza_doc = req.body.scadenzaDoc5;
-
-       datiOspiti[5].nome = req.body.nome6;
-       datiOspiti[5].cognome = req.body.cognome6;
-       datiOspiti[5].nazionalita = req.body.nazione6;
-       datiOspiti[5].eta = req.body.eta_ospiti6;
-       datiOspiti[5].tipo_doc = req.body.documento6;
-       datiOspiti[5].num_doc = req.body.numeroDoc6;
-       datiOspiti[5].scadenza_doc = req.body.scadenzaDoc6;
-
-       datiOspiti[6].nome = req.body.nome7;
-       datiOspiti[6].cognome = req.body.cognome7;
-       datiOspiti[6].nazionalita = req.body.nazione7;
-       datiOspiti[6].eta = req.body.eta_ospiti7;
-       datiOspiti[6].tipo_doc = req.body.documento7;
-       datiOspiti[6].num_doc = req.body.numeroDoc7;
-       datiOspiti[6].scadenza_doc = req.body.scadenzaDoc7;
-
-       datiOspiti[7].nome = req.body.nome8;
-       datiOspiti[7].cognome = req.body.cognome8;
-       datiOspiti[7].nazionalita = req.body.nazione8;
-       datiOspiti[7].eta = req.body.eta_ospiti8;
-       datiOspiti[7].tipo_doc = req.body.documento8;
-       datiOspiti[7].num_doc = req.body.numeroDoc8;
-       datiOspiti[7].scadenza_doc = req.body.scadenzaDoc8;
 
        console.log('Inserimento valori step 1');
+       console.log(datiOspiti);
 
        
        res.render('prenotazioneDir/prenotazionePg3',{data:datePren,dataPrezzoNotte:prezzoNotte,dataPrezzoTassa:prezzoTassa,dataNotti:notti,dataTotale:totale,dataNumOsp:numOspit});
@@ -208,39 +163,50 @@ async function compilaPt1(req, res, next){
 }
 
 //POST prenotazionePg3
-var cpUpload = upload.fields( [{name: 'fileDocU', maxCount: 2 },{name: 'fileDoc1', maxCount: 2 },{name: 'fileDoc2', maxCount: 2 },{name: 'fileDoc3', maxCount: 2 },{name: 'fileDoc4', maxCount: 2 },{name: 'fileDoc5', maxCount: 2 },{name: 'fileDoc6', maxCount: 2 },{name: 'fileDoc7', maxCount: 2 },{name: 'fileDoc8', maxCount: 2 }])
+var cpUpload = upload.fields(arrDoc);
 router.post('/upload', cpUpload, async function (req, res, next) {
 
     try {
-      //assegno l'oggetto dile alla proprietà foto_doc dell'oggetto datiOspite   
-      datiUtenteR.foto_doc = req.files['fileDocU'][0].filename;
-      datiOspiti[0].foto_doc = req.files['fileDoc1'];
-      datiOspiti[1].foto_doc = req.files['fileDoc2']; 
-      datiOspiti[2].foto_doc = req.files['fileDoc3'];   
-      datiOspiti[3].foto_doc = req.files['fileDoc4']; 
-      datiOspiti[4].foto_doc = req.files['fileDoc5']; 
-      datiOspiti[5].foto_doc = req.files['fileDoc6']; 
-      datiOspiti[6].foto_doc = req.files['fileDoc7']; 
-      datiOspiti[7].foto_doc = req.files['fileDoc8'];
+      //assegno l'oggetto file alla proprietà foto_doc dell'oggetto datiOspite   
+      datiUtenteR.foto_fronte_doc = req.files['fronteUtente'][0].filename;
+      datiUtenteR.foto_retro_doc = req.files['retroUtente'][0].filename;
+
+      for (let x = 1; x <= numOspit; x++) {
+
+        datiOspiti[x].foto_fronte_doc = req.files['fronteDocOsp' + x][0].filename;
+        datiOspiti[x].foto_retro_doc = req.files['retroDocOsp' + x][0].filename;
+        console.log('il nome salvato dei doc: ' + datiOspiti[x].foto_fronte_doc);
+      }
+
+      //datiOspiti[0].foto_doc = req.files['fileDoc1'];
+      //datiOspiti[1].foto_doc = req.files['fileDoc2']; 
+      //datiOspiti[2].foto_doc = req.files['fileDoc3'];   
+      //datiOspiti[3].foto_doc = req.files['fileDoc4']; 
+      //datiOspiti[4].foto_doc = req.files['fileDoc5']; 
+      //datiOspiti[5].foto_doc = req.files['fileDoc6']; 
+      //datiOspiti[6].foto_doc = req.files['fileDoc7']; 
+      //datiOspiti[7].foto_doc = req.files['fileDoc8'];
      
       //controllo se sono stati caricati i file, se si sostituisco l'oggetto file con la sua proprietà filename
       //se non sono stati caricati file impongo la proprietà foto_doc = null 
-      for (let index = 0; index < 8; index++) {
+      /*for (let index = 0; index < 8; index++) {
           if(datiOspiti[index].foto_doc == undefined){
               datiOspiti[index].foto_doc = null;
           }else{
             datiOspiti[index].foto_doc = datiOspiti[index].foto_doc[0].filename;
           }
-      }
+      }*/
       
 
-      console.log('step 2 valori inseriti');
-      console.log('');
+      console.log('step 2 valori inseriti:');
       console.log(datiUtenteR);
-      console.log('');
-      for (let index = 0; index < 8; index++) {
+      console.log('dati ospiti');
+      console.log(datiOspiti[1]);
+      console.log(datiOspiti[2]);
+
+      /*for (let index = 0; index < 8; index++) {
            console.log(datiOspiti[index]);           
-      }
+      }*/
 
       res.render('prenotazioneDir/prenotazionePg4',{data:datePren,dataPrezzoNotte:prezzoNotte,dataPrezzoTassa:prezzoTassa,dataNotti:notti,dataTotale:totale,dataNumOsp:numOspit});
 
@@ -276,7 +242,8 @@ async function compilaPt3(req, res, next){
         await withTransaction(db, async() => {
             // inserimento prenotazione
             let sql = "INSERT INTO Prenotazione VALUES (UUID(),?,?,?,?,?,?,?,?,?); \
-            INSERT INTO DocumentiUtenteR VALUES (UUID(),?,?,?,?,(SELECT ID_PREN FROM PRENOTAZIONE WHERE utente = ? AND alloggio = ?));";
+                        INSERT INTO DocumentiUtenteR VALUES (UUID(),?,?,?,?,?,?,(SELECT ID_PREN FROM PRENOTAZIONE WHERE utente = ? AND alloggio = ? AND data_pren = ?)); \
+                        INSERT INTO DateIndisponibili VALUES (UUID(),?,?,?);";
             let values = [
                 prenEffettuata.utente,
                 prenEffettuata.alloggio,
@@ -290,8 +257,14 @@ async function compilaPt3(req, res, next){
                 datiUtenteR.tipo_doc,
                 datiUtenteR.num_doc,
                 datiUtenteR.scadenza_doc,
-                datiUtenteR.foto_doc,
+                datiUtenteR.foto_fronte_doc,
+                datiUtenteR.foto_retro_doc,
                 prenEffettuata.utente,
+                prenEffettuata.utente,
+                prenEffettuata.alloggio,
+                prenEffettuata.data_pren,
+                prenEffettuata.data_inizio,
+                prenEffettuata.data_fine,
                 prenEffettuata.alloggio
             ];
       
@@ -299,23 +272,41 @@ async function compilaPt3(req, res, next){
                     .catch(err => {
                         throw err;
                     });
+
             console.log("Prenotazione Effettuata con successo");
+            
+            nosql = false;
+            var sql_tipo = "INSERT INTO DatiOspiti VALUES (UUID(),?,?,?,?,?,?,?,?,?,(SELECT ID_PREN FROM PRENOTAZIONE WHERE utente = ? AND alloggio = ? AND data_pren = ?));";
+            var sql1 = "";
+            var values1 = [];
 
-
-            /*let sql1 = "INSERT INTO DocumentiUtenteR VALUES (UUID(),?,?,?,?,?;";
-            let values1 = [
-                //creazione query prenotazione
-                datiUtenteR.tipo_doc,
-                datiUtenteR.num_doc,
-                datiUtenteR.scadenza_doc,
-                datiUtenteR.foto_doc,
-                results[0].LAST_INSERT_ID()
-            ];
+            if (datiOspiti[1] == undefined) {
+                nosql = true;
+            }
+            else {
+                for (let x = 1; x <= numOspit; x++) {
+                    if(datiOspiti[x] != undefined) {
+                       sql1 = sql1 + sql_tipo;
+                       values1.push(datiOspiti[x].nome);
+                       values1.push(datiOspiti[x].cognome);
+                       values1.push(datiOspiti[x].tipo_doc);
+                       values1.push(datiOspiti[x].num_doc);
+                       values1.push(datiOspiti[x].foto_fronte_doc);
+                       values1.push(datiOspiti[x].foto_retro_doc);
+                       values1.push(datiOspiti[x].nazionalita);
+                       values1.push(datiOspiti[x].scadenza_doc);
+                       values1.push(datiOspiti[x].eta);
+                       values1.push(prenEffettuata.utente);
+                       values1.push(prenEffettuata.alloggio);
+                       values1.push(prenEffettuata.data_pren);
+                    }
+                }
+            }
       
             results1 = await db.query(sql1, values1)
                     .catch(err => {
                         throw err;
-                    });*/
+                    });
             console.log("Documenti inviati");
         });
 
