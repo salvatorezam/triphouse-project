@@ -64,12 +64,14 @@ var upload = multer ( { storage : storage });
 var moduloPrenotazione = require('../public/javascripts/prenotazione(E).js');
 var moduloOspite = require('../public/javascripts/DatiOspite.js');
 
-var datePren;
-var d_i;
-var d_f ;
-var numOspit;
-var notti;
-var totale;
+var datePren;  // memorizza le date di inizio e fine dalla barra di ricerca
+var d_i;       // primo giorno di soggiorno
+var d_f ;      // ultimo giorno di soggiorno
+var numOspit;  // momorizza il numero degli ospiti escluso l'utente registrato
+var notti;     // memorizza il numero di notti che l'utente e i suoi ospiti passarenna nell'alloggio
+var totale;    // prezzo totale= costo giornaliero * numero giorni + tasse di soggiorno
+var Acitta;    // memorizza la città in cui è l'alloggio
+var Atitolo;   // titolo dell'alloggio inserito
 var nomeUtenteSessione;
 
 //CALCOLO GIORNO ANNO
@@ -97,6 +99,8 @@ router.get('/prenotazionePg1', async function(req, res, next) {
     idAlloggio = res.locals.alloggio.ID_ALL;
     prezzoNotte = res.locals.alloggio.prezzo;
     prezzoTassa = res.locals.alloggio.tasse;
+    Acitta = res.locals.alloggio.citta;
+    Atitolo = res.locals.alloggio.titolo;
     data_prenotazione_effettuata = new Date();
     data_pren_sqlformat = dataAnnoMeseGiorno(new Date());
 
@@ -197,7 +201,15 @@ router.get('/prenotazionePg1', async function(req, res, next) {
                 }
                 else{
 
-                    res.render('prenotazioneDir/prenotazionePg1',{data:datePren,dataPrezzoNotte:prezzoNotte,dataPrezzoTassa:prezzoTassa,dataNotti:notti,dataTotale:totale,dataNumOsp:numOspit});
+                    res.render('prenotazioneDir/prenotazionePg1',{data:datePren,
+                                                                  dataPrezzoNotte:prezzoNotte,
+                                                                  dataPrezzoTassa:prezzoTassa,
+                                                                  dataNotti:notti,
+                                                                  dataTotale:totale,
+                                                                  dataNumOsp:numOspit,
+                                                                  dataCitta: Acitta,
+                                                                  dataTitoloA: Atitolo
+                                                                  });
                 }
 
 
@@ -225,7 +237,10 @@ router.get('/prenotazionePg2', async function(req, res, next) {
     datiUtenteR = new moduloOspite(); 
     datiOspiti = new Array(numOspit+1); 
     
-    res.render('prenotazioneDir/prenotazionePg2',{data:datePren,dataPrezzoNotte:prezzoNotte,dataPrezzoTassa:prezzoTassa,dataNotti:notti,dataTotale:totale,dataNumOsp:numOspit});
+    res.render('prenotazioneDir/prenotazionePg2',{data:datePren,dataPrezzoNotte:prezzoNotte,
+                                                  dataPrezzoTassa:prezzoTassa,dataNotti:notti,
+                                                  dataTotale:totale,dataNumOsp:numOspit,
+                                                  dataCitta: Acitta, dataTitoloA: Atitolo});
 });
 
 //POST prenotazionePg2
@@ -260,7 +275,10 @@ async function compilaPt1(req, res, next){
             invioDoc = "disabled";
        }
        
-       res.render('prenotazioneDir/prenotazionePg3',{data:datePren,dataPrezzoNotte:prezzoNotte,dataPrezzoTassa:prezzoTassa,dataNotti:notti,dataTotale:totale,dataNumOsp:numOspit,dataBut:invioDoc});
+       res.render('prenotazioneDir/prenotazionePg3',{data:datePren,dataPrezzoNotte:prezzoNotte,
+                                                     dataPrezzoTassa:prezzoTassa,dataNotti:notti,
+                                                     dataTotale:totale,dataNumOsp:numOspit,
+                                                     dataBut:invioDoc,dataCitta:Acitta,dataTitoloA:Atitolo });
 
    } catch (err) {
        console.log(err);
@@ -293,7 +311,10 @@ router.post('/upload', cpUpload, async function (req, res, next) {
       console.log(datiOspiti[1]);
       console.log(datiOspiti[2]);
 
-      res.render('prenotazioneDir/prenotazionePg4',{data:datePren,dataPrezzoNotte:prezzoNotte,dataPrezzoTassa:prezzoTassa,dataNotti:notti,dataTotale:totale,dataNumOsp:numOspit});
+      res.render('prenotazioneDir/prenotazionePg4',{data:datePren,dataPrezzoNotte:prezzoNotte,
+                                                    dataPrezzoTassa:prezzoTassa,dataNotti:notti,
+                                                    dataTotale:totale,dataNumOsp:numOspit,
+                                                    dataCitta: Acitta, dataTitoloA: Atitolo});
 
     } catch (error) {
         console.log(error);
