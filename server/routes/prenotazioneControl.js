@@ -304,7 +304,7 @@ async function compilaPt3(req, res, next){
         await withTransaction(db, async() => {
             // inserimento prenotazione
             let sql = "INSERT INTO Prenotazione VALUES (UUID(),?,?,?,?,?,?,?,?,?); \
-                        INSERT INTO DocumentiUtenteR VALUES (UUID(),?,?,?,?,?,?,(SELECT ID_PREN FROM PRENOTAZIONE WHERE utente = ? AND alloggio = ? AND data_pren = ?)); \
+                        INSERT INTO DocumentiUtenteR VALUES (UUID(),?,?,?,?,?,?,(SELECT ID_PREN FROM PRENOTAZIONE WHERE utente = ? AND alloggio = ?)); \
                         INSERT INTO DateIndisponibili VALUES (UUID(),?,?,?);";
             let values = [
                 prenEffettuata.utente,
@@ -324,7 +324,7 @@ async function compilaPt3(req, res, next){
                 prenEffettuata.utente,
                 prenEffettuata.utente,
                 prenEffettuata.alloggio,
-                prenEffettuata.data_pren,
+                //prenEffettuata.data_pren,
                 prenEffettuata.data_inizio,
                 prenEffettuata.data_fine,
                 prenEffettuata.alloggio
@@ -338,7 +338,7 @@ async function compilaPt3(req, res, next){
             console.log("Prenotazione Effettuata con successo");
             
             var nosql = false;
-            var sql_tipo = "INSERT INTO DatiOspiti VALUES (UUID(),?,?,?,?,?,?,?,?,?,(SELECT ID_PREN FROM PRENOTAZIONE WHERE utente = ? AND alloggio = ? AND data_pren = ?));";
+            var sql_tipo = "INSERT INTO DatiOspiti VALUES (UUID(),?,?,?,?,?,?,?,?,?,(SELECT ID_PREN FROM PRENOTAZIONE WHERE utente = ? AND alloggio = ?));";
             var sql1 = "";
             var values1 = [];
 
@@ -362,7 +362,7 @@ async function compilaPt3(req, res, next){
                        values1.push(datiOspiti[x].eta);
                        values1.push(prenEffettuata.utente);
                        values1.push(prenEffettuata.alloggio);
-                       values1.push(prenEffettuata.data_pren);
+                       //values1.push(prenEffettuata.data_pren);
                     }
                 }
             }

@@ -50,7 +50,7 @@ async function listaRicerca(req, res, next) {
 		a.lenzuola AS lenzuola, a.titolo AS titolo, a.descrizione_alloggio AS descrizione_alloggio, a.descrizione_regole AS descrizione_regole, a.note AS note, a.tasse AS tasse, a.prezzo AS prezzo, a.foto_0 AS foto_0, a.foto_1 AS foto_1,a.foto_2 AS foto_2,a.foto_3 As foto_3,a.foto_4 AS foto_4,a.foto_5 AS foto_5\
         FROM Alloggio a \
         WHERE a.citta = ? AND a.num_ospiti_max >= ? AND a.ID_ALL NOT IN (SELECT d.alloggio \
-																		FROM datedisponibili d \
+																		FROM dateindisponibili d \
                                                                         WHERE (? >= d.data_inizio AND ? <= d.data_fine ) OR (? > d.data_inizio AND ? < data_fine) OR ( ? < d.data_inizio AND ? > d.data_fine ));\
         SELECT r.ID_RA AS ID_RA, r.testo AS testo, r.data_rec AS data_rec, r.scrittore AS scrittore, u.nome AS nome_scrittore, \
                 r.alloggio AS alloggio, r.prenotazione AS prenotazione, r.valutazione AS valutazione \
