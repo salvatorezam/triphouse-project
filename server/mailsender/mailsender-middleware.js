@@ -102,7 +102,7 @@ exports.inviaMailDeclinazione = async function (transporter, mailReceiver, testo
         }); 
 };
 
-exports.inviaResocontoTrimestrale = async function (transporter, mailReceiver, sender, testo) {
+exports.inviaMailResocontoTrimestrale = async function (transporter, mailReceiver, sender, testo) {
     let mailOptions = {
         from: sender,
         to: mailReceiver,
