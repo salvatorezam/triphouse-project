@@ -126,7 +126,7 @@
 	);
 
 	CREATE TABLE IF NOT EXISTS DocumentiUtenteR(
-		ID_DO VARCHAR(36) PRIMARY KEY, 
+		ID_DUR VARCHAR(36) PRIMARY KEY, 
 		tipo_doc VARCHAR(20),
 		num_doc VARCHAR(10),
 		scadenza_doc DATE,
