@@ -22,7 +22,7 @@
             <!--inizio form documenti utenti registrati-->
             <div name="formDocUtenteR">
                 <p class="text-muted">seleziona il tipo di documento</p>
-                <fieldset class=" col-lg-4">
+                <fieldset class=" col-lg-4 col-md-4">
                 <div class="form-group" style="text-align: center; margin-top: 1em; ">
                     <input type="radio" class="tipoDoc" id="caDocU" name="documentoU" value="cartaDiIdentità" autocomplete="off" required>
                     <label for="caDocU">Carta d'identità</label><br />
@@ -31,11 +31,11 @@
                 </div>
                 </fieldset>
                 <div class="row">
-                  <div class="col-lg-4">
+                  <div class="col-lg-4 col-md-4">
                     <label class="form-label" for="numDocU">Numero Documento</label>
                     <input class="form-control" name="numeroDocU" id="numDocU" type="text" required>
                   </div>
-                  <div class="col-lg-4">
+                  <div class="col-lg-4 col-md-4">
                     <label class="form-label" for="dataDocU">Data scadenza</label>
                     <input class="form-control" name="scadenzaDocU" id="dataDocU" type="date" required>
                   </div>
@@ -325,7 +325,7 @@
                     <label class="form-label" for="dataScad<%= x %>">Data scadenza</label>
                     <input class="form-control" name="dataScad<%= x %>" id="dataScad<%= x %>" type="date">
                   </div>
-                  <fieldset class=" col-lg-4">
+                  <fieldset class=" col-lg-4 col-md-4">
                     <div class="form-group" style="text-align: center; margin-top: 1em;">
                         <input type="radio" class="tipoDoc" id="tipoDoc<%= x %>" name="tipoDoc<%= x %>" value="carta di identità" autocomplete="off">
                         <label for="tipoDoc<%= x %>">Carta d'identità</label><br />
