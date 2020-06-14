@@ -95,9 +95,16 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                 //elPren.data_prenotazione = dataGiornoMeseAnno(elPren.data_prenotazione.toLocaleDateString());
 
                 // per salvo - eventualmente commentare
+
+                elPren.data_inizio_num = elPren.data_inizio;
+                elPren.data_fine_num = elPren.data_fine;
+                
                 elPren.data_inizio = elPren.data_inizio.toDateString();
                 elPren.data_fine = elPren.data_fine.toDateString();
                 elPren.data_prenotazione = elPren.data_prenotazione.toDateString();
+
+                elPren.data_inizio_num = elPren.data_inizio;
+                elPren.data_fine_num = elPren.data_fine;
   
                 //ospiti
                 elPren.nomi_ospiti = "";
@@ -110,6 +117,7 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                             elPren.nomi_ospiti = elPren.nomi_ospiti + elDatOsp.nome_osp + "-";
                             elPren.naz_ospiti = elPren.naz_ospiti + elDatOsp.naz_osp + "-";
                             elPren.eta_osp = elPren.eta_ospiti + elDatOsp.eta_osp + "-";
+                            elPren.foto_fronte_doc = elDatOsp.foto_fronte_doc;
                             elPren.num_ospiti++;
                         }
                     }

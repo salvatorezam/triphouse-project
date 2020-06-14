@@ -11,9 +11,9 @@ var usersRouter = require('./routes/users');
 var profiloUtenteRouter = require('./routes/profiloUtenteControl');
 var profiloHostRouter = require('./routes/profiloHostControl');
 var prenotazioneRouter = require('./routes/prenotazioneControl');
-var aggiungiAlloggio = require('./routes/aggiungiAlloggio');
+var aggiungiAlloggioControl = require('./routes/aggiungiAlloggioControl');
 var RegAutControl = require('./routes/RegAutControl');
-var visualizzaAlloggio = require('./routes/visualizzaAlloggio');
+var gestisciAlloggioControl = require('./routes/gestisciAlloggioControl');
 var ricercaControl = require('./routes/ricercaControl');
 const { resolveTxt } = require('dns');
 
@@ -52,9 +52,9 @@ app.use('/users', usersRouter);
 app.use('/profiloUtenteControl', profiloUtenteRouter);
 app.use('/profiloHostControl', profiloHostRouter);
 app.use('/prenotazioneControl', prenotazioneRouter);
-app.use('/aggiungiAlloggio', aggiungiAlloggio);
+app.use('/aggiungiAlloggioControl', aggiungiAlloggioControl);
 app.use('/regAutControl', RegAutControl);
-app.use('/visualizzaAlloggio', visualizzaAlloggio);
+app.use('/gestisciAlloggioControl', gestisciAlloggioControl);
 app.use('/ricercaControl', ricercaControl);
 
 app.use(bodyParser.json());

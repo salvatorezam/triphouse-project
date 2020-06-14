@@ -93,6 +93,13 @@ async function visualizzaAlloggioRicerca(req, res, next){
     let recensioni_a = [];
     let contatore = 0;
 
+    var utenteLogBool = false;
+
+    if (req.session.user != undefined && req.app.locals.users.has(req.session.user.id_utente)) {
+        
+        utenteLogBool = true;
+    }
+
     try{
         arrayAlloggi.forEach(element => {
             
@@ -113,7 +120,7 @@ async function visualizzaAlloggioRicerca(req, res, next){
         })
 
 
-        res.render('visualizzaAlloggioRicerca', {data : {data_a :alloggio, data_r: recensioni_a }});
+        res.render('visualizzaAlloggioRicerca', {data : {data_a :alloggio, data_r: recensioni_a, utLog: utenteLogBool}});
 
     } catch (err) {
         console.log(err);

@@ -155,7 +155,12 @@
         </div>
         <div class="col-lg-4">
           <div class="py-3">
-           <a href="/prenotazioneControl/prenotazionePg1"><button class="btn btn-primary btn-block" id='tasto_prenota'>1 notte <h4><%= data.data_a.prezzo %>€</h4> Prenota il tuo soggiorno</button></a>
+            <% if (data.utLog) { %>
+            <a href="/prenotazioneControl/prenotazionePg1"><button class="btn btn-primary" id='tasto_prenota'>1 notte <h4><%= data.data_a.prezzo %>€</h4> Prenota il tuo soggiorno</button></a>
+            <% } else { %>
+            <button class="btn btn-primary" id='tasto_prenota' disabled>1 notte <h4><%= data.data_a.prezzo %>€</h4> Prenota il tuo soggiorno</button>
+            <p> Autenticati per prenotare</p>
+            <% } %>
           </div>
         </div>
       </div>

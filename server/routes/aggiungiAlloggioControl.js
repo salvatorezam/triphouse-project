@@ -33,6 +33,15 @@ var upload = multer({ storage: storage }).array('fileToUpload',6);
 
 var moduloAlloggio = require('../public/javascripts/Alloggio.js');
 
+
+/* GET agg-all-0*/
+
+router.get('/agg-all-0', function(req, res, next) {
+  res.render('aggiungiAlloggioDir/agg-all-0');
+});
+
+
+
 /* GET agg-all-1 */
 router.get('/agg-all-1', async function(req, res, next) {
 
