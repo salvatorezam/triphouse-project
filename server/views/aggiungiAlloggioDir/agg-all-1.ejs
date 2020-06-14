@@ -56,17 +56,25 @@
               <h4>Indirizzo Alloggio</h4>
             </div>
             <div class="col-lg-7 ml-auto">
-              <!-- via e civico-->
-              <div class="form-group">
-                <label class="form-label" for="indirizzo" >Via e numero civico (Es. Via Roma, 1)</label>
-                <input class="form-control" name="indirizzo" id="indirizzo" required >
-              </div>
-              <!-- Città regione provincia cap-->
               <div class="row">
+                <!-- via e civico-->
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label" for="indirizzo" >Via</label>
+                    <input class="form-control" name="indirizzo" id="indirizzo" required >
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label" for="n_civico" >numero civico</label>
+                    <input class="form-control" type="number" name="n_civico" id="n_civico" required >
+                  </div>
+                </div>
+                <!-- Città regione provincia cap-->
                 <div class="col-md-6">
                   <div class="form-group">
                     <label class="form-label" for="citta">Città</label>
-                    <input class="form-control" name="citta" required maxlength="20" id="citta" required>
+                    <input class="form-control" name="citta" required maxlength="30" id="citta" required>
                   </div>
                 </div>
                 <div class="col-md-6">
