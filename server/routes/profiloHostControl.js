@@ -63,13 +63,17 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                         ur.ID_UR AS ID_UR, \
                         p.prezzo_totale AS prezzo_totale, p.data_pren AS data_prenotazione, \
                         dur.tipo_doc AS tipo_doc_ur, dur.num_doc AS num_doc_ur, dur.scadenza_doc AS scadenza_doc_ur, \
+                        dur.foto_fronte_doc AS foto_fronte_doc_dur, dur.foto_retro_doc AS foto_retro_doc_dur \
                         a.foto_0 AS foto_0, a.foto_1 AS foto_1, a.foto_2 AS foto_2, \
                         a.foto_3 AS foto_3, a.foto_4 AS foto_4, a.foto_5 AS foto_5 \
                         FROM DocumentiUtenteR dur, Prenotazione p, Alloggio a, UtenteRegistrato ur \
                         WHERE dur.prenotazione = p.ID_PREN AND p.alloggio = a.ID_ALL AND p.utente = ur.ID_UR AND a.proprietario = ? \
                         GROUP BY p.ID_PREN \
                         ORDER BY data_inizio DESC; \
-                        SELECT p.ID_PREN AS ID_PREN, dos.nome AS nome_osp, dos.nazionalita AS naz_osp, dos.eta AS eta_osp \
+                        SELECT p.ID_PREN AS ID_PREN, dos.nome AS nome_osp, dos.cognome AS cognome_osp, \
+                        dos.tipo_doc AS tipo_doc, dos.foto_fronte_doc AS foto_fronte_doc, \
+                        dos.foto_retro_doc AS foto_retro_doc, dos.nazionalita AS naz_osp, \
+                        dos.scadenza_doc AS scadenza_doc, dos.eta AS eta_osp \
                         FROM Prenotazione p, DatiOspiti dos \
                         WHERE p.ID_PREN = dos.prenotazione; \
                         SELECT rc.prenotazione AS ID_PREN \
