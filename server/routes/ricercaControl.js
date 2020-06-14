@@ -83,78 +83,6 @@ async function listaRicerca(req, res, next) {
     }
 }
 
-/* GET paginaSuccessiva */
-
-router.get('/paginaSuccessiva', paginaSuccessiva);
-
-async function paginaSuccessiva(req,res,next){
-
-    inizioArray = fineArray;
-
-    if(arrayAlloggi.length > (fineArray + 6)){
-
-        fineArray = fineArray + 6;
-    }
-    else{
-        fineArray = arrayAlloggi.length;
-    }
-
-    res.render('listaRicerca', {data : {array : arrayAlloggi, inizioCount : inizioArray, fineCount : fineArray, tipo: 0}})
-
-}
-
-/*GET paginaPrecedente*/
-
-router.get('/paginaPrecedente', paginaPrecedente);
-
-async function paginaPrecedente(req,res,next){
-
-
-    fineArray = inizioArray;
-
-    inizioArray = inizioArray - 6;
-
-
-    res.render('listaRicerca', {data : {array : arrayAlloggi, inizioCount : inizioArray, fineCount : fineArray, tipo: 0}})
-
-}
-
-/* GET paginaSuccessivaFiltri */
-
-router.get('/paginaSuccessivaFiltri', paginaSuccessivaFiltri);
-
-async function paginaSuccessivaFiltri(req,res,next){
-
-    inizioArrayFiltri = fineArrayFiltri;
-
-    if(arrayAlloggiFiltri.length > (fineArrayFiltri + 6)){
-
-        fineArrayFiltri = fineArrayFiltri + 6;
-    }
-    else{
-        fineArrayFiltri = arrayAlloggiFiltri.length;
-    }
-
-    res.render('listaRicerca', {data : {array : arrayAlloggiFiltri, inizioCount : inizioArrayFiltri, fineCount : fineArrayFiltri, tipo: 1}})
-
-}
-
-/*GET paginaPrecedenteFiltri*/
-
-router.get('/paginaPrecedenteFiltri', paginaPrecedenteFiltri);
-
-async function paginaPrecedenteFiltri(req,res,next){
-
-
-    fineArrayFiltri = inizioArrayFiltri;
-
-    inizioArrayFiltri = inizioArrayFiltri - 6;
-
-
-    res.render('listaRicerca', {data : {array : arrayAlloggiFiltri, inizioCount : inizioArrayFiltri, fineCount : fineArrayFiltri, tipo:1}})
-
-}
-
 /*GET visualizzaAlloggio */
 
 router.get('/visualizzaAlloggioRicerca', visualizzaAlloggioRicerca);
@@ -194,7 +122,7 @@ async function visualizzaAlloggioRicerca(req, res, next){
 };
 
 
-/*POST filtri*/
+/*POST ricercaFiltri*/
 router.post('/ricercaFiltri', ricercaFiltri);
 
 async function ricercaFiltri(req, res, next){
@@ -352,10 +280,82 @@ async function ricercaFiltri(req, res, next){
         res.render('listaRicerca', {data : {array : arrayAlloggiFiltri, inizioCount : inizioArray, fineCount : fineArray, tipo:1}});
 
 
-      } catch (err) {
-          console.log(err);
-          next(createError(500));
-      }
+    } catch (err) {
+        console.log(err);
+        next(createError(500));
+    }
+}
+
+/* GET paginaSuccessiva */
+
+router.get('/paginaSuccessiva', paginaSuccessiva);
+
+async function paginaSuccessiva(req,res,next){
+
+    inizioArray = fineArray;
+
+    if(arrayAlloggi.length > (fineArray + 6)){
+
+        fineArray = fineArray + 6;
+    }
+    else{
+        fineArray = arrayAlloggi.length;
+    }
+
+    res.render('listaRicerca', {data : {array : arrayAlloggi, inizioCount : inizioArray, fineCount : fineArray, tipo: 0}})
+
+}
+
+/*GET paginaPrecedente*/
+
+router.get('/paginaPrecedente', paginaPrecedente);
+
+async function paginaPrecedente(req,res,next){
+
+
+    fineArray = inizioArray;
+
+    inizioArray = inizioArray - 6;
+
+
+    res.render('listaRicerca', {data : {array : arrayAlloggi, inizioCount : inizioArray, fineCount : fineArray, tipo: 0}})
+
+}
+
+/* GET paginaSuccessivaFiltri */
+
+router.get('/paginaSuccessivaFiltri', paginaSuccessivaFiltri);
+
+async function paginaSuccessivaFiltri(req,res,next){
+
+    inizioArrayFiltri = fineArrayFiltri;
+
+    if(arrayAlloggiFiltri.length > (fineArrayFiltri + 6)){
+
+        fineArrayFiltri = fineArrayFiltri + 6;
+    }
+    else{
+        fineArrayFiltri = arrayAlloggiFiltri.length;
+    }
+
+    res.render('listaRicerca', {data : {array : arrayAlloggiFiltri, inizioCount : inizioArrayFiltri, fineCount : fineArrayFiltri, tipo: 1}})
+
+}
+
+/*GET paginaPrecedenteFiltri*/
+
+router.get('/paginaPrecedenteFiltri', paginaPrecedenteFiltri);
+
+async function paginaPrecedenteFiltri(req,res,next){
+
+
+    fineArrayFiltri = inizioArrayFiltri;
+
+    inizioArrayFiltri = inizioArrayFiltri - 6;
+
+
+    res.render('listaRicerca', {data : {array : arrayAlloggiFiltri, inizioCount : inizioArrayFiltri, fineCount : fineArrayFiltri, tipo:1}})
+
 }
 
 
