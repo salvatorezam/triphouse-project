@@ -9,11 +9,6 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-/* GET ricerca. */
-router.get('/ricerca', function(req, res, next) {
-  res.render('ricerca');
-});
-
 /* GET registrazione. */
 router.get('/registrazione', function(req, res, next) {
   res.render('registrazione');
@@ -27,11 +22,6 @@ router.get('/autenticazione', function(req, res, next) {
 /* GET diventa host. */
 router.get('/diventahost', function(req, res, next) {
   res.render('finestraDiventaHost');
-});
-
-/* GET aggiungiAlloggio */
-router.get('/aggiungiAlloggio', function(req, res, next) {
-  res.render('aggiungiAlloggioDir/aggiungiAlloggio');
 });
 
 /* GET alloggio page. */
