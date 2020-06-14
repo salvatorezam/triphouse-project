@@ -5,7 +5,7 @@ exports.sendRegistrationEmail = async function (transporter, mailReceiver) {
         from: 'triphousetz@gmail.com',
         to: mailReceiver,
         subject: 'Benvenuto in Triphouse!',
-        text: 'Ma cu tu fici fari?'
+        text: 'Benvenuto nella nostra piattaforma!'
     }
     return new Promise((resolve, reject) => {
         transporter.sendMail(mailOptions, function(error, info) {
