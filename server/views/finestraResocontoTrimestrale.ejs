@@ -17,7 +17,7 @@
         </div>
         <div class="d-flex justify-content-between align-items-center flex-column flex-lg-row mb-5">
           <div class="mr-3">
-            <p class="mb-3 mb-lg-0">Hai <strong><%= data.length %></strong> prenotazioni concluse.</p>
+            <p class="mb-3 mb-lg-0">Hai <strong><%= data.length %></strong> prenotazioni concluse nell'attuale trimestre.</p>
           </div>
         </div>
         <div class="list-group shadow mb-5">
@@ -32,20 +32,22 @@
                 <tr>
                   <th scope="col">Numero</th>
                   <th scope="col">Alloggio</th>
+                  <th scope="col">Città</th>
                   <th scope="col">Data inizio</th>
                   <th scope="col">Data fine</th>
-                  <th scope="col">Guadagni</th>
+                  <th scope="col">Tasse</th>
                 </tr>
               </thead>
-              <% let totaleGuadagni = 0; for (let i = 0; i < data.length; i++) { %>
+              <% let totaleTasseTrimestre = 0; for (let i = 0; i < data.length; i++) { %>
               <tbody>
+                  <!---->
                 <tr>
-                  <th scope="row"><%= i+1%></th>
-                  <td><%= data[i].titolo %></td>
-                  <td><%= data[i].data_inizio %></td>
-                  <td><%= data[i].data_fine %></td>
-                  <td><%= data[i].prezzo_totale %></td>
-                  <% totaleGuadagni += data[i].prezzo_totale %>
+                  <th scope="row"></th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  
                 </tr>
               <% } %>
               <tr>
@@ -53,7 +55,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>&euro; <span><%= totaleGuadagni %></span></td>
+                <td>&euro; <span></span></td>
               </tr>
               </tbody>
             </table>

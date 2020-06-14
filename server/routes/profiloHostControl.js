@@ -357,10 +357,14 @@ async function inviaTasse(req, res, next) {
   try {
     await withTransaction(db, async() => {
 
+      // le tasse devono essere pagate per ogni giorno della permanenza fino al terzo giorno
+      var giorniPrenotazine = (prenData.data_fine.toString().split(' ')[0] - prenData.data_inizio.toString().split(' ')[0]);
+      if (giorniPrenotazine > 3) giorniPrenotazine = 3;
+
       // aggiorno le tasse pagate nel db in relazione ai dati della prenotazione e degli ospiti
       results = await db.query('UPDATE Prenotazione SET tasse_pagate = ? WHERE ID_PREN = ?', 
       [
-        req.body.tasse * (prenData.data_fine.toString().split(' ')[0] - prenData.data_inizio.toString().split(' ')[0]),
+        req.body.tasse * giorniPrenotazine,
         prenData.ID_PREN
       ])
         .catch(err => {
@@ -414,48 +418,62 @@ async function visualizzaResocontoTrimestrale(req, res, next) {
 
   try {
 
-    var curday = function(sp){
-      let today = new Date();
-      var dd = today.getDate();
-      var mm = today.getMonth()+1; //As January is 0.
-      var yyyy = today.getFullYear();
-      
-      if(dd<10) dd='0'+dd;
-      if(mm<10) mm='0'+mm;
-      return (mm+sp+dd+sp+yyyy);
-    };
-    
-    var year = curday('-').split('-')[2];
-    var day = curday('-').split('-')[1];
-    var month = curday('-').split('-')[0];
+    // ricaviamo l'utente dalla sessione
+    let utente = req.app.locals.users.get(req.session.user.id_utente);
 
-    // non appena inizia il trimestre vengono inviati i dati relativi alle tasse di soggiorno all'ufficio del turismo
-    if ( day == '1' & (month == '01' || month == '04' || month == '07' || month == '10')) {
-
-      let utente = req.app.locals.users.get(req.session.user.id_utente);
-
-      let results = await db.query("SELECT \
-                                    FROM UtenteRegistrato ur, Alloggio a, Prenotazione pr", 
-                                    [
-                                      utente,
-                                      year,
-                                      month, 
-                                      day,
-                                      year,
-                                      parseInt(month)+2,
-                                      31
-                                    ])
-                                  .catch(err => {
-                                    throw err;
-                                  }); // SQL:  year - month - day 
-
-      for (row in results) {
-        inviaResocontoTrimestrale(transporter, row.email, 'ufficio.turismo@ministero.gov', tfgh );
+    var trimestri = [ 
+      {
+        inizio : '01-01',
+        fine : '03-31'
+      },
+      {
+        inizio : '04-01',
+        fine : '06-31'
+      },
+      {
+        inizio : '07-01',
+        fine : '09-30'
+      },
+      {
+        inizio : '10-01',
+        fine : '12-31'
       }
-    }
+    ];
+
+    // ricaviamo la data di oggi 
+    let today = new Date();
+    var day = today.getDate();
+    var month = today.getMonth()+1; //As January is 0.
+    var year = today.getFullYear();
+    
+    if(day<10) day='0'+day; 
+    if(month<10) month='0'+month;
+
+    // scegliamo il trimestre di interesse 
+    for (let i = 0; i < trimestri.length; i++) 
+      if (month >= trimestri[i].inizio.split('-')[0] || month <= trimestri[i].fine.split('-')[0]) 
+        var trimestreCorrente = i;
+
+    let prenotazioniTrimestre = await db.query("SELECT pr.ID_PREN AS ID_PREN, a.titolo AS titolo, a.citta AS citta, pr.data_inizio AS data_inizio, \
+                                                pr.data_fine AS data_fine, pr.tasse_pagate\
+                                                FROM UtenteRegistrato ur, Alloggio a, Prenotazione pr\
+                                                WHERE ur.ID_UR = ? AND ur.ID_UR = a.proprietario AND a.ID_ALL = pr.alloggio \
+                                                AND pr.data_inizio >= ? AND pr.data_fine <= ? AND pr.stato_prenotazione = \'conclusa\' ", 
+                                                [
+                                                  utente.id_utente,
+                                                  year+'-'+trimestri[trimestreCorrente].inizio,
+                                                  year+'-'+trimestri[trimestreCorrente].fine,
+                                                ]).
+                                      catch(err => {
+                                        throw err;
+                                      });
 
 
-    res.render('/finestraResocontroTrimestrale', { data : data });
+
+    // fare seconda query per i dati degli ospiti delle singole prenotazioni 
+
+
+    res.render('finestraResocontoTrimestrale', { data : prenotazioniTrimestre });
 
   } catch (err) {
     console.log(err);

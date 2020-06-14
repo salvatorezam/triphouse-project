@@ -43,14 +43,14 @@ async function listaRicerca(req, res, next) {
         };
 
         
-
+        // DATEDISPONIBILI ----------------
         let sql1 = "SELECT a.ID_ALL AS ID_ALL, a.proprietario AS proprietario, a.tipo_all AS tipo_all, a.nome_proprietario AS nome_proprietario, a.indirizzo AS indirizzo, a.n_civico AS n_civico, a.cap AS cap, a.regione AS regione, a.citta AS citta, a.provincia AS provincia, \
 		a.num_ospiti_max AS num_ospiti_max, a.distanza_centro AS distanza_centro, a.num_letti_singoli AS num_letti_singoli, a.num_letti_matrimoniali AS num_letti_matrimoniali, a.num_camere AS num_camere, a.num_bagni AS num_bagni, a.cucina AS cucina, a.lavanderia AS lavanderia, \
 		a.aria_condizionata AS aria_condizionata, a.wifi AS wifi, a.colazione AS colazione, a.asciugacapelli AS asciugacapelli, a.tv AS tv, a.carta_igienica AS carta_igienica, a.sapone_mani_corpo AS sapone_mani_corpo, a.asciugamano AS asciugacapelli, a.accappatoio AS accappatoio, a.cuscino AS cuscino,\
 		a.lenzuola AS lenzuola, a.titolo AS titolo, a.descrizione_alloggio AS descrizione_alloggio, a.descrizione_regole AS descrizione_regole, a.note AS note, a.tasse AS tasse, a.prezzo AS prezzo, a.foto_0 AS foto_0, a.foto_1 AS foto_1,a.foto_2 AS foto_2,a.foto_3 As foto_3,a.foto_4 AS foto_4,a.foto_5 AS foto_5\
         FROM Alloggio a \
         WHERE a.citta = ? AND a.num_ospiti_max >= ? AND a.ID_ALL NOT IN (SELECT d.alloggio \
-																		FROM dateindisponibili d \
+																		FROM datedisponibili d \
                                                                         WHERE (? >= d.data_inizio AND ? <= d.data_fine ) OR (? > d.data_inizio AND ? < data_fine) OR ( ? < d.data_inizio AND ? > d.data_fine ));\
         SELECT r.ID_RA AS ID_RA, r.testo AS testo, r.data_rec AS data_rec, r.scrittore AS scrittore, u.nome AS nome_scrittore, \
                 r.alloggio AS alloggio, r.prenotazione AS prenotazione, r.valutazione AS valutazione \
