@@ -100,16 +100,6 @@
               </div>
             </div>
           </div>
-          <!--MAPPA: decomenta per inserire mappa-->
-          <!--
-          <div class="text-block">
-            <h5 class="mb-4">Listing location</h5>
-            <div class="map-wrapper-300 mb-3">
-
-              <div class="h-100" id="detailMap"></div>
-
-            </div>
-          </div>-->
           <!--GALLERIA-->
           <div class="text-block">
             <h5 class="mb-4">Galleria</h5>
@@ -147,7 +137,7 @@
                 <div class="text-md-center mr-4 mr-xl-5">
                   <!--<img class="d-block avatar avatar-xl p-2 mb-2" src="" alt="">-->
                   <h6 class="mt-2 mb-1"><%= element.nome_scrittore %></h6>
-                  <span class="text-uppercase text-muted text-sm"><%= element.data_rec.toString().slice(0,15) %></span>
+                  <span class="text-uppercase text-muted text-sm"><%= element.data_rec.toString().slice(0,15)%></span>
                 </div>
                 <div class="media-body">
                  
@@ -164,11 +154,27 @@
         </div>
         <div class="col-lg-4">
           <div class="py-3">
-           <a href="/prenotazioneControl/prenotazionePg1"><button class="btn btn-primary btn-block">1 notte <h4><%= data.data_a.prezzo %>€</h4> Prenota il tuo soggiorno</button></a>
+           <a href="/prenotazioneControl/prenotazionePg1"><button class="btn btn-primary btn-block" id='tasto_prenota'>1 notte <h4><%= data.data_a.prezzo %>€</h4> Prenota il tuo soggiorno</button></a>
           </div>
         </div>
       </div>
     </div>
+    <script>
+      $(document).ready(function() {
+        $('#tasto_prenota').click(function () {
+          $.ajax({
+            url: '/prenotazioneControl/prenotazionePg1',
+            type: 'GET',
+            success: response => {
+              if (response == 'PRENOTAZIONE-NON-DISPONIBILE-SUPERI-I-28-GIORNI-DISPONIBILI') {
+                alert('Non puoi prenotare lo stesso alloggio per un ammontare cumulativo di 28 giorni nello stesso anno!');
+                window.location.replace('/');
+              } 
+            }
+          });
+        });
+      });
+    </script>
     <!-- Footer-->
     <% include partials/footer.ejs %>
     <!-- Footer-->
