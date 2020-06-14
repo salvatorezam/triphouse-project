@@ -6,6 +6,8 @@ var router = express.Router();
 var datiOspiti = new Array(8); // memorizza i valori dei campi form relativi agli ospiti
 var datiUtenteR; // memorizza i dati relativi ai documenti dell'utente registrato
 var prenEffettuata; // memorizza la prenotazione
+var data_prenotazione_effettuata;
+
 
 
 var idUtente = "";
@@ -42,12 +44,25 @@ var moduloOspite = require('../public/javascripts/DatiOspite.js');
 
 var datePren;
 var d_i;
-var d_f;
+var d_f ;
 var numOspit;
 var notti;
 var totale;
 var nomeUtenteSessione;
 
+//CALCOLO GIORNO ANNO
+
+function calcolaGiorno(value){
+
+    //var now = new Date();
+    var start = new Date(value.getFullYear(), 0, 0);
+
+    var diff = (value - start) + ((start.getTimezoneOffset() - value.getTimezoneOffset()) * 60 * 1000);
+    var oneDay = 1000 * 60 * 60 * 24;
+    var day = Math.floor(diff / oneDay);
+
+    return day;
+}
 
 /* GET prenotazionePg1 */
 router.get('/prenotazionePg1', async function(req, res, next) {
@@ -58,7 +73,7 @@ router.get('/prenotazionePg1', async function(req, res, next) {
     idAlloggio = res.locals.alloggio.ID_ALL;
     prezzoNotte = res.locals.alloggio.prezzo;
     prezzoTassa = res.locals.alloggio.tasse;
-
+    data_prenotazione_effettuata = new Date();
     
     
     // calcolo le notti per determinare il prezzo totale
@@ -78,7 +93,9 @@ router.get('/prenotazionePg1', async function(req, res, next) {
     const db = await makeDb(config);
     try {
         await withTransaction(db, async() => {
+
             console.log(req.session.user);
+
             if(req.session.user == undefined) {
                
                 console.log("metto true");
@@ -86,14 +103,73 @@ router.get('/prenotazionePg1', async function(req, res, next) {
             }else {
                 var utente = req.app.locals.users.get(req.session.user.id_utente);
             }
-            
+
             if( utente!= undefined) {
                 idUtente = utente.id_utente;
-                res.render('prenotazioneDir/prenotazionePg1',{data:datePren,dataPrezzoNotte:prezzoNotte,dataPrezzoTassa:prezzoTassa,dataNotti:notti,dataTotale:totale,dataNumOsp:numOspit});
-            }else {
+
+                //EFFETTUO QUERY PER IL CONTROLLO DEI 28 GIORNI
+                let sql = "SELECT* FROM prenotazione WHERE utente = ? AND alloggio = ?;";
+                let values = [
+                    
+                    idUtente,
+                    idAlloggio
+                ];
+        
+                results = await db.query(sql, values)
+                        .catch(err => {
+                            throw err;
+                        });
+        
+                //CALCOLO DEI 28 GIORNI
+
+                let prenotazioni_anno_cercato = [];
+                let anno_prenotazione = new Date(datePren.data_i); //trovo l'anno della data di inzio della mia prenotazione
+                    anno_prenotazione = anno_prenotazione.getFullYear();
+
+                if(results.length != 0){
+
+                    let count = 0;
+
+                    results.forEach(element => {
+
+                        if(element.data_inizio.getFullYear() == anno_prenotazione){  //controllo se ho effettuato altre prenotazioni in quell'anno
+
+                            prenotazioni_anno_cercato[count] = element;
+                            count++;
+                        }
+                    });
+
+                }
+
+                let countGiorni = notti;  //inizializzo count giorni con il numero di giorni che l'utente ha selezionato per effettuare la prenotazione
+
+                prenotazioni_anno_cercato.forEach(element => {
+
+                    let i = calcolaGiorno(element.data_inizio);
+                    let f = calcolaGiorno(element.data_fine);
+
+                    countGiorni = countGiorni + (f - i);
+                    
+                });
+
+                //CONTROLLO DEI 28 GIORNI 
+
+                if(countGiorni > 28){
+
+                    res.send('PRENOTAZIONE-NON-DISPONIBILE-SUPERI-I-28-GIORNI-DISPONIBILI');
+                }
+                else{
+
+                    res.render('prenotazioneDir/prenotazionePg1',{data:datePren,dataPrezzoNotte:prezzoNotte,dataPrezzoTassa:prezzoTassa,dataNotti:notti,dataTotale:totale,dataNumOsp:numOspit});
+                }
+
+
+            }
+            else {
                 console.log('sessione Utente non trovata!');
                 res.render('Autenticazione')
-            }
+            }  
+
             
         });
     } catch (err) {
@@ -102,6 +178,10 @@ router.get('/prenotazionePg1', async function(req, res, next) {
     } 
     
 });
+
+
+
+
 
 /* GET prenotazionePg2 */
 router.get('/prenotazionePg2', async function(req, res, next) {
@@ -264,7 +344,7 @@ async function compilaPt3(req, res, next){
         prenEffettuata.alloggio = idAlloggio;
         prenEffettuata.data_inizio = datePren.data_i;
         prenEffettuata.data_fine = datePren.data_f;
-        prenEffettuata.data_pren = new Date();
+        prenEffettuata.data_pren = data_prenotazione_effettuata;
         prenEffettuata.prezzo_totale = (prezzoNotte * notti);
         prenEffettuata.stato_prenotazione = "richiesta";
         prenEffettuata.tipo_pagamento = req.body.metodoPagamento;   

@@ -122,7 +122,7 @@ router.get('/modificaInformazioniAlloggio', function(req, res, next){
 
 });
 
-/* POST EFFETTUA MODIFICHE*/
+/* POST INVIA MODIFICHE*/
 
 router.post('/effettuaModifiche', upload, async function (req, res, next){
 
