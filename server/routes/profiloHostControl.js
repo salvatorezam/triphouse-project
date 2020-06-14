@@ -59,7 +59,7 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                         a.titolo AS titolo, a.tipo_all AS tipo_all, a.indirizzo AS indirizzo, a.n_civico AS n_civico, \
                         a.citta AS citta, a.tasse AS tasse_alloggio, p.stato_prenotazione AS stato_prenotazione, \
                         ur.nome AS nome_ut, ur.cognome AS cognome_ut, ur.telefono AS telefono_ut, \
-                        ur.email AS email_ut, ur.nazione_nascita AS naz_prenotante, DATEDIFF(CURDATE(),ur.data_nascita)/365 AS eta_prenotante, \
+                        ur.email AS email_ut, ur.nazione_nascita AS naz_prenotante, FLOOR(DATEDIFF(CURDATE(),ur.data_nascita)/365) AS eta_prenotante, \
                         ur.ID_UR AS ID_UR, \
                         p.prezzo_totale AS prezzo_totale, p.data_pren AS data_prenotazione, \
                         dur.tipo_doc AS tipo_doc_ur, dur.num_doc AS num_doc_ur, dur.scadenza_doc AS scadenza_doc_ur, \
@@ -83,9 +83,14 @@ async function getListaPrenotazioniRicevute(req, res, next) {
             //unifico i risultati delle query
             for (elPren of prenRicevute[0]) {
 
-                elPren.data_inizio = dataGiornoMeseAnno(elPren.data_inizio.toLocaleDateString());
-                elPren.data_fine = dataGiornoMeseAnno(elPren.data_fine.toLocaleDateString());
-                elPren.data_prenotazione = dataGiornoMeseAnno(elPren.data_prenotazione.toLocaleDateString());
+                //elPren.data_inizio = dataGiornoMeseAnno(elPren.data_inizio.toLocaleDateString());
+                //elPren.data_fine = dataGiornoMeseAnno(elPren.data_fine.toLocaleDateString());
+                //elPren.data_prenotazione = dataGiornoMeseAnno(elPren.data_prenotazione.toLocaleDateString());
+
+                // per salvo - eventualmente commentare
+                elPren.data_inizio = elPren.data_inizio.toDateString();
+                elPren.data_fine = elPren.data_fine.toDateString();
+                elPren.data_prenotazione = elPren.data_prenotazione.toDateString();
   
                 //ospiti
                 elPren.nomi_ospiti = "";
@@ -348,10 +353,15 @@ async function inviaTasse(req, res, next) {
   try {
     await withTransaction(db, async() => {
 
-      results = await db.query('UPDATE Prenotazione SET tasse_pagate = ? WHERE ID_PREN = ?', [req.body.tasse, prenData.ID_PREN])
-              .catch(err => {
-                throw err;
-              });
+      // aggiorno le tasse pagate nel db in relazione ai dati della prenotazione e degli ospiti
+      results = await db.query('UPDATE Prenotazione SET tasse_pagate = ? WHERE ID_PREN = ?', 
+      [
+        req.body.tasse * (prenData.data_fine.toString().split(' ')[0] - prenData.data_inizio.toString().split(' ')[0]),
+        prenData.ID_PREN
+      ])
+        .catch(err => {
+          throw err;
+        });
 
       res.send('UPDATE-SUCCESSFUL');
     });
@@ -371,8 +381,10 @@ async function calcolaGuadagni(req, res, next) {
   try {
     await withTransaction(db, async() => {
 
+      // individuo l'utente che sta facendo la richiesta tramite la sessione
       let utente = req.app.locals.users.get(req.session.user.id_utente);
 
+      // ricavo i guadagni delle prenotazioni concluse relative agli alloggi dell'utente
       results = await db.query('SELECT a.titolo AS titolo, pr.data_inizio AS data_inizio, pr.data_fine AS data_fine, (DATEDIFF(pr.data_fine,pr.data_inizio))*a.prezzo AS prezzo_totale\
                                 FROM UtenteRegistrato ur, Alloggio a, Prenotazione pr \
                                 WHERE ur.ID_UR = a.proprietario AND a.ID_ALL = pr.alloggio AND pr.stato_prenotazione = \'conclusa\';', utente)
@@ -387,5 +399,66 @@ async function calcolaGuadagni(req, res, next) {
       next(createError(500));
   }
 }
+
+router.get('/finestraResocontoTrimestrale', visualizzaResocontoTrimestrale);
+
+// invio resoconto trimestrale automatico
+  
+async function visualizzaResocontoTrimestrale(req, res, next) {
+
+  const db = await makeDb(config);
+
+  try {
+
+    var curday = function(sp){
+      let today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //As January is 0.
+      var yyyy = today.getFullYear();
+      
+      if(dd<10) dd='0'+dd;
+      if(mm<10) mm='0'+mm;
+      return (mm+sp+dd+sp+yyyy);
+    };
+    
+    var year = curday('-').split('-')[2];
+    var day = curday('-').split('-')[1];
+    var month = curday('-').split('-')[0];
+
+    // non appena inizia il trimestre vengono inviati i dati relativi alle tasse di soggiorno all'ufficio del turismo
+    if ( day == '1' & (month == '01' || month == '04' || month == '07' || month == '10')) {
+
+      let utente = req.app.locals.users.get(req.session.user.id_utente);
+
+      let results = await db.query("SELECT \
+                                    FROM UtenteRegistrato ur, Alloggio a, Prenotazione pr", 
+                                    [
+                                      utente,
+                                      year,
+                                      month, 
+                                      day,
+                                      year,
+                                      parseInt(month)+2,
+                                      31
+                                    ])
+                                  .catch(err => {
+                                    throw err;
+                                  }); // SQL:  year - month - day 
+
+      for (row in results) {
+        inviaResocontoTrimestrale(transporter, row.email, 'ufficio.turismo@ministero.gov', tfgh );
+      }
+    }
+
+
+    res.render('/finestraResocontroTrimestrale', { data : data });
+
+  } catch (err) {
+    console.log(err);
+    next(createError(500));
+  }
+
+
+};
 
 module.exports = router;

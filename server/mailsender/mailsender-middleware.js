@@ -102,5 +102,22 @@ exports.inviaMailDeclinazione = async function (transporter, mailReceiver, testo
         }); 
 };
 
+exports.inviaResocontoTrimestrale = async function (transporter, mailReceiver, sender, testo) {
+    let mailOptions = {
+        from: sender,
+        to: mailReceiver,
+        subject: 'Resoconto trimestrale delle tasse di soggiorno',
+        text: testo
+    }
+    return new Promise((resolve, reject) => {
+        transporter.sendMail(mailOptions, function(error, info) {
+            if (error) 
+                return reject(error);
+            console.log('Email sent: ' + info.response);
+            resolve('Email sent');
+            });
+        }); 
+};
+
 
 
