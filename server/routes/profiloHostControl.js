@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var createError = require('http-errors');
 const { transporter } = require('../mailsender/mailsender-config');
-const { inviaMailCliente, inviaMailConferma, inviaMailDeclinazione } = require('../mailsender/mailsender-middleware');
+const { inviaMailCliente, inviaMailConferma, inviaMailDeclinazione, inviaMailResocontoTrimestrale } = require('../mailsender/mailsender-middleware');
 
 const mesi = [
   "meseZero",
@@ -29,6 +29,8 @@ const dataGiornoMeseAnno = function(data) {
 var idUtente = "";
 var prenRicevute = {};
 var prenData = {};
+var utenteMail = "";
+var jsonResocontoTrimestrale;
 
 const { config } = require('../db/config');
 const { makeDb, withTransaction } = require('../db/dbmiddleware');
@@ -48,6 +50,7 @@ async function getListaPrenotazioniRicevute(req, res, next) {
 
             if (utente) {
               idUtente = utente.id_utente;
+              utenteMail = utente.email;
             }
             else {
               console.log('Sessione Utente non trovata!');
@@ -358,7 +361,9 @@ async function inviaTasse(req, res, next) {
     await withTransaction(db, async() => {
 
       // le tasse devono essere pagate per ogni giorno della permanenza fino al terzo giorno
-      var giorniPrenotazine = (prenData.data_fine.toString().split(' ')[0] - prenData.data_inizio.toString().split(' ')[0]);
+      var finalDate = new Date(prenData.data_fine);
+      var startDate = new Date(prenData.data_inizio);
+      var giorniPrenotazine = finalDate - startDate;
       if (giorniPrenotazine > 3) giorniPrenotazine = 3;
 
       // aggiorno le tasse pagate nel db in relazione ai dati della prenotazione e degli ospiti
@@ -390,7 +395,7 @@ async function calcolaGuadagni(req, res, next) {
     await withTransaction(db, async() => {
 
       // individuo l'utente che sta facendo la richiesta tramite la sessione
-      let utente = req.app.locals.users.get(req.session.user.id_utente);
+      var utente = req.app.locals.users.get(req.session.user.id_utente);
 
       // ricavo i guadagni delle prenotazioni concluse relative agli alloggi dell'utente
       results = await db.query('SELECT a.titolo AS titolo, pr.data_inizio AS data_inizio, pr.data_fine AS data_fine, (DATEDIFF(pr.data_fine,pr.data_inizio))*a.prezzo AS prezzo_totale\
@@ -411,7 +416,9 @@ async function calcolaGuadagni(req, res, next) {
 router.get('/finestraResocontoTrimestrale', visualizzaResocontoTrimestrale);
 
 // invio resoconto trimestrale automatico
-  
+
+
+
 async function visualizzaResocontoTrimestrale(req, res, next) {
 
   const db = await makeDb(config);
@@ -419,7 +426,7 @@ async function visualizzaResocontoTrimestrale(req, res, next) {
   try {
 
     // ricaviamo l'utente dalla sessione
-    let utente = req.app.locals.users.get(req.session.user.id_utente);
+    var utente = req.app.locals.users.get(req.session.user.id_utente);
 
     var trimestri = [ 
       {
@@ -451,16 +458,23 @@ async function visualizzaResocontoTrimestrale(req, res, next) {
 
     // scegliamo il trimestre di interesse 
     for (let i = 0; i < trimestri.length; i++) 
-      if (month >= trimestri[i].inizio.split('-')[0] || month <= trimestri[i].fine.split('-')[0]) 
+      if (month >= trimestri[i].inizio.split('-')[0] && month <= trimestri[i].fine.split('-')[0]) {
         var trimestrePassato = (i - 1) % 4;
+        
+      }
+      console.log(trimestrePassato + 'TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT');
+
+      console.log(trimestri[trimestrePassato].inizio + 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
 
     // consideriamo il caso in cui il trimestre si riferisce all'anno passato
     if (trimestrePassato == 3) year = parseInt(year)-1;
 
+    // ricaviamo i dati sulle tasse e sugli ospiti delle prenotazioni del trimestre
     let prenotazioniTrimestre = await db.query("SELECT pr.ID_PREN AS ID_PREN, a.titolo AS titolo, a.citta AS citta, pr.data_inizio AS data_inizio, \
-                                                pr.data_fine AS data_fine, pr.tasse_pagate\
-                                                FROM UtenteRegistrato ur, Alloggio a, Prenotazione pr, DocumentiUtenteR dur, DatiOspiti do\
-                                                WHERE ur.ID_UR = ? AND ur.ID_UR = a.proprietario AND a.ID_ALL = pr.alloggio AND dur.utente = ur.ID_UR AND do.prenotazione = pr.ID_PREN \
+                                                pr.data_fine AS data_fine, pr.tasse_pagate, ur.nazione_nascita AS nazione_nascita, FLOOR(DATEDIFF(CURDATE(),ur.data_nascita)/365) AS eta_ur, \
+                                                do.nazionalita AS nazionalita_do, do.eta AS eta_do  \
+                                                FROM Alloggio a, Prenotazione pr, DocumentiUtenteR dur, DatiOspiti do, UtenteRegistrato ur\
+                                                WHERE a.proprietario = ? AND a.ID_ALL = pr.alloggio AND pr.ID_PREN = dur.prenotazione AND pr.utente = ur.ID_UR AND do.prenotazione = pr.ID_PREN \
                                                 AND pr.data_inizio >= ? AND pr.data_fine <= ? AND pr.stato_prenotazione = \'conclusa\' ", 
                                                 [
                                                   utente.id_utente,
@@ -470,6 +484,12 @@ async function visualizzaResocontoTrimestrale(req, res, next) {
                                       catch(err => {
                                         throw err;
                                       });
+    
+    jsonResocontoTrimestrale = JSON.stringify(prenotazioniTrimestre);
+
+    console.log('JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ');
+    console.log(jsonResocontoTrimestrale);
+    console.log('JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ');
 
     res.render('finestraResocontoTrimestrale', { data : prenotazioniTrimestre });
 
@@ -478,7 +498,34 @@ async function visualizzaResocontoTrimestrale(req, res, next) {
     next(createError(500));
   }
 
-
 };
+
+router.post('/inviaresocontotrimestrale', inviaResocontoTrimestrale);
+
+async function inviaResocontoTrimestrale(req, res, next) {
+
+  const db = await makeDb(config);
+
+  try {
+    await withTransaction(db, async() => {
+
+      var utente = req.app.locals.users.get(req.session.user.id_utente);
+      
+
+      console.log(+ 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+
+      inviaMailResocontoTrimestrale(transporter, 'ufficio@turismo.gov',
+                                  utente.email,
+                                  jsonResocontoTrimestrale);
+
+      res.send('EMAIL-SENT');
+
+    });
+  } catch (err) {
+      console.log(err);
+      next(createError(500));
+  }
+}
+
 
 module.exports = router;
