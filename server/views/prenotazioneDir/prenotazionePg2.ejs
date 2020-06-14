@@ -309,11 +309,8 @@
                   </div>
                   <div class="col-sm-4">
                     <label class="form-label" name="eta" id="eta" for="eta_ospite<%= x %>" data-style="btn-selectpicker"> Età</label>
-                    <select class="selectpicker form-control" name="eta_ospite<%= x %>" id="eta_ospite<%= x %>" data-style="btn-selectpicker">
-                        <option value="0">Adulto</option>
-                        <option value="1">Bambino</option>
-                        <option value="2">Neonato</option>
-                    </select>
+                    <input class="form-control" name="eta_ospite<%= x %>" id="eta_ospite<%= x %>" type="number" min="0" max="99" maxlength="2">
+                    </input>
                   </div>
                 </div>
                 <div class="row">
