@@ -42,15 +42,15 @@
                         <div class=" text-block row ml-2" id="formDocOspiti"> 
                         <% for (let x = 1; x <= dataNumOsp; x++) { %>    
                             <div style="margin-top: 1em;">
-                                <h5>Ospite <%= x %></h5>
+                                <h5>Ospite <%= x %> (facoltativo)</h5>
                                 <div class="row">
                                     <div class="col">
                                         <label class="form-label" for="fronteDocOsp<%= x %>">Inserisci la scansione del documento</label>
-                                        <input class="form-control" type="file" name="fronteDocOsp<%= x %>" id="fronteDocOsp<%= x %>" autocomplete="off" required>
+                                        <input class="form-control" type="file" name="fronteDocOsp<%= x %>" id="fronteDocOsp<%= x %>" autocomplete="off" <%= dataBut %>>
                                     </div>
                                     <div class="col">
                                       <label class="form-label" for="retroDocOsp<%= x %>">Inserisci la scansione del documento</label>
-                                      <input class="form-control" type="file" name="retroDocOsp<%= x %>" id="retroDocOsp<%= x %>" autocomplete="off" required>
+                                      <input class="form-control" type="file" name="retroDocOsp<%= x %>" id="retroDocOsp<%= x %>" autocomplete="off" <%= dataBut %>>
                                   </div>
                                 </div>
                             </div>

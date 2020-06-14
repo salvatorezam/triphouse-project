@@ -128,10 +128,7 @@ router.post('/prenotazionePg3', compilaPt1);
 
 async function compilaPt1(req, res, next){
    try {
-        //datiUtenteR.nome = req.session.user.nome;
-        //datiUtenteR.cognome = req.session.user.cognome;
-        //datiUtenteR.nazionalita = req.session.user.nazione_nascita;
-        //datiUtenteR.eta = 0;
+        
         datiUtenteR.tipo_doc = req.body.documentoU;
         datiUtenteR.num_doc = req.body.numeroDocU;
         datiUtenteR.scadenza_doc = req.body.scadenzaDocU;
@@ -151,9 +148,14 @@ async function compilaPt1(req, res, next){
 
        console.log('Inserimento valori step 1');
        console.log(datiOspiti);
+        
+       let invioDoc = "";
+       if (datiOspiti[1].num_doc == null) {
 
+            invioDoc = "disabled";
+       }
        
-       res.render('prenotazioneDir/prenotazionePg3',{data:datePren,dataPrezzoNotte:prezzoNotte,dataPrezzoTassa:prezzoTassa,dataNotti:notti,dataTotale:totale,dataNumOsp:numOspit});
+       res.render('prenotazioneDir/prenotazionePg3',{data:datePren,dataPrezzoNotte:prezzoNotte,dataPrezzoTassa:prezzoTassa,dataNotti:notti,dataTotale:totale,dataNumOsp:numOspit,dataBut:invioDoc});
 
    } catch (err) {
        console.log(err);
@@ -173,40 +175,18 @@ router.post('/upload', cpUpload, async function (req, res, next) {
 
       for (let x = 1; x <= numOspit; x++) {
 
-        datiOspiti[x].foto_fronte_doc = req.files['fronteDocOsp' + x][0].filename;
-        datiOspiti[x].foto_retro_doc = req.files['retroDocOsp' + x][0].filename;
-        console.log('il nome salvato dei doc: ' + datiOspiti[x].foto_fronte_doc);
+        if (req.files['fronteDocOsp' + x] != undefined) {
+            datiOspiti[x].foto_fronte_doc = req.files['fronteDocOsp' + x][0].filename;
+            datiOspiti[x].foto_retro_doc = req.files['retroDocOsp' + x][0].filename;
+            console.log('il nome salvato dei doc: ' + datiOspiti[x].foto_fronte_doc);
+        }
       }
-
-      //datiOspiti[0].foto_doc = req.files['fileDoc1'];
-      //datiOspiti[1].foto_doc = req.files['fileDoc2']; 
-      //datiOspiti[2].foto_doc = req.files['fileDoc3'];   
-      //datiOspiti[3].foto_doc = req.files['fileDoc4']; 
-      //datiOspiti[4].foto_doc = req.files['fileDoc5']; 
-      //datiOspiti[5].foto_doc = req.files['fileDoc6']; 
-      //datiOspiti[6].foto_doc = req.files['fileDoc7']; 
-      //datiOspiti[7].foto_doc = req.files['fileDoc8'];
-     
-      //controllo se sono stati caricati i file, se si sostituisco l'oggetto file con la sua proprietà filename
-      //se non sono stati caricati file impongo la proprietà foto_doc = null 
-      /*for (let index = 0; index < 8; index++) {
-          if(datiOspiti[index].foto_doc == undefined){
-              datiOspiti[index].foto_doc = null;
-          }else{
-            datiOspiti[index].foto_doc = datiOspiti[index].foto_doc[0].filename;
-          }
-      }*/
-      
 
       console.log('step 2 valori inseriti:');
       console.log(datiUtenteR);
       console.log('dati ospiti');
       console.log(datiOspiti[1]);
       console.log(datiOspiti[2]);
-
-      /*for (let index = 0; index < 8; index++) {
-           console.log(datiOspiti[index]);           
-      }*/
 
       res.render('prenotazioneDir/prenotazionePg4',{data:datePren,dataPrezzoNotte:prezzoNotte,dataPrezzoTassa:prezzoTassa,dataNotti:notti,dataTotale:totale,dataNumOsp:numOspit});
 
@@ -275,13 +255,15 @@ async function compilaPt3(req, res, next){
 
             console.log("Prenotazione Effettuata con successo");
             
-            nosql = false;
+            var nosql = false;
             var sql_tipo = "INSERT INTO DatiOspiti VALUES (UUID(),?,?,?,?,?,?,?,?,?,(SELECT ID_PREN FROM PRENOTAZIONE WHERE utente = ? AND alloggio = ? AND data_pren = ?));";
             var sql1 = "";
             var values1 = [];
 
-            if (datiOspiti[1] == undefined) {
+            if (datiOspiti[1] == undefined || datiOspiti[1].num_doc == '' || datiOspiti[1].num_doc == null ) {
                 nosql = true;
+                //se l' utente non setta il numero di documento, mi scrive informazioni che comunque l' host
+                //dovrà riprendere in loco per forza di cose, quindi tanto vale non fare la insert nel db
             }
             else {
                 for (let x = 1; x <= numOspit; x++) {
@@ -302,41 +284,18 @@ async function compilaPt3(req, res, next){
                     }
                 }
             }
-      
-            results1 = await db.query(sql1, values1)
-                    .catch(err => {
-                        throw err;
-                    });
+            
+            if (nosql == false) {
+                results1 = await db.query(sql1, values1)
+                        .catch(err => {
+                            throw err;
+                        });
+            }
             console.log("Documenti inviati");
         });
-
-
-
-
-          //  let sql2 =  "INSERT INTO DatiOspiti VALUES (UUID(),?,?,?,?,?,?,?,?,(SELECT ID_PREN FROM Prenotazione WHERE utente=? AND alloggio=? AND data_pren=?));";
-                         
-         /*   var values2 = [
-                [datiOspiti[0].nome, datiOspiti[0].cognome, datiOspiti[0].nazionalita, datiOspiti[0].eta, datiOspiti[0].tipo_doc, datiOspiti[0].num_doc, datiOspiti[0].scadenza_doc,  datiOspiti[0].foto_doc, prenEffettuata.utente, prenEffettuata.alloggio, prenEffettuata.data_pren],
-                [datiOspiti[1].nome, datiOspiti[1].cognome, datiOspiti[1].nazionalita, datiOspiti[1].eta, datiOspiti[1].tipo_doc, datiOspiti[1].num_doc, datiOspiti[1].scadenza_doc,  datiOspiti[1].foto_doc, prenEffettuata.utente, prenEffettuata.alloggio, prenEffettuata.data_pren],
-                [datiOspiti[2].nome, datiOspiti[2].cognome, datiOspiti[2].nazionalita, datiOspiti[2].eta, datiOspiti[2].tipo_doc, datiOspiti[2].num_doc, datiOspiti[2].scadenza_doc,  datiOspiti[2].foto_doc, prenEffettuata.utente, prenEffettuata.alloggio, prenEffettuata.data_pren],
-                [datiOspiti[3].nome, datiOspiti[3].cognome, datiOspiti[3].nazionalita, datiOspiti[3].eta, datiOspiti[3].tipo_doc, datiOspiti[3].num_doc, datiOspiti[3].scadenza_doc,  datiOspiti[3].foto_doc, prenEffettuata.utente, prenEffettuata.alloggio, prenEffettuata.data_pren],
-                [datiOspiti[4].nome, datiOspiti[4].cognome, datiOspiti[4].nazionalita, datiOspiti[4].eta, datiOspiti[4].tipo_doc, datiOspiti[4].num_doc, datiOspiti[4].scadenza_doc,  datiOspiti[4].foto_doc, prenEffettuata.utente, prenEffettuata.alloggio, prenEffettuata.data_pren],
-                [datiOspiti[5].nome, datiOspiti[5].cognome, datiOspiti[5].nazionalita, datiOspiti[5].eta, datiOspiti[5].tipo_doc, datiOspiti[5].num_doc, datiOspiti[5].scadenza_doc,  datiOspiti[5].foto_doc, prenEffettuata.utente, prenEffettuata.alloggio, prenEffettuata.data_pren],
-                [datiOspiti[6].nome, datiOspiti[6].cognome, datiOspiti[6].nazionalita, datiOspiti[6].eta, datiOspiti[6].tipo_doc, datiOspiti[6].num_doc, datiOspiti[6].scadenza_doc,  datiOspiti[6].foto_doc, prenEffettuata.utente, prenEffettuata.alloggio, prenEffettuata.data_pren],
-                [datiOspiti[7].nome, datiOspiti[7].cognome, datiOspiti[7].nazionalita, datiOspiti[7].eta, datiOspiti[7].tipo_doc, datiOspiti[7].num_doc, datiOspiti[7].scadenza_doc,  datiOspiti[7].foto_doc, prenEffettuata.utente, prenEffettuata.alloggio, prenEffettuata.data_pren]
-                
-            ];
-
-            results = await db.query(sql2,[values2])
-                    .catch(err => {
-                        throw err;
-                    });
-            console.log("Dati inseriti correttamente");   */  
-
-
         
+        res.render('prenotazioneDir/prenotazionePg5',{nomeUtSes:nomeUtenteSessione});
 
-            res.render('prenotazioneDir/prenotazionePg5',{nomeUtSes:nomeUtenteSessione});  
         } catch (err) {
             console.log(err);
             next(createError(500));
