@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var createError = require('http-errors');
 const { transporter } = require('../mailsender/mailsender-config');
-const { inviaMailCliente, inviaMailConferma, inviaMailDeclinazione, inviaMailResocontoTrimestrale } = require('../mailsender/mailsender-middleware');
+const { inviaMailCliente, inviaMailConferma, inviaMailDeclinazione, inviaMailResoconto } = require('../mailsender/mailsender-middleware');
 
 const mesi = [
   "meseZero",
@@ -414,6 +414,49 @@ async function inviaTasse(req, res, next) {
       next(createError(500));
   }
 }
+
+
+/* Calcola tasse */
+router.post('/inviadocumenti', inviaDocumenti);
+
+async function inviaDocumenti(req, res, next) {
+
+  const db = await makeDb(config);
+
+  try {
+    await withTransaction(db, async() => {
+
+      //reperiamo i dati degli ospiti della prenotazione e li stampiamo 
+      let results = await db.query("SELECT ur.nome AS nome, ur.cognome AS cognome, dur.tipo_doc AS tipo_doc_ur, dur.num_doc AS num_doc_ur, \
+                                    dur.scadenza_doc AS scadenza_doc, dur.foto_fronte_doc AS foto_fronte_doc_ur, dur.foto_retro_doc AS foto_retro_doc_ur, \
+                                    do.nome AS nome_do, do.cognome AS cognome_do, do.tipo_doc AS tipo_doc_do, do.num_doc AS num_doc_do,  \
+                                    do.foto_fronte_doc AS foto_fronte_doc_do, do.foto_retro_doc AS foto_retro_doc_do\
+                                    FROM UtenteRegistrato ur, Prenotazione pr, DocumentiUtenteR dur, DatiOspiti do \
+                                    WHERE ur.ID_UR = PR.utente AND pr.ID_PREN = ? AND pr.ID_PREN = dur.prenotazione AND pr.ID_PREN = do.prenotazione;", 
+                                    [
+                                      prenData.ID_PREN
+                                    ])
+                    .catch(err => {
+                      throw err;
+                    });
+
+      let jsonDocumentiOspiti = JSON.stringify(results); 
+
+      console.log(jsonDocumentiOspiti);
+
+      var utente = req.app.locals.users.get(req.session.user.id_utente);
+
+      inviaMailResoconto(transporter, 'ufficio@questura.gov',
+                                  utente.email,
+                                  jsonDocumentiOspiti);
+
+      res.send('EMAIL-SENT');
+    });
+  } catch (err) {
+      console.log(err);
+      next(createError(500));
+  }
+}
   
 
 router.get('/finestraCalcolaGuadagni', calcolaGuadagni);
@@ -717,11 +760,8 @@ async function inviaResocontoTrimestrale(req, res, next) {
     await withTransaction(db, async() => {
 
       var utente = req.app.locals.users.get(req.session.user.id_utente);
-      
 
-      console.log(+ 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-
-      inviaMailResocontoTrimestrale(transporter, 'ufficio@turismo.gov',
+      inviaMailResoconto(transporter, 'ufficio@turismo.gov',
                                   utente.email,
                                   jsonResocontoTrimestrale);
 

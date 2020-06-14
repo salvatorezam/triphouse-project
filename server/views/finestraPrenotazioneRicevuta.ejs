@@ -15,22 +15,22 @@
               <div class="swiper-wrapper">
                 <!-- Slides-->
                 <% if (data.data_pren.foto_0 != null && data.data_pren.foto_0 != undefined) { %>
-                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_0 %>"></div>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/uploads/<%= data.data_pren.foto_0 %>"></div>
                 <% } %>
                 <% if (data.data_pren.foto_1 != null && data.data_pren.foto_1 != undefined) { %>
-                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_1 %>"></div>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/uploads/<%= data.data_pren.foto_1 %>"></div>
                 <% } %>
                 <% if (data.data_pren.foto_2 != null && data.data_pren.foto_2 != undefined) { %>
-                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_2 %>"></div>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/uploads/<%= data.data_pren.foto_2 %>"></div>
                 <% } %>
                 <% if (data.data_pren.foto_3 != null && data.data_pren.foto_3 != undefined) { %>
-                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_3 %>"></div>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/uploads/<%= data.data_pren.foto_3 %>"></div>
                 <% } %>
                 <% if (data.data_pren.foto_4 != null && data.data_pren.foto_4 != undefined) { %>
-                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_4 %>"></div>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/uploads/<%= data.data_pren.foto_4 %>"></div>
                 <% } %>
                 <% if (data.data_pren.foto_5 != null && data.data_pren.foto_5 != undefined) { %>
-                  <div class="swiper-slide"><img class="img-fluid" src="../images/<%= data.data_pren.foto_5 %>"></div>
+                  <div class="swiper-slide"><img class="img-fluid" src="../images/uploads/<%= data.data_pren.foto_5 %>"></div>
                 <% } %>
               </div>
               <div class="swiper-pagination swiper-pagination-white"></div>
@@ -334,7 +334,7 @@
 
             </ul>
           </div>
-          <div class="text-block d-print-none"> <!-- PENSARE PER LA RICEVUTA -->
+          <div class="text-block d-print-none">
             <button class="btn btn-link pl-0" onclick="window.print()"><i class="fa fa-print mr-2"></i>Print </button>
           </div>
         </div>
@@ -376,6 +376,19 @@
             success: response => {
               console.log('Response from server is ' + response);
               window.alert('Pagamento tasse aggiornato!')
+            }
+          });
+        });
+
+        // Invio dati ospiti -----------------------------------------------------------------------
+        $('#confermaInvioDocumenti').click(function(ev) {
+          $.ajax({
+            context: this,
+            url: '/profiloHostControl/inviadocumenti',
+            type: 'POST',
+            success: response => {
+              console.log('Response from server is ' + response);
+              window.alert('Documenti inviati!')
             }
           });
         });
