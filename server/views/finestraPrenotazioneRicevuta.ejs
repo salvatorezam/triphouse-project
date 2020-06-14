@@ -5,9 +5,9 @@
   </head>
   <body style="padding-top: 72px;">
     <% include partials/header.ejs %>
-    <div class="container-fluid">               
+    <div class="container py-5">               
       <div class="row">
-        <div class="col-lg-7 col-xl-5 px-4 pb-4 pl-xl-5 pr-xl-5">
+        <div class="col-lg-8">
           <section class="mx-n4 mx-xl-n5 mb-4 mb-xl-5">
             <!-- Slider main container-->
             <div class="swiper-container booking-detail-slider">
@@ -79,7 +79,7 @@
           </div>
           <div class="text-block">
             <div class="media align-items-center mb-3">
-              <div class="media-body">
+              <div class="col-lg-6 media-body">
                 <h6><%= data.data_pren.tipo_all %></h6>
                 <p class="text-muted mb-0"><a href="user-profile.html" class="text-reset"><%= data.data_pren.nome_ut %> <%= data.data_pren.cognome_ut %></a> ha prenotato.</p>
               </div><a href="user-profile.html"><img class="avatar avatar-lg avatar-border-white ml-4" src="../images/ominoUtente.png"></a>
@@ -236,6 +236,7 @@
                               <th scope="col">Numero documento</th>
                               <th scope="col">Data di scadenza</th>
                               <th scope="col">File</th>
+                              <th scope="col">Modifica File</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -245,6 +246,13 @@
                               <td><%= data.data_pren.num_doc_ur %></td>
                               <td><%= data.data_pren.scadenza_doc_ur.toDateString().slice(0,15) %></td>
                               <td><a href="../images/uploads/documentiPrenotazione/<%= data.data_pren.foto_fronte_doc_dur %>">Foto</a></td>
+                              <td>
+                                <form method="POST" action="/profiloHostControl/modificaDocumentiDur" enctype="multipart/form-data">
+                                  <input type="file" name="fileToUpload" multiple>
+                                  <br></br>
+                                  <button class="btn btn-outline-primary" type="submit">Salva Modifiche</button>
+                                </form>
+                              </td>
                             </tr>
                             <% if (ospiti == "") { %>
                               <!-- Non ci sono ospiti oltre al prenotante, quindi non ci sono ulteriori righe della tabella-->
@@ -264,6 +272,13 @@
                                     <td>&euro; 0</td>
                                   <% } %>
                                   <td><a href="../images/uploads/documentiPrenotazione/<%= data.data_pren.foto_fronte_doc %>">Foto</a></td>
+                                  <td>
+                                    <form method="POST" action="/profiloHostControl/modificaDocumentiOspiti" enctype="multipart/form-data">
+                                      <input type="file" name="fileToUpload" multiple>
+                                      <br></br>
+                                      <button class="btn btn-outline-primary" type="submit">Salva Modifiche</button>
+                                    </form>
+                                  </td>
                                 </tr>
                               <% } %>
                             <% }; %> 
@@ -322,9 +337,6 @@
           <div class="text-block d-print-none"> <!-- PENSARE PER LA RICEVUTA -->
             <button class="btn btn-link pl-0" onclick="window.print()"><i class="fa fa-print mr-2"></i>Print </button>
           </div>
-        </div>
-        <div class="col-lg-5 col-xl-7 map-side-lg px-lg-0">
-          <div class="map-full shadow-left" id="detailSideMap"></div>
         </div>
       </div>
     </div>

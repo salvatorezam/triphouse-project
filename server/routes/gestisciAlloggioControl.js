@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
   }
 });
 
-var upload = multer({ storage: storage }).array('fileToUpload',6);  
+var upload = multer({ storage: storage }).array('fileToUpload',6);
 
 //variabili che mi servono
 
