@@ -8,7 +8,6 @@ class DatiOspite {
         this.num_doc=null;
         this.scadenza_doc=null;
         this.prenotazione=null;
-        this.foto_doc=null;
 
         console.log('ospite istanziato');
     }
