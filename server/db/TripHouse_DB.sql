@@ -92,7 +92,7 @@
 		foto_5 varchar(60)
 	);
 
-	CREATE TABLE IF NOT EXISTS DateDisponibili (
+	CREATE TABLE IF NOT EXISTS DateIndisponibili (
 		ID_DAT VARCHAR(36) PRIMARY KEY,
 		data_inizio DATE,
 		data_fine DATE,
@@ -116,12 +116,13 @@
 		ID_DO VARCHAR(36) PRIMARY KEY,
 		nome VARCHAR(40),
 		cognome VARCHAR(40),
-		nazionalita VARCHAR(40),
-		eta INT,
 		tipo_doc VARCHAR(20),
 		num_doc VARCHAR(10),
+		foto_fronte_doc VARCHAR(80), 
+        foto_retro_doc VARCHAR(80),
+		nazionalita VARCHAR(40),
 		scadenza_doc DATE,
-		foto_doc VARCHAR(80), 
+		eta INT,
 		prenotazione VARCHAR(36) REFERENCES Prenotazione(ID_PREN)
 	);
 
@@ -130,7 +131,9 @@
 		tipo_doc VARCHAR(20),
 		num_doc VARCHAR(10),
 		scadenza_doc DATE,
-		foto_doc VARCHAR(80),
+		foto_fronte_doc VARCHAR(80),
+        foto_retro_doc VARCHAR(80),
+        utente VARCHAR(36) REFERENCES UtenteRegistrato(ID_UR),
 		prenotazione VARCHAR(36) REFERENCES Prenotazione(ID_PREN)
 	);
 
