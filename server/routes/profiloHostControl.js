@@ -448,26 +448,24 @@ async function visualizzaResocontoTrimestrale(req, res, next) {
     // scegliamo il trimestre di interesse 
     for (let i = 0; i < trimestri.length; i++) 
       if (month >= trimestri[i].inizio.split('-')[0] || month <= trimestri[i].fine.split('-')[0]) 
-        var trimestreCorrente = i;
+        var trimestrePassato = (i - 1) % 4;
+
+    // consideriamo il caso in cui il trimestre si riferisce all'anno passato
+    if (trimestrePassato == 3) year = parseInt(year)-1;
 
     let prenotazioniTrimestre = await db.query("SELECT pr.ID_PREN AS ID_PREN, a.titolo AS titolo, a.citta AS citta, pr.data_inizio AS data_inizio, \
                                                 pr.data_fine AS data_fine, pr.tasse_pagate\
-                                                FROM UtenteRegistrato ur, Alloggio a, Prenotazione pr\
-                                                WHERE ur.ID_UR = ? AND ur.ID_UR = a.proprietario AND a.ID_ALL = pr.alloggio \
+                                                FROM UtenteRegistrato ur, Alloggio a, Prenotazione pr, DocumentiUtenteR dur, DatiOspiti do\
+                                                WHERE ur.ID_UR = ? AND ur.ID_UR = a.proprietario AND a.ID_ALL = pr.alloggio AND dur.utente = ur.ID_UR AND do.prenotazione = pr.ID_PREN \
                                                 AND pr.data_inizio >= ? AND pr.data_fine <= ? AND pr.stato_prenotazione = \'conclusa\' ", 
                                                 [
                                                   utente.id_utente,
-                                                  year+'-'+trimestri[trimestreCorrente].inizio,
-                                                  year+'-'+trimestri[trimestreCorrente].fine,
+                                                  year+'-'+trimestri[trimestrePassato].inizio,
+                                                  year+'-'+trimestri[trimestrePassato].fine,
                                                 ]).
                                       catch(err => {
                                         throw err;
                                       });
-
-
-
-    // fare seconda query per i dati degli ospiti delle singole prenotazioni 
-
 
     res.render('finestraResocontoTrimestrale', { data : prenotazioniTrimestre });
 
