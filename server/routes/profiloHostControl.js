@@ -467,9 +467,6 @@ async function calcolaGuadagni(req, res, next) {
 router.get('/finestraResocontoTrimestrale', visualizzaResocontoTrimestrale);
 
 // invio resoconto trimestrale automatico
-
-
-
 async function visualizzaResocontoTrimestrale(req, res, next) {
 
   const db = await makeDb(config);
@@ -501,7 +498,7 @@ async function visualizzaResocontoTrimestrale(req, res, next) {
     // ricaviamo la data di oggi 
     let today = new Date();
     var day = today.getDate();
-    var month = today.getMonth()+1; //As January is 0.
+    var month = today.getMonth()+1; 
     var year = today.getFullYear();
     
     if(day<10) day='0'+day; 
@@ -513,9 +510,6 @@ async function visualizzaResocontoTrimestrale(req, res, next) {
         var trimestrePassato = (i - 1) % 4;
         
       }
-      console.log(trimestrePassato + 'TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT');
-
-      console.log(trimestri[trimestrePassato].inizio + 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
 
     // consideriamo il caso in cui il trimestre si riferisce all'anno passato
     if (trimestrePassato == 3) year = parseInt(year)-1;
@@ -538,9 +532,7 @@ async function visualizzaResocontoTrimestrale(req, res, next) {
     
     jsonResocontoTrimestrale = JSON.stringify(prenotazioniTrimestre);
 
-    console.log('JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ');
     console.log(jsonResocontoTrimestrale);
-    console.log('JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ');
 
     res.render('finestraResocontoTrimestrale', { data : prenotazioniTrimestre });
 
