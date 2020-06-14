@@ -82,10 +82,10 @@ async function compilaStep1(req, res, next){
     this.alloggio.tipo_all = req.body.tipo_all;
     this.alloggio.nome_proprietario = req.body.nome_proprietario;
 
-    let v = req.body.indirizzo.split(',');
+    //let v = req.body.indirizzo.split(',');
 
-    this.alloggio.indirizzo = v[0].trim();
-    this.alloggio.n_civico = v[1].trim();
+    this.alloggio.indirizzo = req.body.indirizzo //v[0].trim();
+    this.alloggio.n_civico = req.body.n_civico//v[1].trim();
 
     this.alloggio.citta = req.body.citta;
     this.alloggio.regione = req.body.regione;
