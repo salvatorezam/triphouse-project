@@ -16,6 +16,28 @@ var idUtente = "";
 const { config } = require('../db/config');
 const {makeDb, withTransaction } = require('../db/dbmiddleware');
 
+const mesi = [
+    "meseZero",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+  
+  const dataAnnoMeseGiorno = function(data) {
+    data = data.toDateString().slice(4,15).split(' ');
+    let numMese = mesi.indexOf(data[0]);
+    return (data[2] + '-' + numMese + '-' + data[1]);
+  };
+
 // dichiaro multer per la foto del documento
 var multer = require('multer');
 
@@ -76,6 +98,7 @@ router.get('/prenotazionePg1', async function(req, res, next) {
     prezzoNotte = res.locals.alloggio.prezzo;
     prezzoTassa = res.locals.alloggio.tasse;
     data_prenotazione_effettuata = new Date();
+    data_pren_sqlformat = dataAnnoMeseGiorno(new Date());
 
     arrDoc.push({name: 'fronteUtente', maxCount: 1});
     arrDoc.push({name: 'retroUtente', maxCount:1});
@@ -292,7 +315,7 @@ async function compilaPt3(req, res, next){
         prenEffettuata.alloggio = idAlloggio;
         prenEffettuata.data_inizio = datePren.data_i;
         prenEffettuata.data_fine = datePren.data_f;
-        prenEffettuata.data_pren = data_prenotazione_effettuata;
+        prenEffettuata.data_pren = data_pren_sqlformat;
         prenEffettuata.prezzo_totale = (prezzoNotte * notti);
         prenEffettuata.stato_prenotazione = "richiesta";
         prenEffettuata.tipo_pagamento = req.body.metodoPagamento;   
@@ -304,7 +327,7 @@ async function compilaPt3(req, res, next){
         await withTransaction(db, async() => {
             // inserimento prenotazione
             let sql = "INSERT INTO Prenotazione VALUES (UUID(),?,?,?,?,?,?,?,?,?); \
-                        INSERT INTO DocumentiUtenteR VALUES (UUID(),?,?,?,?,?,?,(SELECT ID_PREN FROM PRENOTAZIONE WHERE utente = ? AND alloggio = ?)); \
+                        INSERT INTO DocumentiUtenteR VALUES (UUID(),?,?,?,?,?,?,(SELECT ID_PREN FROM PRENOTAZIONE WHERE utente = ? AND alloggio = ? AND data_pren = ?)); \
                         INSERT INTO DateIndisponibili VALUES (UUID(),?,?,?);";
             let values = [
                 prenEffettuata.utente,
@@ -324,7 +347,7 @@ async function compilaPt3(req, res, next){
                 prenEffettuata.utente,
                 prenEffettuata.utente,
                 prenEffettuata.alloggio,
-                //prenEffettuata.data_pren,
+                prenEffettuata.data_pren,
                 prenEffettuata.data_inizio,
                 prenEffettuata.data_fine,
                 prenEffettuata.alloggio
@@ -338,7 +361,7 @@ async function compilaPt3(req, res, next){
             console.log("Prenotazione Effettuata con successo");
             
             var nosql = false;
-            var sql_tipo = "INSERT INTO DatiOspiti VALUES (UUID(),?,?,?,?,?,?,?,?,?,(SELECT ID_PREN FROM PRENOTAZIONE WHERE utente = ? AND alloggio = ?));";
+            var sql_tipo = "INSERT INTO DatiOspiti VALUES (UUID(),?,?,?,?,?,?,?,?,?,(SELECT ID_PREN FROM PRENOTAZIONE WHERE utente = ? AND alloggio = ? AND data_pren = ?));";
             var sql1 = "";
             var values1 = [];
 
@@ -362,7 +385,7 @@ async function compilaPt3(req, res, next){
                        values1.push(datiOspiti[x].eta);
                        values1.push(prenEffettuata.utente);
                        values1.push(prenEffettuata.alloggio);
-                       //values1.push(prenEffettuata.data_pren);
+                       values1.push(prenEffettuata.data_pren);
                     }
                 }
             }
