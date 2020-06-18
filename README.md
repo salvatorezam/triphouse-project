@@ -1,10 +1,4 @@
 # triphouse-project
-Welleca pecciuatti - Repository definitiva per il progetto
-ciao da Edoardo
+Repository definitiva per il progetto
 
-semo a mare
-
-cu tutti i  scarpi
-unnebiaru
-prova ramo masdf
 
