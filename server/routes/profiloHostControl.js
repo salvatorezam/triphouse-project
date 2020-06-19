@@ -131,7 +131,7 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                 //ospiti
                 elPren.nomi_ospiti = "";
                 elPren.naz_ospiti = "";
-                elPren.eta_ospiti = "";
+                elPren.eta_osp = "";
                 elPren.tipo_doc_ospiti = "";
                 elPren.num_doc_ospiti = "";
                 elPren.scadenze_doc_ospiti = "";
