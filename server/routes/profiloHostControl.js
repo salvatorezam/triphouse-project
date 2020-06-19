@@ -478,7 +478,7 @@ async function calcolaGuadagni(req, res, next) {
       var utente = req.app.locals.users.get(req.session.user.id_utente);
 
       // ricavo i guadagni delle prenotazioni concluse relative agli alloggi dell'utente
-      results = await db.query('SELECT a.titolo AS titolo, pr.data_inizio AS data_inizio, pr.data_fine AS data_fine, (DATEDIFF(pr.data_fine,pr.data_inizio))*a.prezzo AS prezzo_totale\
+      results = await db.query('SELECT a.titolo AS titolo, pr.data_inizio AS data_inizio, pr.data_fine AS data_fine, pr.prezzo_totale AS prezzo_totale\
                                 FROM Alloggio a, Prenotazione pr \
                                 WHERE a.proprietario = ? AND a.ID_ALL = pr.alloggio AND pr.stato_prenotazione = \'conclusa\';', utente.id_utente)
               .catch(err => {
