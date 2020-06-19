@@ -106,7 +106,7 @@ async function visualizzaAlloggioRicerca(req, res, next){
             if(element.ID_ALL == req.query.idAlloggio){
 
                 req.session.alloggio = element;
-                return alloggio = element;
+                alloggio = element;
             }
         });
 
@@ -144,7 +144,7 @@ async function ricercaFiltri(req, res, next){
             
             if(req.body.tipoAlloggio1 == req.body.tipoAlloggio2){
 
-                return alloggiFiltrati = arrayAlloggi;
+                alloggiFiltrati = arrayAlloggi;
             }
             else if(req.body.tipoAlloggio1 && (element.tipo_all == 'B&B')){
 
@@ -169,7 +169,7 @@ async function ricercaFiltri(req, res, next){
         alloggiFiltrati.forEach(element => {
             
             if(req.body.pricefrom == 0 && req.body.priceto == 200){
-                return alloggiFiltratiPrezzo = alloggiFiltrati;
+                alloggiFiltratiPrezzo = alloggiFiltrati;
             }
             else if(element.prezzo > req.body.pricefrom && element.prezzo < req.body.priceto){
 
@@ -284,7 +284,7 @@ async function ricercaFiltri(req, res, next){
 
         arrayAlloggiFiltri = alloggiFiltratiDistanza;
 
-        res.render('listaRicerca', {data : {array : arrayAlloggiFiltri, inizioCount : inizioArray, fineCount : fineArray, tipo:1}});
+        res.render('listaRicerca', {data : {array : arrayAlloggiFiltri, inizioCount : inizioArrayFiltri, fineCount : fineArrayFiltri, tipo:1}});
 
 
     } catch (err) {

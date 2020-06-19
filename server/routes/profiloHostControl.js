@@ -96,7 +96,7 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                         GROUP BY p.ID_PREN \
                         ORDER BY data_inizio DESC; \
                         SELECT p.ID_PREN AS ID_PREN, dos.ID_DO AS ID_DO, dos.nome AS nome_osp, dos.cognome AS cognome_osp, \
-                        dos.tipo_doc AS tipo_doc, dos.foto_fronte_doc AS foto_fronte_doc, \
+                        dos.tipo_doc AS tipo_doc, dos.foto_fronte_doc AS foto_fronte_doc, dos.num_doc AS num_doc_osp,\
                         dos.foto_retro_doc AS foto_retro_doc, dos.nazionalita AS naz_osp, \
                         dos.scadenza_doc AS scadenza_doc, dos.eta AS eta_osp \
                         FROM Prenotazione p, DatiOspiti dos \
@@ -131,14 +131,20 @@ async function getListaPrenotazioniRicevute(req, res, next) {
                 //ospiti
                 elPren.nomi_ospiti = "";
                 elPren.naz_ospiti = "";
-                elPren.eta_ospiti = "";
+                elPren.eta_osp = "";
+                elPren.tipo_doc_ospiti = "";
+                elPren.num_doc_ospiti = "";
+                elPren.scadenze_doc_ospiti = "";
                 elPren.num_ospiti = 0;
                 if (prenRicevute[1].length != 0) {
                     for (elDatOsp of prenRicevute[1]) {
                         if (elPren.ID_PREN == elDatOsp.ID_PREN) {
                             elPren.nomi_ospiti = elPren.nomi_ospiti + elDatOsp.nome_osp + "-";
                             elPren.naz_ospiti = elPren.naz_ospiti + elDatOsp.naz_osp + "-";
-                            elPren.eta_osp = elPren.eta_ospiti + elDatOsp.eta_osp + "-";
+                            elPren.eta_osp = elPren.eta_osp + elDatOsp.eta_osp + "-";
+                            elPren.tipo_doc_ospiti = elPren.tipo_doc_ospiti + elDatOsp.tipo_doc + "-";
+                            elPren.num_doc_ospiti = elPren.num_doc_ospiti + elDatOsp.num_doc_osp + "-";
+                            elPren.scadenze_doc_ospiti = elPren.scadenze_doc_ospiti + elDatOsp.scadenza_doc + "-";
                             elPren.foto_fronte_doc = elDatOsp.foto_fronte_doc;
                             elPren.ID_DO = elDatOsp.ID_DO;
                             elPren.num_ospiti++;

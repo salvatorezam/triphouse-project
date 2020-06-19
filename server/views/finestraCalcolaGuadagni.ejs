@@ -42,8 +42,8 @@
                 <tr>
                   <th scope="row"><%= i+1%></th>
                   <td><%= data[i].titolo %></td>
-                  <td><%= data[i].data_inizio %></td>
-                  <td><%= data[i].data_fine %></td>
+                  <td><%= data[i].data_inizio.toDateString().slice(0,15) %></td>
+                  <td><%= data[i].data_fine.toDateString().slice(0,15) %></td>
                   <td><%= data[i].prezzo_totale %></td>
                   <% totaleGuadagni += data[i].prezzo_totale %>
                 </tr>

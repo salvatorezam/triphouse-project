@@ -258,19 +258,17 @@
                               <!-- Non ci sono ospiti oltre al prenotante, quindi non ci sono ulteriori righe della tabella-->
                             <% } else { %>
                               <% let nomi_ospiti = data.data_pren.nomi_ospiti.slice(0, (data.data_pren.nomi_ospiti.length-1)); nomi_ospiti = nomi_ospiti.split('-'); %>
-                              <% let naz_ospiti = data.data_pren.naz_ospiti.slice(0, (data.data_pren.naz_ospiti.length-1)); naz_ospiti = naz_ospiti.split('-'); %>
-                              <% let eta_ospiti = data.data_pren.eta_osp.slice(0, (data.data_pren.eta_osp.length-1)); eta_ospiti = eta_ospiti.split('-'); %>
+                              <% let tipo_doc_ospiti = data.data_pren.tipo_doc_ospiti.slice(0, (data.data_pren.nomi_ospiti.length-1)); tipo_doc_ospiti = tipo_doc_ospiti.split('-'); %>
+                              <% let num_doc_osp = data.data_pren.num_doc_ospiti.slice(0, (data.data_pren.nomi_ospiti.length-1)); num_doc_osp = num_doc_osp.split('-'); %>
+                              
+                              <% let scadenze_documento = data.data_pren.scadenze_doc_ospiti.slice(0, (data.data_pren.scadenze_doc_ospiti.length-1)); scadenze_documento = scadenze_documento.split('-'); %>
                               <!-- Stampa una riga della tabella per ogni ospite-->
                               <% for (let i = 0; i < ospiti.length; i++) { %>  
                                 <tr>
                                   <td><%= nomi_ospiti[i] %></td>
-                                  <td><%= naz_ospiti[i] %></td>
-                                  <td><%= eta_ospiti[i] %></td>
-                                  <% if (naz_ospiti[i] != 'It' || eta_ospiti[i] > 6) { totaleTasse += data.data_pren.tasse_alloggio; %>
-                                    <td>&euro; <%= data.data_pren.tasse_alloggio  %></td>
-                                  <% } else { %>
-                                    <td>&euro; 0</td>
-                                  <% } %>
+                                  <td><%= tipo_doc_ospiti[i] %></td>
+                                  <td><%= num_doc_osp[i] %></td>
+                                  <td><%= scadenze_documento[i].slice(0,15) %></td>
                                   <td><a href="../images/uploads/documentiPrenotazione/<%= data.data_pren.foto_fronte_doc %>">Foto</a></td>
                                   <td>
                                     <form method="POST" action="/profiloHostControl/modificaDocumentiOspiti" enctype="multipart/form-data">
